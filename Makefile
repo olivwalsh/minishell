@@ -14,14 +14,16 @@ endif
 
 # Variables
 NAME		= minishell
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror 
 CC			= cc
+FLAGS		= -lreadline
 
 OBJ_DIR		= objs/
 SRC_DIR		= src/
 INC_DIR		= inc/
 
-SRC_FILES	=	minishell.c
+SRC_FILES	=	minishell.c \
+				init/init.c
 
 OBJS		= $(addprefix ${OBJ_DIR}, ${SRC_FILES:.c=.o})
 INC			= -I./$(INC_DIR)
@@ -34,7 +36,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(MEM) $(INC) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(MEM) $(INC) $(OBJS) -o $@
+	$(CC) $(CFLAGS) $(FLAGS) $(MEM) $(INC) $(OBJS) -o $@
 	@echo -n "Compiling minishell"
 	@echo $(GREEN)"\tOK"$(RESET)
 
