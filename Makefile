@@ -22,7 +22,8 @@ OBJ_DIR		= objs/
 SRC_DIR		= src/
 INC_DIR		= inc/
 
-SRC_FILES	=	minishell.c
+SRC_FILES	=	minishell.c \
+				init/init.c
 
 OBJS		= $(addprefix ${OBJ_DIR}, ${SRC_FILES:.c=.o})
 INC			= -I./$(INC_DIR)
