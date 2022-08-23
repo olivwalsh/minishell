@@ -5,16 +5,16 @@ RESET		= "\033[m"
 
 # Compilation flags
 ifeq ($(DMEM),1)
-MEM 		= -fsanitize=address -g
+MEM 		= -fsanitize=address
 endif
 
 ifeq ($(DTHREAD),1)
-MEM 		= -fsanitize=thread -g
+MEM 		= -fsanitize=thread
 endif
 
 # Variables
 NAME		= minishell
-CFLAGS		= -Wall -Wextra -Werror 
+CFLAGS		= -Wall -Wextra -Werror -g
 CC			= cc
 FLAGS		= -lreadline
 
@@ -23,7 +23,8 @@ SRC_DIR		= src/
 INC_DIR		= inc/
 
 SRC_FILES	=	minishell.c \
-				init/init.c
+				init/init.c \
+				lexer/lexer.c lexer/tokenize.c lexer/copy.c lexer/utils.c
 
 OBJS		= $(addprefix ${OBJ_DIR}, ${SRC_FILES:.c=.o})
 INC			= -I./$(INC_DIR)
