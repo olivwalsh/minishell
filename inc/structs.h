@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/22 15:45:28 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/23 18:01:01 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,17 @@ typedef struct	s_shell
 // GLOBAL (variable)
 typedef struct	s_data
 {
+	int				err;
 	t_shell			shell;
 	t_terminal		terminal;
-	t_cmd			*cmd;		// linked list
+	t_cmd			*cmds;		// linked list
 	t_token			*tokens;	// linked list
 }				t_data;
+
+typedef struct	s_global
+{
+	t_data	*data;
+	
+}			t_global;
 
 #endif
