@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/24 12:18:24 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/24 15:18:56 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ int	is_special(char c, int *type);
 char	*copy_chars(char *str, int *i, int n);
 char	*copy_word(char *str, int *i);
 char	*copy_quote(char *str, int *i);
+/*
+**
+** LEXER
+**
+*/
+int	ms_expanser(t_token **token);
 /*
 **
 ** CLEAN

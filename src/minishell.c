@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/24 12:18:15 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/24 15:26:29 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int main(int argc, char **argv, char **env)
 		data.shell.input = readline(GREEN"minishell$ "RESET);
 		// create tokens
 		ms_lexer(data.shell.input, &data.tokens);
+		display_tokens();
+		printf("__________________________________________________\n");
+		ms_expanser(&data.tokens);
+		display_tokens();
 		add_history(data.shell.input);
 		// expanser
 		// parser
