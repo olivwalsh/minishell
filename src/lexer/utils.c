@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:11 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/23 19:14:34 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/08/24 12:14:18 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	err_msg(int	code, char c)
-{
-	if (code == -1)
-		printf("minishell: syntax near unexpected token `%c'\n", c);
-	else if (code == -2)
-		printf("minishell: malloc failed\n");
-	
-	g_global.data->err = 1;
-	return (0);
-}
 
 int	is_isspace(char c)
 {
@@ -35,7 +24,6 @@ int	is_quote(char *str, int *type)
 	int	i;
 
 	i = 0;
-	printf("is_quote, str = %s\n", str);
 	if (str[0] != DQUOTE && str[0] != SQUOTE)
 		return (0);
 	i++;
@@ -81,23 +69,7 @@ int	is_special(char c, int *type)
 		*type = REDIR_OUT;
 	else if (c == '$')
 		*type = VAR;
-	else 
+	else
 		return (0);
 	return (1);
-}
-
-void	display_tokens()
-{
-	t_token	*tmp;
-
-	if (g_global.data->tokens)
-	{
-		tmp = g_global.data->tokens;
-		while (tmp)
-		{
-			printf(GREEN"token->prev = %p\t\ttoken = %p\t\ttoken->next = %p\n"RESET, tmp->prev, tmp, tmp->next);
-			printf(GREEN"token->value = %s\t\ttoken->type = %d\n\n"RESET, tmp->value, tmp->type);
-			tmp = tmp->next;
-		}
-	}
 }

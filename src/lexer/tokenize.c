@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:18:24 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/23 18:33:24 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/08/24 12:14:31 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,5 @@ int	tokenize(t_token **tokens, char *str, int *i, int type)
 		add_token(create_token(type, copy_quote(str, i)), tokens);
 	else
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);	
+	return (EXIT_SUCCESS);
 }

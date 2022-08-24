@@ -1,44 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean.c                                            :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/24 12:17:30 by owalsh           ###   ########.fr       */
+/*   Created: 2022/08/24 12:13:21 by owalsh            #+#    #+#             */
+/*   Updated: 2022/08/24 12:15:02 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_list(t_token **tokens)
+void	display_tokens(void)
 {
 	t_token	*tmp;
-	t_token	*next;
 
-	if (*tokens)
+	if (g_global.data->tokens)
 	{
-		tmp = *tokens;
+		tmp = g_global.data->tokens;
 		while (tmp)
 		{
-			next = tmp->next;
-			free(tmp->value);
-			free(tmp);
-			tmp = NULL;
-			tmp = next;
+			if (tmp && tmp->value)
+				printf("token->value = %s\t\ttoken->type = %d\n\n", tmp->value, tmp->type);
+			tmp = tmp->next;
 		}
-		*tokens = NULL;
 	}
-}
-
-void	clean(t_data *data)
-{
-	if (data)
-	{
-		if (data->tokens)
-			free_list(&data->tokens);
-		if (data->shell.input)
-			free(data->shell.input);
-	}
+	else
+		printf("Tokens list is empty\n");
 }

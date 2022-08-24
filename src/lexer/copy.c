@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:58 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/23 19:11:18 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/08/24 12:11:01 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ static int	is_delimiter(char *str)
 
 	i = 0;
 	special = "|<>\'\"&";
-	while (str && str[i] && (str[i] > 32 && str[i] < 127) && !strchr(special, str[i]))
+	while (str && str[i] && (str[i] > 32 && str[i] < 127) \
+		&& !strchr(special, str[i]))
 		i++;
-	return (i);	
+	return (i);
 }
 
 char	*copy_chars(char *str, int *i, int n)
@@ -44,6 +45,26 @@ char	*copy_chars(char *str, int *i, int n)
 	value[j] = '\0';
 	*i += j;
 	return (value);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (src[i])
+		i++;
+	if (!size)
+		return (i);
+	while (*src && size - 1)
+	{
+		*dst = *src;
+		src++;
+		dst++;
+		size--;
+	}
+	*dst = '\0';
+	return (i);
 }
 
 char	*copy_word(char *str, int *i)
