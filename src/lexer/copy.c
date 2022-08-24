@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:58 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/24 12:11:01 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/24 17:06:54 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	is_delimiter(char *str)
 	int		i;
 
 	i = 0;
-	special = "|<>\'\"&";
+	special = "|<>\'\"&()";
 	while (str && str[i] && (str[i] > 32 && str[i] < 127) \
 		&& !strchr(special, str[i]))
 		i++;
@@ -47,33 +47,13 @@ char	*copy_chars(char *str, int *i, int n)
 	return (value);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	while (src[i])
-		i++;
-	if (!size)
-		return (i);
-	while (*src && size - 1)
-	{
-		*dst = *src;
-		src++;
-		dst++;
-		size--;
-	}
-	*dst = '\0';
-	return (i);
-}
-
 char	*copy_word(char *str, int *i)
 {
 	int		j;
 	char	*value;
 
 	j = is_delimiter(str);
-	value = malloc(sizeof(char) * j);
+	value = malloc(sizeof(char) * (j + 1));
 	if (!value)
 	{
 		err_msg(-2, 0);

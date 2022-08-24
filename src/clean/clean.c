@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/24 12:17:30 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/24 16:46:12 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ void	clean(t_data *data)
 		if (data->shell.input)
 			free(data->shell.input);
 	}
+	if (g_global.data)
+		g_global.data->err = 0;
 }

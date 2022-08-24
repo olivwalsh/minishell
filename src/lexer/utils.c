@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:11 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/24 12:14:18 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/24 17:04:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ int	is_special(char c, int *type)
 		*type = REDIR_OUT;
 	else if (c == '$')
 		*type = VAR;
+	else if (c == '(')
+		*type = OPEN_BRK;
+	else if (c == ')')
+		*type = CLOSE_BRK;
 	else
 		return (0);
 	return (1);
