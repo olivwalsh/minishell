@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/24 17:10:56 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/08/24 20:43:42 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,68 @@ int	expanse_quote(t_token **tokens)
 	return (0);
 }
 
-void	insert_token(t_token **tokens, t_token **new)
+void	insert_head(t_token **tokens, t_token *new)
+{
+	t_token	*tmp;
+
+	tmp = new;
+	if ((new)->next)
+	{
+		while(tmp->next)
+			tmp = tmp->next;
+	}
+	tmp->next = (*tokens)->next;
+	(*tokens)->next->prev = tmp;
+	free((*tokens)->value);
+	free(*tokens);
+	*tokens = NULL;
+	*tokens = new;
+}
+
+void	insert_middle(t_token **tokens, t_token *new)
 {
 	t_token	*tmp1;
 	t_token	*tmp2;
 
 	tmp1 = *tokens;
-	tmp1->prev->next = *new;
-	(*new)->prev = tmp1->prev;
-	if ((*new)->next)
+	tmp1->prev->next = new;
+	new->prev = tmp1->prev;
+	tmp2 = new;
+	if (new->next)
 	{
-		tmp2 = *new;
 		while(tmp2->next)
 			tmp2 = tmp2->next;
-		tmp2->next = tmp1->next;
-		tmp1->next->prev = tmp2;
 	}
+	tmp2->next = tmp1->next;
+	tmp1->next->prev = tmp2;
 	free((*tokens)->value);
 	free(*tokens);
+}
+
+void	insert_tail(t_token **tokens, t_token *new)
+{
+	t_token	*tmp;
+
+	tmp = *tokens;
+	tmp->prev->next = new;
+	new->prev = tmp->prev;
+	free((*tokens)->value);
+	free(*tokens);
+}
+
+void	insert_token(t_token **tokens, t_token *new)
+{	
+	if (!(*tokens)->prev)
+		insert_head(tokens, new);
+	else if ((*tokens)->prev && (*tokens)->next)
+		insert_middle(tokens, new);
+	else if (!(*tokens)->next)
+		insert_tail(tokens, new);
+	else if (!(*tokens)->prev && !(*tokens)->next)
+	{
+		free_list(tokens);
+		*tokens = new;
+	}
 }
 
 int	expanse_var(t_token **tokens)
@@ -57,7 +101,8 @@ int	expanse_var(t_token **tokens)
 	ms_lexer(str, &new);
 	if (!new)
 		return (EXIT_FAILURE);
-	insert_token(tokens, &new);
+	// printf("\nnew value is %s\n", new->value);
+	insert_token(tokens, new);
 	return (0);
 }
 
