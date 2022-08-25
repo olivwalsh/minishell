@@ -14,29 +14,27 @@
 
 int	expanse_quote(t_token **tokens)
 {
-	(void)tokens;
-	// t_token	*new;
-	// char	*dest;
-	// char	*src;
-	// int		i;
-	// int		n;
+	t_token	*new;
+	char	*dest;
+	char	*src;
 
-	// src = (*tokens)->value;
-	// dest = src++;
-	// i = 0;
-	// n = strlen((*tokens)->value) - 2;
-	// while (i < n)
-	// {
-	// 	dest[i] = src[i];
-	// 	i++;
-	// }
-	// dest[i] = '\0';
-	// printf("dest is %s\n", dest);
-	// // (*tokens)->value = dest;
-	// ms_lexer(dest, &new);
-	// if (!new)
-	// 	return (EXIT_FAILURE);
-	// // printf("\nnew value is %s\n", new->value);
-	// insert_token(tokens, new);
-	return (0);
+	new = NULL;
+	src = (*tokens)->value;
+	src++;
+	dest = malloc(sizeof(char) * (strlen((*tokens)->value - 1)));
+	ft_strncpy(dest, src, strlen((*tokens)->value) - 2);
+	if (!dest)
+	{
+		(*tokens)->value = NULL;
+		(*tokens)->type = 0;
+	}
+	ms_lexer(dest, &new);
+	if (!new)
+	{
+		free(dest);
+		return (EXIT_FAILURE);
+	}
+	insert_token(tokens, new);
+	free(dest);
+	return (EXIT_SUCCESS);
 }

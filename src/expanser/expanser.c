@@ -32,8 +32,8 @@ int	ms_expanser(t_token **token)
 	tmp = *token;
 	while (tmp)
 	{
-		if (tmp->type == VAR && tmp->type == DBL_QUOTE)
-			ms_expanser(token);
+		if (tmp->type == DBL_QUOTE)
+			res = ms_expanser(token);
 		tmp = tmp->next;
 	}
 	return (res);

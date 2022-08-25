@@ -31,5 +31,5 @@ int	expanse_var(t_token **tokens)
 	if (!new)
 		return (EXIT_FAILURE);
 	insert_token(tokens, new);
-	return (0);
+	return (EXIT_SUCCESS);
 }

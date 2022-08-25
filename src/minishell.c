@@ -32,7 +32,7 @@ int main(int argc, char **argv, char **env)
 		display_tokens();
 		printf("_________________________________________________________\n\n");
 		// expanser
-		if (!res)
+		if (!res && !g_global.data->err)
 		{
 			ms_expanser(&data.tokens);
 			display_tokens();

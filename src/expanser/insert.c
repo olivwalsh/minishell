@@ -53,6 +53,7 @@ static void	insert_middle(t_token **tokens, t_token *new)
 	tmp1->next->prev = tmp2;
 	free((*tokens)->value);
 	free(*tokens);
+	*tokens = NULL;
 }
 
 static void	insert_tail(t_token **tokens, t_token *new)
@@ -64,6 +65,7 @@ static void	insert_tail(t_token **tokens, t_token *new)
 	new->prev = tmp->prev;
 	free((*tokens)->value);
 	free(*tokens);
+	*tokens = NULL;
 }
 
 void	insert_token(t_token **tokens, t_token *new)
