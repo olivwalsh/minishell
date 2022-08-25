@@ -47,15 +47,19 @@ int	is_isspace(char c);
 int	is_quote(char *str, int *type);
 int	is_oper(char c1, char c2, int *type);
 int	is_special(char c, int *type);
+void	add_token(t_token *new, t_token **tokens);
 char	*copy_chars(char *str, int *i, int n);
 char	*copy_word(char *str, int *i);
 char	*copy_quote(char *str, int *i);
 /*
 **
-** LEXER
+** EXPANSER
 **
 */
-int	ms_expanser(t_token **token);
+int		ms_expanser(t_token **token);
+int		expanse_var(t_token **tokens);
+int		expanse_quote(t_token **tokens);
+void	insert_token(t_token **tokens, t_token *new);
 /*
 **
 ** CLEAN
@@ -69,6 +73,7 @@ void	free_list(t_token **tokens);
 **
 */
 void	display_tokens();
+void	display_specific_tokens(t_token *head);
 int		err_msg(int	err, char c);
 
 #endif

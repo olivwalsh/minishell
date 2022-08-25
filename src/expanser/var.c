@@ -11,3 +11,26 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	expanse_var(t_token **tokens)
+{
+	t_token	*new;
+	char	*str;
+	char	*var;
+
+	new = NULL;
+	var = (*tokens)->value;
+	var++;
+	str = getenv(var++);
+	// printf("str is %s\n", str);
+	if (!str)
+	{
+		(*tokens)->value = NULL;
+		(*tokens)->type = 0;
+	}
+	ms_lexer(str, &new);
+	if (!new)
+		return (EXIT_FAILURE);
+	insert_token(tokens, new);
+	return (0);
+}

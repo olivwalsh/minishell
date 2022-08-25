@@ -28,9 +28,10 @@ int main(int argc, char **argv, char **env)
 		// create tokens
 		ms_lexer(data.shell.input, &data.tokens);
 		display_tokens();
-		printf("__________________________________________________\n");
+		printf("_________________________________________________________\n\n");
 		ms_expanser(&data.tokens);
 		display_tokens();
+		printf("_________________________________________________________\n\n");
 		add_history(data.shell.input);
 		// expanser
 		// parser
