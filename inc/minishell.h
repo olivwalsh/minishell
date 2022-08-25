@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 18:55:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/25 19:17:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,17 @@ void	free_list(t_token **tokens);
 ** UTILS
 **
 */
+int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strncpy(char *dst, char *src, int n);
 void	display_tokens();
 void	display_specific_tokens(t_token *head);
 int		err_msg(int	err, char c);
+/*
+**
+** BUILTINS
+**
+*/
+int	ms_exit(char *cmd, char **args);
 
 #endif

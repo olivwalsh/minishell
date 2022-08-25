@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:28:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 19:09:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/25 19:19:01 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,20 @@ int	check_flag(char *arg)
 		}
 		i++;
 	}
-	return (EXIT_SUCESS);
+	return (EXIT_SUCCESS);
 }
 
 int	ms_exit(char *cmd, char **args)
 {
 	if (ft_strcmp(cmd, "exit"))
 		return (EXIT_FAILURE);
-	else
+	if (args && args[1])
 	{
-		if (args[1])
-			ms_exit_error(-1);
-		else if (args[0])
-		{
-			if ()
-		}
+		ms_exit_error(-1);
+		return (EXIT_FAILURE);
 	}
-	if (!arg[])
+	else if (args && args[0] && !check_flag(args[0]))
+		exit(atoi(args[0]));
+	else
+		exit(EXIT_SUCCESS);
 }
