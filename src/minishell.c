@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/24 16:44:19 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/25 16:24:35 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main(int argc, char **argv, char **env)
 	while (1)
 	{
 		res = 0;
-		data.shell.input = readline(GREEN"minishell$ "RESET);
+		data.shell.input = readline(RED"m"LRED"i"LYELLOW"n"YELLOW"i"LGREEN"s"GREEN"h"LBLUE"e"PURPLE"l"LPURPLE"l"RESET"$ ");
 		// create tokens
 		res = ms_lexer(data.shell.input, &data.tokens);
 		display_tokens();
