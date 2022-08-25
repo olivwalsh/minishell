@@ -27,7 +27,8 @@ static int	brackets_count(t_token *head)
 	{
 		i = 0;
 		str = tmp->value;
-		while (tmp->type != DBL_QUOTE && tmp->type != SGL_QUOTE && str && str[i])
+		while (tmp->type != DBL_QUOTE \
+			&& tmp->type != SGL_QUOTE && str && str[i])
 		{
 			if (str[i] == '(')
 				open_brackets++;
@@ -35,18 +36,21 @@ static int	brackets_count(t_token *head)
 				close_brackets++;
 			i++;
 		}
-		tmp = tmp->next;	
+		tmp = tmp->next;
 	}
-	if (close_brackets - open_brackets > 0)
-		err_msg(-1, ')');
-	else if (close_brackets - open_brackets < 0)
-		err_msg(-1, '(');
 	return (close_brackets - open_brackets);
 }
 
 int	lexer_checker(t_token *head)
 {
-	if (brackets_count(head))
+	int	count;
+
+	count = brackets_count(head);
+	if (count > 0)
+		err_msg(-1, ')');
+	else if (count < 0)
+		err_msg(-1, '(');
+	if (count != 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

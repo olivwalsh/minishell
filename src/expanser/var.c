@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expanser.c                                         :+:      :+:    :+:   */
+/*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/24 20:43:42 by foctavia         ###   ########.fr       */
+/*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
+/*   Updated: 2022/08/24 15:21:00 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ms_expanser(t_token **token)
+int	expanse_var(t_token **tokens)
 {
-	int		res;
-	t_token	*tmp;
+	t_token	*new;
+	char	*str;
+	char	*var;
 
-	res = 0;
-	tmp = *token;
-	while (tmp && !g_global.data->err)
+	new = NULL;
+	var = (*tokens)->value;
+	var++;
+	str = getenv(var++);
+	if (!str)
 	{
-		if (tmp->type == VAR)
-			res = expanse_var(&tmp);
-		else if (tmp->type == DBL_QUOTE)
-			res = expanse_quote(&tmp);
-		if (!tmp)
-			break ;
-		tmp = tmp->next;
+		(*tokens)->value = NULL;
+		(*tokens)->type = 0;
 	}
-	tmp = *token;
-	while (tmp)
-	{
-		if (tmp->type == VAR && tmp->type == DBL_QUOTE)
-			ms_expanser(token);
-		tmp = tmp->next;
-	}
-	return (res);
+	ms_lexer(str, &new);
+	if (!new)
+		return (EXIT_FAILURE);
+	insert_token(tokens, new);
+	return (0);
 }

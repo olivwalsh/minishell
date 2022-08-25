@@ -25,6 +25,7 @@ INC_DIR		= inc/
 SRC_FILES	=	minishell.c \
 				init/init.c \
 				lexer/lexer.c lexer/tokenize.c lexer/copy.c lexer/utils.c lexer/checker.c \
+				expanser/expanser.c expanser/var.c expanser/quote.c expanser/insert.c \
 				utils/display.c utils/error.c utils/utils.c \
 				clean/clean.c
 

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
 /*   Updated: 2022/08/24 16:44:19 by owalsh           ###   ########.fr       */
@@ -17,6 +17,7 @@ t_global	g_global = {NULL};
 int main(int argc, char **argv, char **env)
 {
 	t_data	data;
+	int		res;
 
 	if (argc != 1)
 		return (EXIT_FAILURE);
@@ -24,12 +25,20 @@ int main(int argc, char **argv, char **env)
 	// setup readline
 	while (1)
 	{
+		res = 0;
 		data.shell.input = readline(GREEN"minishell$ "RESET);
 		// create tokens
-		ms_lexer(data.shell.input, &data.tokens);
+		res = ms_lexer(data.shell.input, &data.tokens);
 		display_tokens();
-		add_history(data.shell.input);
+		printf("_________________________________________________________\n\n");
 		// expanser
+		if (!res)
+		{
+			ms_expanser(&data.tokens);
+			display_tokens();
+			printf("_________________________________________________________\n\n");
+		}
+		add_history(data.shell.input);
 		// parser
 		// execution
 		clean(&data);

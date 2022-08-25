@@ -15,7 +15,7 @@
 char	*ft_strncpy(char *dst, char *src, int n)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!src || !dst)
 		return (NULL);

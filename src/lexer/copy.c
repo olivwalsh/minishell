@@ -60,7 +60,6 @@ char	*copy_word(char *str, int *i)
 		return (NULL);
 	}
 	value = ft_strncpy(value, str, j);
-	printf("j = %d \n", j);
 	*i += j;
 	return (value);
 }
