@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/24 12:15:28 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/25 16:50:07 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,3 +21,5 @@ int	err_msg(int code, char c)
 	g_global.data->err = 1;
 	return (0);
 }
+
+// int error(t_token token, int code)

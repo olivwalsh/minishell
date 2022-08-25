@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 15:04:46 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/25 18:55:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	free_list(t_token **tokens);
 ** UTILS
 **
 */
+int		ft_strcmp(char *s1, char *s2);
 char	*ft_strncpy(char *dst, char *src, int n);
 void	display_tokens();
 void	display_specific_tokens(t_token *head);
