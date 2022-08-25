@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:44:58 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/24 16:47:06 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/25 14:52:48 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	brackets_count(t_token *head)
 	{
 		i = 0;
 		str = tmp->value;
-		while (str && str[i])
+		while (tmp->type != DBL_QUOTE && tmp->type != SGL_QUOTE && str && str[i])
 		{
 			if (str[i] == '(')
 				open_brackets++;

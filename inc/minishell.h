@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/24 15:18:07 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/25 15:04:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	clean(t_data *data);
 ** UTILS
 **
 */
+char	*ft_strncpy(char *dst, char *src, int n);
 void	display_tokens();
 int		err_msg(int	err, char c);
 

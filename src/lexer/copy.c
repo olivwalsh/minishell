@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:58 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/24 17:06:54 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/25 15:05:08 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ char	*copy_word(char *str, int *i)
 		err_msg(-2, 0);
 		return (NULL);
 	}
-	strncpy(value, str, j);
+	value = ft_strncpy(value, str, j);
+	printf("j = %d \n", j);
 	*i += j;
 	return (value);
 }
@@ -78,7 +79,7 @@ char	*copy_quote(char *str, int *i)
 		err_msg(-2, 0);
 		return (NULL);
 	}
-	strncpy(value, str, j + 1);
+	value = ft_strncpy(value, str, j + 1);
 	*i += j + 1;
 	return (value);
 }

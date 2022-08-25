@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:13:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/24 17:00:24 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/25 15:03:32 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	display_tokens(void)
 				printf(" << ");
 			if (tmp->type == 13)
 				printf(" >> ");
-			printf("\t\t%s\n", tmp->value);
+			printf("\t\t"GREEN"|"RESET"%s"GREEN"|"RESET"\n", tmp->value);
 			tmp = tmp->next;
 		}
 	}
