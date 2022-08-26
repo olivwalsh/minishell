@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 19:15:37 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/26 12:32:37 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int main(int argc, char **argv, char **env)
 		res = 0;
 		data.shell.input = readline(PROMPT);
 		res = ms_lexer(data.shell.input, &data.tokens);
+		printf("data.shell.input: |%s|\n", data.shell.input);
 		ms_exit(data.shell.input, NULL);
 		if (!res)
 		{

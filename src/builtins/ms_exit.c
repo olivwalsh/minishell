@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:28:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 19:19:01 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/26 12:40:59 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_flag(char *arg)
 
 int	ms_exit(char *cmd, char **args)
 {
-	if (ft_strcmp(cmd, "exit"))
+	if (ft_strcmp("exit", cmd))
 		return (EXIT_FAILURE);
 	if (args && args[1])
 	{

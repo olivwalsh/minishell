@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:04:23 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 19:07:17 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/26 12:40:36 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
-	if (!s1 && !s2)
-		return (-1);
-	while (s1[i])
+	while (s1 && s1[i])
 	{
 		if (s1[i] != s2[i])
 			return (s1[i] - s2[i]);
