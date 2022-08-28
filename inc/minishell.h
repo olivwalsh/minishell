@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 15:04:46 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/28 16:41:24 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	is_special(char c, int *type);
 void	add_token(t_token *new, t_token **tokens);
 char	*copy_chars(char *str, int *i, int n);
 char	*copy_word(char *str, int *i);
+char	*copy_var(char *str, int *i);
 char	*copy_quote(char *str, int *i);
 int	lexer_checker(t_token *head);
 /*

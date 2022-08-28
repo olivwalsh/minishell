@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   insert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:08:26 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/25 11:08:29 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/08/28 20:15:43 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	insert_head(t_token **tokens, t_token *new)
 	free((*tokens)->value);
 	(*tokens)->value = new->value;
 	(*tokens)->type = new->type;
+	(*tokens)->exp = new->exp;
 	if ((new)->next)
 	{
 		tmp1 = (*tokens)->next;

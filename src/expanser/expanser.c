@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/24 20:43:42 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/08/28 20:17:56 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ms_expanser(t_token **token)
 	tmp = *token;
 	while (tmp)
 	{
-		if (tmp->type == DBL_QUOTE)
+		if ((tmp->type == DBL_QUOTE || tmp->type == VAR) && tmp->exp != 2)
 			res = ms_expanser(token);
 		tmp = tmp->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:11 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/24 17:04:57 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/28 20:49:16 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,29 @@ int	is_isspace(char c)
 int	is_quote(char *str, int *type)
 {
 	int	i;
+	int	count;
 
 	i = 0;
 	if (str[0] != DQUOTE && str[0] != SQUOTE)
 		return (0);
 	i++;
+	count = 1;
 	while (str && str[i])
 	{
 		if (str[i] == str[0])
-		{
-			if (str[i] == 34)
-				*type = DBL_QUOTE;
-			else if (str[i] == 39)
-				*type = SGL_QUOTE;
-			return (1);
-		}
+			count++;
 		i++;
 	}
-	return (err_msg(-1, str[0]));
+	if (!(count % 2))
+	{
+		if (str[0] == 34)
+			*type = DBL_QUOTE;
+		else if (str[0] == 39)
+			*type = SGL_QUOTE;
+		return (1);
+	}
+	err_msg(-1, str[0]);
+	return (0);
 }
 
 int	is_oper(char c1, char c2, int *type)

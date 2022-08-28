@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/23 18:01:01 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/08/28 17:41:36 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct	s_token
 {
 	char			*value;
 	int				type;
+	int				exp;
 	struct s_token	*prev;
 	struct s_token	*next;
 }				t_token;

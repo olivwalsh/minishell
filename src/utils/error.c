@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/24 12:15:28 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/28 20:49:39 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ int	err_msg(int code, char c)
 	else if (code == -2)
 		printf("minishell: malloc failed\n");
 	g_global.data->err = 1;
-	return (0);
+	return (EXIT_FAILURE);
 }
