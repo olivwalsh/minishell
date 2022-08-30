@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/28 20:17:56 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/08/29 12:29:04 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	ms_expanser(t_token **token)
 {
-	int		res;
-	t_token	*tmp;
+	static int	counter;
+	int			res;
+	t_token		*tmp;
 
 	res = 0;
 	tmp = *token;
@@ -32,7 +33,7 @@ int	ms_expanser(t_token **token)
 	tmp = *token;
 	while (tmp)
 	{
-		if ((tmp->type == DBL_QUOTE || tmp->type == VAR) && tmp->exp != 2)
+		if ((tmp->type == DBL_QUOTE || tmp->type == VAR) && tmp->exp > -1)
 			res = ms_expanser(token);
 		tmp = tmp->next;
 	}
