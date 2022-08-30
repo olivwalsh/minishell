@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 19:17:57 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/29 17:28:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,18 @@ int		expanse_quote(t_token **tokens);
 void	insert_token(t_token **tokens, t_token *new);
 /*
 **
+** PARSER
+**
+*/
+int		ms_parser(t_token *token, t_cmdlst **cmds);
+char	**ft_split(char *s, char c);
+/*
+**
 ** CLEAN
 **
 */
 void	clean(t_data *data);
-void	free_list(t_token **tokens);
+void	free_tokens(t_token **tokens);
 /*
 **
 ** UTILS
@@ -75,8 +82,11 @@ void	free_list(t_token **tokens);
 */
 int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
+char	*ft_strjoin(char *s1, char *s2);
+int		ft_strlen(char *str);
 char	*ft_strncpy(char *dst, char *src, int n);
 void	display_tokens();
+void	display_cmds(void);
 void	display_specific_tokens(t_token *head);
 int		err_msg(int	err, char c);
 /*

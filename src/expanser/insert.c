@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   insert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:08:26 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/25 11:08:29 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:28:48 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	insert_token(t_token **tokens, t_token *new)
 {
 	if (!(*tokens)->prev && !(*tokens)->next)
 	{
-		free_list(tokens);
+		free_tokens(tokens);
 		add_token(new, tokens);
 		g_global.data->tokens = *tokens;
 	}
