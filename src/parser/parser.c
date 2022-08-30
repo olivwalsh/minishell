@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 18:39:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/30 15:45:46 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/30 18:51:36 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	cmd_delimiter(int type)
 {
-	if (type == PIPE || type == OPERAND || type == OPEROR)
+	if (type == PIPE || type == OPERAND || type == OPEROR \
+		|| type == OPEN_BRK || type == CLOSE_BRK)
 		return (1);
 	return (0);
 }
@@ -71,14 +72,11 @@ int	ms_parser(t_token *token, t_cmdlst **cmds)
 	
 
 	tmp = token;
-	printf("in ms_parser\n");
 	while (tmp)
 	{	
 		str = NULL;
-		printf("tmp->value = %s\n", tmp->value);
 		while (tmp && !cmd_delimiter(tmp->type))
 		{
-			printf("is a cmd\n");
 			str = ft_strjoin(str, tmp->value);
 			if (tmp->next && !cmd_delimiter(tmp->next->type))
 			{

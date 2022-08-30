@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/29 16:22:50 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/30 18:41:13 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ typedef struct	s_cmd
 {
 	int				fd_in;
 	int				fd_out;
-	char			*cmd; // absolute path
-	char			**args;
 	int				builtin;
 	int				redir_in;
 	int				redir_out;
+	char			*cmd; // absolute path
+	char			**args;
 }				t_cmd;
 
 // CMD LIST

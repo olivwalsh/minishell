@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:13:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/30 15:44:04 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/30 18:49:38 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ void	display_cmd(t_cmd *cmd)
 	i = 0;	
 	if (cmd)
 	{
-		printf("cmd = "GREEN"|"RESET"%s"GREEN"|"RESET"\n", cmd->cmd);
+		printf("\ncmd = "GREEN"|"RESET"%s"GREEN"|"RESET"\n", cmd->cmd);
 		args = cmd->args;
 		while (args && args[i])
 		{
-			printf("arg: "GREEN"|"RESET"%s "GREEN"|"RESET, args[i]);
+			printf("arg: "GREEN"|"RESET"%s"GREEN"|"RESET, args[i]);
 			i++;
 		}
-		printf("\n");
 	}
 	else
 		printf("no cmd\n");
@@ -45,9 +44,9 @@ void	display_cmds(void)
 		while (tmp)
 		{
 			if (tmp)
-				printf("\ntmp->prev = %p\t\ttmp = %p\t\ttmp->next = %p\n", tmp->prev, tmp, tmp->next);
+				printf("\n\ntmp->prev = %p\t\ttmp = %p\t\ttmp->next = %p\ntmp->type", tmp->prev, tmp, tmp->next);
 			if (tmp->type == 1)
-				printf("WORD");
+				printf("CMD");
 			if (tmp->type == 2)
 				printf(" | ");
 			if (tmp->type == 3)
@@ -73,6 +72,7 @@ void	display_cmds(void)
 	}
 	else
 		printf("no list of cmds\n");
+	printf("\n");
 }
 
 void	display_tokens(void)
