@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/24 16:44:19 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/30 14:18:45 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ int main(int argc, char **argv, char **env)
 		data.shell.input = readline(GREEN"minishell$ "RESET);
 		// create tokens
 		res = ms_lexer(data.shell.input, &data.tokens);
+		printf("tokens\n");
 		display_tokens();
 		printf("_________________________________________________________\n\n");
 		// expanser
 		if (!res && !g_global.data->err)
 		{
 			ms_expanser(&data.tokens);
+			printf("expansed tokens\n");
 			display_tokens();
 			printf("_________________________________________________________\n\n");
 		}

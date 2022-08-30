@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/28 16:41:24 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:18:25 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	lexer_checker(t_token *head);
 */
 int		ms_expanser(t_token **token);
 int		expanse_var(t_token **tokens);
-int		expanse_quote(t_token **tokens);
+int		expanse_quote(t_token **tokens, char *str);
 void	insert_token(t_token **tokens, t_token *new);
 /*
 **
