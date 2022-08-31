@@ -6,11 +6,11 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 18:39:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/30 18:51:36 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/31 15:40:13 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 int	cmd_delimiter(int type)
 {
@@ -29,8 +29,8 @@ t_cmd	*create_cmd(char *cmd)
 	if (!new || !cmd)
 		return (NULL);
 	split_cmd = ft_split(cmd, ' ');
-	if (split_cmd && split_cmd[0]) 
-		new->cmd = split_cmd[0];
+	if (split_cmd && split_cmd[0])
+		new->cmd = get_cmdpath(split_cmd[0]);
 	if (split_cmd[1])
 		new->args = &split_cmd[1];
 	return (new);
@@ -62,6 +62,8 @@ t_cmdlst	*create_cmdlst(int type, t_cmd *cmd)
 		return (NULL);
 	new->type = type;
 	new->cmd = cmd;
+	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
@@ -69,7 +71,6 @@ int	ms_parser(t_token *token, t_cmdlst **cmds)
 {
 	t_token		*tmp;
 	char		*str;
-	
 
 	tmp = token;
 	while (tmp)
@@ -84,7 +85,7 @@ int	ms_parser(t_token *token, t_cmdlst **cmds)
 				tmp = tmp->next;
 			}
 			else
-				break;
+				break ;
 		}
 		add_cmdlst(cmds, create_cmdlst(tmp->type, create_cmd(str)));
 		free(str);

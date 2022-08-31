@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:13:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/30 18:49:38 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/31 15:36:24 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	display_cmds(void)
 			if (tmp)
 				printf("\n\ntmp->prev = %p\t\ttmp = %p\t\ttmp->next = %p\ntmp->type", tmp->prev, tmp, tmp->next);
 			if (tmp->type == 1)
-				printf("CMD");
+				printf(" CMD ");
 			if (tmp->type == 2)
 				printf(" | ");
 			if (tmp->type == 3)

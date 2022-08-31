@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/30 18:41:13 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/31 15:11:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ typedef struct	s_shell
 {
 	char		**env;
 	char		*input;
-	
 }				t_shell;
 
 // GLOBAL (variable)
@@ -75,7 +74,6 @@ typedef struct	s_data
 typedef struct	s_global
 {
 	t_data	*data;
-	
 }			t_global;
 
 #endif

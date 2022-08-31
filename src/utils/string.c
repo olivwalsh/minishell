@@ -6,13 +6,13 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 15:18:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/29 16:15:24 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/31 15:40:47 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
@@ -47,4 +47,32 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	str[i + j] = 0;
 	return (str);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1 && s1[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
+}
+
+int	ft_strncmp(char *s1, char *s2, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
 }
