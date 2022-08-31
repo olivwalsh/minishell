@@ -20,7 +20,8 @@ typedef struct	s_token
 {
 	char			*value;
 	int				type;
-	int				exp;
+	int				var;
+	int				*qts;
 	struct s_token	*prev;
 	struct s_token	*next;
 }				t_token;
@@ -67,7 +68,6 @@ typedef struct	s_data
 typedef struct	s_global
 {
 	t_data	*data;
-	
 }			t_global;
 
 #endif

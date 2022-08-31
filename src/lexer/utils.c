@@ -78,3 +78,40 @@ int	is_special(char c, int *type)
 		return (0);
 	return (1);
 }
+
+void	ft_minus(void *s, size_t n)
+{
+	size_t			i;
+	unsigned char	*str;
+
+	str = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = -2;
+		i++;
+	}
+	// str[i] = 0;
+}
+
+int	quote_init(t_token *tokens)
+{
+	t_token	*tmp;
+
+	tmp = tokens;
+	while (tmp)
+	{
+		if (tmp->type == DBL_QUOTE)
+		{
+			tmp->qts = malloc(sizeof(int) * ft_strlen(tmp->value));
+			ft_minus(tmp->qts, ft_strlen(tmp->value));
+			if (!tmp->qts)
+			{
+				err_msg(-2, 0);
+				return (EXIT_FAILURE);
+			}
+		}
+		tmp = tmp->next;
+	}
+	return (EXIT_SUCCESS);
+}

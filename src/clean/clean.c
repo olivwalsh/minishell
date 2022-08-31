@@ -23,7 +23,10 @@ void	free_list(t_token **tokens)
 		while (tmp)
 		{
 			next = tmp->next;
-			free(tmp->value);
+			if (tmp->value)
+				free(tmp->value);
+			if (tmp->qts)
+				free(tmp->qts);
 			free(tmp);
 			tmp = NULL;
 			tmp = next;

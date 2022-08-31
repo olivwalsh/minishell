@@ -41,6 +41,8 @@ static t_token	*create_token(int type, char *value)
 	}
 	new->type = type;
 	new->value = value;
+	new->var = 0;
+	new->qts = NULL;
 	new->prev = NULL;
 	new->next = NULL;
 	return (new);

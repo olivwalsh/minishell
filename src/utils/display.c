@@ -26,7 +26,7 @@ void	display_tokens(void)
 			//if (tmp && tmp->value)
 			//	printf("token->value = %s\t\ttoken->type = %d\n\n", tmp->value, tmp->type);
 			if (tmp-> type == 1)
-				printf("WORD");
+				printf(" WORD ");
 			if (tmp->type == 2)
 				printf(" | ");
 			if (tmp->type == 3)

@@ -34,6 +34,7 @@ int	ms_lexer(char *str, t_token **tokens)
 		else if (str[i])
 			res = tokenize(tokens, &str[i], &i, WORD);
 	}
+	res = quote_init(*tokens);
 	res = lexer_checker(*tokens);
 	return (res);
 }

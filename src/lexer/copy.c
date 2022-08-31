@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	is_delimiter(char *str)
+int	is_delimiter(char *str)
 {
 	char	*special;
 	int		i;

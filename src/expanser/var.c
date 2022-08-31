@@ -14,34 +14,53 @@
 
 static int	check_var(t_token **tokens, char *var)
 {
+	printf("var is %s\n", var);
 	if (!var[1] || is_isspace(var[1]))
 	{
-		(*tokens)->exp = -1;
+		(*tokens)->var = -1;
 		return (1);
 	}	
 	return (0);
 }
 
-char	*get_var(t_token **tokens, char *var)
+// static char	*get_var(t_token **tokens, char *var)
+// {
+
+// 	if (check_var(tokens, var))
+// 		return (var);
+// 	var++;
+// 	str = getenv(var++);
+// 	return (str);
+// }
+
+static void	check_new(t_token *new)
 {
-	char	*str;
-	
-	if (check_var(tokens, var))
-		return (var);
-	var++;
-	str = getenv(var++);
-	return (str);
+	t_token	*tmp;
+
+	tmp = new;
+	while (tmp)
+	{
+		if (tmp->value[0] == '$')
+			tmp->var = -1;
+		tmp = tmp->next;
+	}
 }
 
 int	expanse_var(t_token **tokens)
 {
 	t_token	*new;
 	char	*str;
+	char	*var;
 
 	new = NULL;
-	str = get_var(tokens, (*tokens)->value);
-	if ((*tokens)->exp == -1)
+	// str = get_var(tokens, (*tokens)->value);
+	var = (*tokens)->value;
+	if (check_var(tokens, var))
 		return (EXIT_SUCCESS);
+	var++;
+	str = getenv(var++);
+	// if ((*tokens)->var == -1)
+	// 	return (EXIT_SUCCESS);
 	if (!str)
 	{
 		(*tokens)->value = NULL;
@@ -51,8 +70,7 @@ int	expanse_var(t_token **tokens)
 	ms_lexer(str, &new);
 	if (!new)
 		return (EXIT_FAILURE);
-	if (str[0] == '$')
-		new->exp = -1;
+	check_new(new);
 	insert_token(tokens, new);
 	return (EXIT_SUCCESS);
 }

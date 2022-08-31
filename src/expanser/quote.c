@@ -32,44 +32,6 @@
 // 	return (EXIT_SUCCESS);
 // }
 
-static int	is_delimiter(char *str)
-{
-	char	*special;
-	int		i;
-
-	i = 0;
-	special = "|<>\'\"&()";
-	printf("in is_delimiter, with str[0] = %c\n", str[0]);
-	while (str && str[i] && (str[i] > 32 && str[i] < 127) \
-		&& !strchr(special, str[i]))
-	{
-		if (str[i] == '$' && is_delimiter(&str[i + 1]))
-			break ;
-		i++;
-	}
-	return (i);
-}
-
-int	is_var(t_token **tokens, char *str, int i)
-{
-	int	j;
-
-	j = 0;
-	if ((*tokens)->exp == i)
-		return (0);
-	if (str[0] == '$')
-	{
-		printf("found a dollar\n");
-		if (!str[1])
-			return (0);
-		j = is_delimiter(&str[1]);
-		printf("delimiter is at %d char \n", j);
-		return (j);
-	}
-	return (0);
-}
-
-
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
@@ -109,43 +71,96 @@ char	*ft_strjoin(char *s1, char const *s2)
 	return (new);
 }
 
-int	expanse_quote(t_token **tokens, char *str)
+int	*ft_tabint(const int *t, int c)
+{
+	int		i;
+	int		*tab;
+
+	tab = (int *)t;
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i] == c)
+			return (tab + i);
+		i++;
+	}
+	return (NULL);
+}
+
+int	is_var(t_token *tokens, char *str, int i)
+{
+	int	j;
+
+	j = 0;
+	if (ft_tabint(tokens->qts, i))
+		return (0);
+	if (str[0] == '$')
+	{
+		if (!str[1])
+			return (0);
+		j = is_delimiter(&str[1]);
+		return (j);
+	}
+	return (0);
+}
+
+char	*get_value(char *str, int i, int j)
 {
 	char	*var;
 	char	*val;
-	char	*exp;
-	int		i;
-	int		j;
 
 	var = NULL;
+	var = malloc(sizeof(char) * (j + 1));
+	if (!var)
+	{
+		err_msg(-2, 0);
+		return (NULL);
+	}
+	var = ft_strncpy(var, &str[i + 1], j);
+	val = getenv(var);
+	free(var);
+	return (val);
+}
+
+void	get_expanse(t_token *tokens, char *str, char *val, int i)
+{
+	char	*exp;
+
 	exp = NULL;
+	exp = ft_strjoin(exp, str);
+	if (val)
+		exp = ft_strjoin(exp, val);
+	exp = ft_strjoin(exp, &str[i]);
+	free(tokens->value);
+	tokens->value = exp;
+}
+
+int	expanse_quote(t_token *tokens, char *str, int idx)
+{
+	char		*val;
+	int			i;
+	int			j;
+
 	i = 0;
 	j = 0;
+	// printf("str is %s\n", str);
 	while (str && str[i])
 	{
 		j = is_var(tokens, &str[i], i);
 		if (j)
 		{
-			var = malloc(sizeof(char) * (j + 1));
-			if (!var)
+			val = get_value(str, i, j);
+			if (g_global.data->err)
 				return (EXIT_FAILURE);
-			var = ft_strncpy(var, &str[i + 1], j);
-			val = getenv(var);
-			if (val[0] == '$')
-				(*tokens)->exp = i;
-			free(var);
+			if (val && val[0] == '$')
+				tokens->qts[idx] = i;
 			str[i] = 0;
-			exp = ft_strjoin(exp, str);
-			exp = ft_strjoin(exp, val);
 			i += j + 1;
-			exp = ft_strjoin(exp, &str[i]);
-			free((*tokens)->value);
-			(*tokens)->value = exp;
+			get_expanse(tokens, str, val, i);
 			return (EXIT_SUCCESS);
 		}
-		else
-			i++;	
+		i++;
 	}
-	(*tokens)->exp = -1;
+	tokens->qts[idx] = -1;
 	return (EXIT_SUCCESS);
 }
