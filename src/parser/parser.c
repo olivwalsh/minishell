@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 18:39:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 15:40:13 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/31 16:42:24 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,18 @@ int	cmd_delimiter(int type)
 	return (0);
 }
 
-t_cmd	*create_cmd(char *cmd)
+t_cmd	*create_cmd(char *str)
 {
 	t_cmd	*new;
-	char	**split_cmd;
 
 	new = malloc(sizeof(t_cmd));
-	if (!new || !cmd)
+	if (!new || !str)
 		return (NULL);
-	split_cmd = ft_split(cmd, ' ');
-	if (split_cmd && split_cmd[0])
-		new->cmd = get_cmdpath(split_cmd[0]);
-	if (split_cmd[1])
-		new->args = &split_cmd[1];
+	new->cmd_args = ft_split(str, ' ');
+	if (new->cmd_args && new->cmd_args[0])
+		new->cmd = get_cmdpath(new->cmd_args[0]);
+	if (new->cmd_args[1])
+		new->args = &new->cmd_args[1];
 	return (new);
 }
 
@@ -78,10 +77,10 @@ int	ms_parser(t_token *token, t_cmdlst **cmds)
 		str = NULL;
 		while (tmp && !cmd_delimiter(tmp->type))
 		{
-			str = ft_strjoin(str, tmp->value);
+			str = ft_sjoin(str, tmp->value);
 			if (tmp->next && !cmd_delimiter(tmp->next->type))
 			{
-				str = ft_strjoin(str, " ");
+				str = ft_sjoin(str, " ");
 				tmp = tmp->next;
 			}
 			else

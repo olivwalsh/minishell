@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/30 15:45:04 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/31 16:21:48 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,15 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	while (tab && tab[i])
-		free(tab[i++]);
-	free(tab);
+	if (tab && tab[i])
+	{
+		while (i < get_tablen(tab))
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
+	}
 }
 
 void	free_cmds(t_cmdlst **lst)
@@ -53,13 +59,11 @@ void	free_cmds(t_cmdlst **lst)
 		while (tmp)
 		{
 			next = tmp->next;
-			// if (tmp->cmd && tmp->cmd->args)
-			// 	free_tab(tmp->cmd->args);
-			if (tmp->cmd)
-			{
+			if (tmp->cmd && tmp->cmd->cmd_args)
+				free_tab(tmp->cmd->cmd_args);
+			if (tmp->cmd->cmd)
 				free(tmp->cmd->cmd);
-				free(tmp->cmd);
-			}
+			free(tmp->cmd);
 			free(tmp);
 			tmp = NULL;
 			tmp = next;

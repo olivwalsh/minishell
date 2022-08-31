@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:46:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 15:37:00 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/31 16:19:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ char	*get_cmdpath(char *cmd)
 		if (!access(cmd_path, X_OK))
 		{
 			free(path);
-			printf("returning cmd path = %s\n", cmd_path);
+			free_tab(path_list);
 			return (cmd_path);
 		}
 		i++;
 		free(path);
 		free(cmd_path);
 	}
+	free_tab(path_list);
 	return (NULL);
 }

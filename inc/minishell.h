@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 14:59:32 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/31 16:23:14 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,17 @@ char	*get_cmdpath(char *cmd);
 */
 void	clean(t_data *data);
 void	free_tokens(t_token **tokens);
+void	free_tab(char **tab);
 /*
 **
 ** UTILS
 **
 */
+int		get_tablen(char **tab);
 int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, int n);
+char	*ft_sjoin(char *s1, char *s2);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);
 char	*ft_strncpy(char *dst, char *src, int n);
