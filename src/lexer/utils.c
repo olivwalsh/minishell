@@ -103,9 +103,9 @@ int	quote_init(t_token *tokens)
 	{
 		if (tmp->type == DBL_QUOTE)
 		{
-			tmp->qts = malloc(sizeof(int) * ft_strlen(tmp->value));
-			ft_minus(tmp->qts, ft_strlen(tmp->value));
-			if (!tmp->qts)
+			tmp->qts_stop = malloc(sizeof(int) * ft_strlen(tmp->value));
+			ft_minus(tmp->qts_stop, ft_strlen(tmp->value));
+			if (!tmp->qts_stop)
 			{
 				err_msg(-2, 0);
 				return (EXIT_FAILURE);

@@ -61,7 +61,7 @@ char	*copy_quote(char *str, int *i);
 **
 */
 int		ms_expanser(t_token **token);
-int		expanse_var(t_token **tokens);
+int		var_expanser(t_token **tokens);
 int		expanse_quote(t_token *tokens, char *str, int idx);
 int		*ft_tabint(const int *t, int c);
 void	insert_token(t_token **tokens, t_token *new);

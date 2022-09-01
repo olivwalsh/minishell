@@ -92,7 +92,7 @@ int	is_var(t_token *tokens, char *str, int i)
 	int	j;
 
 	j = 0;
-	if (ft_tabint(tokens->qts, i))
+	if (ft_tabint(tokens->qts_stop, i))
 		return (0);
 	if (str[0] == '$')
 	{
@@ -135,6 +135,22 @@ void	get_expanse(t_token *tokens, char *str, char *val, int i)
 	tokens->value = exp;
 }
 
+void	check_value(t_token *tokens, char *val, int idx, int i)
+{
+	int	j;
+
+	j = 0;
+	while (val && val[j])
+	{
+		if (val[j] == '$')
+		{
+			tokens->qts_stop[idx] = i + j;
+			idx++;
+		}
+		j++;
+	}
+}
+
 int	expanse_quote(t_token *tokens, char *str, int idx)
 {
 	char		*val;
@@ -143,7 +159,7 @@ int	expanse_quote(t_token *tokens, char *str, int idx)
 
 	i = 0;
 	j = 0;
-	// printf("str is %s\n", str);
+	printf("str is %s\nidx is %d\n", str, idx);
 	while (str && str[i])
 	{
 		j = is_var(tokens, &str[i], i);
@@ -152,8 +168,7 @@ int	expanse_quote(t_token *tokens, char *str, int idx)
 			val = get_value(str, i, j);
 			if (g_global.data->err)
 				return (EXIT_FAILURE);
-			if (val && val[0] == '$')
-				tokens->qts[idx] = i;
+			check_value(tokens, val, idx, i);
 			str[i] = 0;
 			i += j + 1;
 			get_expanse(tokens, str, val, i);
@@ -161,6 +176,6 @@ int	expanse_quote(t_token *tokens, char *str, int idx)
 		}
 		i++;
 	}
-	tokens->qts[idx] = -1;
+	tokens->qts_stop[idx] = -1;
 	return (EXIT_SUCCESS);
 }

@@ -20,8 +20,9 @@ typedef struct	s_token
 {
 	char			*value;
 	int				type;
-	int				var;
-	int				*qts;
+	int				var_stop;
+	int				*qts_stop;
+	int				idx;
 	struct s_token	*prev;
 	struct s_token	*next;
 }				t_token;

@@ -20,7 +20,7 @@ static void	insert_head(t_token *tokens, t_token *new)
 	free(tokens->value);
 	tokens->value = new->value;
 	tokens->type = new->type;
-	tokens->var = new->var;
+	tokens->var_stop = new->var_stop;
 	if ((new)->next)
 	{
 		tmp1 = tokens->next;

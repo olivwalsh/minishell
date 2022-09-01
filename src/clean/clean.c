@@ -24,9 +24,15 @@ void	free_list(t_token **tokens)
 		{
 			next = tmp->next;
 			if (tmp->value)
+			{
 				free(tmp->value);
-			if (tmp->qts)
-				free(tmp->qts);
+				tmp->value = NULL;
+			}
+			if (tmp->qts_stop)
+			{
+				free(tmp->qts_stop);
+				tmp->qts_stop = NULL;
+			}
 			free(tmp);
 			tmp = NULL;
 			tmp = next;

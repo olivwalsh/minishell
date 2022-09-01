@@ -29,16 +29,12 @@ int main(int argc, char **argv, char **env)
 		data.shell.input = readline(GREEN"minishell$ "RESET);
 		// create tokens
 		res = ms_lexer(data.shell.input, &data.tokens);
-		printf("tokens\n");
 		display_tokens();
 		printf("_________________________________________________________\n\n");
 		// expanser
 		if (!res && !g_global.data->err)
 		{
 			ms_expanser(&data.tokens);
-			printf("expansed tokens\n");
-			display_tokens();
-			printf("_________________________________________________________\n\n");
 		}
 		add_history(data.shell.input);
 		// parser
