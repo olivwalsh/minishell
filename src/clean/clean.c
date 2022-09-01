@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 16:21:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/01 10:56:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,14 @@ void	free_cmds(t_cmdlst **lst)
 		while (tmp)
 		{
 			next = tmp->next;
-			if (tmp->cmd && tmp->cmd->cmd_args)
-				free_tab(tmp->cmd->cmd_args);
-			if (tmp->cmd->cmd)
-				free(tmp->cmd->cmd);
-			free(tmp->cmd);
+			if (tmp->cmd)
+			{
+				if (tmp->cmd->cmd_args)
+					free_tab(tmp->cmd->cmd_args);
+				if (tmp->cmd->cmd)
+					free(tmp->cmd->cmd);
+				free(tmp->cmd);
+			}
 			free(tmp);
 			tmp = NULL;
 			tmp = next;
@@ -78,6 +81,7 @@ void	clean(t_data *data)
 	{
 		if (data->tokens)
 			free_tokens(&data->tokens);
+		
 		if (data->cmds)
 			free_cmds(&data->cmds);
 		if (data->shell.input)
