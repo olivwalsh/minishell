@@ -23,7 +23,16 @@ void	free_tokens(t_token **tokens)
 		while (tmp)
 		{
 			next = tmp->next;
-			free(tmp->value);
+			if (tmp->value)
+			{
+				free(tmp->value);
+				tmp->value = NULL;
+			}
+			if (tmp->qts_stop)
+			{
+				free(tmp->qts_stop);
+				tmp->qts_stop = NULL;
+			}
 			free(tmp);
 			tmp = NULL;
 			tmp = next;
@@ -81,7 +90,6 @@ void	clean(t_data *data)
 	{
 		if (data->tokens)
 			free_tokens(&data->tokens);
-		
 		if (data->cmds)
 			free_cmds(&data->cmds);
 		if (data->shell.input)

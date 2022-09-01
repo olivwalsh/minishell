@@ -22,6 +22,22 @@ int	get_tablen(char **tab)
 	return (i);
 }
 
+int	*ft_tabint(const int *t, int c)
+{
+	int		i;
+	int		*tab;
+
+	tab = (int *)t;
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i] == c)
+			return (tab + i);
+		i++;
+	}
+	return (NULL);
+}
+
 int	ft_isdigit(char c)
 {
 	if (c < '0' || c > '9')

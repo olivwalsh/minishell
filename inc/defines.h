@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MS_DEFINES_H
-#define MS_DEFINES_H
+#ifndef DEFINES_H
+# define DEFINES_H
 
 # define ERROR_LEXER -1
 

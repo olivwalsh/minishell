@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:18:24 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/24 16:06:17 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/28 16:34:58 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ static t_token	*create_token(int type, char *value)
 	}
 	new->type = type;
 	new->value = value;
+	new->var_stop = 0;
+	new->qts_stop = NULL;
+	new->idx = 0;
 	new->prev = NULL;
 	new->next = NULL;
 	return (new);
@@ -52,8 +55,10 @@ int	tokenize(t_token **tokens, char *str, int *i, int type)
 		add_token(create_token(type, copy_chars(str, i, 1)), tokens);
 	else if (type > 9 && type < 14)
 		add_token(create_token(type, copy_chars(str, i, 2)), tokens);
-	else if (type == WORD || type == VAR)
+	else if (type == WORD)
 		add_token(create_token(type, copy_word(str, i)), tokens);
+	else if (type == VAR)
+		add_token(create_token(type, copy_var(str, i)), tokens);
 	else if (type == SGL_QUOTE || type == DBL_QUOTE)
 		add_token(create_token(type, copy_quote(str, i)), tokens);
 	else
