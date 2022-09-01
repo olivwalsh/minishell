@@ -17,7 +17,7 @@ void	display_cmd(t_cmd *cmd)
 	char	**args;
 	int		i;
 
-	i = 0;	
+	i = 0;
 	if (cmd)
 	{
 		printf("\ncmd = "GREEN"|"RESET"%s"GREEN"|"RESET"\n", cmd->cmd);
@@ -35,7 +35,7 @@ void	display_cmd(t_cmd *cmd)
 void	display_cmds(void)
 {
 	t_cmdlst	*tmp;
-	
+
 	printf("DISPLAY CMDS\n\n");
 	if (g_global.data->cmds)
 	{
@@ -86,8 +86,8 @@ void	display_tokens(void)
 		tmp = g_global.data->tokens;
 		while (tmp)
 		{
-			//if (tmp && tmp->value)
-			//	printf("token->value = %s\t\ttoken->type = %d\n\n", tmp->value, tmp->type);
+			// if (tmp && tmp->value)
+			// 	printf("token->value = %s\t\ttoken->type = %d\n\n", tmp->value, tmp->type);
 			if (tmp-> type == 1)
 				printf(" WORD ");
 			if (tmp->type == 2)

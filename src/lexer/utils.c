@@ -60,75 +60,38 @@ int	is_oper(char c1, char c2, int *type)
 	return (1);
 }
 
-int    is_var(char *str)
+int	is_var(char *str)
 {
-    char    *special;
+	char	*special;
 
-    special = "|<>\'\"&()";
-    if (str && str[0] == '$')
-    {
-        if ((str[1] > 32 && str[1] < 127) && !is_isspace(str[1])
-            && !strchr(special, str[1]))
-            return (1);
-    }
-    return (0);
-}
-
-int    is_special(char *str, int *type)
-{
-    char    c;
-
-    c = str[0];
-    if (c == '|')
-        *type = PIPE;
-    else if (c == '<')
-        *type = REDIR_IN;
-    else if (c == '>')
-        *type = REDIR_OUT;
-    else if (is_var(str))
-        *type = VAR;
-    else if (c == '(')
-        *type = OPEN_BRK;
-    else if (c == ')')
-        *type = CLOSE_BRK;
-    else
-        return (0);
-    return (1);
-}
-
-void	ft_minus(void *s, size_t n)
-{
-	size_t			i;
-	unsigned char	*str;
-
-	str = (unsigned char *)s;
-	i = 0;
-	while (i < n)
+	special = "|<>\'\"&()";
+	if (str && str[0] == '$')
 	{
-		str[i] = -2;
-		i++;
+		if ((str[1] > 32 && str[1] < 127) && !is_isspace(str[1])
+			&& !strchr(special, str[1]))
+			return (1);
 	}
-	// str[i] = 0;
+	return (0);
 }
 
-int	quote_init(t_token *tokens)
+int	is_special(char *str, int *type)
 {
-	t_token	*tmp;
+	char	c;
 
-	tmp = tokens;
-	while (tmp)
-	{
-		if (tmp->type == DBL_QUOTE)
-		{
-			tmp->qts_stop = malloc(sizeof(int) * ft_strlen(tmp->value));
-			ft_minus(tmp->qts_stop, ft_strlen(tmp->value));
-			if (!tmp->qts_stop)
-			{
-				err_msg(-2, 0);
-				return (EXIT_FAILURE);
-			}
-		}
-		tmp = tmp->next;
-	}
-	return (EXIT_SUCCESS);
+	c = str[0];
+	if (c == '|')
+		*type = PIPE;
+	else if (c == '<')
+		*type = REDIR_IN;
+	else if (c == '>')
+		*type = REDIR_OUT;
+	else if (is_var(str))
+		*type = VAR;
+	else if (c == '(')
+		*type = OPEN_BRK;
+	else if (c == ')')
+		*type = CLOSE_BRK;
+	else
+		return (0);
+	return (1);
 }

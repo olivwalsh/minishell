@@ -90,7 +90,6 @@ void	clean(t_data *data)
 	{
 		if (data->tokens)
 			free_tokens(&data->tokens);
-		
 		if (data->cmds)
 			free_cmds(&data->cmds);
 		if (data->shell.input)

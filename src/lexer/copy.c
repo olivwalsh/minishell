@@ -55,19 +55,15 @@ char	*copy_word(char *str, int *i)
 {
 	int		j;
 	char	*value;
-	// printf ("str before delimiter is %s\n", str);
+
 	j = is_delimiter(str);
-	// printf ("str after delimiter is %s\n", str);
 	value = malloc(sizeof(char) * (j + 1));
-	// printf ("str after malloc is %s\n", str);
 	if (!value)
 	{
 		err_msg(-2, 0);
 		return (NULL);
 	}
-	// printf ("str before strncpy is %s\n", str);
 	value = ft_strncpy(value, str, j);
-	// printf ("value after strncpy is %s\n", value);
 	*i += j;
 	return (value);
 }

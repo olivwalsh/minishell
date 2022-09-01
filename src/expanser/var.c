@@ -12,16 +12,6 @@
 
 #include "minishell.h"
 
-// static int	check_var(t_token **tokens, char *var)
-// {
-// 	if (!var[1] || is_isspace(var[1]))
-// 	{
-// 		(*tokens)->var_stop = -1;
-// 		return (1);
-// 	}	
-// 	return (0);
-// }
-
 static void	check_new(t_token *new)
 {
 	t_token	*tmp;
@@ -35,7 +25,7 @@ static void	check_new(t_token *new)
 	}
 }
 
-static int	expanse_var(t_token **tokens)
+int	expanse_var(t_token **tokens)
 {
 	t_token	*new;
 	char	*str;
@@ -43,8 +33,6 @@ static int	expanse_var(t_token **tokens)
 
 	new = NULL;
 	var = (*tokens)->value;
-	// if (check_var(tokens, var))
-	// 	return (EXIT_SUCCESS);
 	var++;
 	str = getenv(var++);
 	if (!str)
@@ -59,29 +47,4 @@ static int	expanse_var(t_token **tokens)
 	check_new(new);
 	insert_token(tokens, new);
 	return (EXIT_SUCCESS);
-}
-
-int	var_expanser(t_token **tokens)
-{
-	int			res;
-	t_token		*tmp;
-
-	res = 0;
-	tmp = *tokens;
-	while (tmp && !g_global.data->err)
-	{
-		if (tmp->type == VAR)
-			res = expanse_var(&tmp);
-		if (!tmp)
-			break ;
-		tmp = tmp->next;
-	}
-	tmp = *tokens;
-	while (tmp)
-	{
-		if (tmp->type == VAR && tmp->var_stop > -1)
-			res = var_expanser(tokens);
-		tmp = tmp->next;
-	}
-	return (res);
 }

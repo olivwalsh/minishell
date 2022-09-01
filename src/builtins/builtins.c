@@ -29,5 +29,5 @@ int	set_buildin(char *cmd)
 	else if (!ft_strcmp("exit", cmd))
 		return (BD_EXIT);
 	else
-		return (EXIT_FAILURE);		
+		return (EXIT_FAILURE);
 }

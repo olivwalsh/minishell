@@ -32,61 +32,6 @@
 // 	return (EXIT_SUCCESS);
 // }
 
-// size_t	ft_strlen(const char *str)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (str && str[i])
-// 		i++;
-// 	return (i);
-// }
-
-// char	*ft_strjoin(char *s1, char const *s2)
-// {
-// 	char	*new;
-// 	size_t	len1;
-// 	size_t	len2;
-// 	int		i;
-// 	int		j;
-
-// 	if ((!s1 && !s2) || !s2[0])
-// 		return (NULL);
-// 	len1 = ft_strlen(s1);
-// 	len2 = ft_strlen(s2);
-// 	new = malloc(sizeof(char) * (len1 + len2 + 1));
-// 	if (!new)
-// 		return (NULL);
-// 	i = 0;
-// 	while (s1 && s1[i])
-// 	{
-// 		new[i] = s1[i];
-// 		i++;
-// 	}
-// 	j = 0;
-// 	while (s2 && s2[j])
-// 		new[i++] = s2[j++];
-// 	new[i] = '\0';
-// 	free(s1);
-// 	return (new);
-// }
-
-int	*ft_tabint(const int *t, int c)
-{
-	int		i;
-	int		*tab;
-
-	tab = (int *)t;
-	i = 0;
-	while (tab[i])
-	{
-		if (tab[i] == c)
-			return (tab + i);
-		i++;
-	}
-	return (NULL);
-}
-
 int	is_variable(t_token *tokens, char *str, int i)
 {
 	int	j;
@@ -122,19 +67,6 @@ char	*get_value(char *str, int i, int j)
 	return (val);
 }
 
-void	get_expanse(t_token *tokens, char *str, char *val, int i)
-{
-	char	*exp;
-
-	exp = NULL;
-	exp = ft_sjoin(exp, str);
-	if (val)
-		exp = ft_sjoin(exp, val);
-	exp = ft_sjoin(exp, &str[i]);
-	free(tokens->value);
-	tokens->value = exp;
-}
-
 void	check_value(t_token *tokens, char *val, int idx, int i)
 {
 	int	j;
@@ -151,6 +83,19 @@ void	check_value(t_token *tokens, char *val, int idx, int i)
 	}
 }
 
+void	get_expanse(t_token *tokens, char *str, char *val, int i)
+{
+	char	*exp;
+
+	exp = NULL;
+	exp = ft_sjoin(exp, str);
+	if (val)
+		exp = ft_sjoin(exp, val);
+	exp = ft_sjoin(exp, &str[i]);
+	free(tokens->value);
+	tokens->value = exp;
+}
+
 int	expanse_quote(t_token *tokens, char *str, int idx)
 {
 	char		*val;
@@ -159,7 +104,6 @@ int	expanse_quote(t_token *tokens, char *str, int idx)
 
 	i = 0;
 	j = 0;
-	printf("str is %s\nidx is %d\n", str, idx);
 	while (str && str[i])
 	{
 		j = is_variable(tokens, &str[i], i);
