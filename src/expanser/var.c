@@ -12,15 +12,15 @@
 
 #include "minishell.h"
 
-static int	check_var(t_token **tokens, char *var)
-{
-	if (!var[1] || is_isspace(var[1]))
-	{
-		(*tokens)->var_stop = -1;
-		return (1);
-	}	
-	return (0);
-}
+// static int	check_var(t_token **tokens, char *var)
+// {
+// 	if (!var[1] || is_isspace(var[1]))
+// 	{
+// 		(*tokens)->var_stop = -1;
+// 		return (1);
+// 	}	
+// 	return (0);
+// }
 
 static void	check_new(t_token *new)
 {
@@ -43,8 +43,8 @@ static int	expanse_var(t_token **tokens)
 
 	new = NULL;
 	var = (*tokens)->value;
-	if (check_var(tokens, var))
-		return (EXIT_SUCCESS);
+	// if (check_var(tokens, var))
+	// 	return (EXIT_SUCCESS);
 	var++;
 	str = getenv(var++);
 	if (!str)

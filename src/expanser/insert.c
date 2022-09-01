@@ -75,7 +75,7 @@ void	insert_token(t_token **tokens, t_token *new)
 {
 	if (!(*tokens)->prev && !(*tokens)->next)
 	{
-		free_list(tokens);
+		free_tokens(tokens);
 		add_token(new, tokens);
 		g_global.data->tokens = *tokens;
 	}

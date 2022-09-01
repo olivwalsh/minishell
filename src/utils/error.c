@@ -21,3 +21,5 @@ int	err_msg(int code, char c)
 	g_global.data->err = 1;
 	return (EXIT_FAILURE);
 }
+
+// int error(t_token token, int code)

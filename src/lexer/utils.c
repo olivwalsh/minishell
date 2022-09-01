@@ -60,23 +60,40 @@ int	is_oper(char c1, char c2, int *type)
 	return (1);
 }
 
-int	is_special(char c, int *type)
+int    is_var(char *str)
 {
-	if (c == '|')
-		*type = PIPE;
-	else if (c == '<')
-		*type = REDIR_IN;
-	else if (c == '>')
-		*type = REDIR_OUT;
-	else if (c == '$')
-		*type = VAR;
-	else if (c == '(')
-		*type = OPEN_BRK;
-	else if (c == ')')
-		*type = CLOSE_BRK;
-	else
-		return (0);
-	return (1);
+    char    *special;
+
+    special = "|<>\'\"&()";
+    if (str && str[0] == '$')
+    {
+        if ((str[1] > 32 && str[1] < 127) && !is_isspace(str[1])
+            && !strchr(special, str[1]))
+            return (1);
+    }
+    return (0);
+}
+
+int    is_special(char *str, int *type)
+{
+    char    c;
+
+    c = str[0];
+    if (c == '|')
+        *type = PIPE;
+    else if (c == '<')
+        *type = REDIR_IN;
+    else if (c == '>')
+        *type = REDIR_OUT;
+    else if (is_var(str))
+        *type = VAR;
+    else if (c == '(')
+        *type = OPEN_BRK;
+    else if (c == ')')
+        *type = CLOSE_BRK;
+    else
+        return (0);
+    return (1);
 }
 
 void	ft_minus(void *s, size_t n)

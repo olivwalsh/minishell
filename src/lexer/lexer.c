@@ -29,7 +29,7 @@ int	ms_lexer(char *str, t_token **tokens)
 			res = tokenize(tokens, &str[i], &i, type);
 		else if (is_oper(str[i], str[i + 1], &type))
 			res = tokenize(tokens, &str[i], &i, type);
-		else if (is_special(str[i], &type))
+		else if (is_special(&str[i], &type))
 			res = tokenize(tokens, &str[i], &i, type);
 		else if (str[i])
 			res = tokenize(tokens, &str[i], &i, WORD);
