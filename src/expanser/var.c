@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/29 17:30:45 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/01 16:21:53 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ static void	check_new(t_token *new)
 	}
 }
 
+void    delete_token(t_token **tokens)
+{
+    t_token    *prev;
+    t_token    *next;
+
+    prev = (*tokens)->prev;
+    next = (*tokens)->next;
+    if (prev)
+        prev->next = next;
+    if (next)
+        next->prev = prev;
+    free((*tokens)->value);
+    free(*tokens);
+}
+
 int	expanse_var(t_token **tokens)
 {
 	t_token	*new;
@@ -37,8 +52,7 @@ int	expanse_var(t_token **tokens)
 	str = getenv(var++);
 	if (!str)
 	{
-		(*tokens)->value = NULL;
-		(*tokens)->type = 0;
+		delete_token(tokens);
 		return (EXIT_SUCCESS);
 	}
 	ms_lexer(str, &new);
