@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:22:28 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 19:01:08 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/31 15:55:00 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@
 # define LPINK "\e[38;4;200m"
 
 // Generic
-# define PROMPT RED"m"LRED"i"LYELLOW"n"YELLOW"i"LGREEN"s"GREEN"h"LBLUE"e"LPINK"l"LPURPLE"l"RESET"$ "
+# define SUCCESS_PROMPT GREEN"\u2794"RED"  m"LRED"i"LYELLOW"n"YELLOW"i"LGREEN"s"GREEN"h"LBLUE"e"LPINK"l"LPURPLE"l"RESET"$ "
+# define FAIL_PROMPT RED"\u2794"RED"  m"LRED"i"LYELLOW"n"YELLOW"i"LGREEN"s"GREEN"h"LBLUE"e"LPINK"l"LPURPLE"l"RESET"$ "
 
 // Tokens type
 # define WORD 1

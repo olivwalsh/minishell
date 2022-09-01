@@ -1,51 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 15:04:23 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 16:05:37 by owalsh           ###   ########.fr       */
+/*   Created: 2022/08/31 14:46:50 by owalsh            #+#    #+#             */
+/*   Updated: 2022/08/31 16:19:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_tablen(char **tab)
+char	*get_cmdpath(char *cmd)
 {
-	int	i;
+	char	*path;
+	char	*cmd_path;
+	char	**path_list;
+	int		i;
 
+	path_list = ft_split(getenv("PATH"), ':');
+	if (!access(cmd, X_OK))
+		return (cmd);
 	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
-int	ft_isdigit(char c)
-{
-	if (c < '0' || c > '9')
-		return (0);
-	return (1);
-}
-
-char	*ft_strncpy(char *dst, char *src, int n)
-{
-	int	i;
-
-	i = 0;
-	if (!src || !dst)
-		return (NULL);
-	while (i < n && src[i])
+	while (path_list && path_list[i])
 	{
-		dst[i] = src[i];
+		path = ft_strjoin(path_list[i], "/");
+		cmd_path = ft_strjoin(path, cmd);
+		if (!access(cmd_path, X_OK))
+		{
+			free(path);
+			free_tab(path_list);
+			return (cmd_path);
+		}
 		i++;
+		free(path);
+		free(cmd_path);
 	}
-	dst[i] = '\0';
-	while (i < n)
-	{
-		dst[i] = '\0';
-		i++;
-	}
-	return (dst);
+	free_tab(path_list);
+	return (NULL);
 }

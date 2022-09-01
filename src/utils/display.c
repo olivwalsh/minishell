@@ -6,11 +6,74 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:13:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 15:03:32 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/31 15:36:24 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	display_cmd(t_cmd *cmd)
+{
+	char	**args;
+	int		i;
+
+	i = 0;	
+	if (cmd)
+	{
+		printf("\ncmd = "GREEN"|"RESET"%s"GREEN"|"RESET"\n", cmd->cmd);
+		args = cmd->args;
+		while (args && args[i])
+		{
+			printf("arg: "GREEN"|"RESET"%s"GREEN"|"RESET, args[i]);
+			i++;
+		}
+	}
+	else
+		printf("no cmd\n");
+}
+
+void	display_cmds(void)
+{
+	t_cmdlst	*tmp;
+	
+	printf("DISPLAY CMDS\n\n");
+	if (g_global.data->cmds)
+	{
+		printf("g_global.data->cmds = %p\n\n", g_global.data->cmds);
+		tmp = g_global.data->cmds;
+		while (tmp)
+		{
+			if (tmp)
+				printf("\n\ntmp->prev = %p\t\ttmp = %p\t\ttmp->next = %p\ntmp->type", tmp->prev, tmp, tmp->next);
+			if (tmp->type == 1)
+				printf(" CMD ");
+			if (tmp->type == 2)
+				printf(" | ");
+			if (tmp->type == 3)
+				printf(" < ");
+			if (tmp->type == 4)
+				printf(" > ");
+			if (tmp->type == 5)
+				printf(" ( ");
+			if (tmp->type == 6)
+				printf(" ) ");
+			if (tmp->type == 10)
+				printf(" && ");
+			if (tmp->type == 11)
+				printf(" || ");
+			if (tmp->type == 12)
+				printf(" << ");
+			if (tmp->type == 13)
+				printf(" >> ");
+			if (tmp->type == WORD)
+				display_cmd(tmp->cmd);
+			tmp = tmp->next;
+		}
+	}
+	else
+		printf("no list of cmds\n");
+	printf("\n");
+}
 
 void	display_tokens(void)
 {

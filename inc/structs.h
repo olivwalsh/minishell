@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 17:01:10 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/08/31 16:17:52 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,23 @@ typedef struct	s_cmd
 {
 	int				fd_in;
 	int				fd_out;
-	char			*cmd; // absolute path
-	char			**args;
+	int				builtin;
 	int				redir_in;
 	int				redir_out;
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
+	char			*cmd; // absolute path
+	char			**cmd_args;
+	char			**args;
 }				t_cmd;
+
+// CMD LIST
+typedef struct	s_cmdlst
+{
+	int 				type;
+	t_cmd				*cmd;
+	struct s_cmdlst		*next;
+	struct s_cmdlst		*prev;
+	
+}				t_cmdlst;
 
 // TERMINAL -- termios
 typedef struct	s_terminal
@@ -50,7 +60,6 @@ typedef struct	s_shell
 {
 	char		**env;
 	char		*input;
-	
 }				t_shell;
 
 // GLOBAL (variable)
@@ -59,14 +68,13 @@ typedef struct	s_data
 	int				err;
 	t_shell			shell;
 	t_terminal		terminal;
-	t_cmd			*cmds;		// linked list
+	t_cmdlst		*cmds;		// linked list
 	t_token			*tokens;	// linked list
 }				t_data;
 
 typedef struct	s_global
 {
 	t_data	*data;
-	
 }			t_global;
 
 #endif

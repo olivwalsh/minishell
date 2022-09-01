@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 19:15:37 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/01 10:56:59 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_global	g_global = {NULL};
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
 	int		res;
@@ -22,18 +22,19 @@ int main(int argc, char **argv, char **env)
 	if (argc != 1)
 		return (EXIT_FAILURE);
 	ms_init(&data, argv, env);
+	res = 0;
 	while (1)
 	{
-		res = 0;
-		data.shell.input = readline(PROMPT);
-		res = ms_lexer(data.shell.input, &data.tokens);
-		ms_exit(data.shell.input, NULL);
 		if (!res)
+			data.shell.input = readline(SUCCESS_PROMPT);
+		else
+			data.shell.input = readline(FAIL_PROMPT);
+		ms_exit(data.shell.input, NULL);
+		if (!ms_lexer(data.shell.input, &data.tokens)
+			&& !ms_expanser(&data.tokens))
 		{
-			ms_expanser(&data.tokens);
 			display_tokens();
-			printf("_________________________________________________________\n\n");
-			// parser
+			ms_parser(data.tokens, &data.cmds);
 			// execution
 		}
 		add_history(data.shell.input);
