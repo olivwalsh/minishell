@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 15:18:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 16:22:58 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/01 16:17:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_sjoin(char *s1, char *s2)
 	int		j;
 	char	*str;
 
-	if ((!s1 && !s2) || !s2[0])
+	if ((!s1 && !s2) || (s2 && !s2[0]))
 		return (NULL);
 	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
