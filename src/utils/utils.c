@@ -22,14 +22,12 @@ int	get_tablen(char **tab)
 	return (i);
 }
 
-int	*ft_tabint(const int *t, int c)
+int	*ft_tabint(int *tab, int c)
 {
 	int		i;
-	int		*tab;
 
-	tab = (int *)t;
 	i = 0;
-	while (tab[i])
+	while (tab && tab[i] != 0 && tab[i] != -2)
 	{
 		if (tab[i] == c)
 			return (tab + i);

@@ -64,7 +64,6 @@ char	*copy_quote(char *str, int *i);
 int		ms_expanser(t_token **token);
 int		expanse_var(t_token **tokens);
 int		expanse_quote(t_token *tokens, char *str, int idx);
-int		*ft_tabint(const int *t, int c);
 void	insert_token(t_token **tokens, t_token *new);
 /*
 **
@@ -88,7 +87,7 @@ void	free_tab(char **tab);
 **
 */
 int		get_tablen(char **tab);
-int		*ft_tabint(const int *t, int c);
+int		*ft_tabint(int *t, int c);
 int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, int n);

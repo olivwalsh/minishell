@@ -24,6 +24,7 @@ static void	ft_minus(void *s, size_t n)
 		str[i] = -2;
 		i++;
 	}
+	str[n] = -2;
 }
 
 int	quote_init(t_token *tokens)
@@ -35,7 +36,7 @@ int	quote_init(t_token *tokens)
 	{
 		if (tmp->type == DBL_QUOTE)
 		{
-			tmp->qts_stop = malloc(sizeof(int) * ft_strlen(tmp->value));
+			tmp->qts_stop = malloc(sizeof(int) * (ft_strlen(tmp->value) + 1));
 			ft_minus(tmp->qts_stop, ft_strlen(tmp->value));
 			if (!tmp->qts_stop)
 			{

@@ -91,9 +91,10 @@ char	*copy_quote(char *str, int *i)
 	int		j;
 
 	j = 1;
+	value = NULL;
 	while (str && str[j] && str[j] != str[0])
 		j++;
-	value = malloc(sizeof(char) * (j + 1));
+	value = malloc(sizeof(char) * (j + 2));
 	if (!value)
 	{
 		err_msg(-2, 0);
