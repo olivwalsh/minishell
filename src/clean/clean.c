@@ -41,19 +41,19 @@ void	free_tokens(t_token **tokens)
 	}
 }
 
-void	free_tab(char **tab)
+void	free_tab(char **table)
 {
 	int	i;
 
 	i = 0;
-	if (tab && tab[i])
+	if (table && table[i])
 	{
-		while (i < get_tablen(tab))
+		while (i < get_tablen(table))
 		{
-			free(tab[i]);
+			free(table[i]);
 			i++;
 		}
-		free(tab);
+		free(table);
 	}
 }
 

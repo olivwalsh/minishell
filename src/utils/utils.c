@@ -12,27 +12,25 @@
 
 #include "minishell.h"
 
-int	get_tablen(char **tab)
+int	get_tablen(char **table)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (table[i])
 		i++;
 	return (i);
 }
 
-int	*ft_tabint(const int *t, int c)
+int	*ft_tabint(int *table, int c)
 {
 	int		i;
-	int		*tab;
 
-	tab = (int *)t;
 	i = 0;
-	while (tab[i])
+	while (table && table[i] != 0 && table[i] != -2)
 	{
-		if (tab[i] == c)
-			return (tab + i);
+		if (table[i] == c)
+			return (table + i);
 		i++;
 	}
 	return (NULL);

@@ -15,12 +15,16 @@
 
 // SYSTEM LIBRARIES
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "/usr/include/readline/readline.h"
+#include "/usr/include/readline/history.h"
+// # include <readline/readline.h>
+// # include <readline/history.h>
 # include <stdlib.h>
 # include <termios.h>
 # include <unistd.h>
 # include <string.h>
+# include <curses.h>
+# include <term.h>
 
 // MS LIBRARIES
 # include "structs.h"
@@ -64,7 +68,6 @@ char	*copy_quote(char *str, int *i);
 int		ms_expanser(t_token **token);
 int		expanse_var(t_token **tokens);
 int		expanse_quote(t_token *tokens, char *str, int idx);
-int		*ft_tabint(const int *t, int c);
 void	insert_token(t_token **tokens, t_token *new);
 /*
 **
@@ -81,14 +84,14 @@ char	*get_cmdpath(char *cmd);
 */
 void	clean(t_data *data);
 void	free_tokens(t_token **tokens);
-void	free_tab(char **tab);
+void	free_tab(char **table);
 /*
 **
 ** UTILS
 **
 */
-int		get_tablen(char **tab);
-int		*ft_tabint(const int *t, int c);
+int		get_tablen(char **table);
+int		*ft_tabint(int *t, int c);
 int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, int n);
