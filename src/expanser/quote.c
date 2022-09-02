@@ -12,25 +12,21 @@
 
 #include "minishell.h"
 
-// int	delete_quote(t_token **tokens)
-// {
-// 	char	*dest;
-// 	char	*src;
+int	delete_quote(t_token *tokens)
+{
+	char	*dest;
+	char	*src;
 
-// 	src = (*tokens)->value;
-// 	src++;
-// 	dest = malloc(sizeof(char) * (strlen((*tokens)->value - 1)));
-// 	ft_strncpy(dest, src, strlen((*tokens)->value) - 2);
-// 	if (!dest)
-// 	{
-// 		(*tokens)->value = NULL;
-// 		(*tokens)->type = 0;
-// 	}
-// 	free((*tokens)->value);
-// 	(*tokens)->value = NULL;
-// 	(*tokens)->value = dest;
-// 	return (EXIT_SUCCESS);
-// }
+	src = tokens->value;
+	src++;
+	dest = malloc(sizeof(char) * (ft_strlen(tokens->value) - 1));
+	ft_strncpy(dest, src, ft_strlen(tokens->value) - 2);
+	if (!dest)
+		tokens->value = NULL;
+	free(tokens->value);
+	tokens->value = dest;
+	return (EXIT_SUCCESS);
+}
 
 int	is_variable(t_token *tokens, char *str, int i)
 {
@@ -121,5 +117,7 @@ int	expanse_quote(t_token *tokens, char *str, int idx)
 		i++;
 	}
 	tokens->qts_stop[idx] = -1;
+	if (delete_quote(tokens))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

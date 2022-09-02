@@ -72,6 +72,8 @@ int	ms_parser(t_token *token, t_cmdlst **cmds)
 	char		*str;
 
 	tmp = token;
+	printf("entering ms_parser with following tokens:\n");
+	display_tokens();
 	while (tmp)
 	{	
 		str = NULL;

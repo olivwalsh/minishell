@@ -42,7 +42,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(MEM) $(INC) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(FLAGS) $(MEM) $(INC) $(OBJS) -o $@
+	$(CC) $(CFLAGS) $(MEM) $(INC)  $(OBJS) -o  $@ $(FLAGS)
 	@echo -n "Compiling minishell"
 	@echo $(GREEN)"\tOK"$(RESET)
 

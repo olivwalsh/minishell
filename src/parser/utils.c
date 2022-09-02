@@ -15,19 +15,19 @@
 static int	count_lines(char *s, char c)
 {
 	int	i;
-	int	lines;
+	int	words;
 
 	i = 1;
-	lines = 0;
+	words = 0;
 	if (s[0] != c)
-		lines++;
+		words++;
 	while (s[i])
 	{
 		if (s[i - 1] == c && s[i] != c)
-			lines++;
+			words++;
 		i++;
 	}
-	return (lines);
+	return (words);
 }
 
 char	**free_previous(char **str, int x)
@@ -80,19 +80,19 @@ static char	**linemalloc(char **split, char *s, char c)
 char	**ft_split(char *s, char c)
 {
 	char	**split;
-	int		lines;
+	int		words;
 
 	if (!s)
 		return (NULL);
 	if (*s == 0)
-		lines = 0;
+		words = 0;
 	else
-		lines = count_lines(s, c);
-	split = malloc(sizeof(char *) * (lines + 1));
+		words = count_lines(s, c);
+	split = malloc(sizeof(char *) * (words + 1));
 	if (!split)
 		return (NULL);
 	if (!linemalloc(split, s, c))
 		return (NULL);
-	split[lines] = NULL;
+	split[words] = NULL;
 	return (split);
 }
