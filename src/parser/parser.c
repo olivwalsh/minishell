@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 18:39:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 16:42:24 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/02 16:14:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	ms_parser(t_token *token, t_cmdlst **cmds)
 		str = NULL;
 		while (tmp && !cmd_delimiter(tmp->type))
 		{
+			// check if appendin, appendout, redirin, redirout
+			
 			str = ft_sjoin(str, tmp->value);
 			if (tmp->next && !cmd_delimiter(tmp->next->type))
 			{
