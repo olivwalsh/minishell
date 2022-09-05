@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 16:17:52 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/02 16:20:30 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,27 @@ typedef struct s_token
 	struct s_token	*next;
 }				t_token;
 
+typedef struct s_redir
+{
+	int			redir_in;
+	int			redir_out;
+	int			append_in;
+	int			append_out;
+	char		*infile;
+	char		*outfile;
+	char		*delimiter;
+}				t_redir;
+
 // COMMANDS
 typedef struct s_cmd
 {
 	int				fd_in;
 	int				fd_out;
 	int				builtin;
-	int				redir_in;
-	int				redir_out;
 	char			*cmd;
 	char			**cmd_args;
 	char			**args;
+	t_redir			redir;
 }				t_cmd;
 
 // CMD LIST
