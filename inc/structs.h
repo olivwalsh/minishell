@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/02 16:20:30 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/05 15:40:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_cmd
 	char			*cmd;
 	char			**cmd_args;
 	char			**args;
-	t_redir			redir;
+	t_redir			*redir;
 }				t_cmd;
 
 // CMD LIST

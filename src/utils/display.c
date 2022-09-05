@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:13:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 15:36:24 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/05 16:39:26 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ void	display_cmd(t_cmd *cmd)
 		{
 			printf("arg: "GREEN"|"RESET"%s"GREEN"|"RESET, args[i]);
 			i++;
+		}
+		if (cmd->redir)
+		{
+			printf("\nCmd has a redir\n");
+			if (cmd->redir->redir_in)
+				printf("\nReads from %s\n", cmd->redir->infile);
+			if (cmd->redir->redir_out)
+				printf("\nWrites to %s\n", cmd->redir->outfile);
+			if (cmd->redir->append_in)
+				printf("\nReads stdin with delimiter set as %s\n", cmd->redir->delimiter);
+			if (cmd->redir->append_out)
+				printf("\nAppend to %s\n", cmd->redir->outfile);
 		}
 	}
 	else

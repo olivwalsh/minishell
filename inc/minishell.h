@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/05 12:10:12 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/05 15:42:53 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
 int		err_msg(int err, char c);
+char	*err_msg_str(int code, char *str);
 char	*ft_strjoin(char *s1, char *s2, int clean);
 char	*ft_strncpy(char *dst, char *src, int n);
 void	display_tokens(void);

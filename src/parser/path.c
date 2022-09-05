@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:46:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/05 12:10:45 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/05 13:57:09 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ char	*get_cmdpath(char *cmd)
 		free(cmd_path);
 	}
 	free_tab(path_list);
-	return (NULL);
+	return (cmd);
 }
