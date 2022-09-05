@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:46:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 16:19:57 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/05 12:10:45 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char	*get_cmdpath(char *cmd)
 	i = 0;
 	while (path_list && path_list[i])
 	{
-		path = ft_strjoin(path_list[i], "/");
-		cmd_path = ft_strjoin(path, cmd);
+		path = ft_strjoin(path_list[i], "/", 0);
+		cmd_path = ft_strjoin(path, cmd, 0);
 		if (!access(cmd_path, X_OK))
 		{
 			free(path);
