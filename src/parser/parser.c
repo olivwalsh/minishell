@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 18:39:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/05 13:15:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/02 16:14:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	ms_parser(t_token *token, t_cmdlst **cmds)
 	res = 0;
 	tmp = token;
 	while (tmp && !g_global.data->err)
-	{	
+	{
 		if (!tmp->prev)
 			res = check_first(tmp);
 		res = parse_cmd(&tmp, cmds);
