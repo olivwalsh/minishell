@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:35 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/05 12:09:51 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 17:09:35 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_value(char *str, int i, int j)
 		return (NULL);
 	}
 	var = ft_strncpy(var, &str[i + 1], j);
-	val = getenv(var);
+	val = ft_getenv(var);
 	free(var);
 	return (val);
 }

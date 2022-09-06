@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/01 10:56:56 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 16:50:31 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	free_tab(char **table)
 	i = 0;
 	if (table && table[i])
 	{
-		while (i < get_tablen(table))
+		while (i < ft_tablen(table))
 		{
 			free(table[i]);
 			i++;
@@ -94,6 +94,8 @@ void	clean(t_data *data)
 			free_cmds(&data->cmds);
 		if (data->shell.input)
 			free(data->shell.input);
+		if (data->shell.env)
+			free_tab(data->shell.env);
 	}
 	if (g_global.data)
 		g_global.data->err = 0;

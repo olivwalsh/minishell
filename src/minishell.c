@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/02 15:11:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 16:42:03 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 1)
 		return (EXIT_FAILURE);
-	ms_init(&data, argv, env);
+	if (ms_init(&data, argv, env))
+		return (EXIT_FAILURE);
+	// display_env();
 	res = 0;
 	while (1)
 	{

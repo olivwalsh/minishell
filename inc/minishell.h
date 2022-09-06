@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/05 12:10:12 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 17:03:46 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 // SYSTEM LIBRARIES
 # include <stdio.h>
-#include "/usr/include/readline/readline.h"
-#include "/usr/include/readline/history.h"
-// # include <readline/readline.h>
-// # include <readline/history.h>
+// #include "/usr/include/readline/readline.h"
+// #include "/usr/include/readline/history.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <stdlib.h>
 # include <termios.h>
 # include <unistd.h>
@@ -40,6 +40,7 @@ extern t_global	g_global;
 **
 */
 int		ms_init(t_data *data, char **argv, char **env);
+int		copy_env(t_data *data, char **env);
 /*
 **
 ** LEXER
@@ -90,15 +91,17 @@ void	free_tab(char **table);
 ** UTILS
 **
 */
-int		get_tablen(char **table);
+int		ft_tablen(char **table);
 int		*ft_tabint(int *t, int c);
 int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
 int		err_msg(int err, char c);
+char	*ft_getenv(char *name);
 char	*ft_strjoin(char *s1, char *s2, int clean);
 char	*ft_strncpy(char *dst, char *src, int n);
+void	display_env(void);
 void	display_tokens(void);
 void	display_cmds(void);
 void	display_specific_tokens(t_token *head);

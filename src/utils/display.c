@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:13:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 15:36:24 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 16:38:33 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	display_env(void)
+{
+	char **env;
+	int	i;
+
+	if (g_global.data->shell.env)
+	{
+		env = g_global.data->shell.env;
+		i = 0;
+		while (env && env[i])
+		{
+			printf("%s\n", env[i]);
+			i++;
+		}
+	}
+	else
+		printf("no env\n");
+}
 
 void	display_cmd(t_cmd *cmd)
 {

@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 18:56:16 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 17:11:20 by foctavia         ###   ########.fr       */
+/*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
+/*   Updated: 2022/09/06 15:44:35 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	set_buildin(char *cmd)
+int	ms_export(char *cmd, char **args)
 {
-	if (!ft_strcmp("echo", cmd))
-		return (BD_ECHO);
-	else if (!ft_strcmp("cd", cmd))
-		return (BD_EXIT);
-	else if (!ft_strcmp("pwd", cmd))
-		return (BD_EXIT);
-	else if (!ft_strcmp("export", cmd))
-		return (BD_EXIT);
-	else if (!ft_strcmp("unset", cmd))
-		return (BD_EXIT);
-	else if (!ft_strcmp("env", cmd))
-		return (BD_EXIT);
-	else if (!ft_strcmp("exit", cmd))
-		return (BD_EXIT);
-	else
+	if (ft_strcmp("export", cmd))
 		return (EXIT_FAILURE);
+		
+	return(EXIT_SUCCESS);
 }
