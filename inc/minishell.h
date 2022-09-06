@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 17:03:46 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:31:20 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ void	display_specific_tokens(t_token *head);
 **
 */
 int		ms_exit(char *cmd, char **args);
+int		ms_env(char *cmd, char **args);
 
 #endif

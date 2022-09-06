@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 16:50:31 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:16:47 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ void	clean(t_data *data)
 			free_cmds(&data->cmds);
 		if (data->shell.input)
 			free(data->shell.input);
-		if (data->shell.env)
-			free_tab(data->shell.env);
 	}
 	if (g_global.data)
 		g_global.data->err = 0;
