@@ -6,25 +6,11 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:07:15 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 15:16:32 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 16:05:40 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_redir	*create_redir()
-{
-	t_redir	*redir;
-
-	redir = malloc(sizeof(t_redir));
-	memset(redir, 0, sizeof(t_redir));
-	if (!redir)
-	{
-		err_msg(-2, 0);
-		return (NULL);
-	}
-	return (redir);
-}
 
 int	cmd_readinfile(t_token **token, t_cmd *cmd)
 {

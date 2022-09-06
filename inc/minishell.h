@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 15:14:41 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 16:05:26 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	insert_token(t_token **tokens, t_token *new);
 */
 int 		ms_parser(t_token *tokens, t_cmdlst **cmds);
 t_cmd		*create_cmd(t_token **token);
+t_redir		*create_redir(void);
 t_cmdlst	*create_cmdlst(int type, t_cmd *cmd);
 void		add_cmdlst(t_cmdlst **lst, t_cmdlst	*new);
 int			cmd_addredir(t_token **token, t_cmd *cmd);
