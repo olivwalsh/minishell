@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/01 10:56:56 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:19:30 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void	free_cmds(t_cmdlst **lst)
 			next = tmp->next;
 			if (tmp->cmd)
 			{
-				if (tmp->cmd->cmd_args)
-					free_tab(tmp->cmd->cmd_args);
-				if (tmp->cmd->cmd)
-					free(tmp->cmd->cmd);
+				if (tmp->cmd->redir)
+					free(tmp->cmd->redir);
+				if (tmp->cmd->args)
+					free_tab(tmp->cmd->args);
 				free(tmp->cmd);
 			}
 			free(tmp);

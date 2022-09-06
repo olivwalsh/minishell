@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:13:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/05 16:39:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:28:04 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ void	display_cmd(t_cmd *cmd)
 		args = cmd->args;
 		while (args && args[i])
 		{
-			printf("arg: "GREEN"|"RESET"%s"GREEN"|"RESET, args[i]);
+			printf("arg(s) = "GREEN"|"RESET"%s"GREEN"| "RESET, args[i]);
 			i++;
 		}
+		printf("\n");
 		if (cmd->redir)
 		{
-			printf("\nCmd has a redir\n");
 			if (cmd->redir->redir_in)
-				printf("\nReads from %s\n", cmd->redir->infile);
+				printf("-> read from %s\n", cmd->redir->infile);
 			if (cmd->redir->redir_out)
-				printf("\nWrites to %s\n", cmd->redir->outfile);
+				printf("-> write to %s\n", cmd->redir->outfile);
 			if (cmd->redir->append_in)
-				printf("\nReads stdin with delimiter set as %s\n", cmd->redir->delimiter);
+				printf("-> read from stdin with delimiter set as %s\n", cmd->redir->delimiter);
 			if (cmd->redir->append_out)
-				printf("\nAppend to %s\n", cmd->redir->outfile);
+				printf("-> append to %s\n", cmd->redir->outfile);
 		}
 	}
 	else
@@ -47,16 +47,19 @@ void	display_cmd(t_cmd *cmd)
 void	display_cmds(void)
 {
 	t_cmdlst	*tmp;
+	int			i;
 
-	printf("DISPLAY CMDS\n\n");
+	printf("\n\nDISPLAY CMDS\n\n");
+	i = 0;
 	if (g_global.data->cmds)
 	{
 		printf("g_global.data->cmds = %p\n\n", g_global.data->cmds);
 		tmp = g_global.data->cmds;
 		while (tmp)
 		{
-			if (tmp)
-				printf("\n\ntmp->prev = %p\t\ttmp = %p\t\ttmp->next = %p\ntmp->type", tmp->prev, tmp, tmp->next);
+			printf("%d. CMDLST type = ", i + 1);
+			// if (tmp)
+			// 	printf("\n\ntmp->prev = %p\t\ttmp = %p\t\ttmp->next = %p\ntmp->type", tmp->prev, tmp, tmp->next);
 			if (tmp->type == 1)
 				printf(" CMD ");
 			if (tmp->type == 2)
@@ -79,12 +82,13 @@ void	display_cmds(void)
 				printf(" >> ");
 			if (tmp->type == WORD)
 				display_cmd(tmp->cmd);
+			printf("\n\n");
+			i++;
 			tmp = tmp->next;
 		}
 	}
 	else
 		printf("no list of cmds\n");
-	printf("\n");
 }
 
 void	display_tokens(void)

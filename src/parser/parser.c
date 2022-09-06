@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 18:39:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 10:09:37 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:02:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,6 @@ int	add_append(char **cmd_args, t_redir *redir)
 	return (EXIT_SUCCESS);	
 }
 
-t_redir	*create_redir()
-{
-	t_redir	*redir;
-
-	redir = malloc(sizeof(t_redir));
-	memset(redir, 0, sizeof(t_redir));
-	if (!redir)
-	{
-		err_msg(-2, 0);
-		return (NULL);
-	}
-	return (redir);
-}
 
 t_cmd	*create_cmd(char *str)
 {

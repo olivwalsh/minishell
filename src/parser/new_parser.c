@@ -3,21 +3,23 @@
 int ms_parser(t_token *tokens, t_cmdlst **cmds)
 {
 	t_token	*tmp;
-	t_cmd	*cmd;
 
 	tmp = tokens;
 	while (tmp && !g_global.data->err)
 	{
-		cmd = NULL;
-		if (!tmp->prev && is_delimiter(tmp))
+		if (!tmp->prev && is_delim(tmp))
 			return (EXIT_FAILURE);
-		if (is_delimiter(tmp) && (tmp->next && is_delimiter(tmp->next)))
+		if (is_delim(tmp) && (tmp->next && is_delim(tmp->next)))
 			return (EXIT_FAILURE);
-		if (tmp->type == WORD)
-			cmd = create_cmd(tmp);
-		add_cmdlst(cmds, create_cmdlst(tmp->type, cmd));
-		tmp = tmp->next;
+		if (!is_delim(tmp))
+			add_cmdlst(cmds, create_cmdlst(WORD, create_cmd(&tmp)));
+		else
+		{
+			add_cmdlst(cmds, create_cmdlst(tmp->type, NULL));
+			tmp = tmp->next;
+		}
 	}
+	display_cmds();
 	// gerer les erreurs type ( && = erreur, ) && = pas erreur 
 	// set head
 	// create a list of commands based on the parser
