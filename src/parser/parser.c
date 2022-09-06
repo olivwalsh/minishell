@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 18:39:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/05 16:31:05 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 10:09:37 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,6 @@ t_redir	*create_redir()
 	return (redir);
 }
 
-int	is_redir(char *arg)
-{
-	if (!ft_strcmp(arg, "<<") || !ft_strcmp(arg, ">>")
-		|| !ft_strcmp(arg, "<") || !ft_strcmp(arg, ">"))
-		return (1);
-	return (0);
-}
-
 t_cmd	*create_cmd(char *str)
 {
 	t_cmd	*new;
@@ -142,40 +134,6 @@ t_cmd	*create_cmd(char *str)
 	return (new);
 }
 
-void	add_cmdlst(t_cmdlst **lst, t_cmdlst	*new)
-{
-	t_cmdlst	*tmp;
-
-	if (*lst)
-	{
-		tmp = *lst;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-		new->prev = tmp;
-		new->next = NULL;
-	}
-	else
-		*lst = new;
-}
-
-t_cmdlst	*create_cmdlst(int type, t_cmd *cmd)
-{
-	t_cmdlst	*new;
-
-	new = malloc(sizeof(t_cmdlst));
-	if (!new)
-	{
-		err_msg(-2, 0);
-		return (NULL);
-	}
-	new->type = type;
-	new->cmd = cmd;
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
-}
-
 int	check_first(t_token *token)
 {
 	if (token->type == PIPE || token->type == OPERAND || token->type == OPEROR)
@@ -210,7 +168,7 @@ int	parse_cmd(t_token **token, t_cmdlst **cmds)
 	free(str);
 	return (EXIT_SUCCESS);
 }	
-
+/*
 int	ms_parser(t_token *token, t_cmdlst **cmds)
 {
 	t_token		*tmp;
@@ -229,3 +187,4 @@ int	ms_parser(t_token *token, t_cmdlst **cmds)
 	display_cmds();
 	return (res);
 }
+*/
