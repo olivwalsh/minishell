@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 16:05:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/07 18:52:13 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 // SYSTEM LIBRARIES
 # include <stdio.h>
-#include "/usr/include/readline/readline.h"
-#include "/usr/include/readline/history.h"
-// # include <readline/readline.h>
-// # include <readline/history.h>
+// #include "/usr/include/readline/readline.h"
+// #include "/usr/include/readline/history.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <stdlib.h>
 # include <termios.h>
 # include <unistd.h>
@@ -68,6 +68,7 @@ char	*copy_quote(char *str, int *i);
 int		ms_expanser(t_token **token);
 int		expanse_var(t_token **tokens);
 int		expanse_quote(t_token *tokens, char *str, int idx);
+int		delete_quote(t_token **tokens);
 void	insert_token(t_token **tokens, t_token *new);
 /*
 **

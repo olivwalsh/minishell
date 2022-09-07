@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/05 11:53:10 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/07 18:52:52 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	var_expanser(t_token **tokens)
 	tmp = *tokens;
 	while (tmp && !g_global.data->err)
 	{
-		if (tmp->type == VAR)
+		if (tmp->type == VAR && tmp->var_stop > -1)
 			res = expanse_var(&tmp);
 		if (!tmp)
 			break ;
@@ -65,7 +65,10 @@ int	ms_expanser(t_token **tokens)
 	if (!var_expanser(tokens))
 	{
 		if (!quote_expanser(tokens))
+		{
+			delete_quote(tokens);
 			return (EXIT_SUCCESS);
+		}
 	}
 	return (EXIT_FAILURE);
 }
