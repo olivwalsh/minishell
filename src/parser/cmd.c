@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 16:18:17 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/07 13:17:26 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ void	cmd_setargs(t_token **token, t_cmd *new)
 	char	*args;
 
 	args = NULL;
+	if (*token && !new->cmd)
+		new->cmd = (*token)->value;
+	*token =  (*token)->next;
 	while ((*token) && !is_delim(*token) && !is_redir(*token))
 	{
 		args = ft_strjoin(args, (*token)->value, 1);
@@ -55,23 +58,49 @@ void	cmd_setargs(t_token **token, t_cmd *new)
 	free(args);
 }
 
+// t_cmd	*create_cmd(t_token **token)
+// {
+// 	t_cmd	*new;
+
+// 	new = init_cmd();
+// 	if (is_redir(*token))
+// 		cmd_addredir(token, new);
+// 	if ((*token) && (is_redir(*token) || is_delim(*token)))
+// 	{
+// 		err_msg_str(-1, (*token)->value);
+// 		return (NULL);
+// 	}
+// 	if (!(*token))
+// 	{
+// 		err_msg_str(-3, "missing command after redirection.\n");
+// 		return (NULL);
+// 	}
+// 	new->cmd = (*token)->value;
+// 	cmd_setargs(token, new);
+// 	while (*token && is_redir(*token))
+// 		cmd_addredir(token, new);
+// 	if (g_global.data->err)
+// 		return (NULL);
+// 	return (new);
+// }
+
+
 t_cmd	*create_cmd(t_token **token)
 {
 	t_cmd	*new;
 
 	new = init_cmd();
-	if (is_redir(*token))
-		cmd_addredir(token, new);
-	if ((*token) && (is_redir(*token) || is_delim(*token)))
+	while (*token && !is_delim(*token))
 	{
-		err_msg_str(-1, (*token)->value);
-		return (NULL);
+		if (is_redir(*token) && (*token)->next && (*token)->next->type == WORD)
+			cmd_addredir(token, new);
+		else if ((*token)->type == WORD)
+			cmd_setargs(token, new);
+		else 
+		{
+			err_msg_str(-3, "missing command after redirection.\n");
+			return (NULL);
+		}
 	}
-	new->cmd = (*token)->value;
-	cmd_setargs(token, new);
-	if (*token && ((*token)->type == REDIR_OUT || (*token)->type == APPEND_OUT))
-		cmd_addredir(token, new);
-	if (g_global.data->err)
-		return (NULL);
 	return (new);
 }

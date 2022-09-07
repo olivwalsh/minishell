@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:13:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 15:32:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/07 13:17:12 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	display_cmd(t_cmd *cmd)
 	i = 0;
 	if (cmd)
 	{
-		printf("\ncmd = "GREEN"|"RESET"%s"GREEN"|"RESET"\n", cmd->cmd);
+		printf("\ncmd\t= "GREEN"|"RESET"%s"GREEN"|"RESET"\n", cmd->cmd);
 		args = cmd->args;
-		i++;
+		// i++;
 		if (args && args[i])
-			printf("arg(s) = ");
+			printf("arg(s)\t= ");
 		while (args && args[i])
 		{
 			printf(GREEN"|"RESET"%s"GREEN"| "RESET, args[i]);

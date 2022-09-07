@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/05 14:16:27 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/07 10:13:08 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*err_msg_str(int code, char *str)
 		printf("minishell: syntax error near unexpected token `%s'\n", str);
 	else if (code == -2)
 		printf("minishell: malloc failed\n");
+	else if (code == -3)
+		printf("minishell: %s\n", str);
 	g_global.data->err = 1;
 	return (NULL);
 }
