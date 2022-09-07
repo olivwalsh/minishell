@@ -5,94 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 16:18:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/29 16:18:20 by owalsh           ###   ########.fr       */
+/*   Created: 2022/09/06 13:12:16 by owalsh            #+#    #+#             */
+/*   Updated: 2022/09/06 16:18:22 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count_lines(char *s, char c)
+int	is_redir(t_token *token)
 {
-	int	i;
-	int	words;
+	if (token->type == REDIR_IN || token->type == REDIR_OUT
+		|| token->type == APPEND_IN || token->type == APPEND_OUT)
+		return (1);
+	return (0);
+}
 
-	i = 1;
-	words = 0;
-	if (s[0] != c)
-		words++;
-	while (s[i])
+int	is_delim(t_token *token)
+{
+	if (token->type == PIPE || token->type == OPERAND || token->type == OPEROR)
+		return (1);
+	return (0);
+}
+
+t_cmdlst	*create_cmdlst(int type, t_cmd *cmd)
+{
+	t_cmdlst	*new;
+
+	new = malloc(sizeof(t_cmdlst));
+	if (!new)
 	{
-		if (s[i - 1] == c && s[i] != c)
-			words++;
-		i++;
-	}
-	return (words);
-}
-
-char	**free_previous(char **str, int x)
-{
-	while (x <= 0)
-		free(str[x--]);
-	free(str);
-	return (NULL);
-}
-
-void	fill(char *str, char **split, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-	{
-		(*split)[i] = str[i];
-		i++;
-	}
-	(*split)[i] = '\0';
-}
-
-static char	**linemalloc(char **split, char *s, char c)
-{
-	int	i;
-	int	x;
-
-	x = 0;
-	while (*s)
-	{
-		i = 0;
-		if (*s && s[i] != c)
-		{
-			while (s[i] && s[i] != c)
-				i++;
-			split[x] = malloc(sizeof(char) * (i + 1));
-			if (!split[x])
-				return (free_previous(split, x));
-			fill(s, &split[x], c);
-			x++;
-			s += i;
-		}
-		else
-			s++;
-	}
-	return (split);
-}
-
-char	**ft_split(char *s, char c)
-{
-	char	**split;
-	int		words;
-
-	if (!s)
+		err_msg(-2, 0);
 		return (NULL);
-	if (*s == 0)
-		words = 0;
+	}
+	new->type = type;
+	new->cmd = cmd;
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
+}
+
+void	add_cmdlst(t_cmdlst **lst, t_cmdlst	*new)
+{
+	t_cmdlst	*tmp;
+
+	if (*lst)
+	{
+		tmp = *lst;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+		new->prev = tmp;
+		new->next = NULL;
+	}
 	else
-		words = count_lines(s, c);
-	split = malloc(sizeof(char *) * (words + 1));
-	if (!split)
-		return (NULL);
-	if (!linemalloc(split, s, c))
-		return (NULL);
-	split[words] = NULL;
-	return (split);
+		*lst = new;
 }

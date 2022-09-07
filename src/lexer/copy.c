@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:58 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/29 15:20:10 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:21:43 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 int	is_delimiter(char *str)
 {
 	char	*special;
+	char	*operand;
 	int		i;
 
 	i = 0;
-	special = "|<>\'\"&()";
+	special = "|<>\'\"()";
+	operand = "&&";
 	while (str && str[i] && (str[i] > 32 && str[i] < 127) \
-		&& !strchr(special, str[i]))
+		&& !strchr(special, str[i]) && ft_strncmp(operand, &str[i], 2))
 	{
 		if (str[i] == '$' && is_delimiter(&str[i + 1]))
 			break ;

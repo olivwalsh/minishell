@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/05 12:10:12 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 16:05:26 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,15 @@ void	insert_token(t_token **tokens, t_token *new);
 ** PARSER
 **
 */
-int		ms_parser(t_token *token, t_cmdlst **cmds);
-char	**ft_split(char *s, char c);
-char	*get_cmdpath(char *cmd);
+int 		ms_parser(t_token *tokens, t_cmdlst **cmds);
+t_cmd		*create_cmd(t_token **token);
+t_redir		*create_redir(void);
+t_cmdlst	*create_cmdlst(int type, t_cmd *cmd);
+void		add_cmdlst(t_cmdlst **lst, t_cmdlst	*new);
+int			cmd_addredir(t_token **token, t_cmd *cmd);
+char		*get_cmdpath(char *cmd);
+int			is_delim(t_token *token);
+int			is_redir(t_token *token);
 /*
 **
 ** CLEAN
@@ -94,9 +100,11 @@ int		get_tablen(char **table);
 int		*ft_tabint(int *t, int c);
 int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
+char	**ft_split(char *s, char c);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
 int		err_msg(int err, char c);
+char	*err_msg_str(int code, char *str);
 char	*ft_strjoin(char *s1, char *s2, int clean);
 char	*ft_strncpy(char *dst, char *src, int n);
 void	display_tokens(void);
