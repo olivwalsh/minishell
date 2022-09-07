@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:35 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/07 18:52:20 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/07 23:58:13 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int    delete_quote(t_token **tokens)
                 tmp->value = NULL;
             free(tmp->value);
             tmp->value = dest;
+			if (tmp->type == DBL_QUOTE)
+				tmp->type = WORD;
         }
         tmp = tmp->next;
     }

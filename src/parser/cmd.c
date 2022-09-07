@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/07 18:50:17 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/08 00:01:53 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	count_words(t_token **token)
 	t_token	*tmp;
 
 	i = 0;
-	j = 0;
 	str = (*token)->value;
 	while (str && str[i])
 	{
@@ -59,6 +58,7 @@ int	count_words(t_token **token)
 	tmp = *token;
 	while (tmp->next && tmp->next->type == WORD && tmp->next->value[0] != '-')
 	{
+		j = 0;
 		str = tmp->next->value;
 		while (str && str[j])
 		{
@@ -110,33 +110,51 @@ char	*copy_cmd(t_token **token)
 	return (str);
 }
 
-void    cmd_setargs(t_token **token, t_cmd *new)
+void	cmd_setargs(t_token **token, t_cmd *new)
 {
-    char    *args;
-    t_token    *tmp;
-    int        i;
+	char	*args;
 
-    args = NULL;
-    if (*token && !new->cmd)
-        new->cmd = (*token)->value;
-    *token =  (*token)->next;
-    i = 0;
-    tmp = *token;
-    while (tmp && !is_delim(tmp) && !is_redir(tmp))
-    {
-        i++;
-        tmp = tmp->next;
-    }
-    new->args = malloc(sizeof(char *) * (i + 1));
-    i = 0;
-    while ((*token) && !is_delim(*token) && !is_redir(*token))
-    {
-        new->args[i++] = (*token)->value;
-        *token = (*token)->next;
-    }
-    new->args[i] = NULL;
-    free(args);
+	args = NULL;
+	if (*token && !new->cmd)
+		new->cmd = copy_cmd(token);
+	*token =  (*token)->next;
+	while ((*token) && !is_delim(*token) && !is_redir(*token))
+	{
+		args = ft_strjoin(args, (*token)->value, 1);
+		args = ft_strjoin(args, " ", 1);
+		*token = (*token)->next;
+	}
+	new->args = ft_split(args, ' ');
+	free(args);
 }
+
+// void    cmd_setargs(t_token **token, t_cmd *new)
+// {
+//     char    *args;
+//     t_token    *tmp;
+//     int        i;
+
+//     args = NULL;
+//     if (*token && !new->cmd)
+//         new->cmd = (*token)->value;
+//     *token =  (*token)->next;
+//     i = 0;
+//     tmp = *token;
+//     while (tmp && !is_delim(tmp) && !is_redir(tmp))
+//     {
+//         i++;
+//         tmp = tmp->next;
+//     }
+//     new->args = malloc(sizeof(char *) * (i + 1));
+//     i = 0;
+//     while ((*token) && !is_delim(*token) && !is_redir(*token))
+//     {
+//         new->args[i++] = (*token)->value;
+//         *token = (*token)->next;
+//     }
+//     new->args[i] = NULL;
+//     free(args);
+// }
 
 t_cmd	*create_cmd(t_token **token)
 {
