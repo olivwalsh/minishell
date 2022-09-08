@@ -40,6 +40,7 @@ extern t_global	g_global;
 **
 */
 int		ms_init(t_data *data, char **argv, char **env);
+int		copy_env(t_data *data, char **env);
 /*
 **
 ** LEXER
@@ -101,7 +102,7 @@ void	free_tab(char **table);
 ** UTILS
 **
 */
-int		get_tablen(char **table);
+int		ft_tablen(char **table);
 int		*ft_tabint(int *t, int c);
 int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
@@ -110,8 +111,10 @@ int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
 int		err_msg(int err, char c);
 char	*err_msg_str(int code, char *str);
+char	*ft_getenv(char *name);
 char	*ft_strjoin(char *s1, char *s2, int clean);
 char	*ft_strncpy(char *dst, char *src, int n);
+void	display_env(void);
 void	display_tokens(void);
 void	display_cmds(void);
 void	display_specific_tokens(t_token *head);
@@ -121,5 +124,6 @@ void	display_specific_tokens(t_token *head);
 **
 */
 int		ms_exit(char *cmd, char **args);
+int		ms_env(char *cmd, char **args);
 
 #endif

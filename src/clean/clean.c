@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
 /*   Updated: 2022/09/06 15:19:30 by owalsh           ###   ########.fr       */
@@ -48,7 +48,7 @@ void	free_tab(char **table)
 	i = 0;
 	if (table && table[i])
 	{
-		while (i < get_tablen(table))
+		while (i < ft_tablen(table))
 		{
 			free(table[i]);
 			i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:28:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/29 11:04:36 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 21:17:08 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ int	check_flag(char *arg)
 	return (EXIT_SUCCESS);
 }
 
+int	clean_exit(void)
+{
+	if (g_global.data)
+	{
+		if (g_global.data->shell.env)
+			free_tab(g_global.data->shell.env);
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	ms_exit(char *cmd, char **args)
 {
 	if (ft_strcmp("exit", cmd))
@@ -49,5 +59,5 @@ int	ms_exit(char *cmd, char **args)
 	else if (args && args[0] && !check_flag(args[0]))
 		exit(atoi(args[0]));
 	else
-		exit(EXIT_SUCCESS);
+		exit(clean_exit());
 }

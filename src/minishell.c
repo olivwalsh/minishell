@@ -21,7 +21,9 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 1)
 		return (EXIT_FAILURE);
-	ms_init(&data, argv, env);
+	if (ms_init(&data, argv, env))
+		return (EXIT_FAILURE);
+	// display_env();
 	res = 0;
 	while (1)
 	{

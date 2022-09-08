@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buildins.c                                         :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:56:16 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 19:02:37 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 21:20:46 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	set_buildin(char *cmd)
 	else if (!ft_strcmp("unset", cmd))
 		return (BD_EXIT);
 	else if (!ft_strcmp("env", cmd))
-		return (BD_EXIT);
+		return (BD_ENV);
 	else if (!ft_strcmp("exit", cmd))
 		return (BD_EXIT);
 	else

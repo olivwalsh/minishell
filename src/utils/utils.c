@@ -3,16 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:04:23 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 16:05:37 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 17:16:43 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_tablen(char **table)
+char	*ft_strstr(char *str, char *to_find)
+{
+	int	i;
+
+	i = 0;
+	if (to_find[i] == '\0')
+		return (str);
+	if (str[i] == '\0')
+		return (NULL);
+	while (str[i] && str[i] == to_find[i])
+	{
+		i++;
+		if (to_find[i] == '\0')
+			return (str + i);
+	}
+	return (NULL);
+}
+
+char	*create_result(char *res)
+{
+	char	*new;
+
+	new = malloc(sizeof(char) * (ft_strlen(res) + 1));
+	if (!new)
+	{
+		err_msg(-2, 0);
+		return (NULL);
+	}
+	ft_strncpy(new, res, ft_strlen(res));
+	return (new);
+}
+
+char	*ft_getenv(char *name)
+{
+	char	**env;
+	char	*res;
+	char	*new_name;
+	int		i;
+
+	if (!name)
+		return (NULL);
+	new_name = NULL;
+	new_name = ft_strjoin(new_name, name, 1);
+	new_name = ft_strjoin(new_name, "=", 1);
+	if (!new_name)
+		return (NULL);
+	env = g_global.data->shell.env;
+	i = 0;
+	while (env && env[i])
+	{
+		res = ft_strstr(env[i], new_name);
+		if (res)
+		{
+			res = create_result(res);
+			break ;
+		}
+		else
+			i++;
+	}
+	free(new_name);
+	return (res);
+}
+
+int	ft_tablen(char **table)
 {
 	int	i;
 

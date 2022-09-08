@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:46:50 by owalsh            #+#    #+#             */
 /*   Updated: 2022/09/05 13:57:09 by owalsh           ###   ########.fr       */
@@ -19,7 +19,7 @@ char	*get_cmdpath(char *cmd)
 	char	**path_list;
 	int		i;
 
-	path_list = ft_split(getenv("PATH"), ':');
+	path_list = ft_split(ft_getenv("PATH"), ':');
 	if (!access(cmd, X_OK))
 		return (cmd);
 	i = 0;
