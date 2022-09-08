@@ -27,6 +27,7 @@ SRC_FILES	=	minishell.c \
 				lexer/lexer.c lexer/tokenize.c lexer/copy.c lexer/quote.c lexer/delimiter.c lexer/utils.c lexer/checker.c \
 				expanser/expanser.c expanser/var.c expanser/quote.c expanser/insert.c expanser/delete.c\
 				parser/parser.c parser/init.c parser/cmd.c parser/redir.c parser/utils.c parser/path.c parser/file.c \
+				exec/exec.c \
 				utils/display.c utils/error.c utils/utils.c utils/string.c utils/split.c utils/get_next_line.c \
 				builtins/builtins.c builtins/ms_exit.c builtins/ms_env.c\
 				clean/clean.c
