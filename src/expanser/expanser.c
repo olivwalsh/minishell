@@ -66,8 +66,8 @@ int	ms_expanser(t_token **tokens)
 	{
 		if (!quote_expanser(tokens))
 		{
-			delete_quote(tokens);
-			return (EXIT_SUCCESS);
+			if (!delete_quote(tokens))
+				return (EXIT_SUCCESS);
 		}
 	}
 	return (EXIT_FAILURE);

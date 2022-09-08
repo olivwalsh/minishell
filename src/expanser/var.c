@@ -25,19 +25,19 @@ static void	check_new(t_token *new)
 	}
 }
 
-void    delete_token(t_token **tokens)
+void	delete_token(t_token **tokens)
 {
-    t_token    *prev;
-    t_token    *next;
+	t_token	*prev;
+	t_token	*next;
 
-    prev = (*tokens)->prev;
-    next = (*tokens)->next;
-    if (prev)
-        prev->next = next;
-    if (next)
-        next->prev = prev;
-    free((*tokens)->value);
-    free(*tokens);
+	prev = (*tokens)->prev;
+	next = (*tokens)->next;
+	if (prev)
+		prev->next = next;
+	if (next)
+		next->prev = prev;
+	free((*tokens)->value);
+	free(*tokens);
 }
 
 int	expanse_var(t_token **tokens)

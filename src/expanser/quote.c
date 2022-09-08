@@ -12,33 +12,6 @@
 
 #include "minishell.h"
 
-int    delete_quote(t_token **tokens)
-{
-    char    *dest;
-    char    *src;
-    t_token    *tmp;
-
-    tmp = *tokens;
-    while (tmp && !g_global.data->err)
-    {
-        if (tmp->type == SGL_QUOTE || tmp->type == DBL_QUOTE)
-        {
-            src = tmp->value;
-            src++;
-            dest = malloc(sizeof(char) * (ft_strlen(tmp->value) - 1));
-            ft_strncpy(dest, src, ft_strlen(tmp->value) - 2);
-            if (!dest)
-                tmp->value = NULL;
-            free(tmp->value);
-            tmp->value = dest;
-			if (tmp->type == DBL_QUOTE)
-				tmp->type = WORD;
-        }
-        tmp = tmp->next;
-    }
-    return (EXIT_SUCCESS);
-}
-
 int	is_variable(t_token *tokens, char *str, int i)
 {
 	int	j;

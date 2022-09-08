@@ -27,36 +27,12 @@ int	is_delim(t_token *token)
 	return (0);
 }
 
-t_cmdlst	*create_cmdlst(int type, t_cmd *cmd)
+int	ft_strtoken(char *str)
 {
-	t_cmdlst	*new;
+	int	i;
 
-	new = malloc(sizeof(t_cmdlst));
-	if (!new)
-	{
-		err_msg(-2, 0);
-		return (NULL);
-	}
-	new->type = type;
-	new->cmd = cmd;
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
-}
-
-void	add_cmdlst(t_cmdlst **lst, t_cmdlst	*new)
-{
-	t_cmdlst	*tmp;
-
-	if (*lst)
-	{
-		tmp = *lst;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-		new->prev = tmp;
-		new->next = NULL;
-	}
-	else
-		*lst = new;
+	i = 0;
+	while (str && str[i] && str[i] != ' ')
+		i++;
+	return (i);
 }

@@ -12,91 +12,56 @@
 
 #include "minishell.h"
 
-t_redir	*create_redir(void)
+int	loop_words(char *str, int *code)
 {
-	t_redir	*redir;
+	int	j;
+	int	k;
 
-	redir = malloc(sizeof(t_redir));
-	memset(redir, 0, sizeof(t_redir));
-	if (!redir)
+	j = 0;
+	if (!str[j])
+		return (j);
+	while (str && str[j])
 	{
-		err_msg(-2, 0);
-		return (NULL);
+		if (str[j] == ' ')
+		{
+			k = j;
+			while (str && str[j] && str[j] == ' ')
+				j++;
+			if (!str[j])
+			{
+				*code = 1;
+				return (k);
+			}
+		}
+		j++;
 	}
-	return (redir);
-}
-
-t_cmd	*init_cmd(void)
-{
-	t_cmd	*new;
-
-	new = malloc(sizeof(t_cmd));
-	if (!new)
-		return (NULL);
-	memset(new, 0, sizeof(t_cmd));
-	new->fd_in = -1;
-	new->fd_out = -1;
-	new->redir = NULL;
-	return (new);
+	return (j);
 }
 
 int	count_words(t_token **token)
 {
-	int	i;
-	int	j;
-	int	k;
+	int		i;
+	int		code;
 	char	*str;
 	t_token	*tmp;
 
 	i = 0;
+	code = 0;
 	str = (*token)->value;
 	if (!str[i])
 		return (i);
-	while (str && str[i])
-	{
-		if (str[i] == ' ')
-		{
-			k = i;
-			while (str && str[i] && str[i] == ' ')
-				i++;
-			if (!str[i])
-				return (k);
-		}
-		i++;
-	}
+	i = loop_words(str, &code);
+	if (code)
+		return (i);
 	tmp = *token;
 	while (tmp->next && tmp->next->type == WORD && tmp->next->value[0] != '-')
 	{
-		j = 0;
 		str = tmp->next->value;
-		while (str && str[j])
-		{
-			if (str[j] == ' ')
-			{
-				k = i;
-				while (str && str[j] && str[j] == ' ')
-				{
-					j++;
-					i++;
-				}
-				if (!str[j])
-					return (k);
-			}
-			j++;
-			i++;
-		}
+		i += loop_words(str, &code);
+		if (code)
+			return (i);
 		tmp = tmp->next;
 	}
-	return (i);
-}
-
-int	ft_strtoken(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i] && str[i] != ' ')
-		i++;
 	return (i);
 }
 
@@ -111,15 +76,14 @@ char	*copy_cmd(t_token **token)
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (err_msg_str(-2, NULL));
-	if (!len)
-		str[len] = '\0';
-	else if (len == ft_strtoken((*token)->value))
+	if (len == ft_strtoken((*token)->value))
 		ft_strncpy(str, (*token)->value, len);
 	else
 	{
 		join = NULL;
 		join = ft_strjoin(join, (*token)->value, 1);
-		while ((*token)->next && (*token)->next->type == WORD && (*token)->next->value[0] != '-')
+		while ((*token)->next && (*token)->next->type == WORD && \
+			(*token)->next->value[0] != '-')
 		{
 			join = ft_strjoin(join, (*token)->next->value, 1);
 			*token = (*token)->next;
@@ -130,50 +94,30 @@ char	*copy_cmd(t_token **token)
 	return (str);
 }
 
-void    cmd_setargs(t_token **token, t_cmd *new)
+void	cmd_setargs(t_token **token, t_cmd *new)
 {
-    char    *args;
-    t_token    *tmp;
-    int        i;
+	int		i;
+	char	*args;
+	t_token	*tmp;
 
-    args = NULL;
-    if (*token && !new->cmd)
-        new->cmd = copy_cmd(token);
-    *token =  (*token)->next;
-    i = 0;
-    tmp = *token;
-    while (tmp && !is_delim(tmp) && !is_redir(tmp))
-    {
-        i++;
-        tmp = tmp->next;
-    }
-    new->args = malloc(sizeof(char *) * (i + 1));
-    i = 0;
-    while (*token && !is_delim(*token) && !is_redir(*token))
-    {
-        new->args[i++] = copy_cmd(token);
-        *token = (*token)->next;
-    }
-    new->args[i] = NULL;
-    free(args);
-}
-
-t_cmd	*create_cmd(t_token **token)
-{
-	t_cmd	*new;
-
-	new = init_cmd();
-	while (*token && !is_delim(*token))
+	args = NULL;
+	if (*token && !new->cmd)
+		new->cmd = copy_cmd(token);
+	*token = (*token)->next;
+	i = 0;
+	tmp = *token;
+	while (tmp && !is_delim(tmp) && !is_redir(tmp))
 	{
-		if (is_redir(*token) && (*token)->next && (*token)->next->type == WORD)
-			cmd_addredir(token, new);
-		else if ((*token)->type == WORD)
-			cmd_setargs(token, new);
-		else 
-		{
-			err_msg_str(-3, "missing command after redirection.\n");
-			return (NULL);
-		}
+		i++;
+		tmp = tmp->next;
 	}
-	return (new);
+	new->args = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (*token && !is_delim(*token) && !is_redir(*token))
+	{
+		new->args[i++] = copy_cmd(token);
+		*token = (*token)->next;
+	}
+	new->args[i] = NULL;
+	free(args);
 }
