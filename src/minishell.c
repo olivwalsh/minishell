@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/07 23:38:30 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:47:29 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **env)
 		if (!ms_lexer(data.shell.input, &data.tokens)
 			&& !ms_expanser(&data.tokens))
 		{
-			display_tokens();
+			// display_tokens();
 			ms_parser(data.tokens, &data.cmds);
 			// execution
 		}
