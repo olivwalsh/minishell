@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 00:01:53 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:28:20 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	cmd_setargs(t_token **token, t_cmd *new)
 
 	args = NULL;
 	if (*token && !new->cmd)
-		new->cmd = copy_cmd(token);
+		new->cmd = get_cmdpath(copy_cmd(token));
 	*token = (*token)->next;
 	i = 0;
 	tmp = *token;

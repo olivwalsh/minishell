@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:07:15 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/07 10:08:08 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/08 16:43:26 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,13 @@ int	cmd_readinfile(t_token **token, t_cmd *cmd)
 		err_msg_str(-1, NULL);
 		return (EXIT_FAILURE);
 	}
-	cmd->redir->infile = (*token)->value;
+	cmd->redir->infile = copy_cmd(token);
+	if (!read_file(cmd->redir->infile))
+	{
+		*token = (*token)->next;
+		return (EXIT_FAILURE);
+	}
+	cmd->fd_in = read_file(cmd->redir->infile);
 	*token = (*token)->next;
 	return (EXIT_SUCCESS);
 }
@@ -35,7 +41,8 @@ int	cmd_readstdin(t_token **token, t_cmd *cmd)
 		err_msg_str(-1, NULL);
 		return (EXIT_FAILURE);
 	}
-	cmd->redir->delimiter = (*token)->value;
+	cmd->redir->delimiter = copy_cmd(token);
+	cmd->fd_in = read_stdin(cmd->redir->delimiter);
 	*token = (*token)->next;
 	return (EXIT_SUCCESS);
 }
@@ -49,7 +56,13 @@ int	cmd_writeoutfile(t_token **token, t_cmd *cmd)
 		err_msg_str(-1, NULL);
 		return (EXIT_FAILURE);
 	}
-	cmd->redir->outfile = (*token)->value;
+	cmd->redir->outfile = copy_cmd(token);
+	if (!create_file(cmd->redir->outfile))
+	{
+		*token = (*token)->next;
+		return (EXIT_FAILURE);
+	}
+	cmd->fd_out = create_file(cmd->redir->outfile);
 	*token = (*token)->next;
 	return (EXIT_SUCCESS);
 }
@@ -63,7 +76,13 @@ int	cmd_appendoutfile(t_token **token, t_cmd *cmd)
 		err_msg_str(-1, NULL);
 		return (EXIT_FAILURE);
 	}
-	cmd->redir->outfile = (*token)->value;
+	cmd->redir->outfile = copy_cmd(token);
+	if (!append_file(cmd->redir->outfile))
+	{
+		*token = (*token)->next;
+		return (EXIT_FAILURE);
+	}
+	cmd->fd_out = append_file(cmd->redir->outfile);
 	*token = (*token)->next;
 	return (EXIT_SUCCESS);
 }

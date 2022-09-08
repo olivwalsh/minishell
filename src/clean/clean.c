@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 15:19:30 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/08 16:25:12 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,23 @@ void	free_tokens(t_token **tokens)
 	}
 }
 
+// void	free_tab(char **table)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (table && table[i])
+// 	{
+// 		while (i < ft_tablen(table))
+// 		{
+// 			free(table[i]);
+// 			i++;
+// 		}
+// 		free(table);
+// 	}
+// }
+
 void	free_tab(char **table)
-{
-	int	i;
-
-	i = 0;
-	if (table && table[i])
-	{
-		while (i < ft_tablen(table))
-		{
-			free(table[i]);
-			i++;
-		}
-		free(table);
-	}
-}
-
-void	free_tab_simple(char **table)
 {
 	int	i;
 
@@ -68,6 +68,20 @@ void	free_tab_simple(char **table)
 		i++;
 	}
 	free(table);
+}
+
+void	free_redir(t_redir *redir)
+{
+	if (redir->redir_in)
+		free(redir->infile);
+	if (redir->append_in)
+	{
+		free(redir->delimiter);
+		unlink("tmp");
+	}
+	if (redir->append_out || redir->redir_out)
+		free(redir->outfile);
+	free(redir);
 }
 
 void	free_cmds(t_cmdlst **lst)
@@ -84,11 +98,11 @@ void	free_cmds(t_cmdlst **lst)
 			if (tmp->cmd)
 			{
 				if (tmp->cmd->redir)
-					free(tmp->cmd->redir);
+					free_redir(tmp->cmd->redir);
 				if (tmp->cmd->cmd)
 					free(tmp->cmd->cmd);
 				if (tmp->cmd->args)
-					free_tab_simple(tmp->cmd->args);
+					free_tab(tmp->cmd->args);
 				free(tmp->cmd);
 			}
 			free(tmp);

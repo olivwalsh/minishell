@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:22:28 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/31 15:55:00 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/08 15:44:40 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define DEFINES_H
 
 # define ERROR_LEXER -1
+
+# define BUFFER_SIZE 1
 
 // Colours
 # define RED "\033[1;31m"
