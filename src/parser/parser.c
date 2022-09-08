@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:51 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 17:32:58 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/08 18:14:38 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int	ms_parser(t_token *tokens, t_cmdlst **cmds)
 			tmp = tmp->next;
 		}
 	}
-	display_cmds();
 	return (EXIT_SUCCESS);
 }

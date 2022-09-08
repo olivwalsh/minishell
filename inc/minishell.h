@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 15:46:38 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/08 17:49:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,12 @@ t_redir		*create_redir(void);
 t_cmdlst	*create_cmdlst(int type, t_cmd *cmd);
 /*
 **
+** EXEC
+**
+*/
+int			ms_execute(t_cmdlst **cmds, char **env);
+/*
+**
 ** CLEAN
 **
 */
@@ -118,6 +124,7 @@ int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
 int		err_msg(int err, char c);
+int		err_msg_1(int code, char c);
 char	*get_next_line(int fd);
 char	*err_msg_str(int code, char *str);
 char	*ft_getenv(char *name);

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 15:28:20 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/08 18:29:37 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,26 @@ char	*copy_cmd(t_token **token)
 	return (str);
 }
 
+void	check_builtin(t_cmd *new)
+{
+	if (!ft_strcmp("echo", new->cmd))
+		new->builtin = BD_ECHO;
+	else if (!ft_strcmp("cd", new->cmd))
+		new->builtin = BD_CD;
+	else if (!ft_strcmp("pwd", new->cmd))
+		new->builtin = BD_PWD;
+	else if (!ft_strcmp("export", new->cmd))
+		new->builtin = BD_EXPORT;
+	else if (!ft_strcmp("unset", new->cmd))
+		new->builtin = BD_UNSET;
+	else if (!ft_strcmp("env", new->cmd))
+		new->builtin = BD_ENV;
+	else if (!ft_strcmp("exit", new->cmd))
+		new->builtin = BD_EXIT;
+	else
+		new->builtin = 0;
+}
+
 void	cmd_setargs(t_token **token, t_cmd *new)
 {
 	int		i;
@@ -102,8 +122,12 @@ void	cmd_setargs(t_token **token, t_cmd *new)
 
 	args = NULL;
 	if (*token && !new->cmd)
-		new->cmd = get_cmdpath(copy_cmd(token));
-	*token = (*token)->next;
+	{
+		new->cmd = copy_cmd(token);
+		check_builtin(new);
+		if (!new->builtin)
+			new->cmd = get_cmdpath(new->cmd);
+	}
 	i = 0;
 	tmp = *token;
 	while (tmp && !is_delim(tmp) && !is_redir(tmp))
