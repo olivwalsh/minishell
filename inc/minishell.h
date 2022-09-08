@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 16:05:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/07 18:52:13 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 // SYSTEM LIBRARIES
 # include <stdio.h>
-#include "/usr/include/readline/readline.h"
-#include "/usr/include/readline/history.h"
-// # include <readline/readline.h>
-// # include <readline/history.h>
+// #include "/usr/include/readline/readline.h"
+// #include "/usr/include/readline/history.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <stdlib.h>
 # include <termios.h>
 # include <unistd.h>
@@ -50,6 +50,7 @@ int		tokenize(t_token **tokens, char *str, int *i, int type);
 int		quote_init(t_token *tokens);
 int		lexer_checker(t_token *head);
 int		is_delimiter(char *str);
+int		is_delimiter_spc(char *str);
 int		is_isspace(char c);
 int		is_quote(char *str, int *type);
 int		is_oper(char c1, char c2, int *type);
@@ -68,6 +69,7 @@ char	*copy_quote(char *str, int *i);
 int		ms_expanser(t_token **token);
 int		expanse_var(t_token **tokens);
 int		expanse_quote(t_token *tokens, char *str, int idx);
+int		delete_quote(t_token **tokens);
 void	insert_token(t_token **tokens, t_token *new);
 /*
 **
@@ -75,14 +77,17 @@ void	insert_token(t_token **tokens, t_token *new);
 **
 */
 int 		ms_parser(t_token *tokens, t_cmdlst **cmds);
-t_cmd		*create_cmd(t_token **token);
-t_redir		*create_redir(void);
-t_cmdlst	*create_cmdlst(int type, t_cmd *cmd);
-void		add_cmdlst(t_cmdlst **lst, t_cmdlst	*new);
 int			cmd_addredir(t_token **token, t_cmd *cmd);
-char		*get_cmdpath(char *cmd);
 int			is_delim(t_token *token);
 int			is_redir(t_token *token);
+int			ft_strtoken(char *str);
+void		add_cmdlst(t_cmdlst **lst, t_cmdlst	*new);
+void		cmd_setargs(t_token **token, t_cmd *new);
+char		*get_cmdpath(char *cmd);
+t_cmd		*create_cmd(t_token **token);
+t_cmd		*init_cmd(void);
+t_redir		*create_redir(void);
+t_cmdlst	*create_cmdlst(int type, t_cmd *cmd);
 /*
 **
 ** CLEAN

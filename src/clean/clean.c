@@ -57,6 +57,19 @@ void	free_tab(char **table)
 	}
 }
 
+void	free_tab_simple(char **table)
+{
+	int	i;
+
+	i = 0;
+	while (table && table[i])
+	{
+		free(table[i]);
+		i++;
+	}
+	free(table);
+}
+
 void	free_cmds(t_cmdlst **lst)
 {
 	t_cmdlst	*tmp;
@@ -72,8 +85,10 @@ void	free_cmds(t_cmdlst **lst)
 			{
 				if (tmp->cmd->redir)
 					free(tmp->cmd->redir);
+				if (tmp->cmd->cmd)
+					free(tmp->cmd->cmd);
 				if (tmp->cmd->args)
-					free_tab(tmp->cmd->args);
+					free_tab_simple(tmp->cmd->args);
 				free(tmp->cmd);
 			}
 			free(tmp);

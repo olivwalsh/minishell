@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:35 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/05 12:09:51 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/07 23:58:13 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	delete_quote(t_token *tokens)
-{
-	char	*dest;
-	char	*src;
-
-	src = tokens->value;
-	src++;
-	dest = malloc(sizeof(char) * (ft_strlen(tokens->value) - 1));
-	ft_strncpy(dest, src, ft_strlen(tokens->value) - 2);
-	if (!dest)
-		tokens->value = NULL;
-	free(tokens->value);
-	tokens->value = dest;
-	return (EXIT_SUCCESS);
-}
 
 int	is_variable(t_token *tokens, char *str, int i)
 {
@@ -117,7 +101,5 @@ int	expanse_quote(t_token *tokens, char *str, int idx)
 		i++;
 	}
 	tokens->qts_stop[idx] = -1;
-	if (delete_quote(tokens))
-		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

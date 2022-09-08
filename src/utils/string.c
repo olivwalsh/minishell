@@ -32,10 +32,7 @@ char	*ft_strjoin(char *s1, char *s2, int clean)
 		return (NULL);
 	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
-	{
-		err_msg(-2, 0);
-		return (NULL);
-	}
+		return (err_msg_str(-2, 0));
 	i = 0;
 	while (s1 && s1[i])
 	{
