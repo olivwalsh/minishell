@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:12:16 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 15:33:40 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/08 17:25:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	is_delim(t_token *token)
 {
 	if (token->type == PIPE || token->type == OPERAND || token->type == OPEROR)
 		return (1);
+	else if (token->type == OPEN_BRK || token->type == CLOSE_BRK)
+		return (2);
 	return (0);
 }
 
