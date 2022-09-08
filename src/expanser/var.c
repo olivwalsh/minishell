@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/01 16:21:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/06 17:09:35 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	expanse_var(t_token **tokens)
 	new = NULL;
 	var = (*tokens)->value;
 	var++;
-	str = getenv(var++);
+	str = ft_getenv(var++);
 	if (!str)
 	{
 		delete_token(tokens);

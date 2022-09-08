@@ -42,7 +42,7 @@ char	*get_value(char *str, int i, int j)
 		return (NULL);
 	}
 	var = ft_strncpy(var, &str[i + 1], j);
-	val = getenv(var);
+	val = ft_getenv(var);
 	free(var);
 	return (val);
 }
