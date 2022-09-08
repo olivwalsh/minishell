@@ -44,15 +44,24 @@ int	count_words(t_token **token)
 {
 	int	i;
 	int	j;
+	int	k;
 	char	*str;
 	t_token	*tmp;
 
 	i = 0;
 	str = (*token)->value;
+	if (!str[i])
+		return (i);
 	while (str && str[i])
 	{
 		if (str[i] == ' ')
-			return (i);
+		{
+			k = i;
+			while (str && str[i] && str[i] == ' ')
+				i++;
+			if (!str[i])
+				return (k);
+		}
 		i++;
 	}
 	tmp = *token;
@@ -63,7 +72,16 @@ int	count_words(t_token **token)
 		while (str && str[j])
 		{
 			if (str[j] == ' ')
-				return (i);
+			{
+				k = i;
+				while (str && str[j] && str[j] == ' ')
+				{
+					j++;
+					i++;
+				}
+				if (!str[j])
+					return (k);
+			}
 			j++;
 			i++;
 		}
@@ -87,13 +105,15 @@ char	*copy_cmd(t_token **token)
 	char	*str;
 	char	*join;
 	int		len;
-	
+
 	len = count_words(token);
 	str = NULL;
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (err_msg_str(-2, NULL));
-	if (len == ft_strtoken((*token)->value))
+	if (!len)
+		str[len] = '\0';
+	else if (len == ft_strtoken((*token)->value))
 		ft_strncpy(str, (*token)->value, len);
 	else
 	{
@@ -110,51 +130,33 @@ char	*copy_cmd(t_token **token)
 	return (str);
 }
 
-void	cmd_setargs(t_token **token, t_cmd *new)
+void    cmd_setargs(t_token **token, t_cmd *new)
 {
-	char	*args;
+    char    *args;
+    t_token    *tmp;
+    int        i;
 
-	args = NULL;
-	if (*token && !new->cmd)
-		new->cmd = copy_cmd(token);
-	*token =  (*token)->next;
-	while ((*token) && !is_delim(*token) && !is_redir(*token))
-	{
-		args = ft_strjoin(args, (*token)->value, 1);
-		args = ft_strjoin(args, " ", 1);
-		*token = (*token)->next;
-	}
-	new->args = ft_split(args, ' ');
-	free(args);
+    args = NULL;
+    if (*token && !new->cmd)
+        new->cmd = copy_cmd(token);
+    *token =  (*token)->next;
+    i = 0;
+    tmp = *token;
+    while (tmp && !is_delim(tmp) && !is_redir(tmp))
+    {
+        i++;
+        tmp = tmp->next;
+    }
+    new->args = malloc(sizeof(char *) * (i + 1));
+    i = 0;
+    while (*token && !is_delim(*token) && !is_redir(*token))
+    {
+        new->args[i++] = copy_cmd(token);
+        *token = (*token)->next;
+    }
+    new->args[i] = NULL;
+    free(args);
 }
-
-// void    cmd_setargs(t_token **token, t_cmd *new)
-// {
-//     char    *args;
-//     t_token    *tmp;
-//     int        i;
-
-//     args = NULL;
-//     if (*token && !new->cmd)
-//         new->cmd = (*token)->value;
-//     *token =  (*token)->next;
-//     i = 0;
-//     tmp = *token;
-//     while (tmp && !is_delim(tmp) && !is_redir(tmp))
-//     {
-//         i++;
-//         tmp = tmp->next;
-//     }
-//     new->args = malloc(sizeof(char *) * (i + 1));
-//     i = 0;
-//     while ((*token) && !is_delim(*token) && !is_redir(*token))
-//     {
-//         new->args[i++] = (*token)->value;
-//         *token = (*token)->next;
-//     }
-//     new->args[i] = NULL;
-//     free(args);
-// }
 
 t_cmd	*create_cmd(t_token **token)
 {
