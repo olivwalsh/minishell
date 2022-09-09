@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 17:49:27 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/09 11:24:28 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,6 @@ void	display_specific_tokens(t_token *head);
 */
 int		ms_exit(char *cmd, char **args);
 int		ms_env(char *cmd, char **args);
+int		ms_echo(char *cmd, char **args);
 
 #endif

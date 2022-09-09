@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 18:38:51 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/09 11:22:48 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ms_builtin(t_cmdlst **cmds, char **env)
 		ms_exit((*cmds)->cmd->cmd, NULL);
 	else if ((*cmds)->cmd->builtin == BD_ENV)
 		ms_env((*cmds)->cmd->cmd, NULL);
+	else if ((*cmds)->cmd->builtin == BD_ECHO)
+		ms_echo((*cmds)->cmd->cmd, (*cmds)->cmd->args);
 	return (EXIT_SUCCESS);
 }
 
