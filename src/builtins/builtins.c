@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:56:16 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 21:20:46 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/09 13:17:30 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	set_buildin(char *cmd)
 	else if (!ft_strcmp("pwd", cmd))
 		return (BD_EXIT);
 	else if (!ft_strcmp("export", cmd))
-		return (BD_EXIT);
+		return (BD_EXPORT);
 	else if (!ft_strcmp("unset", cmd))
 		return (BD_EXIT);
 	else if (!ft_strcmp("env", cmd))

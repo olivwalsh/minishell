@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 18:38:25 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/09 12:00:40 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv, char **env)
 		return (EXIT_FAILURE);
 	if (ms_init(&data, argv, env))
 		return (EXIT_FAILURE);
-	// display_env();
 	res = 0;
 	while (1)
 	{
@@ -35,7 +34,7 @@ int	main(int argc, char **argv, char **env)
 			&& !ms_expanser(&data.tokens))
 		{
 			ms_parser(data.tokens, &data.cmds);
-			display_cmds();
+			// display_cmds();
 			ms_execute(&data.cmds, data.shell.env);
 		}
 		add_history(data.shell.input);
