@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/09 11:22:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/09 11:46:50 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,26 @@ int	ms_builtin(t_cmdlst **cmds, char **env)
 		ms_env((*cmds)->cmd->cmd, NULL);
 	else if ((*cmds)->cmd->builtin == BD_ECHO)
 		ms_echo((*cmds)->cmd->cmd, (*cmds)->cmd->args);
+	else if ((*cmds)->cmd->builtin == BD_ECHO)
+		ms_echo((*cmds)->cmd->cmd, (*cmds)->cmd->args);
+	return (EXIT_SUCCESS);
+}
+
+int	ms_wait(pid_t pid)
+{
+	int		error;
+	int		exit_status;
+
+	error = 0;
+	waitpid(pid, &exit_status, 0);
+	if (WIFEXITED(exit_status))
+		error = WEXITSTATUS(exit_status);
+	if (error)
+	{
+		write(2, strerror(error), ft_strlen(strerror(error)));
+		write(2, "\n", 1);
+		return (error);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -40,15 +60,14 @@ int	ms_execve(t_cmdlst **cmds, char **env)
 		if (execve((*cmds)->cmd->cmd, (*cmds)->cmd->args, env) < 0)
 			exit(errno);
 	}
-	waitpid(pid, NULL, 0);
-	return (EXIT_SUCCESS);
+	return (ms_wait(pid));
 }
 
 int	ms_execute(t_cmdlst **cmds, char **env)
 {
 	if ((*cmds)->cmd->builtin)
-		ms_builtin(cmds, env);
+		return (ms_builtin(cmds, env));
 	else
-		ms_execve(cmds, env);
+		return (ms_execve(cmds, env));
 	return (EXIT_SUCCESS);
 }

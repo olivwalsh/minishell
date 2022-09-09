@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/09 11:27:52 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/09 12:01:28 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		if (!res)
-			data.shell.input = readline(SUCCESS_PROMPT);
+			data.shell.input = readline(SUCESS_PROMPT);
 		else
 			data.shell.input = readline(FAIL_PROMPT);
 		if (!ms_lexer(data.shell.input, &data.tokens)
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			ms_parser(data.tokens, &data.cmds);
 			// display_cmds();
-			ms_execute(&data.cmds, data.shell.env);
+			res = ms_execute(&data.cmds, data.shell.env);
 		}
 		add_history(data.shell.input);
 		clean(&data);
