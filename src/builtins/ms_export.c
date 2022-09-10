@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/09 16:42:10 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/10 08:47:48 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,48 @@ int	ms_export_error(int code, char *arg)
 	return (EXIT_FAILURE);
 }
 
+char	**free_new(char **str, int i)
+{
+	while (i >= 0)
+		free(str[i--]);
+	free(str);
+	err_msg(-2, 0);
+	return (NULL);
+}
+
+char	**redo_malloc(char **old, char *str, int n)
+{
+	char	**new;
+	int		i;
+
+	if (!str || !old || !n)
+		return (NULL);
+	new = malloc(sizeof(char *) * (n + 1));
+	if (!new)
+	{
+		err_msg(-2, 0);
+		return (NULL);
+	}
+	i = 0;
+	while (old && old[i])
+	{
+		new[i] = malloc(sizeof(char) * (ft_strlen(old[i]) + 1));
+		if (!new[i])
+			return (free_new(new, i));
+		ft_strncpy(new[i], old[i], ft_strlen(old[i]));
+		i++;
+	}
+	new[i] = str;
+	new[i + 1] = NULL;
+	free_tab(old);
+	old = NULL;
+	return (new);
+}
+
 int	add_env(char *str, char **env)
 {
 	int		i;
 	char	*new;
-	char	**new_env;
 
 	i = 0;
 	new = malloc(sizeof(char) * (ft_strlen(str) + 1));
@@ -64,10 +101,7 @@ int	add_env(char *str, char **env)
 		}
 		i++;
 	}
-	new_env = malloc(sizeof(char *) * 2);
-	new_env[0] = new;
-	new_env[1] = NULL;
-	env[i] = new_env[0];
+	g_global.data->shell.env = redo_malloc(env, new, i + 1);
 	return (EXIT_SUCCESS);
 }
 

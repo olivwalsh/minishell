@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:04:23 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/06 17:16:43 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/10 08:59:31 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_getenv(char *name)
 	while (env && env[i])
 	{
 		res = ft_strstr(env[i], new_name);
-		if (res)
+		if (res && !ft_strncmp(env[i], new_name, ft_strlen(new_name)))
 		{
 			res = create_result(res);
 			break ;
