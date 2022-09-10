@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 17:49:27 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/10 08:46:24 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,10 +128,10 @@ int		err_msg_1(int code, char c);
 char	*get_next_line(int fd);
 char	*err_msg_str(int code, char *str);
 char	*ft_getenv(char *name);
+char	*ft_strstr(char *str, char *to_find);
 char	*ft_strjoin(char *s1, char *s2, int clean);
 char	*ft_strncpy(char *dst, char *src, int n);
 char	**ft_split(char *s, char c);
-void	display_env(void);
 void	display_tokens(void);
 void	display_cmds(void);
 void	display_specific_tokens(t_token *head);
@@ -140,7 +140,8 @@ void	display_specific_tokens(t_token *head);
 ** BUILTINS
 **
 */
-int		ms_exit(char *cmd, char **args);
-int		ms_env(char *cmd, char **args);
+int		ms_exit(char *cmd, char **args, char **env);
+int		ms_env(char *cmd, char **args, char ** env);
+int		ms_export(char *cmd, char **args, char **env);
 
 #endif

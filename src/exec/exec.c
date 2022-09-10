@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 18:38:51 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/09 16:59:50 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int	ms_builtin(t_cmdlst **cmds, char **env)
 {
-	(void)env;
 	if ((*cmds)->cmd->builtin == BD_EXIT)
-		ms_exit((*cmds)->cmd->cmd, NULL);
+		ms_exit((*cmds)->cmd->cmd, &(*cmds)->cmd->args[1], env);
 	else if ((*cmds)->cmd->builtin == BD_ENV)
-		ms_env((*cmds)->cmd->cmd, NULL);
+		ms_env((*cmds)->cmd->cmd, &(*cmds)->cmd->args[1], env);
+	else if ((*cmds)->cmd->builtin == BD_EXPORT)
+		ms_export((*cmds)->cmd->cmd, &(*cmds)->cmd->args[1], env);
 	return (EXIT_SUCCESS);
 }
 
