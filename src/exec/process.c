@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/12 15:23:10 by owalsh           ###   ########.fr       */
+/*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
+/*   Updated: 2022/09/12 17:54:05 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,48 +27,37 @@ int	ms_builtin(t_cmd *cmd, char **env)
 	return (EXIT_SUCCESS);
 }
 
-int	ms_wait(t_cmdlst **cmds)
-{
-	int		error;
-	int		exit_status;
-	t_cmdlst	*tmp;
-
-	error = 0;
-	while ((*cmds)->prev)
-		*cmds = (*cmds)->prev;
-	tmp = *cmds;
-	while (tmp)
-	{
-		if (tmp->cmd)
-		{
-			waitpid(tmp->cmd->pid, &exit_status, 0);
-			if (WIFEXITED(exit_status))
-				error = WEXITSTATUS(exit_status);
-			if (error)
-			{
-				write(2, strerror(error), ft_strlen(strerror(error)));
-				write(2, "\n", 1);
-				return (error);
-			}
-		}
-		tmp = tmp->next;
-	}
-	return (EXIT_SUCCESS);
-}
-
 int	set_fd(t_cmdlst **cmds)
 {
-	int	pipes[2];
+	int			pipes[2];
 	t_cmdlst	*tmp;
-	
-	pipe(pipes);
+
+	if (pipe(pipes) < 0)
+		exit(errno);
 	(*cmds)->cmd->fd_out = pipes[1];
 	tmp = (*cmds)->next->next;
 	tmp->cmd->fd_in = pipes[0];
 	return (EXIT_SUCCESS);
 }
 
-int	ms_execve(t_cmdlst **cmds, char **env)
+int	update_fd(t_cmd *cmd)
+{
+	if (cmd->fd_in > 0)
+	{
+		if (dup2(cmd->fd_in, STDIN_FILENO) < 0)
+			exit(errno);
+		close(cmd->fd_in);
+	}
+	if (cmd->fd_out > 0)
+	{
+		if (dup2(cmd->fd_out, STDOUT_FILENO) < 0)
+			exit(errno);
+		close(cmd->fd_out);
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	exec_cmd(t_cmdlst **cmds, char **env)
 {
 	t_cmd	*cmd;
 
@@ -80,16 +69,7 @@ int	ms_execve(t_cmdlst **cmds, char **env)
 		ms_exit(cmd->cmd, &cmd->args[1], env);
 	if (cmd->pid == 0)
 	{
-		if (cmd->fd_in > 0)
-		{
-			dup2(cmd->fd_in, STDIN_FILENO);
-			close(cmd->fd_in);
-		}
-		if (cmd->fd_out > 0)
-		{
-			dup2(cmd->fd_out, STDOUT_FILENO);
-			close(cmd->fd_out);
-		}
+		update_fd(cmd);
 		if (cmd->builtin)
 			exit(ms_builtin(cmd, env));
 		if (execve(cmd->cmd, cmd->args, env) < 0)
@@ -102,18 +82,5 @@ int	ms_execve(t_cmdlst **cmds, char **env)
 		if (cmd->fd_out > 0)
 			close(cmd->fd_out);
 	}
-	return (EXIT_SUCCESS);
-}
-
-int	ms_execute(t_cmdlst **cmds, char **env)
-{
-	if (!env)
-		return (EXIT_FAILURE);
-	if ((*cmds)->next && (*cmds)->next->type == PIPE)
-		set_fd(cmds);
-	if ((*cmds)->type == WORD)
-		ms_execve(cmds, env);
-	if ((*cmds)->next)
-		ms_execute(&(*cmds)->next, env);
 	return (EXIT_SUCCESS);
 }
