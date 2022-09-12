@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/10 08:46:24 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:05:55 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ t_cmdlst	*create_cmdlst(int type, t_cmd *cmd);
 **
 */
 int			ms_execute(t_cmdlst **cmds, char **env);
+int			ms_wait(t_cmdlst **cmds);
 /*
 **
 ** CLEAN
@@ -140,6 +141,8 @@ void	display_specific_tokens(t_token *head);
 ** BUILTINS
 **
 */
+int		ms_cd(char *cmd, char **args);
+int		ms_echo(char *cmd, char **args);
 int		ms_exit(char *cmd, char **args, char **env);
 int		ms_env(char *cmd, char **args, char ** env);
 int		ms_export(char *cmd, char **args, char **env);

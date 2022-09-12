@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:33:00 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 16:05:47 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/12 13:56:42 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	read_file(char *file)
 		perror(file);
 		return (0);
 	}
-	close(fd);
 	return (fd);
 }
 
@@ -42,7 +41,6 @@ int	read_stdin(char *delimiter)
 		line = get_next_line(0);
 	}
 	free(line);
-	close(newfile);
 	return (read_file("tmp"));
 }
 

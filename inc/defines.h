@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:22:28 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 15:44:40 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/09 12:14:42 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@
 # define PINK "\e[38;5;205m"
 # define LPINK "\e[38;4;200m"
 
-// Generic
-# define SUCCESS_PROMPT GREEN"\u2794"RED"  m"LRED"i"LYELLOW"n"YELLOW"i"LGREEN"s"GREEN"h"LBLUE"e"LPINK"l"LPURPLE"l"RESET"$ "
-# define FAIL_PROMPT RED"\u2794"RED"  m"LRED"i"LYELLOW"n"YELLOW"i"LGREEN"s"GREEN"h"LBLUE"e"LPINK"l"LPURPLE"l"RESET"$ "
+// PROMT
+# define SUCESS_PROMPT "\033[1;32m\u2794\033[1;31m  m\033[1;31mi\033[1;33m\
+n\033[0;33mi\033[1;32ms\033[1;32mh\033[1;34me\e[38;4;200ml\033[1;35ml\033[m$ "
+# define FAIL_PROMPT "\033[1;31m\u2794\033[1;31m  m\033[1;31mi\033[1;33m\
+n\033[0;33mi\033[1;32ms\033[1;32mh\033[1;34me\e[38;4;200ml\033[1;35ml\033[m$ "
 
 // Tokens type
 # define WORD 1

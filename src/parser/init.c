@@ -34,6 +34,7 @@ t_cmd	*init_cmd(void)
 	if (!new)
 		return (NULL);
 	memset(new, 0, sizeof(t_cmd));
+	new->pid = -1;
 	new->fd_in = -1;
 	new->fd_out = -1;
 	new->redir = NULL;
