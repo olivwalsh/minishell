@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/09 13:37:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/12 11:27:34 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 int	ms_builtin(t_cmdlst **cmds, char **env)
 {
-	(void)env;
 	if ((*cmds)->cmd->builtin == BD_EXIT)
-		ms_exit((*cmds)->cmd->cmd, NULL);
+		ms_exit((*cmds)->cmd->cmd, &(*cmds)->cmd->args[1], env);
 	else if ((*cmds)->cmd->builtin == BD_ENV)
-		ms_env((*cmds)->cmd->cmd, NULL);
+		ms_env((*cmds)->cmd->cmd, &(*cmds)->cmd->args[1], env);
 	else if ((*cmds)->cmd->builtin == BD_ECHO)
 		ms_echo((*cmds)->cmd->cmd, (*cmds)->cmd->args);
 	else if ((*cmds)->cmd->builtin == BD_CD)
 		ms_cd((*cmds)->cmd->cmd, (*cmds)->cmd->args);
+	else if ((*cmds)->cmd->builtin == BD_EXPORT)
+		ms_export((*cmds)->cmd->cmd, &(*cmds)->cmd->args[1], env);
 	return (EXIT_SUCCESS);
 }
 
@@ -65,6 +66,8 @@ int	ms_execve(t_cmdlst **cmds, char **env)
 
 int	ms_execute(t_cmdlst **cmds, char **env)
 {
+	if (!env)
+		return (EXIT_FAILURE);
 	if ((*cmds)->cmd->builtin)
 		return (ms_builtin(cmds, env));
 	else

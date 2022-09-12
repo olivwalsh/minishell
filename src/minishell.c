@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/09 12:01:28 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/12 11:23:47 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv, char **env)
 		return (EXIT_FAILURE);
 	if (ms_init(&data, argv, env))
 		return (EXIT_FAILURE);
-	// display_env();
 	res = 0;
 	while (1)
 	{

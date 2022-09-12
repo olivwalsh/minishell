@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:56:15 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/06 16:52:21 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/10 08:46:18 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,17 @@ static void	free_str(char **str, int i)
 int	copy_substr(char **new_env, char **env, int substr)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	while(env[i] && j < substr)
+	while(env[i] && i < substr)
 	{
-		new_env[j] = malloc(sizeof(char) * (ft_strlen(env[i]) + 1));
-		if (!new_env[j])
+		new_env[i] = malloc(sizeof(char) * (ft_strlen(env[i]) + 1));
+		if (!new_env[i])
 		{
-			free_str(new_env, j);
+			free_str(new_env, i);
 			return (err_msg(-2, 0));
 		}
-		ft_strncpy(new_env[j], env[i], ft_strlen(env[i]));
-		j++;
+		ft_strncpy(new_env[i], env[i], ft_strlen(env[i]));
 		i++;
 	}
 	new_env[substr] = NULL;
