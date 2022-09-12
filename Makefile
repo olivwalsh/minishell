@@ -47,7 +47,10 @@ $(NAME) : $(OBJS)
 	@echo -n "Compiling minishell"
 	@echo $(GREEN)"\tOK"$(RESET)
 
-run: re
+run: all
+	./minishell
+
+rerun: re
 	./minishell
 
 clean :
