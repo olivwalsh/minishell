@@ -36,6 +36,7 @@ int	main(int argc, char **argv, char **env)
 			ms_parser(data.tokens, &data.cmds);
 			// display_cmds();
 			res = ms_execute(&data.cmds, data.shell.env);
+			ms_wait(&data.cmds);
 		}
 		add_history(data.shell.input);
 		clean(&data);

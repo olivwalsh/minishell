@@ -104,7 +104,7 @@ t_cmdlst	*create_cmdlst(int type, t_cmd *cmd);
 **
 */
 int			ms_execute(t_cmdlst **cmds, char **env);
-int			ms_wait(pid_t pid);
+int			ms_wait(t_cmdlst **cmds);
 /*
 **
 ** CLEAN

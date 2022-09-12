@@ -41,6 +41,7 @@ typedef struct s_redir
 // COMMANDS
 typedef struct s_cmd
 {
+	pid_t			pid;
 	int				fd_in;
 	int				fd_out;
 	int				pipe[2];
