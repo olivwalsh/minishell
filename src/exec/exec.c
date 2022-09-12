@@ -45,6 +45,8 @@ int	ms_execve(t_cmdlst **cmds, char **env)
 
 int	ms_execute(t_cmdlst **cmds, char **env)
 {
+	if (!env)
+		return (EXIT_FAILURE)
 	if ((*cmds)->cmd->builtin)
 		ms_builtin(cmds, env);
 	else

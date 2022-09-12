@@ -111,41 +111,26 @@ int	ms_export(char *cmd, char **args, char **env)
 	int	j;
 
 	i = 0;
-	if (!env || ft_strcmp("export", cmd))
-		return (EXIT_FAILURE);
-	while (args && args[i])
-	{
-		if (strchr(args[i], '=') && args[i][0] != '=')
-			add_env(args[i], env);
-		i++;
-	}
-	i = 0;
 	while (args && args[i])
 	{
 		j = 0;
 		if (args[i][0] == '-')
 			return (ms_export_error(-1, args[i]));
+		while (args[i] && args[i][j])
+		{
+			if ((args[i][0] < 'A' || args[i][0] > 'Z') && \
+				(args[i][0] < 'a' || args[i][0] > 'z') && args[i][0] != '_')
+				return (ms_export_error(-2, args[i]));
+			if ((args[i][j] < 'A' || args[i][j] > 'Z') && \
+				(args[i][j] < 'a' || args[i][j] > 'z') && \
+				(args[i][j] < '0' || args[i][j] > '9') && \
+				args[i][j] != '_' && args[i][j] != '=')
+				return (ms_export_error(-2, args[i]));
+			j++;
+		}
 		if (strchr(args[i], '=') && args[i][0] != '=')
-		{
-			i++;
-			if (!args[i])
-				break ;
-		}
-		else
-		{
-			while (args[i] && args[i][j])
-			{
-				if ((args[i][0] < 'A' || args[i][0] > 'Z') && \
-					(args[i][0] < 'a' || args[i][0] > 'z'))
-					return (ms_export_error(-2, args[i]));
-				if ((args[i][j] < 'A' || args[i][j] > 'Z') && \
-					(args[i][j] < 'a' || args[i][j] > 'z') && \
-					(args[i][j] < '0' || args[i][j] > '9'))
-					return (ms_export_error(-2, args[i]));
-				j++;
-			}
-		}
+			add_env(args[i], env);
 		i++;
 	}
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

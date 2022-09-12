@@ -16,6 +16,5 @@ int	ms_unset(char *cmd, char **args)
 {
 	if (ft_strcmp("unset", cmd))
 		return (EXIT_FAILURE);
-		
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
