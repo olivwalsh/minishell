@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/09 11:24:28 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/09 13:53:16 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ t_cmdlst	*create_cmdlst(int type, t_cmd *cmd);
 **
 */
 int			ms_execute(t_cmdlst **cmds, char **env);
+int			ms_wait(pid_t pid);
 /*
 **
 ** CLEAN
@@ -140,6 +141,7 @@ void	display_specific_tokens(t_token *head);
 ** BUILTINS
 **
 */
+int		ms_cd(char *cmd, char **args);
 int		ms_exit(char *cmd, char **args);
 int		ms_env(char *cmd, char **args);
 int		ms_echo(char *cmd, char **args);
