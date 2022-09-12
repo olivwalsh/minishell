@@ -53,5 +53,5 @@ int	ms_env(char *cmd, char **args, char **env)
 		return (ms_env_error(-1, args[0]));
 	else
 		display_env(env);
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

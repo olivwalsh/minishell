@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **env)
 			&& !ms_expanser(&data.tokens))
 		{
 			ms_parser(data.tokens, &data.cmds);
-			// display_cmds();
+			display_cmds();
 			ms_execute(&data.cmds, data.shell.env);
 		}
 		add_history(data.shell.input);
