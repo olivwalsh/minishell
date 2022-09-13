@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 09:29:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/13 14:10:50 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ms_builtin(t_cmd *cmd, char **env)
+int	ms_builtin_parent(t_cmd *cmd, char **env)
+{
+	if (cmd->builtin == BD_EXIT)
+		ms_exit(cmd->cmd, &cmd->args[1], env);
+	else if (cmd->builtin == BD_CD)
+		ms_cd(cmd->cmd, cmd->args, env);
+	else if (cmd->builtin == BD_EXPORT)
+		ms_export(cmd->cmd, &cmd->args[1], env);
+	else if (cmd->builtin == BD_UNSET)
+		ms_unset(cmd->cmd, &cmd->args[1], env);
+	return (EXIT_SUCCESS);
+}
+
+int	ms_builtin_child(t_cmd *cmd, char **env)
 {
 	if (cmd->builtin == BD_EXIT)
 		ms_exit(cmd->cmd, &cmd->args[1], env);
@@ -23,7 +36,9 @@ int	ms_builtin(t_cmd *cmd, char **env)
 	else if (cmd->builtin == BD_CD)
 		ms_cd(cmd->cmd, cmd->args, env);
 	else if (cmd->builtin == BD_EXPORT)
-		ms_export(cmd->cmd, &cmd->args[1], env);
+		exit(EXIT_SUCCESS);
+	else if (cmd->builtin == BD_UNSET)
+		exit(EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
 
@@ -67,18 +82,18 @@ int	exec_cmd(t_cmdlst **cmds, char **env)
 	cmd->pid = fork();
 	if (cmd->pid == -1)
 		exit(errno);
-	if (cmd->builtin == BD_EXIT || cmd->builtin == BD_EXPORT || cmd->builtin == BD_CD)
-		ms_builtin(cmd, env);
 	if (cmd->pid == 0)
 	{
 		update_fd(cmd);
 		if (cmd->builtin)
-			exit(ms_builtin(cmd, env));
+			exit(ms_builtin_child(cmd, env));
 		if (execve(cmd->cmd, cmd->args, env) < 0)
 			exit(errno);
 	}
 	else
 	{
+		if (cmd->builtin == BD_EXIT || cmd->builtin == BD_EXPORT || cmd->builtin == BD_CD || cmd->builtin == BD_UNSET)
+			ms_builtin_parent(cmd, env);
 		if (cmd->fd_in > 0)
 			close(cmd->fd_in);
 		if (cmd->fd_out > 0)

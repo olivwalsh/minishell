@@ -20,7 +20,7 @@ int	ms_execute(t_cmdlst **cmds, char **env)
 		set_fd(cmds);
 	if ((*cmds)->type == WORD)
 		exec_cmd(cmds, env);
-	if ((*cmds)->next)
+	if (*cmds && (*cmds)->next)
 		ms_execute(&(*cmds)->next, env);
 	return (EXIT_SUCCESS);
 }
