@@ -29,7 +29,7 @@ SRC_FILES	=	minishell.c \
 				parser/parser.c parser/init.c parser/cmd.c parser/redir.c parser/utils.c parser/path.c parser/file.c \
 				exec/execute.c exec/process.c exec/wait.c \
 				utils/is.c utils/display.c utils/error.c utils/utils.c utils/string.c utils/split.c utils/get_next_line.c \
-				builtins/builtins.c builtins/ms_exit.c builtins/ms_env.c builtins/ms_echo.c builtins/ms_cd.c builtins/ms_export.c \
+				builtins/builtins.c builtins/ms_exit.c builtins/ms_env.c builtins/ms_echo.c builtins/ms_cd.c builtins/ms_export.c builtins/ms_pwd.c \
 				clean/clean.c
 
 OBJS		= $(addprefix ${OBJ_DIR}, ${SRC_FILES:.c=.o})
