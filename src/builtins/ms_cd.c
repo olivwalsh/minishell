@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 08:41:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/13 10:11:50 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ms_cd(char *cmd, char **args, char **env)
 	char	*cwd;
 	
 	cwd = NULL;
-	if (ft_strcmp(cmd, "cd"))
+	if (ft_strcmp("cd", cmd))
 		return (EXIT_FAILURE);
 	if (!args[1])
 		return (exec_error(-10));
