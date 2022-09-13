@@ -6,44 +6,11 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/13 13:48:38 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:46:52 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ms_export_error(int code, char *arg)
-{
-	char	*str;
-
-	str = NULL;
-	if (code == -1)
-	{
-		str = ft_strjoin(str, "minishell: export: ", 1);
-		str = ft_strjoin(str, arg, 1);
-		str = ft_strjoin(str, ": Invalid option", 1);
-		printf("%s\n", str);
-		free(str);
-	}
-	else if (code == -2)
-	{
-		str = ft_strjoin(str, "minishell: export: `", 1);
-		str = ft_strjoin(str, arg, 1);
-		str = ft_strjoin(str, "': not a valid identifier", 1);
-		printf("%s\n", str);
-		free(str);
-	}
-	return (EXIT_FAILURE);
-}
-
-char	**free_new(char **str, int i)
-{
-	while (i >= 0)
-		free(str[i--]);
-	free(str);
-	err_msg(-2, 0);
-	return (NULL);
-}
 
 char	**redo_malloc(char **old, char *str, int n)
 {
@@ -74,6 +41,20 @@ char	**redo_malloc(char **old, char *str, int n)
 	return (new);
 }
 
+char	*cut_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '=')
+			str[i + 1] = '\0';
+		i++;
+	}
+	return (str);
+}
+
 int	add_env(char *str, char **env)
 {
 	int		i;
@@ -83,13 +64,7 @@ int	add_env(char *str, char **env)
 	if (!new)
 		return (err_msg(-2, 0));
 	new = ft_strncpy(new, str, ft_strlen(str));
-	i = 0;
-	while (str && str[i])
-	{
-		if (str[i] == '=')
-			str[i + 1] = '\0';
-		i++;
-	}
+	str = cut_str(str);
 	i = 0;
 	while (env && env[i])
 	{
@@ -105,32 +80,41 @@ int	add_env(char *str, char **env)
 	return (EXIT_SUCCESS);
 }
 
-int	ms_export(char *cmd, char **args, char **env)
+int	args_checker(char **args, int i)
 {
-	int		i;
 	int		j;
 	char	*auth;
 
+	j = 0;
+	auth = "_=";
+	if (args[i][j] == '-')
+		return (err_bd(-2, "minishell: export: ", args[i]));
+	while (args && args[i] && args[i][j])
+	{
+		if (!is_alpha(args[i][0]) && args[i][0] != '_' && args[i][0] != '/')
+			return (err_bd(-3, "minishell: export: `", args[i]));
+		if (!is_alnum(args[i][j]) && !strchr(auth, args[i][j]))
+			return (err_bd(-3, "minishell: export: `", args[i]));
+		if (args[i][j] == '=')
+			auth = "_=/";
+		j++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	ms_export(char *cmd, char **args, char **env)
+{
+	int		i;
+
 	i = 0;
 	(void)cmd;
+	display_env(env);
 	if (!args || !args[0])
-		print_export(env);
+		display_export(env);
 	while (args && args[i])
 	{
-		auth = "_=";
-		j = 0;
-		if (args[i][0] == '-')
-			return (ms_export_error(-1, args[i]));
-		while (args && args[i] && args[i][j])
-		{
-			if (!is_alpha(args[i][0]) && args[i][0] != '_' && args[i][0] != '/')
-				return (ms_export_error(-2, args[i]));
-			if (!is_alnum(args[i][j]) && !strchr(auth, args[i][j]))
-				return (ms_export_error(-2, args[i]));
-			if (args[i][j] == '=')
-				auth = "_=/";
-			j++;
-		}
+		if (args_checker(args, i))
+			return (EXIT_FAILURE);
 		if (strchr(args[i], '=') && args[i][0] != '=')
 			add_env(args[i], env);
 		i++;

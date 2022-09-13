@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alphabetical.c                                     :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 13:47:09 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/13 14:01:14 by foctavia         ###   ########.fr       */
+/*   Created: 2022/09/13 15:44:15 by foctavia          #+#    #+#             */
+/*   Updated: 2022/09/13 15:58:10 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	swap_env(char **env1, char **env2)
 
 	tmp = *env1;
 	*env1 = *env2;
-	*env2 = tmp;    
+	*env2 = tmp;
 }
 
 void	sort_env(int n, char **env)
@@ -27,7 +27,7 @@ void	sort_env(int n, char **env)
 	int	j;
 
 	i = 0;
-	while (i < (n - 2))
+	while (i < (n - 1))
 	{
 		j = i + 1;
 		if (ft_strcmp(env[i], env[j]) > 0)
@@ -61,7 +61,7 @@ char	**dup_env(char **env)
 	return (copy);
 }
 
-int	print_export(char **env)
+int	display_export(char **env)
 {
 	int		i;
 	char	**copy;

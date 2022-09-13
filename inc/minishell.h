@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 14:06:05 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:47:06 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
 int		err_msg(int err, char c);
 int		err_msg_1(int code, char c);
+int		err_bd(int code, char *func, char *arg);
 char	*get_next_line(int fd);
 char	*err_msg_str(int code, char *str);
 char	*ft_getenv(char *name);
@@ -151,7 +152,7 @@ int		ms_exit(char *cmd, char **args, char **env);
 int		ms_env(char *cmd, char **args, char ** env);
 int		ms_export(char *cmd, char **args, char **env);
 int		ms_unset(char *cmd, char **args, char **env);
-int		print_export(char **env);
+int		display_export(char **env);
 char	**free_new(char **str, int i);
 void	display_env(char **env);
 
