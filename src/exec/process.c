@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 08:43:34 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/13 09:29:33 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ int	set_fd(t_cmdlst **cmds)
 
 	if (pipe(pipes) < 0)
 		exit(errno);
-	(*cmds)->cmd->fd_out = pipes[1];
+	if ((*cmds)->cmd->fd_out == -1)
+		(*cmds)->cmd->fd_out = pipes[1];
 	tmp = (*cmds)->next->next;
-	tmp->cmd->fd_in = pipes[0];
+	if (tmp->cmd->fd_in == -1)
+		tmp->cmd->fd_in = pipes[0];
 	return (EXIT_SUCCESS);
 }
 
