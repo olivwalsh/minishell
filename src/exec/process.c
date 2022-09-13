@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/12 19:20:25 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/13 08:43:34 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	exec_cmd(t_cmdlst **cmds, char **env)
 	cmd->pid = fork();
 	if (cmd->pid == -1)
 		exit(errno);
-	if (cmd->builtin == BD_EXIT)
-		ms_exit(cmd->cmd, &cmd->args[1], env);
+	if (cmd->builtin == BD_EXIT || cmd->builtin == BD_EXPORT || cmd->builtin == BD_CD)
+		ms_builtin(cmd, env);
 	if (cmd->pid == 0)
 	{
 		update_fd(cmd);

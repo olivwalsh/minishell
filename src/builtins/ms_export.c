@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/12 11:28:10 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/13 09:26:10 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,26 +107,26 @@ int	add_env(char *str, char **env)
 
 int	ms_export(char *cmd, char **args, char **env)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*auth;
 
 	i = 0;
 	(void)cmd;
 	while (args && args[i])
 	{
+		auth = "_=";
 		j = 0;
 		if (args[i][0] == '-')
 			return (ms_export_error(-1, args[i]));
 		while (args[i] && args[i][j])
 		{
-			if ((args[i][0] < 'A' || args[i][0] > 'Z') && \
-				(args[i][0] < 'a' || args[i][0] > 'z') && args[i][0] != '_')
+			if (!is_alpha(args[i][0]) && args[i][0] != '_' && args[i][0] != '/')
 				return (ms_export_error(-2, args[i]));
-			if ((args[i][j] < 'A' || args[i][j] > 'Z') && \
-				(args[i][j] < 'a' || args[i][j] > 'z') && \
-				(args[i][j] < '0' || args[i][j] > '9') && \
-				args[i][j] != '_' && args[i][j] != '=')
+			if (!is_alnum(args[i][j]) && !strchr(auth, args[i][j]))
 				return (ms_export_error(-2, args[i]));
+			if (args[i][j] == '=')
+				auth = "_=/";
 			j++;
 		}
 		if (strchr(args[i], '=') && args[i][0] != '=')

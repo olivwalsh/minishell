@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/12 20:01:39 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/13 08:41:48 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	set_workingdirectory(char **path, char **env)
 
 	oldpath = getenv("PWD");
 	printf("pwd path is: %s\n", oldpath);
+	printf("in set working directory with path[0] = %s\n", path[0]);
 	ms_export("export", path, env);
 	
 	return (EXIT_SUCCESS);

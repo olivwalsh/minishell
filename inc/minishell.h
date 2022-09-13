@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/12 19:20:46 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/13 09:25:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ void	free_tab(char **table);
 ** UTILS
 **
 */
+int 	is_alnum(char c);
+int		is_alpha(char c);
 int		ft_tablen(char **table);
 int		*ft_tabint(int *t, int c);
 int		ft_isdigit(char c);
