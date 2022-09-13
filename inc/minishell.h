@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 15:43:21 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/13 18:02:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int		ms_exit(char *cmd, char **args, char **env);
 int		ms_env(char *cmd, char **args, char ** env);
 int		ms_export(char *cmd, char **args, char **env);
 int		ms_pwd(char *cmd, char **args, char **env);
+int		cd_navigate(char *path, char **env);
 int		nav_backwards(char *path, char **env);
 int		nav_oldpwd(char **env);
 int		nav_fromhome(char *path, char **env);
@@ -161,5 +162,6 @@ int		nav_home(char **env);
 int		set_pwd(char *newpath, char **env);
 int		set_oldpwd(char *newpath, char **env);
 int		cd_error(int err, char *path);
+int		is_absolute(char *path);
 
 #endif
