@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/14 17:10:50 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/14 22:28:05 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int		copy_env(t_data *data, char **env);
 */
 int		ms_lexer(char *str, t_token **tokens);
 int		tokenize(t_token **tokens, char *str, int *i, int type);
-int		quote_init(t_token *tokens);
 int		lexer_checker(t_token *head);
 int		is_delimiter(char *str);
 int		is_delimiter_spc(char *str);
@@ -73,7 +72,7 @@ char	*copy_quote(char *str, int *i);
 */
 int		ms_expanser(t_token **token);
 int		expanse_var(t_token **tokens);
-int		expanse_quote(t_token *tokens, char *str, int idx);
+int		expanse_quote(t_token *tokens, char *str);
 int		delete_quote(t_token **tokens);
 void	insert_token(t_token **tokens, t_token *new);
 /*
@@ -123,7 +122,6 @@ void	free_tab(char **table);
 int 	is_alnum(char c);
 int		is_alpha(char c);
 int		ft_tablen(char **table);
-int		*ft_tabint(int *t, int c);
 int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, int n);
@@ -134,6 +132,7 @@ int		err_bd(int code, char *func, char *arg);
 char	*get_next_line(int fd);
 char	*err_msg_str(int code, char *str);
 char	*ft_getenv(char *name);
+char	*ft_strchr(char *str, int c);
 char	*ft_strstr(char *str, char *to_find);
 char	*ft_strjoin(char *s1, char *s2, int clean);
 char	*ft_strncpy(char *dst, char *src, int n);

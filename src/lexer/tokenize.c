@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:18:24 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/28 16:34:58 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/14 22:50:23 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static t_token	*create_token(int type, char *value)
 	new->type = type;
 	new->value = value;
 	new->var_stop = 0;
-	new->qts_stop = NULL;
-	new->idx = 0;
 	new->prev = NULL;
 	new->next = NULL;
 	return (new);

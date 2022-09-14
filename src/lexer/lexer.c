@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:16:38 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/07 13:27:24 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/14 22:17:31 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	ms_lexer(char *str, t_token **tokens)
 		else if (str[i])
 			res = tokenize(tokens, &str[i], &i, WORD);
 	}
-	res = quote_init(*tokens);
 	res = lexer_checker(*tokens);
 	return (res);
 }
