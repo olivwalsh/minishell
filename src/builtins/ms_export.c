@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/13 15:46:52 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:24:12 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,12 @@ char	**redo_malloc(char **old, char *str, int n)
 	i = 0;
 	while (old && old[i])
 	{
-		new[i] = malloc(sizeof(char) * (ft_strlen(old[i]) + 1));
-		if (!new[i])
-			return (free_new(new, i));
-		ft_strncpy(new[i], old[i], ft_strlen(old[i]));
+		new[i] = old[i];
 		i++;
 	}
 	new[i] = str;
 	new[i + 1] = NULL;
-	free_tab(old);
+	free(old);
 	old = NULL;
 	return (new);
 }
@@ -83,20 +80,16 @@ int	add_env(char *str, char **env)
 int	args_checker(char **args, int i)
 {
 	int		j;
-	char	*auth;
 
-	j = 0;
-	auth = "_=";
+	j = 1;
 	if (args[i][j] == '-')
 		return (err_bd(-2, "minishell: export: ", args[i]));
-	while (args && args[i] && args[i][j])
+	while (args && args[i] && args[i][j] && args[i][j] != '=')
 	{
 		if (!is_alpha(args[i][0]) && args[i][0] != '_' && args[i][0] != '/')
 			return (err_bd(-3, "minishell: export: `", args[i]));
-		if (!is_alnum(args[i][j]) && !strchr(auth, args[i][j]))
+		if (!is_alnum(args[i][j]) && args[i][j] != '_')
 			return (err_bd(-3, "minishell: export: `", args[i]));
-		if (args[i][j] == '=')
-			auth = "_=/";
 		j++;
 	}
 	return (EXIT_SUCCESS);
@@ -107,8 +100,8 @@ int	ms_export(char *cmd, char **args, char **env)
 	int		i;
 
 	i = 0;
-	(void)cmd;
-	display_env(env);
+	if (ft_strcmp("export", cmd))
+		return (EXIT_FAILURE);
 	if (!args || !args[0])
 		display_export(env);
 	while (args && args[i])

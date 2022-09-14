@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 15:47:06 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:10:50 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,6 @@ int		ms_env(char *cmd, char **args, char ** env);
 int		ms_export(char *cmd, char **args, char **env);
 int		ms_unset(char *cmd, char **args, char **env);
 int		display_export(char **env);
-char	**free_new(char **str, int i);
 void	display_env(char **env);
 
 #endif

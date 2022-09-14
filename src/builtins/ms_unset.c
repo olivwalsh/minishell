@@ -6,30 +6,11 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:23 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/13 15:42:01 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:10:20 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	**free_new(char **str, int i)
-{
-	while (i >= 0)
-		free(str[i--]);
-	free(str);
-	err_msg(-2, 0);
-	return (NULL);
-}
-
-char	**malloc_unset(char **old, char **new, int i, int *j)
-{
-	new[*j] = malloc(sizeof(char) * (ft_strlen(old[i]) + 1));
-	if (!new[*j])
-		return (free_new(new, *j));
-	ft_strncpy(new[*j], old[i], ft_strlen(old[i]));
-	*j += 1;
-	return (new);
-}
 
 char	**remove_env(char **old, int n)
 {
@@ -50,12 +31,12 @@ char	**remove_env(char **old, int n)
 	while (old && old[i])
 	{
 		if (i != n)
-			if (!malloc_unset(old, new, i, &j))
-				return (NULL);
-		i++;
+			new[j++] = old[i++];
+		else if (i == n)
+			free(old[i++]);
 	}
 	new[j] = NULL;
-	free_tab(old);
+	free(old);
 	old = NULL;
 	return (new);
 }
