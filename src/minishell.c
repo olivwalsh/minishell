@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 14:33:05 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:17:44 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	main(int argc, char **argv, char **env)
 		if (data.shell.input[0] && !ms_lexer(data.shell.input, &data.tokens)
 			&& !ms_expanser(&data.tokens))
 		{
-			display_tokens();
+			// display_tokens();
 			ms_parser(data.tokens, &data.cmds);
-			display_cmds();
+			// display_cmds();
 			ms_execute(&data.cmds, data.shell.env);
 			res = ms_wait(&data.cmds);
 		}

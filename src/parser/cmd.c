@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 15:09:34 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:17:31 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ char	*copy_cmd(t_token **token)
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (err_msg_str(-2, NULL));
-	printf ("len is %d, token len is %d, val is %s\n", len, ft_strtoken((*token)->value), (*token)->value);
 	if (len == ft_strtoken((*token)->value))
 		ft_strncpy(str, (*token)->value, len);
 	else
