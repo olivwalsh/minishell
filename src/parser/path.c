@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:46:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 16:40:31 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/15 11:18:18 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	command_error(char *cmd)
-{
-	write(1, "command not found: ", 19);
-	while (cmd && *cmd && *cmd != ' ')
-	{		
-		write(1, cmd, 1);
-		cmd++;
-	}
-	write(1, "\n", 1);
-	return (0);
-}
 
 char	*get_cmdpath(char *cmd)
 {
@@ -49,6 +37,6 @@ char	*get_cmdpath(char *cmd)
 		free(cmd_path);
 	}
 	free_tab(path_list);
-	command_error(cmd);
+	err_cmd(cmd);
 	return (cmd);
 }

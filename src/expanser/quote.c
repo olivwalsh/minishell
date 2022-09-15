@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:35 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/14 22:26:02 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:42:44 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,14 @@ int	expanse_quote(t_token *tokens, char *str)
 		j = is_variable(&str[i]);
 		if (j)
 		{
+			val = NULL;
 			val = get_value(str, i, j);
 			if (g_global.data->err)
 				return (EXIT_FAILURE);
 			str[i] = 0;
 			i += j + 1;
 			str = get_expanse(tokens, str, val, &i);
+			free(val);
 		}
 		i++;
 	}

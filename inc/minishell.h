@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/14 22:28:05 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:38:21 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		expanse_var(t_token **tokens);
 int		expanse_quote(t_token *tokens, char *str);
 int		delete_quote(t_token **tokens);
 void	insert_token(t_token **tokens, t_token *new);
+char	*add_space(char *str);
 /*
 **
 ** PARSER
@@ -89,6 +90,7 @@ int			read_file(char *file);
 int			read_stdin(char *delimiter);
 int			create_file(char *file);
 int			append_file(char *file);
+int			err_cmd(char *cmd);
 void		add_cmdlst(t_cmdlst **lst, t_cmdlst	*new);
 void		cmd_setargs(t_token **token, t_cmd *new);
 char		*copy_cmd(t_token **token);

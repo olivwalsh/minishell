@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:12:16 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 17:25:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/15 15:12:59 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,20 @@ int	is_delim(t_token *token)
 int	ft_strtoken(char *str)
 {
 	int	i;
+	int j;
 
 	i = 0;
-	while (str && str[i] && str[i] != ' ')
+	while (str && str[i])
+	{
+		if (str[i] == ' ')
+		{
+			j = i;
+			while (str[i] == ' ' && str[i + 1])
+				i++;
+			if (!str[i + 1])
+				return (j);
+		}
 		i++;
+	}
 	return (i);
 }

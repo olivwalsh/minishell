@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:16:38 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/14 22:17:31 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/15 11:49:39 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	ms_lexer(char *str, t_token **tokens)
 		else if (str[i])
 			res = tokenize(tokens, &str[i], &i, WORD);
 	}
+	if (g_global.data->err)
+		return (EXIT_FAILURE);
 	res = lexer_checker(*tokens);
 	return (res);
 }

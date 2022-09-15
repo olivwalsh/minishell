@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:31:09 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/09 17:04:43 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:43:11 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	delete_quote(t_token **tokens)
 			if (!dest)
 				tmp->value = NULL;
 			free(tmp->value);
-			tmp->value = dest;
+			tmp->value = add_space(dest);
 			tmp->type = WORD;
 		}
 		tmp = tmp->next;

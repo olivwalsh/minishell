@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 15:42:01 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/15 12:00:41 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,25 @@ int	err_bd(int code, char *func, char *arg)
 	str = ft_strjoin(str, func, 1);
 	str = ft_strjoin(str, arg, 1);
 	if (code == -1)
-		str = ft_strjoin(str, ": No such file or directory", 1);
+		str = ft_strjoin(str, ": No such file or directory\n", 1);
 	else if (code == -2)
-		str = ft_strjoin(str, ": Invalid option", 1);
+		str = ft_strjoin(str, ": Invalid option\n", 1);
 	else if (code == -3)
-		str = ft_strjoin(str, "': not a valid identifier", 1);
-	printf("%s\n", str);
+		str = ft_strjoin(str, "': not a valid identifier\n", 1);
+	write(STDERR_FILENO, str, ft_strlen(str));
+	free(str);
+	return (EXIT_FAILURE);
+}
+
+int	err_cmd(char *cmd)
+{
+	char	*str;
+
+	str = NULL;
+	str = ft_strjoin(str, "minishell: ", 1);
+	str = ft_strjoin(str, cmd, 1);
+	str = ft_strjoin(str, ": command not found\n", 1);
+	write(STDERR_FILENO, str, ft_strlen(str));
 	free(str);
 	return (EXIT_FAILURE);
 }
