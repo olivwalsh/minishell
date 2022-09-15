@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 18:10:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/15 19:10:38 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	ms_cd(char *cmd, char **args, char **env)
 {
 	char	*cwd;
+	int		res;
 
+	res = EXIT_SUCCESS;
 	cwd = NULL;
 	(void)env;
 	if (ft_strcmp("cd", cmd))
@@ -23,6 +25,7 @@ int	ms_cd(char *cmd, char **args, char **env)
 	if (args && args[1] && args[2])
 		return (cd_error(-11, NULL));
 	else
-		return (cd_navigate(args[1], env));
-	return (EXIT_SUCCESS);
+		res = cd_navigate(args[1], env);
+	printf("res = %d\n", res);
+	return (res);
 }

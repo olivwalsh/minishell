@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:52:25 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 18:08:04 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/15 19:12:13 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,34 @@ int	nav_home(char **env)
 
 	home = ft_getenv("HOME");
 	if (chdir(home) < 0)
-		exit(errno);
-	set_oldpwd(getenv("PWD"), env);
+		return (cd_error(errno, home));
 	set_pwd(home, env);
 	return (EXIT_SUCCESS);
 }
 
 // cd relative/path
-int	nav_relative(char *path, char **env)
+int	nav_relative(char *origin, char *path, char **env)
 {
+	origin = ft_strjoin(origin, "/", 0);
+	origin = ft_strjoin(origin, path, 1);
+	if (chdir(origin) < 0)
+	{
+		free(origin);
+		return (cd_error(errno, path));
+	}
+	set_pwd(origin, env);
+	return (EXIT_SUCCESS);
+}
+
+// cd ~/from/home/dir
+int	nav_fromhome(char *path, char **env)
+{
+	char	*home;
 	char	*pwd;
 
-	if (!path)
-		return (EXIT_FAILURE);
-	pwd = ft_getenv("PWD");
-	set_oldpwd(pwd, env);
-	pwd = ft_strjoin(pwd, "/", 0);
+	home = ft_getenv("HOME");
+	path++;
+	pwd = ft_strjoin(home, "/", 1);
 	pwd = ft_strjoin(pwd, path, 1);
 	if (chdir(pwd) < 0)
 		return (cd_error(errno, path));
@@ -42,45 +54,34 @@ int	nav_relative(char *path, char **env)
 	return (EXIT_SUCCESS);
 }
 
-// cd /absolute/path
-int	nav_absolute(char *path, char **env)
-{
-	char	*pwd;
-
-	pwd = ft_getenv("PWD");
-	set_oldpwd(pwd, env);
-	if (chdir(path) < 0)
-		return (cd_error(-12, path));
-	set_pwd(path, env);
-	return (EXIT_SUCCESS);
-}
-
-// cd ~/from/home/dir
-int	nav_fromhome(char *path, char **env)
-{
-	nav_home(env);
-	path++;
-	return (nav_relative(++path, env));
-}
-
 int	cd_navigate(char *path, char **env)
 {
-	int	i;
+	char	*pwd;
+	int		error;
 
-	i = 0;
+	error = 0;
+	pwd = ft_getenv("PWD");
 	if (!path || !path[0] || !ft_strcmp(path, "~"))
-		return (nav_home(env));
+		error = nav_home(env);
+	else if (!ft_strcmp(path, ".") || !ft_strcmp(path, "./"))
+		error = nav_pwd(env);
 	else if (!ft_strcmp(path, "-"))
-		return (nav_oldpwd(env));
+		error = nav_oldpwd(env);
 	else if (path[0] == '~' && path[1])
-		return (nav_fromhome(path, env));
+		error = nav_fromhome(path, env);
 	else if (!ft_strcmp(path, ".."))
-		return (nav_back(env));
+		error = nav_back(pwd, env);
 	else if (!ft_strncmp("../", path, 3))
-		return (nav_backwards(path, env));
+		error = nav_backwards(path, env);
 	else if (is_absolute(path))
-		return (nav_absolute(path, env));
+		error = nav_absolute(path, env);
 	else
-		return (nav_relative(path, env));
-	return (EXIT_FAILURE);
+		error = nav_relative(pwd, path, env);
+	if (error)
+	{
+		free(pwd);
+		return (EXIT_FAILURE);
+	}
+	set_oldpwd(pwd, env);
+	return (EXIT_SUCCESS);
 }

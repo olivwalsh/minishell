@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 16:45:08 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/15 18:08:51 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,16 @@ int	update_fd(t_cmd *cmd)
 
 int    ms_builtin_parent(t_cmd *cmd, char **env)
 {
+	int	res;
+
+	res = EXIT_SUCCESS;
     if (cmd->builtin == BD_EXIT)
-        ms_exit(cmd->cmd, &cmd->args[1], env);
+        res = ms_exit(cmd->cmd, &cmd->args[1], env);
     else if (cmd->builtin == BD_CD)
-        ms_cd(cmd->cmd, cmd->args, env);
+        res = ms_cd(cmd->cmd, cmd->args, env);
     else if (cmd->builtin == BD_EXPORT)
-        ms_export(cmd->cmd, &cmd->args[1], env);
-    return (EXIT_SUCCESS);
+        res = ms_export(cmd->cmd, &cmd->args[1], env);
+    return (res);
 }
 
 int    ms_builtin_child(t_cmd *cmd, char **env)
@@ -75,7 +78,9 @@ int    ms_builtin_child(t_cmd *cmd, char **env)
 int    exec_cmd(t_cmdlst **cmds, char **env)
 {
     t_cmd    *cmd;
+	int		res;
 
+	res = EXIT_SUCCESS;
     cmd = (*cmds)->cmd;
     cmd->pid = fork();
     if (cmd->pid == -1)
@@ -92,11 +97,11 @@ int    exec_cmd(t_cmdlst **cmds, char **env)
     {
         if (cmd->builtin == BD_EXIT || cmd->builtin == BD_EXPORT || \
             cmd->builtin == BD_CD || cmd->builtin == BD_UNSET)
-            ms_builtin_parent(cmd, env);
+            res = ms_builtin_parent(cmd, env);
         if (cmd->fd_in > 0)
             close(cmd->fd_in);
         if (cmd->fd_out > 0)
             close(cmd->fd_out);
     }
-    return (EXIT_SUCCESS);
+    return (res);
 }

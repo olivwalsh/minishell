@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/12 18:53:25 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/15 19:05:05 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ int	main(int argc, char **argv, char **env)
 		{
 			ms_parser(data.tokens, &data.cmds);
 			// display_cmds();
-			ms_execute(&data.cmds, data.shell.env);
-			res = ms_wait(&data.cmds);
+			res = ms_execute(&data.cmds, data.shell.env);
+			if (res)
+				ms_wait(&data.cmds);
+			else
+				res = ms_wait(&data.cmds);
 		}
 		add_history(data.shell.input);
 		clean(&data);
