@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 15:52:10 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:21:00 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ int	set_fd(t_cmdlst **cmds)
 		exit(errno);
 	if ((*cmds)->cmd->fd_out == -1)
 		(*cmds)->cmd->fd_out = pipes[1];
+	else
+		close(pipes[1]);
 	tmp = (*cmds)->next->next;
 	if (tmp->cmd->fd_in == -1)
 		tmp->cmd->fd_in = pipes[0];
+	else
+		close(pipes[0]);
 	return (EXIT_SUCCESS);
 }
 
