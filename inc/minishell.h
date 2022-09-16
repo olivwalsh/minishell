@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 16:56:19 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 11:50:40 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*copy_quote(char *str, int *i);
 int		ms_expanser(t_token **token);
 int		expanse_var(t_token **tokens);
 int		expanse_quote(t_token *tokens, char *str);
-int		delete_quote(t_token **tokens);
+int		change_type(t_token **tokens);
 void	insert_token(t_token **tokens, t_token *new);
 char	*add_space(char *str);
 /*
@@ -95,6 +95,7 @@ void		add_cmdlst(t_cmdlst **lst, t_cmdlst	*new);
 void		cmd_setargs(t_token **token, t_cmd *new);
 char		*copy_cmd(t_token **token);
 char		*get_cmdpath(char *cmd);
+char		*delete_quotes(char *src);
 t_cmd		*create_cmd(t_token **token);
 t_cmd		*init_cmd(void);
 t_redir		*create_redir(void);

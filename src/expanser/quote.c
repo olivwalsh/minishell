@@ -6,11 +6,25 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:35 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/15 16:28:52 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 11:46:14 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	change_type(t_token **tokens)
+{
+	t_token	*tmp;
+
+	tmp = *tokens;
+	while (tmp && !g_global.data->err)
+	{
+		if (tmp->type == SGL_QUOTE || tmp->type == DBL_QUOTE)
+			tmp->type = WORD;
+		tmp = tmp->next;
+	}
+	return (EXIT_SUCCESS);
+}
 
 int	is_variable(char *str)
 {

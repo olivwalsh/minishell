@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 15:17:31 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 11:54:33 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char	*copy_cmd(t_token **token)
 		ft_strncpy(str, join, len);
 		free(join);
 	}
+	str = delete_quotes(str);
 	return (str);
 }
 

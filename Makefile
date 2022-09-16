@@ -25,8 +25,8 @@ INC_DIR		= inc/
 SRC_FILES	=	minishell.c \
 				init/init.c init/env.c\
 				lexer/lexer.c lexer/tokenize.c lexer/copy.c lexer/delimiter.c lexer/utils.c lexer/checker.c \
-				expanser/expanser.c expanser/var.c expanser/quote.c expanser/insert.c expanser/delete.c\
-				parser/parser.c parser/init.c parser/cmd.c parser/redir.c parser/utils.c parser/path.c parser/file.c \
+				expanser/expanser.c expanser/var.c expanser/quote.c expanser/insert.c \
+				parser/parser.c parser/init.c parser/cmd.c parser/delete.c parser/redir.c parser/utils.c parser/path.c parser/file.c \
 				exec/execute.c exec/process.c exec/wait.c \
 				utils/is.c utils/display.c utils/error.c utils/utils.c utils/string.c utils/split.c utils/get_next_line.c \
 				builtins/builtins.c builtins/ms_exit.c builtins/ms_env.c builtins/ms_echo.c builtins/ms_cd.c \

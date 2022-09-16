@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:12:16 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 15:12:59 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 11:53:22 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_delim(t_token *token)
 int	ft_strtoken(char *str)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (str && str[i])

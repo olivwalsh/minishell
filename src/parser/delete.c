@@ -5,23 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 11:31:09 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/15 17:06:40 by foctavia         ###   ########.fr       */
+/*   Created: 2022/09/16 11:48:08 by foctavia          #+#    #+#             */
+/*   Updated: 2022/09/16 13:49:49 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*non_quote(char *dest, char *src)
+static char	*non_quote(char *dest, char *src, int type)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = 0;
 	while (src && src[i])
 	{
-		if (src[i] == '\'' || src[i] == '\"')
+		if (src[i] == type)
 			i++;
 		else
 			dest[j++] = src[i++];
@@ -30,30 +30,49 @@ char	*non_quote(char *dest, char *src)
 	return (dest);
 }
 
-int	delete_quote(t_token **tokens)
+int	quote_exist(char *src)
+{
+	int	i;
+	int	j;
+	int	type;
+
+	i = 0;
+	j = 0;
+	type = 0;
+	while (src && src[i])
+	{
+		if (src[i] == DQUOTE || src[i] == SQUOTE)
+		{
+			j = i;
+			j++;
+			while (src && src[j])
+			{
+				if (src[j] == src[i])
+					type = src[j];
+				j++;
+			}
+			break ;
+		}
+		i++;
+	}
+	return (type);
+}
+
+char	*delete_quotes(char *src)
 {
 	char	*dest;
-	char	*src;
-	t_token	*tmp;
-
-	tmp = *tokens;
-	while (tmp && !g_global.data->err)
+	int		type;
+	
+	type = quote_exist(src);
+	if (!type)
+		return (src);
+	dest = malloc(sizeof(char) * (ft_strlen(src) - 1));
+	if (!dest)
 	{
-		if (tmp->type == SGL_QUOTE || tmp->type == DBL_QUOTE)
-		{
-			src = tmp->value;
-			src++;
-			dest = malloc(sizeof(char) * (ft_strlen(tmp->value) - 1));
-			if (!dest)
-				return (err_msg(-2, 0));
-			dest = non_quote(dest, src);
-			if (!dest)
-				tmp->value = NULL;
-			free(tmp->value);
-			tmp->value = dest;
-			tmp->type = WORD;
-		}
-		tmp = tmp->next;
+		free(src);
+		return (err_msg_str(-2, NULL));
 	}
-	return (EXIT_SUCCESS);
+	dest = non_quote(dest, src, type);
+	free(src);
+	return (dest);
 }

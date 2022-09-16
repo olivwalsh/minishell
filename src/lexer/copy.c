@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:58 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/15 17:28:11 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:10:19 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,5 @@ char	*copy_quote(char *str, int *i)
 		return (err_msg_str(-2, 0));
 	value = ft_strncpy(value, str, j + 1);
 	*i += j + 1;
-	printf("val is |%s|\n", value);
 	return (value);
 }
