@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 15:44:15 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/16 14:33:00 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 19:25:11 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,22 @@ char	**dup_env(char **env)
 	return (copy);
 }
 
+void	print_line(char *copy)
+{
+	int	i;
+
+	i = 0;
+	printf("export ");
+	while (copy && copy[i])
+	{
+		printf("%c", copy[i]);
+		if (copy[i] == '=')
+			printf("\"");
+		i++;
+	}
+	printf("\"\n");
+}
+
 int	display_export(char **env)
 {
 	int		i;
@@ -89,7 +105,7 @@ int	display_export(char **env)
 	i = 0;
 	while (copy && copy[i])
 	{
-		printf("export %s\n", copy[i]);
+		print_line(copy[i]);
 		i++;
 	}
 	free(copy);
