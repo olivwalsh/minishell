@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:35 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/16 11:46:14 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:12:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*get_expanse(t_token *tokens, char *str, char *val, int *i)
 {
 	char	*exp;
 	int		j;
-	
+
 	j = *i;
 	exp = NULL;
 	exp = ft_strjoin(exp, str, 1);

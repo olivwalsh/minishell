@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 17:17:19 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:30:24 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,16 @@ int	main(int argc, char **argv, char **env)
 	res = 0;
 	while (1)
 	{
-		if (!res)
-			data.shell.input = readline(SUCESS_PROMPT);
-		else
+		if (res)
 			data.shell.input = readline(FAIL_PROMPT);
+		else
+			data.shell.input = readline(SUCESS_PROMPT);
 		if (data.shell.input[0] && !ms_lexer(data.shell.input, &data.tokens)
-			&& !ms_expanser(&data.tokens))
+			&& !ms_expanser(&data.tokens, res))
 		{
-			// display_tokens();
 			ms_parser(data.tokens, &data.cmds);
 			res = ms_execute(&data.cmds, data.shell.env);
-			if (res)
-				ms_wait(&data.cmds);
-			else
-				res = ms_wait(&data.cmds);
+			res = ms_wait(&data.cmds, res);
 		}
 		add_history(data.shell.input);
 		clean(&data);
