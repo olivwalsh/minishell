@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 19:10:38 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/16 13:35:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ int	ms_cd(char *cmd, char **args, char **env)
 		return (cd_error(-11, NULL));
 	else
 		res = cd_navigate(args[1], env);
-	printf("res = %d\n", res);
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:01:20 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 14:20:19 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/16 13:43:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	cd_error(int err, char *path)
 {
-	write(2, "minishell: ", 11);
 	write(2, "cd: ", 4);
 	write(2, path, ft_strlen(path));
 	write(2, ": ", 2);

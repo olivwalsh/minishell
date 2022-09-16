@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 18:08:51 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/16 13:42:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int    ms_builtin_child(t_cmd *cmd, char **env)
     else if (cmd->builtin == BD_ECHO)
         ms_echo(cmd->cmd, cmd->args);
 	else if (cmd->builtin == BD_PWD)
-		ms_pwd(cmd->cmd, cmd->args, env);
+		exit(ms_pwd(cmd->cmd, cmd->args, env));
     else if (cmd->builtin == BD_EXPORT)
         exit(EXIT_SUCCESS);
     else if (cmd->builtin == BD_UNSET)
