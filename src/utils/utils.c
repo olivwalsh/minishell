@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:04:23 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 14:11:55 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:14:31 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*ft_strstr(char *str, char *to_find)
-{
-	int	i;
-
-	i = 0;
-	if (to_find[i] == '\0')
-		return (str);
-	if (str[i] == '\0')
-		return (NULL);
-	while (str[i] && str[i] == to_find[i])
-	{
-		i++;
-		if (to_find[i] == '\0')
-			return (str + i);
-	}
-	return (NULL);
-}
 
 char	*create_result(char *res)
 {
@@ -85,44 +67,9 @@ int	ft_tablen(char **table)
 	return (i);
 }
 
-char	*ft_strchr(char *str, int c)
-{
-	int		i;
-
-	i = 0;
-	while (str && str[i])
-	{
-		if (str[i] == c)
-			return (str + i);
-		i++;
-	}
-	return (NULL);
-}
-
 int	ft_isdigit(char c)
 {
 	if (c < '0' || c > '9')
 		return (0);
 	return (1);
-}
-
-char	*ft_strncpy(char *dst, char *src, int n)
-{
-	int	i;
-
-	i = 0;
-	if (!src || !dst)
-		return (NULL);
-	while (i < n && src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	while (i < n)
-	{
-		dst[i] = '\0';
-		i++;
-	}
-	return (dst);
 }

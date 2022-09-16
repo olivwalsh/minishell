@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 14:06:13 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:07:36 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ char	*copy_quote(char *str, int *i);
 ** EXPANSER
 **
 */
-int		ms_expanser(t_token **token);
+int		ms_expanser(t_token **tokens, int exstatus);
+int		expanse_exstatus(t_token **tokens, int exstatus);
 int		expanse_var(t_token **tokens);
 int		expanse_quote(t_token *tokens, char *str);
 int		change_type(t_token **tokens);
@@ -106,9 +107,11 @@ t_cmdlst	*create_cmdlst(int type, t_cmd *cmd);
 **
 */
 int			ms_execute(t_cmdlst **cmds, char **env);
-int			ms_wait(t_cmdlst **cmds);
+int			ms_wait(t_cmdlst **cmds, int res);
 int			exec_cmd(t_cmdlst **cmds, char **env);
 int			set_fd(t_cmdlst **cmds);
+int			close_fd(t_cmd *cmd);
+int			update_fd(t_cmd *cmd);
 /*
 **
 ** CLEAN
@@ -134,6 +137,7 @@ int		err_msg_1(int code, char c);
 int		err_bd(int code, char *func, char *arg);
 char	*get_next_line(int fd);
 char	*err_msg_str(int code, char *str);
+char	*ft_itoa(int n);
 char	*ft_getenv(char *name);
 char	*ft_strchr(char *str, int c);
 char	*ft_strstr(char *str, char *to_find);

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:24:12 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 09:24:19 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/16 16:12:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_alpha(char c)
 	return (1);
 }
 
-int is_alnum(char c)
+int	is_alnum(char c)
 {
 	if (is_alpha(c) || (c >= '0' && c <= '9'))
 		return (1);

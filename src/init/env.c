@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:56:15 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/10 08:46:18 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:14:48 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	count_substr(char **env)
 {
 	int	i;
-	
+
 	i = 0;
 	while (env && env[i])
 		i++;
@@ -34,7 +34,7 @@ int	copy_substr(char **new_env, char **env, int substr)
 	int	i;
 
 	i = 0;
-	while(env[i] && i < substr)
+	while (env[i] && i < substr)
 	{
 		new_env[i] = malloc(sizeof(char) * (ft_strlen(env[i]) + 1));
 		if (!new_env[i])
