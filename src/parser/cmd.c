@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 18:29:37 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/13 10:11:15 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,19 +96,19 @@ char	*copy_cmd(t_token **token)
 
 void	check_builtin(t_cmd *new)
 {
-	if (!ft_strcmp("echo", new->cmd))
+	if (!ft_strcmp(new->cmd, "echo"))
 		new->builtin = BD_ECHO;
-	else if (!ft_strcmp("cd", new->cmd))
+	else if (!ft_strcmp(new->cmd, "cd"))
 		new->builtin = BD_CD;
-	else if (!ft_strcmp("pwd", new->cmd))
+	else if (!ft_strcmp(new->cmd, "pwd"))
 		new->builtin = BD_PWD;
-	else if (!ft_strcmp("export", new->cmd))
+	else if (!ft_strcmp(new->cmd, "export"))
 		new->builtin = BD_EXPORT;
-	else if (!ft_strcmp("unset", new->cmd))
+	else if (!ft_strcmp(new->cmd, "unset"))
 		new->builtin = BD_UNSET;
-	else if (!ft_strcmp("env", new->cmd))
+	else if (!ft_strcmp(new->cmd, "env"))
 		new->builtin = BD_ENV;
-	else if (!ft_strcmp("exit", new->cmd))
+	else if (!ft_strcmp(new->cmd, "exit"))
 		new->builtin = BD_EXIT;
 	else
 		new->builtin = 0;

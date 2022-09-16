@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 19:07:59 by owalsh           ###   ########.fr       */
+/*   Created: 2022/09/13 17:01:20 by owalsh            #+#    #+#             */
+/*   Updated: 2022/09/16 13:43:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ms_execute(t_cmdlst **cmds, char **env)
+int	cd_error(int err, char *path)
 {
-	int	res;
-
-	res = EXIT_SUCCESS;
-	if (!env)
-		return (EXIT_FAILURE);
-	if ((*cmds)->next && (*cmds)->next->type == PIPE)
-		set_fd(cmds);
-	if ((*cmds)->type == WORD)
-		res = exec_cmd(cmds, env);
-	if ((*cmds)->next)
-		res = ms_execute(&(*cmds)->next, env);
-	return (res);
+	write(2, "cd: ", 4);
+	write(2, path, ft_strlen(path));
+	write(2, ": ", 2);
+	write(2, strerror(err), ft_strlen(strerror(err)));
+	write(2, "\n", 1);
+	return (EXIT_FAILURE);
 }

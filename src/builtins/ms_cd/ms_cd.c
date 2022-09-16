@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   ms_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 19:07:59 by owalsh           ###   ########.fr       */
+/*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
+/*   Updated: 2022/09/16 13:35:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ms_execute(t_cmdlst **cmds, char **env)
+int	ms_cd(char *cmd, char **args, char **env)
 {
-	int	res;
+	char	*cwd;
+	int		res;
 
 	res = EXIT_SUCCESS;
-	if (!env)
+	cwd = NULL;
+	(void)env;
+	if (ft_strcmp("cd", cmd))
 		return (EXIT_FAILURE);
-	if ((*cmds)->next && (*cmds)->next->type == PIPE)
-		set_fd(cmds);
-	if ((*cmds)->type == WORD)
-		res = exec_cmd(cmds, env);
-	if ((*cmds)->next)
-		res = ms_execute(&(*cmds)->next, env);
+	if (args && args[1] && args[2])
+		return (cd_error(-11, NULL));
+	else
+		res = cd_navigate(args[1], env);
 	return (res);
 }
