@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_echo.c                                          :+:      :+:    :+:   */
+/*   ms_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/09 11:21:20 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 14:06:57 by foctavia         ###   ########.fr       */
+/*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
+/*   Updated: 2022/09/16 13:35:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int    ms_echo(char *cmd, char **args)
+int	ms_cd(char *cmd, char **args, char **env)
 {
-	int	i;
-	int	nl;
+	char	*cwd;
+	int		res;
 
-	nl = 1;
-	if (ft_strcmp("echo", cmd))
+	res = EXIT_SUCCESS;
+	cwd = NULL;
+	(void)env;
+	if (ft_strcmp("cd", cmd))
 		return (EXIT_FAILURE);
-	i = 1;
-	if (args[1] && !ft_strcmp(args[1], "-n"))
-	{
-		i = 2;
-		nl = 0;
-	}
-	while (args && args[i])
-	{
-		printf("%s ", args[i]);
-		i++;
-	}
-	if (nl)
-		printf("\n");
-	return (EXIT_SUCCESS);
+	if (args && args[1] && args[2])
+		return (cd_error(-11, NULL));
+	else
+		res = cd_navigate(args[1], env);
+	return (res);
 }

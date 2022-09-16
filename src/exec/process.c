@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 16:21:00 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:18:21 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 int	ms_builtin_parent(t_cmd *cmd, char **env)
 {
+	int	res;
+
+	res = EXIT_SUCCESS;
 	if (cmd->builtin == BD_EXIT)
-		ms_exit(cmd->cmd, &cmd->args[1], env);
-	else if (cmd->builtin == BD_CD)
-		ms_cd(cmd->cmd, cmd->args, env);
-	else if (cmd->builtin == BD_EXPORT)
-		ms_export(cmd->cmd, &cmd->args[1], env);
+        res = ms_exit(cmd->cmd, &cmd->args[1], env);
+    else if (cmd->builtin == BD_CD)
+        res = ms_cd(cmd->cmd, cmd->args, env);
+    else if (cmd->builtin == BD_EXPORT)
+        res = ms_export(cmd->cmd, &cmd->args[1], env);
 	else if (cmd->builtin == BD_UNSET)
-		ms_unset(cmd->cmd, &cmd->args[1], env);
-	return (EXIT_SUCCESS);
+		res = ms_unset(cmd->cmd, &cmd->args[1], env);
+	return (res);
 }
 
 int	ms_builtin_child(t_cmd *cmd, char **env)
@@ -34,7 +37,9 @@ int	ms_builtin_child(t_cmd *cmd, char **env)
 	else if (cmd->builtin == BD_ECHO)
 		ms_echo(cmd->cmd, cmd->args);
 	else if (cmd->builtin == BD_CD)
-		ms_cd(cmd->cmd, cmd->args, env);
+		exit(ms_cd(cmd->cmd, cmd->args, env));
+	else if (cmd->builtin == BD_PWD)
+		exit(ms_pwd(cmd->cmd, cmd->args, env));
 	else if (cmd->builtin == BD_EXPORT)
 		exit(EXIT_SUCCESS);
 	else if (cmd->builtin == BD_UNSET)
@@ -78,31 +83,33 @@ int	update_fd(t_cmd *cmd)
 	return (EXIT_SUCCESS);
 }
 
-int	exec_cmd(t_cmdlst **cmds, char **env)
+int    exec_cmd(t_cmdlst **cmds, char **env)
 {
-	t_cmd	*cmd;
+    t_cmd    *cmd;
+	int		res;
 
-	cmd = (*cmds)->cmd;
-	cmd->pid = fork();
-	if (cmd->pid == -1)
-		exit(errno);
-	if (cmd->pid == 0)
-	{
-		update_fd(cmd);
-		if (cmd->builtin)
-			exit(ms_builtin_child(cmd, env));
-		if (execve(cmd->cmd, cmd->args, env) < 0)
-			exit(errno);
-	}
-	else
-	{
-		if (cmd->builtin == BD_EXIT || cmd->builtin == BD_EXPORT || \
-			cmd->builtin == BD_CD || cmd->builtin == BD_UNSET)
-			ms_builtin_parent(cmd, env);
-		if (cmd->fd_in > 0)
-			close(cmd->fd_in);
-		if (cmd->fd_out > 0)
-			close(cmd->fd_out);
-	}
-	return (EXIT_SUCCESS);
+	res = EXIT_SUCCESS;
+    cmd = (*cmds)->cmd;
+    cmd->pid = fork();
+    if (cmd->pid == -1)
+        exit(errno);
+    if (cmd->pid == 0)
+    {
+        update_fd(cmd);
+        if (cmd->builtin)
+            exit(ms_builtin_child(cmd, env));
+        if (execve(cmd->cmd, cmd->args, env) < 0)
+            exit(errno);
+    }
+    else
+    {
+        if (cmd->builtin == BD_EXIT || cmd->builtin == BD_EXPORT || \
+            cmd->builtin == BD_CD || cmd->builtin == BD_UNSET)
+            res = ms_builtin_parent(cmd, env);
+        if (cmd->fd_in > 0)
+            close(cmd->fd_in);
+        if (cmd->fd_out > 0)
+            close(cmd->fd_out);
+    }
+    return (res);
 }
