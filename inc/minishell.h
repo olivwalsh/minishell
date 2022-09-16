@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 14:06:13 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 15:16:01 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void		add_cmdlst(t_cmdlst **lst, t_cmdlst	*new);
 void		cmd_setargs(t_token **token, t_cmd *new);
 char		*copy_cmd(t_token **token);
 char		*get_cmdpath(char *cmd);
-char		*delete_quotes(char *src);
+char		*delete_quotes(char *src, char *rest);
 t_cmd		*create_cmd(t_token **token);
 t_cmd		*init_cmd(void);
 t_redir		*create_redir(void);
@@ -154,8 +154,9 @@ int		ms_exit(char *cmd, char **args, char **env);
 int		ms_env(char *cmd, char **args, char ** env);
 int		ms_export(char *cmd, char **args, char **env);
 int		ms_unset(char *cmd, char **args, char **env);
-int		display_export(char **env);
 int		ms_pwd(char *cmd, char **args, char **env);
+int		display_env(char **env);
+int		display_export(char **env);
 int		cd_navigate(char *path, char **env);
 int		set_pwd(char *newpath, char **env);
 int		set_oldpwd(char *newpath, char **env);
@@ -169,6 +170,5 @@ int		nav_relative(char *origin, char *path, char **env);
 int		nav_back(char *origin, char **env);
 int		nav_home(char **env);
 int		nav_pwd(char **env);
-void	display_env(char **env);
 
 #endif

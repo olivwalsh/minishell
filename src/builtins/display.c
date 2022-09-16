@@ -6,11 +6,27 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 15:44:15 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/13 15:58:10 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:33:00 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	display_env(char **env)
+{
+	int	i;
+
+	if (env)
+	{
+		i = 0;
+		while (env && env[i])
+		{
+			printf("%s\n", env[i]);
+			i++;
+		}
+	}
+	return (EXIT_SUCCESS);
+}
 
 void	swap_env(char **env1, char **env2)
 {

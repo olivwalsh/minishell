@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 14:11:47 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:26:32 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char	*copy_cmd(t_token **token)
 	int		len;
 
 	len = count_words(token);
-	str = NULL;
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (err_msg_str(-2, NULL));
@@ -91,7 +90,7 @@ char	*copy_cmd(t_token **token)
 		ft_strncpy(str, join, len);
 		free(join);
 	}
-	str = delete_quotes(str);
+	str = delete_quotes(str, str);
 	return (str);
 }
 
@@ -118,10 +117,8 @@ void	check_builtin(t_cmd *new)
 void	cmd_setargs(t_token **token, t_cmd *new)
 {
 	int		i;
-	char	*args;
 	t_token	*tmp;
 
-	args = NULL;
 	if (*token && !new->cmd)
 	{
 		new->cmd = copy_cmd(token);
@@ -144,5 +141,4 @@ void	cmd_setargs(t_token **token, t_cmd *new)
 		*token = (*token)->next;
 	}
 	new->args[i] = NULL;
-	free(args);
 }

@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:48:08 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/16 13:49:49 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:18:24 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,27 @@ static char	*non_quote(char *dest, char *src, int type)
 	return (dest);
 }
 
-int	quote_exist(char *src)
+int	quote_exist(char *src, int *j)
 {
 	int	i;
-	int	j;
 	int	type;
 
 	i = 0;
-	j = 0;
+	*j = 0;
 	type = 0;
 	while (src && src[i])
 	{
 		if (src[i] == DQUOTE || src[i] == SQUOTE)
 		{
-			j = i;
-			j++;
-			while (src && src[j])
+			*j = i + 1;
+			while (src && src[*j])
 			{
-				if (src[j] == src[i])
-					type = src[j];
-				j++;
+				if (src[*j] == src[i])
+				{
+					type = src[(*j)++];
+					break ;
+				}
+				(*j)++;
 			}
 			break ;
 		}
@@ -58,12 +59,14 @@ int	quote_exist(char *src)
 	return (type);
 }
 
-char	*delete_quotes(char *src)
+char	*delete_quotes(char *src, char *rest)
 {
 	char	*dest;
 	int		type;
-	
-	type = quote_exist(src);
+	int		i;
+	int		j;
+
+	type = quote_exist(rest, &j);
 	if (!type)
 		return (src);
 	dest = malloc(sizeof(char) * (ft_strlen(src) - 1));
@@ -73,6 +76,8 @@ char	*delete_quotes(char *src)
 		return (err_msg_str(-2, NULL));
 	}
 	dest = non_quote(dest, src, type);
+	if (quote_exist(&rest[j], &i))
+		dest = delete_quotes(dest, &dest[j - 2]);
 	free(src);
 	return (dest);
 }
