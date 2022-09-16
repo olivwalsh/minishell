@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/16 11:46:36 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 15:06:42 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	quote_expanser(t_token **tokens)
 	return (res);
 }
 
-static int	var_expanser(t_token **tokens)
+static int	var_expanser(t_token **tokens, int exstatus)
 {
 	int			res;
 	t_token		*tmp;
@@ -37,6 +37,8 @@ static int	var_expanser(t_token **tokens)
 	tmp = *tokens;
 	while (tmp && !g_global.data->err)
 	{
+		if (tmp->type == VAR && !ft_strncmp(tmp->value, "$?", 2))
+			res = expanse_exstatus(&tmp, exstatus);
 		if (tmp->type == VAR && tmp->var_stop > -1)
 			res = expanse_var(&tmp);
 		if (!tmp)
@@ -47,15 +49,15 @@ static int	var_expanser(t_token **tokens)
 	while (tmp)
 	{
 		if (tmp->type == VAR && tmp->var_stop > -1)
-			res = var_expanser(tokens);
+			res = var_expanser(tokens, exstatus);
 		tmp = tmp->next;
 	}
 	return (res);
 }
 
-int	ms_expanser(t_token **tokens)
+int	ms_expanser(t_token **tokens, int exstatus)
 {
-	if (!var_expanser(tokens))
+	if (!var_expanser(tokens, exstatus))
 	{
 		if (!quote_expanser(tokens))
 		{

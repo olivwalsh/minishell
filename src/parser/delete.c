@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:48:08 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/16 13:49:49 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:17:34 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*delete_quotes(char *src)
 {
 	char	*dest;
 	int		type;
-	
+
 	type = quote_exist(src);
 	if (!type)
 		return (src);

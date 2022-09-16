@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ms_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:20 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 14:06:57 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:19:13 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int    ms_echo(char *cmd, char **args)
+int	ms_echo(char *cmd, char **args)
 {
 	int	i;
 	int	nl;

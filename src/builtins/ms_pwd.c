@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:59:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 13:52:01 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/16 14:49:53 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ int	ms_pwd(char *cmd, char **args, char **env)
 	cwd = NULL;
 	cwd = getcwd(cwd, 0);
 	if (!cwd)
+	{
+		free(cwd);
 		return (pwd_error(errno));
+	}
 	printf("%s\n", cwd);
+	free(cwd);
 	return (EXIT_SUCCESS);
 }

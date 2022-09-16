@@ -6,13 +6,13 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:50:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/12 17:53:41 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/16 16:02:01 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ms_wait(t_cmdlst **cmds)
+int	ms_wait(t_cmdlst **cmds, int res)
 {
 	int			error;
 	int			exit_status;
@@ -34,5 +34,5 @@ int	ms_wait(t_cmdlst **cmds)
 		}
 		tmp = tmp->next;
 	}
-	return (EXIT_SUCCESS);
+	return (res);
 }

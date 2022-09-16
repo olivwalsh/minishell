@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/15 18:58:29 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 15:44:09 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,13 @@ int	expanse_var(t_token **tokens)
 	free(str);
 	check_new(new);
 	insert_token(tokens, new);
+	return (EXIT_SUCCESS);
+}
+
+int	expanse_exstatus(t_token **tokens, int exstatus)
+{
+	free((*tokens)->value);
+	(*tokens)->value = ft_itoa(exstatus);
+	(*tokens)->type = WORD;
 	return (EXIT_SUCCESS);
 }
