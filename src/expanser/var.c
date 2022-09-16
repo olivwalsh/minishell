@@ -6,11 +6,31 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/06 17:09:35 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:58:29 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*add_space(char *str)
+{
+	char	*new;
+	int		i;
+
+	i = 0;
+	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	if (!new)
+		err_msg_str(-2, NULL);
+	while (str && str[i])
+	{
+		new[i] = str[i];
+		i++;
+	}
+	new[i] = ' ';
+	new[i + 1] = '\0';
+	free(str);
+	return (new);
+}
 
 static void	check_new(t_token *new)
 {
@@ -20,7 +40,11 @@ static void	check_new(t_token *new)
 	while (tmp)
 	{
 		if (tmp->value[0] == '$')
+		{
 			tmp->var_stop = -1;
+			tmp->type = WORD;
+			tmp->value = add_space(tmp->value);
+		}
 		tmp = tmp->next;
 	}
 }
@@ -58,6 +82,7 @@ int	expanse_var(t_token **tokens)
 	ms_lexer(str, &new);
 	if (!new)
 		return (EXIT_FAILURE);
+	free(str);
 	check_new(new);
 	insert_token(tokens, new);
 	return (EXIT_SUCCESS);

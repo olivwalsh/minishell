@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:04:23 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/13 15:24:51 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/16 14:11:55 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,15 @@ int	ft_tablen(char **table)
 	return (i);
 }
 
-int	*ft_tabint(int *table, int c)
+char	*ft_strchr(char *str, int c)
 {
 	int		i;
 
 	i = 0;
-	while (table && table[i] != 0 && table[i] != -2)
+	while (str && str[i])
 	{
-		if (table[i] == c)
-			return (table + i);
+		if (str[i] == c)
+			return (str + i);
 		i++;
 	}
 	return (NULL);

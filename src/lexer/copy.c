@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:58 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/07 23:34:24 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:10:19 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,19 @@ char	*copy_quote(char *str, int *i)
 
 	j = 1;
 	value = NULL;
-	while (str && str[j] && str[j] != str[0])
+	while (str && str[j])
+	{
+		if (str[j] == str[0])
+		{
+			while (str && str[j + 1] && str[j + 1] == ' ')
+				j++;
+			break ;
+		}
 		j++;
+	}
 	value = malloc(sizeof(char) * (j + 2));
 	if (!value)
-	{
-		err_msg(-2, 0);
-		return (NULL);
-	}
+		return (err_msg_str(-2, 0));
 	value = ft_strncpy(value, str, j + 1);
 	*i += j + 1;
 	return (value);

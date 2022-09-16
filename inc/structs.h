@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/12 14:56:08 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/14 22:18:41 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ typedef struct s_token
 	char			*value;
 	int				type;
 	int				var_stop;
-	int				*qts_stop;
-	int				idx;
 	struct s_token	*prev;
 	struct s_token	*next;
 }				t_token;

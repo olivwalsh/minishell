@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 16:40:36 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/16 14:06:13 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int		copy_env(t_data *data, char **env);
 */
 int		ms_lexer(char *str, t_token **tokens);
 int		tokenize(t_token **tokens, char *str, int *i, int type);
-int		quote_init(t_token *tokens);
 int		lexer_checker(t_token *head);
 int		is_delimiter(char *str);
 int		is_delimiter_spc(char *str);
@@ -73,9 +72,10 @@ char	*copy_quote(char *str, int *i);
 */
 int		ms_expanser(t_token **token);
 int		expanse_var(t_token **tokens);
-int		expanse_quote(t_token *tokens, char *str, int idx);
-int		delete_quote(t_token **tokens);
+int		expanse_quote(t_token *tokens, char *str);
+int		change_type(t_token **tokens);
 void	insert_token(t_token **tokens, t_token *new);
+char	*add_space(char *str);
 /*
 **
 ** PARSER
@@ -90,10 +90,12 @@ int			read_file(char *file);
 int			read_stdin(char *delimiter);
 int			create_file(char *file);
 int			append_file(char *file);
+int			err_cmd(char *cmd);
 void		add_cmdlst(t_cmdlst **lst, t_cmdlst	*new);
 void		cmd_setargs(t_token **token, t_cmd *new);
 char		*copy_cmd(t_token **token);
 char		*get_cmdpath(char *cmd);
+char		*delete_quotes(char *src);
 t_cmd		*create_cmd(t_token **token);
 t_cmd		*init_cmd(void);
 t_redir		*create_redir(void);
@@ -123,16 +125,17 @@ void	free_tab(char **table);
 int 	is_alnum(char c);
 int		is_alpha(char c);
 int		ft_tablen(char **table);
-int		*ft_tabint(int *t, int c);
 int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
 int		err_msg(int err, char c);
 int		err_msg_1(int code, char c);
+int		err_bd(int code, char *func, char *arg);
 char	*get_next_line(int fd);
 char	*err_msg_str(int code, char *str);
 char	*ft_getenv(char *name);
+char	*ft_strchr(char *str, int c);
 char	*ft_strstr(char *str, char *to_find);
 char	*ft_strjoin(char *s1, char *s2, int clean);
 char	*ft_strncpy(char *dst, char *src, int n);
@@ -150,6 +153,8 @@ int		ms_echo(char *cmd, char **args);
 int		ms_exit(char *cmd, char **args, char **env);
 int		ms_env(char *cmd, char **args, char ** env);
 int		ms_export(char *cmd, char **args, char **env);
+int		ms_unset(char *cmd, char **args, char **env);
+int		display_export(char **env);
 int		ms_pwd(char *cmd, char **args, char **env);
 int		cd_navigate(char *path, char **env);
 int		set_pwd(char *newpath, char **env);
@@ -164,5 +169,6 @@ int		nav_relative(char *origin, char *path, char **env);
 int		nav_back(char *origin, char **env);
 int		nav_home(char **env);
 int		nav_pwd(char **env);
+void	display_env(char **env);
 
 #endif

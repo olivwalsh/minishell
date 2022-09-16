@@ -4,3 +4,8 @@ minishell
 .vscode/*
 outfile
 infile
+.DS_Store
+a
+b
+c
+d

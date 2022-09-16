@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/10 00:30:57 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/14 22:50:48 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ void	free_tokens(t_token **tokens)
 			{
 				free(tmp->value);
 				tmp->value = NULL;
-			}
-			if (tmp->qts_stop)
-			{
-				free(tmp->qts_stop);
-				tmp->qts_stop = NULL;
 			}
 			free(tmp);
 			tmp = NULL;
