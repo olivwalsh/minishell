@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:52:25 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 19:12:13 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/16 19:32:33 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,11 @@ int	nav_fromhome(char *path, char **env)
 	return (EXIT_SUCCESS);
 }
 
-int	cd_navigate(char *path, char **env)
+int	cd_navigate(char *path, char **env, char *pwd)
 {
-	char	*pwd;
 	int		error;
 
 	error = 0;
-	pwd = ft_getenv("PWD");
 	if (!path || !path[0] || !ft_strcmp(path, "~"))
 		error = nav_home(env);
 	else if (!ft_strcmp(path, ".") || !ft_strcmp(path, "./"))
@@ -77,11 +75,5 @@ int	cd_navigate(char *path, char **env)
 		error = nav_absolute(path, env);
 	else
 		error = nav_relative(pwd, path, env);
-	if (error)
-	{
-		free(pwd);
-		return (EXIT_FAILURE);
-	}
-	set_oldpwd(pwd, env);
-	return (EXIT_SUCCESS);
+	return (error);
 }

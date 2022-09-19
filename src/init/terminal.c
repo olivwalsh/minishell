@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_cd.c                                            :+:      :+:    :+:   */
+/*   terminal.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 19:33:36 by owalsh           ###   ########.fr       */
+/*   Created: 2022/09/19 13:57:12 by owalsh            #+#    #+#             */
+/*   Updated: 2022/09/19 14:12:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ms_cd(char *cmd, char **args, char **env)
+void	init_terminal(void)
 {
-	int		res;
-	char	*pwd;
-
-	res = EXIT_SUCCESS;
-	(void)cmd;
-	pwd = ft_getenv("PWD");
-	if (args && args[1] && args[2])
-		return (cd_error(-11, NULL));
-	else
-		res = cd_navigate(args[1], env, pwd);
-	if (res)
-	{
-		free(pwd);
-		return (EXIT_FAILURE);
-	}
-	set_oldpwd(pwd, env);
-	return (res);
+	// get attribute to set as default -> to put back default ermios at the end 
+	// change attributes as required
+	// manage signals
 }
