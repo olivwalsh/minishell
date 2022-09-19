@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 17:29:51 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/16 19:33:16 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ int		ms_unset(char *cmd, char **args, char **env);
 int		ms_pwd(char *cmd, char **args, char **env);
 int		display_env(char **env);
 int		display_export(char **env);
-int		cd_navigate(char *path, char **env);
+int		cd_navigate(char *path, char **env, char *pwd);
 int		set_pwd(char *newpath, char **env);
 int		set_oldpwd(char *newpath, char **env);
 int		cd_error(int err, char *path);
