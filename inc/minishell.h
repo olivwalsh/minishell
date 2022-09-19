@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 19:33:16 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/19 16:43:54 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <errno.h>
+# include <signal.h>
 
 // MS LIBRARIES
 # include "structs.h"
@@ -45,6 +46,7 @@ extern t_global	g_global;
 */
 int		ms_init(t_data *data, char **argv, char **env);
 int		copy_env(t_data *data, char **env);
+void	init_terminal(void);
 /*
 **
 ** LEXER
