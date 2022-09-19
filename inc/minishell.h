@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 17:29:51 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/19 14:01:35 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ t_cmdlst	*create_cmdlst(int type, t_cmd *cmd);
 **
 */
 int			ms_execute(t_cmdlst **cmds, char **env);
+int			ms_bracket(t_cmdlst **cmds, char **env);
 int			ms_wait(t_cmdlst **cmds, int res);
 int			exec_cmd(t_cmdlst **cmds, char **env);
 int			set_fd(t_cmdlst **cmds);
