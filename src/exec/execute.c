@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 14:07:18 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/19 14:00:25 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,15 @@ int	ms_execute(t_cmdlst **cmds, char **env)
 		set_fd(cmds);
 	if ((*cmds)->type == WORD)
 		res = exec_cmd(cmds, env);
-	if ((*cmds)->next)
+	if ((*cmds)->type == OPEN_BRK)
+		res = ms_bracket(&(*cmds)->next, env);
+	else if ((*cmds)->next && (*cmds)->next->type == OPEN_BRK)
+		res = ms_bracket(&(*cmds)->next->next, env);
+	if ((*cmds)->next && (*cmds)->next->type == OPERAND && !res)
+		res = ms_execute(&(*cmds)->next, env);
+	else if ((*cmds)->next && (*cmds)->next->type == OPEROR && res)
+		res = ms_execute(&(*cmds)->next, env);
+	else if ((*cmds)->next && (*cmds)->next->type != OPEROR && (*cmds)->next->type != OPERAND)
 		res = ms_execute(&(*cmds)->next, env);
 	return (res);
 }
