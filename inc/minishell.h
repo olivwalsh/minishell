@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/19 16:43:54 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/20 16:55:10 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <sys/types.h>
 # include <errno.h>
 # include <signal.h>
+# include <dirent.h>
 
 // MS LIBRARIES
 # include "structs.h"
@@ -61,12 +62,14 @@ int		is_isspace(char c);
 int		is_quote(char *str, int *type);
 int		is_oper(char c1, char c2, int *type);
 int		is_special(char *str, int *type);
-int		lexer_checker(t_token *head);
-void	add_token(t_token *new, t_token **tokens);
 char	*copy_chars(char *str, int *i, int n);
 char	*copy_word(char *str, int *i);
 char	*copy_var(char *str, int *i);
 char	*copy_quote(char *str, int *i);
+void	add_token(t_token *new, t_token **tokens);
+void	check_new(t_token *new);
+void	delete_token(t_token **tokens);
+t_token	*create_token(int type, char *value);
 /*
 **
 ** EXPANSER
@@ -77,8 +80,10 @@ int		expanse_exstatus(t_token **tokens, int exstatus);
 int		expanse_var(t_token **tokens);
 int		expanse_quote(t_token *tokens, char *str);
 int		change_type(t_token **tokens);
+int		expanse_wildcard(t_token **wildcard);
 void	insert_token(t_token **tokens, t_token *new);
 char	*add_space(char *str);
+void	delete_token(t_token **tokens);
 /*
 **
 ** PARSER
@@ -109,6 +114,7 @@ t_cmdlst	*create_cmdlst(int type, t_cmd *cmd);
 **
 */
 int			ms_execute(t_cmdlst **cmds, char **env);
+int			ms_bracket(t_cmdlst **cmds, char **env);
 int			ms_wait(t_cmdlst **cmds, int res);
 int			exec_cmd(t_cmdlst **cmds, char **env);
 int			set_fd(t_cmdlst **cmds);

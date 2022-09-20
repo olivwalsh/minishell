@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:57:12 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/19 19:14:15 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/20 16:55:37 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	init_terminal(void)
 	new = g_global.data->terminal.new;
 	tcgetattr(STDIN_FILENO, &dflt);
 	memcpy(&new, &dflt, sizeof(struct termios));
-	sigaction()
+	// sigaction()
     signal(SIGQUIT, &sig_exit);
     signal(SIGINT, &sig_nl);
 	new.c_cc[VINTR] = 3;

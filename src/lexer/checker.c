@@ -3,26 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:44:58 by owalsh            #+#    #+#             */
-/*   Updated: 2022/08/25 14:52:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/20 14:36:52 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	brackets_count(t_token *head)
+
+static int	brk_order(t_token *head)
 {
 	t_token	*tmp;
 	char	*str;
 	int		i;
-	int		open_brackets;
-	int		close_brackets;
+	int		open_brk;
+	int		close_brk;
 
 	tmp = head;
-	open_brackets = 0;
-	close_brackets = 0;
+	open_brk = 0;
+	close_brk = 0;
+	while (tmp)
+	{
+		i = 0;
+		str = tmp->value;
+		while (tmp->type != DBL_QUOTE \
+			&& tmp->type != SGL_QUOTE && str && str[i])
+		{
+			if (str[i] == '(' && open_brk == close_brk)
+				open_brk++;
+			else if (str[i] == ')' && open_brk != close_brk)
+				close_brk++;
+			i++;
+		}
+		tmp = tmp->next;
+	}
+	return (close_brk - open_brk);
+}
+
+static int	brk_count(t_token *head)
+{
+	t_token	*tmp;
+	char	*str;
+	int		i;
+	int		open_brk;
+	int		close_brk;
+
+	tmp = head;
+	open_brk = 0;
+	close_brk = 0;
 	while (tmp)
 	{
 		i = 0;
@@ -31,26 +61,76 @@ static int	brackets_count(t_token *head)
 			&& tmp->type != SGL_QUOTE && str && str[i])
 		{
 			if (str[i] == '(')
-				open_brackets++;
+				open_brk++;
 			else if (str[i] == ')')
-				close_brackets++;
+				close_brk++;
 			i++;
 		}
 		tmp = tmp->next;
 	}
-	return (close_brackets - open_brackets);
+	return (close_brk - open_brk);
+}
+
+static int	is_phrase(t_token *token)
+{
+	if (token && (token->type == WORD || token->type == SGL_QUOTE \
+		|| token->type == DBL_QUOTE))
+		return (1);
+	return (0);
+}
+
+static int	is_connector(t_token *token)
+{
+	if (token && (token->type == OPERAND || token->type == OPEROR \
+		|| token->type == PIPE))
+		return (1);
+	return (0);
+}
+
+static int	brk_placement(t_token *head)
+{
+	t_token	*tmp;
+	char	*str;
+	int		i;
+	int		brk;
+
+	tmp = head;
+	brk = 0;
+	while (tmp)
+	{
+		i = 0;
+		str = tmp->value;
+		while (tmp->type != DBL_QUOTE \
+			&& tmp->type != SGL_QUOTE && str && str[i])
+		{
+			if (str[i] == '(' || str[i] == ')')
+			{
+				if ((str[i] == '(' && tmp->next && tmp->next->type == CLOSE_BRK) \
+					|| (str[i] == '(' && tmp->prev && !is_connector(tmp->prev)) \
+					|| (str[i] == ')' && tmp->prev && !is_phrase(tmp->prev)))
+					return (err_msg(-1, str[i]));
+			}
+			i++;
+		}
+		tmp = tmp->next;
+	}
+	return (EXIT_SUCCESS);
 }
 
 int	lexer_checker(t_token *head)
 {
 	int	count;
+	int	order;
 
-	count = brackets_count(head);
-	if (count > 0)
+	count = brk_count(head);
+	order = brk_order(head);
+	if (count > 0 || count != order)
 		err_msg(-1, ')');
 	else if (count < 0)
 		err_msg(-1, '(');
-	if (count != 0)
+	if (count != 0 || order != 0)
+		return (EXIT_FAILURE);
+	if (brk_placement(head))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

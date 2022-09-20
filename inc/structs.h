@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/14 22:18:41 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/20 09:41:18 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_cmd
 typedef struct s_cmdlst
 {
 	int					type;
+	int					open_brk;
+	int					close_brk;
 	t_cmd				*cmd;
 	struct s_cmdlst		*next;
 	struct s_cmdlst		*prev;
