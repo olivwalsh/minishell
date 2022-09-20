@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:13:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/08 18:30:55 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/20 15:12:33 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	display_tokens(void)
 		{
 			// if (tmp && tmp->value)
 			// 	printf("token->value = %s\t\ttoken->type = %d\n\n", tmp->value, tmp->type);
+			// if (tmp)
+			// 	printf("token->prev = %p\t\ttoken = %p\t\ttoken->next = %p\n\n", tmp->prev, tmp, tmp->next);
 			if (tmp-> type == 1)
 				printf(" WORD ");
 			if (tmp->type == 2)

@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:44:58 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/20 11:04:17 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/20 14:36:52 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,17 @@ static int	brk_count(t_token *head)
 
 static int	is_phrase(t_token *token)
 {
-	if (token && (token->type == WORD || token->type == SGL_QUOTE || token->type == DBL_QUOTE))
+	if (token && (token->type == WORD || token->type == SGL_QUOTE \
+		|| token->type == DBL_QUOTE))
 		return (1);
-	printf("not a phrase, token type is %d\n", token->type);
+	return (0);
+}
+
+static int	is_connector(t_token *token)
+{
+	if (token && (token->type == OPERAND || token->type == OPEROR \
+		|| token->type == PIPE))
+		return (1);
 	return (0);
 }
 
@@ -97,8 +105,9 @@ static int	brk_placement(t_token *head)
 		{
 			if (str[i] == '(' || str[i] == ')')
 			{
-				if ((str[i] == '(' && tmp->next->type == CLOSE_BRK) \
-					|| (str[i] == ')' && !is_phrase(tmp->prev)))
+				if ((str[i] == '(' && tmp->next && tmp->next->type == CLOSE_BRK) \
+					|| (str[i] == '(' && tmp->prev && !is_connector(tmp->prev)) \
+					|| (str[i] == ')' && tmp->prev && !is_phrase(tmp->prev)))
 					return (err_msg(-1, str[i]));
 			}
 			i++;
@@ -115,14 +124,12 @@ int	lexer_checker(t_token *head)
 
 	count = brk_count(head);
 	order = brk_order(head);
-	printf("count is %d, order is %d\n", count, order);
 	if (count > 0 || count != order)
 		err_msg(-1, ')');
 	else if (count < 0)
 		err_msg(-1, '(');
 	if (count != 0 || order != 0)
 		return (EXIT_FAILURE);
-	printf("hi\n");
 	if (brk_placement(head))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
