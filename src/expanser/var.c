@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/20 10:52:25 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:26:22 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*add_space(char *str)
 	return (new);
 }
 
-static void	check_new(t_token *new)
+void	check_new(t_token *new)
 {
 	t_token	*tmp;
 

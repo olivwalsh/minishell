@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/20 10:18:45 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:26:12 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <errno.h>
+# include <dirent.h>
 
 // MS LIBRARIES
 # include "structs.h"
@@ -59,11 +60,14 @@ int		is_isspace(char c);
 int		is_quote(char *str, int *type);
 int		is_oper(char c1, char c2, int *type);
 int		is_special(char *str, int *type);
-void	add_token(t_token *new, t_token **tokens);
 char	*copy_chars(char *str, int *i, int n);
 char	*copy_word(char *str, int *i);
 char	*copy_var(char *str, int *i);
 char	*copy_quote(char *str, int *i);
+void	add_token(t_token *new, t_token **tokens);
+void	check_new(t_token *new);
+void	delete_token(t_token **tokens);
+t_token	*create_token(int type, char *value);
 /*
 **
 ** EXPANSER
@@ -74,8 +78,10 @@ int		expanse_exstatus(t_token **tokens, int exstatus);
 int		expanse_var(t_token **tokens);
 int		expanse_quote(t_token *tokens, char *str);
 int		change_type(t_token **tokens);
+int		expanse_wildcard(t_token **wildcard);
 void	insert_token(t_token **tokens, t_token *new);
 char	*add_space(char *str);
+void	delete_token(t_token **tokens);
 /*
 **
 ** PARSER
