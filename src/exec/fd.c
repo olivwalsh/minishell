@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:05:55 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 17:16:19 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/20 12:21:52 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	set_fd(t_cmdlst **cmds)
 		(*cmds)->cmd->fd_out = pipes[1];
 	else
 		close(pipes[1]);
-	tmp = (*cmds)->next->next;
+	tmp = *cmds;
+	while (tmp && tmp->type != WORD)
+		tmp = tmp->next;
 	if (tmp->cmd->fd_in == -1)
 		tmp->cmd->fd_in = pipes[0];
 	else
