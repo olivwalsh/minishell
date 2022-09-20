@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/16 15:44:09 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/20 10:52:25 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int	expanse_var(t_token **tokens)
 		delete_token(tokens);
 		return (EXIT_SUCCESS);
 	}
-	ms_lexer(str, &new);
+	if (ms_lexer(str, &new))
+		return (EXIT_FAILURE);
 	if (!new)
 		return (EXIT_FAILURE);
 	free(str);
