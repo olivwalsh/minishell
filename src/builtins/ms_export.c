@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/14 17:24:12 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:30:07 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ int	args_checker(char **args, int i)
 
 	j = 1;
 	if (args[i][j] == '-')
-		return (err_bd(-2, "minishell: export: ", args[i]));
+		return (err_bd(-2, 0, "minishell: export: ", args[i]));
 	while (args && args[i] && args[i][j] && args[i][j] != '=')
 	{
 		if (!is_alpha(args[i][0]) && args[i][0] != '_' && args[i][0] != '/')
-			return (err_bd(-3, "minishell: export: `", args[i]));
+			return (err_bd(-3, 0, "minishell: export: `", args[i]));
 		if (!is_alnum(args[i][j]) && args[i][j] != '_')
-			return (err_bd(-3, "minishell: export: `", args[i]));
+			return (err_bd(-3, 0, "minishell: export: `", args[i]));
 		j++;
 	}
 	return (EXIT_SUCCESS);

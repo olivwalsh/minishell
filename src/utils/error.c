@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 12:00:41 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:19:34 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,30 @@ char	*err_msg_str(int code, char *str)
 	return (NULL);
 }
 
-int	err_bd(int code, char *func, char *arg)
+int	err_bd(int code, int err, char *func, char *arg)
 {
 	char	*str;
 
 	str = NULL;
 	str = ft_strjoin(str, func, 1);
-	str = ft_strjoin(str, arg, 1);
+	if (arg)
+		str = ft_strjoin(str, arg, 1);
+	if (arg && err)
+		str = ft_strjoin(str, ": ", 1);
 	if (code == -1)
 		str = ft_strjoin(str, ": No such file or directory\n", 1);
 	else if (code == -2)
 		str = ft_strjoin(str, ": Invalid option\n", 1);
 	else if (code == -3)
 		str = ft_strjoin(str, "': not a valid identifier\n", 1);
+	else if (code == -4)
+		str = ft_strjoin(str, ": too many arguments\n", 1);
 	write(STDERR_FILENO, str, ft_strlen(str));
+	if (errno)
+	{
+		write(STDERR_FILENO, strerror(err), ft_strlen(strerror(err)));
+		write(STDERR_FILENO, "\n", 1);
+	}
 	free(str);
 	return (EXIT_FAILURE);
 }

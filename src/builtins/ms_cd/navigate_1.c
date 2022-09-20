@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   navigate_1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:52:25 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 19:32:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/20 17:08:53 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	nav_home(char **env)
 
 	home = ft_getenv("HOME");
 	if (chdir(home) < 0)
-		return (cd_error(errno, home));
+		return (err_bd(0, errno, "minishell: cd: ", home));
 	set_pwd(home, env);
 	return (EXIT_SUCCESS);
 }
@@ -32,7 +32,7 @@ int	nav_relative(char *origin, char *path, char **env)
 	if (chdir(origin) < 0)
 	{
 		free(origin);
-		return (cd_error(errno, path));
+		return (err_bd(0, errno, "minishell: cd: ", path));
 	}
 	set_pwd(origin, env);
 	return (EXIT_SUCCESS);
@@ -49,7 +49,7 @@ int	nav_fromhome(char *path, char **env)
 	pwd = ft_strjoin(home, "/", 1);
 	pwd = ft_strjoin(pwd, path, 1);
 	if (chdir(pwd) < 0)
-		return (cd_error(errno, path));
+		return (err_bd(0, errno, "minishell: cd: ", path));
 	set_pwd(pwd, env);
 	return (EXIT_SUCCESS);
 }
@@ -62,7 +62,7 @@ int	cd_navigate(char *path, char **env, char *pwd)
 	if (!path || !path[0] || !ft_strcmp(path, "~"))
 		error = nav_home(env);
 	else if (!ft_strcmp(path, ".") || !ft_strcmp(path, "./"))
-		error = nav_pwd(env);
+		return (EXIT_SUCCESS);
 	else if (!ft_strcmp(path, "-"))
 		error = nav_oldpwd(env);
 	else if (path[0] == '~' && path[1])
