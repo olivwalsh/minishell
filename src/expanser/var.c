@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/16 15:44:09 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/20 12:33:18 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*add_space(char *str)
 	return (new);
 }
 
-static void	check_new(t_token *new)
+void	check_new(t_token *new)
 {
 	t_token	*tmp;
 
