@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:18:24 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/15 11:48:44 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/20 14:39:48 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	add_token(t_token *new, t_token **tokens)
 		*tokens = new;
 }
 
-static t_token	*create_token(int type, char *value)
+t_token	*create_token(int type, char *value)
 {
 	t_token	*new;
 
