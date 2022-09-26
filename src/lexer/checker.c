@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:44:58 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/20 14:36:52 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:34:30 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ static int	brk_placement(t_token *head)
 
 	tmp = head;
 	brk = 0;
+	(void)brk;
 	while (tmp)
 	{
 		i = 0;

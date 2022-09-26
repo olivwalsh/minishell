@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/20 15:26:54 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:37:31 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 t_global	g_global = {NULL};
 
+
+
 int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
-	int		res;
+	int res;
 
 	if (argc != 1)
 		return (EXIT_FAILURE);
@@ -26,11 +28,14 @@ int	main(int argc, char **argv, char **env)
 	res = 0;
 	while (1)
 	{
+		if (data.shell.input)
+			free(data.shell.input);
+		set_terminal(&data.terminal);
 		if (res)
 			data.shell.input = readline(FAIL_PROMPT);
 		else
 			data.shell.input = readline(SUCESS_PROMPT);
-		if (data.shell.input[0] && !ms_lexer(data.shell.input, &data.tokens)
+		if (data.shell.input && data.shell.input[0] && !ms_lexer(data.shell.input, &data.tokens)
 			&& !ms_expanser(&data.tokens, res)
 			&& !ms_parser(data.tokens, &data.cmds))
 		{

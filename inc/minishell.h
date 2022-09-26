@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/20 16:55:10 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/26 15:08:19 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ extern t_global	g_global;
 */
 int		ms_init(t_data *data, char **argv, char **env);
 int		copy_env(t_data *data, char **env);
-void	init_terminal(void);
+void	set_terminal(t_terminal *terminal);
 /*
 **
 ** LEXER
