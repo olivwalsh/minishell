@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:28:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/26 15:19:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:07:18 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,16 @@ int	check_flag(char *arg)
 	return (EXIT_SUCCESS);
 }
 
-// void	exit_terminal(void)
-// {
-// 	struct termios dflt;
-	
-// 	tcgetattr(STDIN_FILENO, &dflt);
-	
-// 	dflt = g_global.data->terminal.dftl;
-// 	dflt.c_cc[VINTR] = KEY_CTRLC;
-// 	dflt.c_cc[VEOF] = KEY_CTRLD;
-// 	dflt.c_cc[VINTR] = KEY_CTRLQ;
-// 	tcsetattr(STDIN_FILENO, TCSANOW, &dflt);
-// }
-
 int	clean_exit(char **env)
 {
-	struct termios dflt;
-	
+	struct termios	dflt;
+
 	tcgetattr(STDIN_FILENO, &dflt);
 	if (env)
 	{
 		if (env)
 			free_tab(env);
 	}
-	// exit_terminal();
 	return (EXIT_SUCCESS);
 }
 

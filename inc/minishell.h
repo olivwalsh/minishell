@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 17:52:27 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:22:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	set_terminal(t_terminal *terminal);
 ** LEXER
 **
 */
-int		ms_lexer(char *str, t_token **tokens);
+int		ms_lexer(char *str, t_token **tokens, int *res);
 int		tokenize(t_token **tokens, char *str, int *i, int type);
 int		lexer_checker(t_token *head);
 int		is_delimiter(char *str);
@@ -75,9 +75,9 @@ t_token	*create_token(int type, char *value);
 ** EXPANSER
 **
 */
-int		ms_expanser(t_token **tokens, int exstatus);
+int		ms_expanser(t_token **tokens, int *res);
 int		expanse_exstatus(t_token **tokens, int exstatus);
-int		expanse_var(t_token **tokens);
+int		expanse_var(t_token **tokens, int *res);
 int		expanse_quote(t_token *tokens, char *str);
 int		change_type(t_token **tokens);
 int		expanse_wildcard(t_token **wildcard);
@@ -89,7 +89,7 @@ void	delete_token(t_token **tokens);
 ** PARSER
 **
 */
-int 		ms_parser(t_token *tokens, t_cmdlst **cmds);
+int 		ms_parser(t_token *tokens, t_cmdlst **cmds, int *res);
 int			cmd_addredir(t_token **token, t_cmd *cmd);
 int			is_delim(t_token *token);
 int			is_redir(t_token *token);
@@ -102,6 +102,9 @@ int			append_file(char *file);
 int			err_cmd(char *cmd);
 void		add_cmdlst(t_cmdlst **lst, t_cmdlst	*new);
 void		cmd_setargs(t_token **token, t_cmd *new);
+void		set_heredocterm(void);
+void		sig_prompt(int signum);
+void		sig_eof(char *delimiter);
 char		*copy_cmd(t_token **token);
 char		*get_cmdpath(char *cmd);
 char		*delete_quotes(char *src, char *rest);

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/26 15:43:25 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:12:22 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void ms_minishell(t_data *data)
 		data->shell.input = readline(FAIL_PROMPT);
 	else
 		data->shell.input = readline(SUCESS_PROMPT);
-	if (!ms_lexer(data->shell.input, &data->tokens)
-		&& !ms_expanser(&data->tokens, res)
-		&& !ms_parser(data->tokens, &data->cmds))
+	if (!ms_lexer(data->shell.input, &data->tokens, &res)
+		&& !ms_expanser(&data->tokens, &res)
+		&& !ms_parser(data->tokens, &data->cmds, &res))
 	{
 		res = ms_execute(&data->cmds, data->shell.env);
 		res = ms_wait(&data->cmds, res);

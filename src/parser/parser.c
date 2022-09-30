@@ -6,24 +6,23 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:51 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 14:53:59 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:18:21 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ms_parser(t_token *tokens, t_cmdlst **cmds)
+int	ms_parser(t_token *tokens, t_cmdlst **cmds, int *res)
 {
 	t_token	*tmp;
 
 	tmp = tokens;
-	// tcsetattr(0, TCSANOW, &g_global.data->terminal.dftl);
 	while (tmp && !g_global.data->err)
 	{
 		if (!tmp->prev && is_delim(tmp) == 1)
-			return (err_msg_1(-1, tmp->value[0]));
+			*res = err_msg_1(-1, tmp->value[0]);
 		if (is_delim(tmp) == 1 && (tmp->next && is_delim(tmp->next) == 1))
-			return (err_msg_1(-1, tmp->value[0]));
+			*res = err_msg_1(-1, tmp->value[0]);
 		if (!is_delim(tmp))
 			add_cmdlst(cmds, create_cmdlst(WORD, create_cmd(&tmp)));
 		else
@@ -32,5 +31,7 @@ int	ms_parser(t_token *tokens, t_cmdlst **cmds)
 			tmp = tmp->next;
 		}
 	}
-	return (EXIT_SUCCESS);
+	if (!(*res))
+		*res = g_global.data->err;
+	return (*res);
 }

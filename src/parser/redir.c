@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:07:15 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 17:43:11 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:02:04 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,6 @@ int	cmd_readinfile(t_token **token, t_cmd *cmd)
 	cmd->fd_in = read_file(cmd->redir->infile);
 	*token = (*token)->next;
 	return (EXIT_SUCCESS);
-}
-
-
-
-void	sig_prompt(int signum)
-{
-	(void)signum;
-	if (g_global.data->shell.heredoc == 1)
-	{
-		if (g_global.data->shell.pid_heredoc == 0)
-		{	
-			close(g_global.data->shell.fd_heredoc[0]);
-			write (0, "\n", 1);
-			exit(EXIT_SUCCESS);
-		}
-	}
-}
-
-void	set_heredocterm()
-{
-	tcsetattr(STDIN_FILENO, TCSANOW, &g_global.data->terminal.heredoc);
-	signal(SIGQUIT, &sig_prompt);
 }
 
 int	cmd_readstdin(t_token **token, t_cmd *cmd)
