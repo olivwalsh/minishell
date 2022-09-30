@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/26 15:34:14 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 17:44:53 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ void	free_redir(t_redir *redir)
 	if (redir->redir_in)
 		free(redir->infile);
 	if (redir->append_in)
-	{
 		free(redir->delimiter);
-		unlink("tmp");
-	}
 	if (redir->append_out || redir->redir_out)
 		free(redir->outfile);
 	free(redir);

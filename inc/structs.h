@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 12:09:50 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 17:32:10 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ typedef struct s_shell
 {
 	char		**env;
 	char		*input;
+	int			heredoc;
+	int			fd_heredoc[2];
+	pid_t		pid_heredoc;
 }				t_shell;
 
 // GLOBAL (variable)

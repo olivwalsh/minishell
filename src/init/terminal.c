@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:57:12 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/26 15:28:07 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 17:55:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ void	sig_nl(int signum)
 
 void	set_terminal(t_terminal *term)
 {
-	// settting our terminal
 	tcsetattr(STDIN_FILENO, TCSANOW, &term->new);
-
-    signal(SIGQUIT, &sig_exit); // ctrl - D
-    signal(SIGINT, &sig_nl);	// ctrl - C
+    signal(SIGQUIT, &sig_exit);
+    signal(SIGINT, &sig_nl);
 }

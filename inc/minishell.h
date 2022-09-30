@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/26 15:08:19 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 17:52:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ int			is_delim(t_token *token);
 int			is_redir(t_token *token);
 int			ft_strtoken(char *str);
 int			read_file(char *file);
-int			read_stdin(char *delimiter);
+int			read_stdin(char *delimiter, int fd);
+int			fork_stdin(char *delimiter);
 int			create_file(char *file);
 int			append_file(char *file);
 int			err_cmd(char *cmd);

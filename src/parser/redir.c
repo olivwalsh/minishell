@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:07:15 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 16:24:54 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 17:43:11 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,21 @@ int	cmd_readinfile(t_token **token, t_cmd *cmd)
 void	sig_prompt(int signum)
 {
 	(void)signum;
-	write(0, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (g_global.data->shell.heredoc == 1)
+	{
+		if (g_global.data->shell.pid_heredoc == 0)
+		{	
+			close(g_global.data->shell.fd_heredoc[0]);
+			write (0, "\n", 1);
+			exit(EXIT_SUCCESS);
+		}
+	}
 }
 
 void	set_heredocterm()
 {
 	tcsetattr(STDIN_FILENO, TCSANOW, &g_global.data->terminal.heredoc);
-	// signal(SIGQUIT, SIG_DFL);
-	signal(SIGQUIT, &sig_prompt); 	// ctrl - C
-
-	//signal(SIGEOF, &sig_eof); // ctrl - D
-    // signal(SIGINT, &sig_prompt);	// ctrl - C
+	signal(SIGQUIT, &sig_prompt);
 }
 
 int	cmd_readstdin(t_token **token, t_cmd *cmd)
@@ -64,7 +65,7 @@ int	cmd_readstdin(t_token **token, t_cmd *cmd)
 		return (EXIT_FAILURE);
 	}
 	cmd->redir->delimiter = copy_cmd(token);
-	cmd->fd_in = read_stdin(cmd->redir->delimiter);
+	cmd->fd_in = fork_stdin(cmd->redir->delimiter);
 	*token = (*token)->next;
 	return (EXIT_SUCCESS);
 }
