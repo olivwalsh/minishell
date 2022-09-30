@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:18:24 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/20 14:39:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:53:29 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_token	*create_token(int type, char *value)
 	new = malloc(sizeof(t_token));
 	if (!new)
 	{
-		err_msg(-2, 0);
+		err_msg_str(-2, 0);
 		return (NULL);
 	}
 	new->type = type;

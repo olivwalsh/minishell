@@ -6,41 +6,53 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 17:14:27 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:56:52 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	err_msg(int code, char c)
+int	err_msg(int code, char *c, int err)
 {
+	char	*str;
+
+	str = NULL;
+	str = ft_strjoin(str, "minishell: ", 1);
 	if (code == -1)
-		printf("minishell: syntax error near unexpected token `%c'\n", c);
+	{
+		str = ft_strjoin(str, "syntax error near unexpected token `", 1);
+		str = ft_strjoin(str, c, 1);
+		str = ft_strjoin(str, "'\n", 1);
+	}
 	else if (code == -2)
-		printf("minishell: malloc failed\n");
-	g_global.data->err = 1;
+		str = ft_strjoin(str, "malloc function failed\n", 1);
+	write(STDERR_FILENO, str, ft_strlen(str));
+	free(str);
+	if (err)
+		g_global.data->err = 1;
 	return (EXIT_FAILURE);
 }
 
-int	err_msg_1(int code, char c)
+char	*err_msg_str(int code, char *tmp)
 {
-	if (code == -1)
-		printf("minishell: syntax error near unexpected token `%c'\n", c);
-	else if (code == -2)
-		printf("minishell: malloc failed\n");
-	return (EXIT_FAILURE);
-}
+	char	*str;
 
-char	*err_msg_str(int code, char *str)
-{
-	if (!str)
-		str = "newline";
+	if (!tmp)
+		tmp = "newline";
+	str = NULL;
+	str = ft_strjoin(str, "minishell: ", 1);
 	if (code == -1)
-		printf("minishell: syntax error near unexpected token `%s'\n", str);
+	{
+		str = ft_strjoin(str, "syntax error near unexpected token `", 1);
+		str = ft_strjoin(str, tmp, 1);
+		str = ft_strjoin(str, "'\n", 1);
+	}
 	else if (code == -2)
-		printf("minishell: malloc failed\n");
+		str = ft_strjoin(str, "malloc function failed\n", 1);
 	else if (code == -3)
-		printf("minishell: %s\n", str);
+		str = ft_strjoin(str, "missing command after redirection\n", 1);
+	write(STDERR_FILENO, str, ft_strlen(str));
+	free(str);
 	g_global.data->err = 1;
 	return (NULL);
 }
@@ -87,5 +99,3 @@ int	err_cmd(char *cmd)
 	free(str);
 	return (EXIT_FAILURE);
 }
-
-// int error(t_token token, int code)

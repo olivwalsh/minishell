@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/20 16:30:07 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:55:04 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**redo_malloc(char **old, char *str, int n)
 	new = malloc(sizeof(char *) * (n + 1));
 	if (!new)
 	{
-		err_msg(-2, 0);
+		err_msg_str(-2, 0);
 		return (NULL);
 	}
 	i = 0;
@@ -59,7 +59,7 @@ int	add_env(char *str, char **env)
 
 	new = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!new)
-		return (err_msg(-2, 0));
+		return (err_msg(-2, 0, 1));
 	new = ft_strncpy(new, str, ft_strlen(str));
 	str = cut_str(str);
 	i = 0;

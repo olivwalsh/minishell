@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:44:58 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/20 14:36:52 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:29:17 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,10 @@ static int	brk_placement(t_token *head)
 				if ((str[i] == '(' && tmp->next && tmp->next->type == CLOSE_BRK) \
 					|| (str[i] == '(' && tmp->prev && !is_connector(tmp->prev)) \
 					|| (str[i] == ')' && tmp->prev && !is_phrase(tmp->prev)))
-					return (err_msg(-1, str[i]));
+				{
+					str[i + 1] = '\0';
+					return (err_msg(-1, &str[i], 1));
+				}
 			}
 			i++;
 		}
@@ -125,9 +128,9 @@ int	lexer_checker(t_token *head)
 	count = brk_count(head);
 	order = brk_order(head);
 	if (count > 0 || count != order)
-		err_msg(-1, ')');
+		err_msg(-1, ")", 1);
 	else if (count < 0)
-		err_msg(-1, '(');
+		err_msg(-1, "(", 1);
 	if (count != 0 || order != 0)
 		return (EXIT_FAILURE);
 	if (brk_placement(head))

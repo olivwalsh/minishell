@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 17:26:32 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:38:04 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*copy_cmd(t_token **token)
 	len = count_words(token);
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
-		return (err_msg_str(-2, NULL));
+		return (err_msg_str(-2, 0));
 	if (len == ft_strtoken((*token)->value))
 		ft_strncpy(str, (*token)->value, len);
 	else
@@ -134,6 +134,11 @@ void	cmd_setargs(t_token **token, t_cmd *new)
 		tmp = tmp->next;
 	}
 	new->args = malloc(sizeof(char *) * (i + 1));
+	if (!new->args)
+	{
+		err_msg_str(-2, 0);
+		return ;
+	}
 	i = 0;
 	while (*token && !is_delim(*token) && !is_redir(*token))
 	{
