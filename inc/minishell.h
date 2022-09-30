@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/20 16:49:59 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:25:22 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,6 @@ int		display_export(char **env);
 int		cd_navigate(char *path, char **env, char *pwd);
 int		set_pwd(char *newpath, char **env);
 int		set_oldpwd(char *newpath, char **env);
-int		cd_error(int err, char *path);
 int		is_absolute(char *path);
 int		nav_backwards(char *path, char **env);
 int		nav_oldpwd(char **env);

@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/20 17:19:34 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:14:27 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	err_bd(int code, int err, char *func, char *arg)
 		str = ft_strjoin(str, "': not a valid identifier\n", 1);
 	else if (code == -4)
 		str = ft_strjoin(str, ": too many arguments\n", 1);
+	else if (code == -5)
+		str = ft_strjoin(str, ": numeric arguments required\n", 1);
 	write(STDERR_FILENO, str, ft_strlen(str));
 	if (errno)
 	{
