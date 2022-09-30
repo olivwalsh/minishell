@@ -6,12 +6,11 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:44:58 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 18:29:17 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 19:02:17 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 static int	brk_order(t_token *head)
 {
@@ -96,6 +95,7 @@ static int	brk_placement(t_token *head)
 
 	tmp = head;
 	brk = 0;
+	(void)brk;
 	while (tmp)
 	{
 		i = 0;

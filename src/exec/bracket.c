@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bracket.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:00 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/20 15:11:32 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:10:35 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ int	ms_bracket(t_cmdlst **cmds, char **env)
 			set_fd(cmds);
 		if ((*cmds)->type == WORD)
 			res = exec_cmd(cmds, env);
-		if ((*cmds)->next && (*cmds)->next->next && (*cmds)->next->type == OPERAND && !res)
+		if ((*cmds)->next
+			&& (*cmds)->next->next && (*cmds)->next->type == OPERAND && !res)
 			*cmds = (*cmds)->next->next;
-		else if ((*cmds)->next && (*cmds)->next->next && (*cmds)->next->type == OPEROR && res)
+		else if ((*cmds)->next
+			&& (*cmds)->next->next && (*cmds)->next->type == OPEROR && res)
 			*cmds = (*cmds)->next->next;
 		else
 			break ;

@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 16:17:24 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 19:13:15 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	ms_execute(t_cmdlst **cmds, char **env)
 		res = ms_execute(&(*cmds)->next, env);
 	else if ((*cmds)->next && (*cmds)->next->type == OPEROR && res)
 		res = ms_execute(&(*cmds)->next, env);
-	else if ((*cmds)->next && (*cmds)->next->type != OPEROR && (*cmds)->next->type != OPERAND)
+	else if ((*cmds)->next
+		&& (*cmds)->next->type != OPEROR && (*cmds)->next->type != OPERAND)
 		res = ms_execute(&(*cmds)->next, env);
 	return (res);
 }

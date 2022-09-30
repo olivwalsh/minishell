@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:32:02 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 19:13:05 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	delete_token(t_token **tokens)
 	free(*tokens);
 }
 
-int	expanse_var(t_token **tokens)
+int	expanse_var(t_token **tokens, int *res)
 {
 	t_token	*new;
 	char	*str;
@@ -79,7 +79,7 @@ int	expanse_var(t_token **tokens)
 		delete_token(tokens);
 		return (EXIT_SUCCESS);
 	}
-	if (ms_lexer(str, &new))
+	if (ms_lexer(str, &new, res))
 		return (EXIT_FAILURE);
 	if (!new)
 		return (EXIT_FAILURE);

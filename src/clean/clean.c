@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/14 22:50:48 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:44:53 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ void	free_redir(t_redir *redir)
 	if (redir->redir_in)
 		free(redir->infile);
 	if (redir->append_in)
-	{
 		free(redir->delimiter);
-		unlink("tmp");
-	}
 	if (redir->append_out || redir->redir_out)
 		free(redir->outfile);
 	free(redir);
@@ -99,14 +96,13 @@ void	free_cmds(t_cmdlst **lst)
 
 void	clean(t_data *data)
 {
+	tcsetattr(0, TCSANOW, &data->terminal.dftl);
 	if (data)
 	{
 		if (data->tokens)
 			free_tokens(&data->tokens);
 		if (data->cmds)
 			free_cmds(&data->cmds);
-		if (data->shell.input)
-			free(data->shell.input);
 	}
 	if (g_global.data)
 		g_global.data->err = 0;

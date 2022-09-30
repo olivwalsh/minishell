@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:28:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 17:38:52 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 19:02:12 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int	check_flag(char *arg)
 
 int	clean_exit(char **env)
 {
+	struct termios	dflt;
+
+	tcgetattr(STDIN_FILENO, &dflt);
 	if (env)
 	{
 		if (env)
