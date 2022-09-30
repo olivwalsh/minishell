@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:22:28 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 11:58:23 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:07:32 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,10 @@ n\033[0;33mi\033[1;32ms\033[1;32mh\033[1;34me\e[38;4;200ml\033[1;35ml\033[m$ "
 # define BD_UNSET 105
 # define BD_ENV 106
 # define BD_EXIT 107
+
+// Keys
+# define KEY_NONE 0
+# define KEY_CTRL_C 3
+# define KEY_CTRL_D 4 
 
 #endif

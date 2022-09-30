@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:07:15 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 16:17:33 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:02:04 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	cmd_readinfile(t_token **token, t_cmd *cmd)
 
 int	cmd_readstdin(t_token **token, t_cmd *cmd)
 {
+	set_heredocterm();
 	cmd->redir->append_in = 1;
 	*token = (*token)->next;
 	if (!(*token))
@@ -42,7 +43,7 @@ int	cmd_readstdin(t_token **token, t_cmd *cmd)
 		return (EXIT_FAILURE);
 	}
 	cmd->redir->delimiter = copy_cmd(token);
-	cmd->fd_in = read_stdin(cmd->redir->delimiter);
+	cmd->fd_in = fork_stdin(cmd->redir->delimiter);
 	*token = (*token)->next;
 	return (EXIT_SUCCESS);
 }

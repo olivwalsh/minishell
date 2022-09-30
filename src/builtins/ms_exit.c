@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:28:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/09 17:07:32 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:07:18 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int	check_flag(char *arg)
 
 int	clean_exit(char **env)
 {
+	struct termios	dflt;
+
+	tcgetattr(STDIN_FILENO, &dflt);
 	if (env)
 	{
 		if (env)

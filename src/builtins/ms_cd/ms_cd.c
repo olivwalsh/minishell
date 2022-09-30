@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 19:33:36 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/20 17:15:13 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ int	ms_cd(char *cmd, char **args, char **env)
 
 	res = EXIT_SUCCESS;
 	(void)cmd;
-	pwd = ft_getenv("PWD");
+	pwd = NULL;
+	pwd = getcwd(pwd, 0);
+	if (!pwd)
+	{
+		free(pwd);
+		return (EXIT_FAILURE);
+	}
 	if (args && args[1] && args[2])
 		return (cd_error(-11, NULL));
 	else

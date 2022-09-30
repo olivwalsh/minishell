@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/20 15:11:41 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:10:00 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	ms_execute(t_cmdlst **cmds, char **env)
 		res = ms_execute(&(*cmds)->next, env);
 	else if ((*cmds)->next && (*cmds)->next->type == OPEROR && res)
 		res = ms_execute(&(*cmds)->next, env);
-	else if ((*cmds)->next && (*cmds)->next->type != OPEROR && (*cmds)->next->type != OPERAND)
+	else if ((*cmds)->next
+		&& (*cmds)->next->type != OPEROR && (*cmds)->next->type != OPERAND)
 		res = ms_execute(&(*cmds)->next, env);
 	return (res);
 }
