@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:51 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 18:48:37 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 14:53:59 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ms_parser(t_token *tokens, t_cmdlst **cmds)
 	t_token	*tmp;
 
 	tmp = tokens;
+	// tcsetattr(0, TCSANOW, &g_global.data->terminal.dftl);
 	while (tmp && !g_global.data->err)
 	{
 		if (!tmp->prev && is_delim(tmp) == 1)

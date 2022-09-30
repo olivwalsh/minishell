@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:52:25 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 19:32:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/20 17:14:26 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	cd_navigate(char *path, char **env, char *pwd)
 	if (!path || !path[0] || !ft_strcmp(path, "~"))
 		error = nav_home(env);
 	else if (!ft_strcmp(path, ".") || !ft_strcmp(path, "./"))
-		error = nav_pwd(env);
+		return (EXIT_SUCCESS);
 	else if (!ft_strcmp(path, "-"))
 		error = nav_oldpwd(env);
 	else if (path[0] == '~' && path[1])

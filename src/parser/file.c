@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:33:00 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/12 13:56:42 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 16:27:24 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ int	read_file(char *file)
 	return (fd);
 }
 
+void	sig_eof(char *delimiter)
+{
+	write(2, "minishell: ", 11);
+	write(2, "warning: here-document delimited by end-of-file (wanted `", 57);
+	write(2, delimiter, ft_strlen(delimiter));
+	write(2, "')\n", 3);
+}
+
 int	read_stdin(char *delimiter)
 {
 	char	*line;
@@ -34,11 +42,15 @@ int	read_stdin(char *delimiter)
 	if (newfile == -1)
 		return (0);
 	line = get_next_line(0);
-	while (ft_strncmp(line, delimiter, ft_strlen(delimiter)))
+	if (!line)
+		sig_eof(delimiter);
+	while (line && ft_strncmp(line, delimiter, ft_strlen(delimiter)))
 	{
 		write(newfile, line, ft_strlen(line));
 		free(line);
 		line = get_next_line(0);
+		if (!line)
+			sig_eof(delimiter);
 	}
 	free(line);
 	return (read_file("tmp"));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:07:15 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 16:17:33 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:24:54 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,30 @@ int	cmd_readinfile(t_token **token, t_cmd *cmd)
 	return (EXIT_SUCCESS);
 }
 
+
+
+void	sig_prompt(int signum)
+{
+	(void)signum;
+	write(0, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	set_heredocterm()
+{
+	tcsetattr(STDIN_FILENO, TCSANOW, &g_global.data->terminal.heredoc);
+	// signal(SIGQUIT, SIG_DFL);
+	signal(SIGQUIT, &sig_prompt); 	// ctrl - C
+
+	//signal(SIGEOF, &sig_eof); // ctrl - D
+    // signal(SIGINT, &sig_prompt);	// ctrl - C
+}
+
 int	cmd_readstdin(t_token **token, t_cmd *cmd)
 {
+	set_heredocterm();
 	cmd->redir->append_in = 1;
 	*token = (*token)->next;
 	if (!(*token))
