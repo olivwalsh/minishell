@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 13:57:12 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 18:42:11 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/02 17:12:17 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	sig_exit(int signum)
 {
 	(void)signum;
-	write(2, "exit\n", 5);
+	write(1, "exit\n", 5);
 	rl_clear_history();
 	clean(g_global.data);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 void	sig_nl(int signum)
