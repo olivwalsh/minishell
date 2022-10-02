@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:22:28 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/26 15:07:32 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/02 18:14:19 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@
 # define LPINK "\e[38;4;200m"
 
 // PROMT
-# define SUCESS_PROMPT "\033[1;32m\u2794\033[1;31m  m\033[1;31mi\033[1;33m\
-n\033[0;33mi\033[1;32ms\033[1;32mh\033[1;34me\e[38;4;200ml\033[1;35ml\033[m$ "
-# define FAIL_PROMPT "\033[1;31m\u2794\033[1;31m  m\033[1;31mi\033[1;33m\
-n\033[0;33mi\033[1;32ms\033[1;32mh\033[1;34me\e[38;4;200ml\033[1;35ml\033[m$ "
+# define SUCESS_PROMPT "\033[1;32m\u2794\033[1;36m  minishell\033[m$ "
+# define FAIL_PROMPT "\033[1;31m\u2794\033[1;36m  minishell\033[m$ "
 
 // Tokens type
 # define WORD 1
