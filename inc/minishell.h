@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 18:22:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/02 16:56:50 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ char	*ft_strchr(char *str, int c);
 char	*ft_strstr(char *str, char *to_find);
 char	*ft_strjoin(char *s1, char *s2, int clean);
 char	*ft_strncpy(char *dst, char *src, int n);
+char	*ft_strndup(const char *s, int n);
 char	**ft_split(char *s, char c);
 void	display_tokens(void);
 void	display_cmds(void);

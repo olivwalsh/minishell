@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:22:04 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/02 14:24:25 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ static int	quote_expanser(t_token **tokens)
 	return (res);
 }
 
+static int	has_wildcard(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '*')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 static int	var_expanser(t_token **tokens, int *res)
 {
 	t_token		*tmp;
@@ -35,7 +49,7 @@ static int	var_expanser(t_token **tokens, int *res)
 	tmp = *tokens;
 	while (tmp && !g_global.data->err)
 	{
-		if (tmp->type == WORD && !ft_strncmp(tmp->value, "*", 1))
+		if (tmp->type == WORD && has_wildcard(tmp->value))
 			*res = expanse_wildcard(&tmp);
 		if (tmp->type == VAR && !ft_strncmp(tmp->value, "$?", 2))
 			*res = expanse_exstatus(&tmp, *res);
