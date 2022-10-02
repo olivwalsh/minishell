@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:22:15 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 19:13:05 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*add_space(char *str)
 	i = 0;
 	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
 	if (!new)
-		err_msg_str(-2, NULL);
+		err_msg_str(-2, 0);
 	while (str && str[i])
 	{
 		new[i] = str[i];

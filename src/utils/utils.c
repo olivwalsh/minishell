@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:04:23 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 19:37:07 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:50:04 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ char	*create_result(char *res)
 
 	new = malloc(sizeof(char) * (ft_strlen(res) + 1));
 	if (!new)
-	{
-		err_msg(-2, 0);
-		return (NULL);
-	}
+		return (err_msg_str(-2, 0));
 	ft_strncpy(new, res, ft_strlen(res));
 	return (new);
 }

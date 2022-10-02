@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:41:47 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/15 18:57:58 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:52:15 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ t_redir	*create_redir(void)
 	t_redir	*redir;
 
 	redir = malloc(sizeof(t_redir));
-	memset(redir, 0, sizeof(t_redir));
 	if (!redir)
 	{
-		err_msg(-2, 0);
+		err_msg_str(-2, 0);
 		return (NULL);
 	}
+	memset(redir, 0, sizeof(t_redir));
 	return (redir);
 }
 
@@ -32,7 +32,10 @@ t_cmd	*init_cmd(void)
 
 	new = malloc(sizeof(t_cmd));
 	if (!new)
+	{
+		err_msg_str(-2, 0);
 		return (NULL);
+	}
 	memset(new, 0, sizeof(t_cmd));
 	new->pid = -1;
 	new->fd_in = -1;
@@ -48,7 +51,7 @@ t_cmdlst	*create_cmdlst(int type, t_cmd *cmd)
 	new = malloc(sizeof(t_cmdlst));
 	if (!new)
 	{
-		err_msg(-2, 0);
+		err_msg_str(-2, 0);
 		return (NULL);
 	}
 	new->type = type;
@@ -88,7 +91,7 @@ t_cmd	*create_cmd(t_token **token)
 			cmd_setargs(token, new);
 		else
 		{
-			err_msg_str(-3, "missing command after redirection.\n");
+			err_msg_str(-3, 0);
 			return (NULL);
 		}
 	}
