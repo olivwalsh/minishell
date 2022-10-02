@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ms_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:59:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 14:49:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 16:34:51 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	pwd_error(int err)
-{
-	write(2, "pwd: ", 5);
-	if (err == -7)
-		write(2, "too many arguments", 18);
-	else
-	{
-		write(2, "error retrieving current directory: getcwd: ", 49);
-		write(2, strerror(err), ft_strlen(strerror(err)));
-	}
-	write(2, "\n", 1);
-	return (EXIT_FAILURE);
-}
 
 int	ms_pwd(char *cmd, char **args, char **env)
 {
@@ -34,14 +20,12 @@ int	ms_pwd(char *cmd, char **args, char **env)
 	(void)env;
 	if (ft_strcmp(cmd, "pwd"))
 		return (EXIT_FAILURE);
-	if (args && args[1])
-		return (pwd_error(-7));
 	cwd = NULL;
 	cwd = getcwd(cwd, 0);
 	if (!cwd)
 	{
 		free(cwd);
-		return (pwd_error(errno));
+		return (err_bd(0, errno, "pwd: ", NULL));
 	}
 	printf("%s\n", cwd);
 	free(cwd);

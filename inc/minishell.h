@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 18:22:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 19:15:22 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,8 @@ int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
-int		err_msg(int err, char c);
-int		err_msg_1(int code, char c);
-int		err_bd(int code, char *func, char *arg);
+int		err_msg(int code, char *c, int err);
+int		err_bd(int code, int err, char *func, char *arg);
 char	*get_next_line(int fd);
 char	*err_msg_str(int code, char *str);
 char	*ft_itoa(int n);
@@ -176,7 +175,6 @@ int		display_export(char **env);
 int		cd_navigate(char *path, char **env, char *pwd);
 int		set_pwd(char *newpath, char **env);
 int		set_oldpwd(char *newpath, char **env);
-int		cd_error(int err, char *path);
 int		is_absolute(char *path);
 int		nav_backwards(char *path, char **env);
 int		nav_oldpwd(char **env);

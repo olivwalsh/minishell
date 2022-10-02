@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:35 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/16 16:12:46 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:33:00 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ char	*get_value(char *str, int i, int j)
 	var = NULL;
 	var = malloc(sizeof(char) * (j + 1));
 	if (!var)
-	{
-		err_msg(-2, 0);
-		return (NULL);
-	}
+		return (err_msg_str(-2, 0));
 	var = ft_strncpy(var, &str[i + 1], j);
 	val = ft_getenv(var);
 	free(var);

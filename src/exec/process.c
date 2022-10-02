@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 16:07:09 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 17:36:34 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int	ms_builtin_parent(t_cmd *cmd, char **env)
 
 int	ms_builtin_child(t_cmd *cmd, char **env)
 {
-	if (cmd->builtin == BD_EXIT)
-		ms_exit(cmd->cmd, &cmd->args[1], env);
-	else if (cmd->builtin == BD_ENV)
+	if (cmd->builtin == BD_ENV)
 		ms_env(cmd->cmd, &cmd->args[1], env);
 	else if (cmd->builtin == BD_ECHO)
 		ms_echo(cmd->cmd, cmd->args);

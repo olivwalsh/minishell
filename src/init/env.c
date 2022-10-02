@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:56:15 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/16 17:14:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:11:06 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	copy_substr(char **new_env, char **env, int substr)
 		if (!new_env[i])
 		{
 			free_str(new_env, i);
-			return (err_msg(-2, 0));
+			return (err_msg(-2, NULL, 1));
 		}
 		ft_strncpy(new_env[i], env[i], ft_strlen(env[i]));
 		i++;
@@ -64,7 +64,7 @@ int	copy_env(t_data *data, char **env)
 		return (EXIT_FAILURE);
 	new_env = malloc(sizeof(char *) * (substr + 1));
 	if (!new_env)
-		return (err_msg(-2, 0));
+		return (err_msg(-2, NULL, 1));
 	if (copy_substr(new_env, env, substr))
 		return (EXIT_FAILURE);
 	data->shell.env = new_env;

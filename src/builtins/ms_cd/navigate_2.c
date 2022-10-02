@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   navigate_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:43:51 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 18:02:59 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/09/20 17:08:41 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	nav_pwd(char **env)
 
 	pwd = ft_getenv("PWD");
 	if (chdir(pwd) < 0)
-		return (cd_error(errno, pwd));
+		return (err_bd(0, errno, "minishell: cd: ", pwd));
 	set_pwd(pwd, env);
 	return (EXIT_SUCCESS);
 }
@@ -31,7 +31,7 @@ int	nav_oldpwd(char **env)
 
 	oldpwd = ft_getenv("OLDPWD");
 	if (chdir(oldpwd) < 0)
-		return (cd_error(errno, oldpwd));
+		return (err_bd(0, errno, "minishell: cd: ", oldpwd));
 	set_pwd(oldpwd, env);
 	return (EXIT_SUCCESS);
 }
@@ -83,7 +83,7 @@ int	nav_backwards(char *path, char **env)
 	if (!path || !path[0])
 		return (EXIT_SUCCESS);
 	if (!ft_strcmp(path, ".") || !ft_strcmp(path, "./"))
-		return (nav_pwd(env));
+		return (EXIT_SUCCESS);
 	pwd = ft_getenv("PWD");
 	res = nav_relative(pwd, path, env);
 	free(pwd);
@@ -93,7 +93,7 @@ int	nav_backwards(char *path, char **env)
 int	nav_absolute(char *path, char **env)
 {
 	if (chdir(path) < 0)
-		return (cd_error(errno, path));
+		return (err_bd(0, errno, "minishell: cd: ", path));
 	set_pwd(path, env);
 	return (EXIT_SUCCESS);
 }
