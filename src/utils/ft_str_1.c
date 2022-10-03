@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 15:18:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 16:15:13 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/02 16:56:30 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,24 @@ int	ft_strncmp(char *s1, char *s2, int n)
 		i++;
 	}
 	return (0);
+}
+
+char	*ft_strndup(const char *s, int n)
+{
+	char	*dup;
+	int		i;
+
+	if (!s)
+		return (NULL);
+	dup = malloc(sizeof(char) * (n + 1));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (i < n && s[i])
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }
