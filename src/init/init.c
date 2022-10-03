@@ -6,15 +6,16 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:14:01 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 19:00:02 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/03 08:29:33 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ms_init(t_data *data, char **argv, char **env)
+int	ms_init(t_data *data, char **argv, char **env, int *res)
 {
 	(void)argv;
+	*res = 0;
 	memset(data, 0, sizeof(t_data));
 	g_global.data = data;
 	if (copy_env(data, env))
