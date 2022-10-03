@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/02 17:16:32 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/03 08:29:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ extern t_global	g_global;
 ** INIT
 **
 */
-int		ms_init(t_data *data, char **argv, char **env);
+int		ms_init(t_data *data, char **argv, char **env, int *res);
 int		copy_env(t_data *data, char **env);
 void	set_terminal(t_terminal *terminal);
 /*
