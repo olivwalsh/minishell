@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/04 12:17:11 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/04 15:03:28 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	var_expanser(t_token **tokens, int *res, int exstatus)
 
 int	ms_expanser(t_token **tokens, int *res, int exstatus)
 {
-	if (!var_expanser(tokens, res, exstatus))
+	if (!*res && !var_expanser(tokens, res, exstatus))
 	{
 		if (!quote_expanser(tokens))
 		{

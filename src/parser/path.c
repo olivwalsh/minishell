@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:46:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 11:18:18 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:43:40 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ char	*get_cmdpath(char *cmd)
 	env = ft_getenv("PATH");
 	path_list = ft_split(env, ':');
 	free(env);
+	if (!ft_strcmp("..", cmd))
+	{
+		err_cmd(cmd);
+		return (NULL);
+	}
 	if (!access(cmd, X_OK))
 		return (cmd);
 	i = 0;
@@ -38,5 +43,5 @@ char	*get_cmdpath(char *cmd)
 	}
 	free_tab(path_list);
 	err_cmd(cmd);
-	return (cmd);
+	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 18:56:52 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:36:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,8 @@ int	err_bd(int code, int err, char *func, char *arg)
 
 int	err_cmd(char *cmd)
 {
-	char	*str;
-
-	str = NULL;
-	str = ft_strjoin(str, "minishell: ", 1);
-	str = ft_strjoin(str, cmd, 1);
-	str = ft_strjoin(str, ": command not found\n", 1);
-	write(STDERR_FILENO, str, ft_strlen(str));
-	free(str);
-	return (EXIT_FAILURE);
+	write(STDERR_FILENO, "minishell: ", 11);
+	write(STDERR_FILENO, cmd, ft_strlen(cmd));
+	write(STDERR_FILENO, ": command not found\n", 21);
+	return (127);
 }
