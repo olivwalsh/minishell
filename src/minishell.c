@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/03 08:47:13 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/04 12:16:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ t_global	g_global = {NULL};
 
 static void ms_minishell(t_data *data, int *res)
 {
+	int	exstatus;
+	
+	exstatus = *res;
 	if (data->shell.input)
 		free(data->shell.input);
 	set_terminal(&data->terminal);
@@ -24,7 +27,7 @@ static void ms_minishell(t_data *data, int *res)
 	else
 		data->shell.input = readline(SUCESS_PROMPT);
 	if (!ms_lexer(data->shell.input, &data->tokens, res)
-		&& !ms_expanser(&data->tokens, res)
+		&& !ms_expanser(&data->tokens, res, exstatus)
 		&& !ms_parser(data->tokens, &data->cmds, res))
 	{
 		*res = ms_execute(&data->cmds, data->shell.env);

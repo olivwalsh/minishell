@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/03 08:29:49 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/04 12:17:24 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_token	*create_token(int type, char *value);
 ** EXPANSER
 **
 */
-int		ms_expanser(t_token **tokens, int *res);
+int		ms_expanser(t_token **tokens, int *res, int exstatus);
 int		expanse_exstatus(t_token **tokens, int exstatus);
 int		expanse_var(t_token **tokens, int *res);
 int		expanse_quote(t_token *tokens, char *str);
