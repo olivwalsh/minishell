@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:55:04 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:25:36 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int	ms_export(char *cmd, char **args, char **env)
 		return (EXIT_FAILURE);
 	if (!args || !args[0])
 		display_export(env);
+	if (!args[0][0])
+		return (err_bd(-3, 0, "minishell: export: `", args[i]));
 	while (args && args[i])
 	{
 		if (args_checker(args, i))

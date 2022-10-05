@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/04 14:57:51 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/05 09:50:53 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,38 +112,4 @@ void	check_builtin(t_cmd *new)
 		new->builtin = BD_EXIT;
 	else
 		new->builtin = 0;
-}
-
-void	cmd_setargs(t_token **token, t_cmd *new)
-{
-	int		i;
-	t_token	*tmp;
-
-	if (*token && !new->cmd)
-	{
-		new->cmd = copy_cmd(token);
-		check_builtin(new);
-		if (!new->builtin)
-			new->cmd = get_cmdpath(new->cmd);
-	}
-	i = 0;
-	tmp = *token;
-	while (tmp && !is_delim(tmp) && !is_redir(tmp))
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	new->args = malloc(sizeof(char *) * (i + 1));
-	if (!new->args)
-	{
-		err_msg_str(-2, 0);
-		return ;
-	}
-	i = 0;
-	while (*token && !is_delim(*token) && !is_redir(*token))
-	{
-		new->args[i++] = copy_cmd(token);
-		*token = (*token)->next;
-	}
-	new->args[i] = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/04 12:17:24 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/05 09:53:58 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int			fork_stdin(char *delimiter);
 int			create_file(char *file);
 int			append_file(char *file);
 int			err_cmd(char *cmd);
+void		check_builtin(t_cmd *new);
 void		add_cmdlst(t_cmdlst **lst, t_cmdlst	*new);
 void		cmd_setargs(t_token **token, t_cmd *new);
 void		set_heredocterm(void);

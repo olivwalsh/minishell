@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:41:47 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:52:15 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/04 19:11:10 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_cmd	*create_cmd(t_token **token)
 	t_cmd	*new;
 
 	new = init_cmd();
-	while (*token && !is_delim(*token))
+	while (*token && !is_delim(*token) && !g_global.data->err)
 	{
 		if (is_redir(*token) && (*token)->next && (*token)->next->type == WORD)
 			cmd_addredir(token, new);

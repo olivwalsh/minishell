@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:20 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/04 11:52:55 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/05 09:47:53 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ int	ms_echo(char *cmd, char **args)
 		nl = FALSE;
 	}
 	while (args && args[i])
-		printf("%s ", args[i++]);
+	{
+		write(STDOUT_FILENO, args[i], ft_strlen(args[i]));
+		write(STDOUT_FILENO, " ", 1);
+		i++;
+	}
 	if (nl)
-		printf("\n");
+		write(STDOUT_FILENO, "\n", 1);
 	return (EXIT_SUCCESS);
 }

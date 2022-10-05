@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:07:15 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 18:02:04 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/04 19:07:43 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ int	cmd_addredir(t_token **token, t_cmd *cmd)
 	if (!cmd->redir)
 		cmd->redir = create_redir();
 	if ((*token)->type == REDIR_IN)
-		cmd_readinfile(token, cmd);
+		return (cmd_readinfile(token, cmd));
 	else if ((*token)->type == APPEND_IN)
-		cmd_readstdin(token, cmd);
+		return (cmd_readstdin(token, cmd));
 	else if ((*token)->type == REDIR_OUT)
-		cmd_writeoutfile(token, cmd);
+		return (cmd_writeoutfile(token, cmd));
 	else if ((*token)->type == APPEND_OUT)
-		cmd_appendoutfile(token, cmd);
+		return (cmd_appendoutfile(token, cmd));
 	return (EXIT_SUCCESS);
 }
