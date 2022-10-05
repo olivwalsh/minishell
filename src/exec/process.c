@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/04 17:45:31 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/05 12:04:30 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ int	exec_cmd(t_cmdlst **cmds, char **env)
 		exit(errno);
 	if (cmd->pid == 0)
 	{
-		if (!cmd->cmd)
+		if (!cmd->cmd && !cmd->redir)
 			exit(127);
+		if (!cmd->cmd)
+			exit(0);
 		update_fd(cmd);
 		if (cmd->builtin)
 			exit(ms_builtin_child(cmd, env));

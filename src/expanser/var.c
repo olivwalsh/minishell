@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 19:13:05 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:59:41 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ void	delete_token(t_token **tokens)
 		next->prev = prev;
 	free((*tokens)->value);
 	free(*tokens);
+	if (!prev && !next)
+	{
+		tokens = NULL;
+		g_global.data->tokens = NULL;
+	}
 }
 
 int	expanse_var(t_token **tokens, int *res)
@@ -83,7 +88,8 @@ int	expanse_var(t_token **tokens, int *res)
 		return (EXIT_FAILURE);
 	if (!new)
 		return (EXIT_FAILURE);
-	free(str);
+	if (str)
+		free(str);
 	check_new(new);
 	insert_token(tokens, new);
 	return (EXIT_SUCCESS);

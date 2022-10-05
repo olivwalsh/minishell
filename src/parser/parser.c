@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:51 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/05 09:54:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/05 17:09:33 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ms_parser(t_token *tokens, t_cmdlst **cmds, int *res)
 	while (!*res && tmp && !g_global.data->err)
 	{
 		str_char = ft_strndup(tmp->value, 1);
-		if (!tmp->prev && is_delim(tmp) == 1)
+		if ((!tmp->prev || !tmp->next) && is_delim(tmp) == 1)
 		{
 			*res = err_msg(-1, str_char, 0);
 			return (*res);

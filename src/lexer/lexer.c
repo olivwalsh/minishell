@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:16:38 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/04 15:04:47 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/05 17:09:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ms_lexer(char *str, t_token **tokens, int *res)
 
 	i = 0;
 	type = 0;
+	if (!str || !str[0])
+		return (*res);
 	while (str && str[i] && !g_global.data->err)
 	{
 		while (str[i] && is_isspace(str[i]))
@@ -32,7 +34,7 @@ int	ms_lexer(char *str, t_token **tokens, int *res)
 		else if (str[i])
 			*res = tokenize(tokens, &str[i], &i, WORD);
 	}
-	if (g_global.data->err || !str || !str[0])
+	if (g_global.data->err)
 	{
 		*res = EXIT_FAILURE;
 		return (*res);

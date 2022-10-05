@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/04 17:57:30 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/05 16:41:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*err_msg_str(int code, char *tmp)
 		str = ft_strjoin(str, "malloc function failed\n", 1);
 	else if (code == -3)
 		str = ft_strjoin(str, "missing command after redirection\n", 1);
+	else if (code == -4)
+		str = ft_strjoin(str, "ambiguous redirect\n", 1);
 	write(STDERR_FILENO, str, ft_strlen(str));
 	free(str);
 	g_global.data->err = 1;

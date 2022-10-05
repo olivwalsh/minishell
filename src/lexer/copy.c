@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:58 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:24:47 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:09:00 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*copy_var(char *str, int *i)
 	int		j;
 	char	*value;
 
-	j = is_delimiter(&str[1]) + 1;
+	j = is_delimiter_var(&str[1]) + 1;
 	value = malloc(sizeof(char) * (j + 1));
 	if (!value)
 		return (err_msg_str(-2, 0));

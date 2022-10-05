@@ -24,7 +24,7 @@ INC_DIR		= inc/
 
 SRC_FILES	=	minishell.c \
 				init/init.c init/env.c init/terminal.c \
-				lexer/lexer.c lexer/tokenize.c lexer/copy.c lexer/delimiter.c lexer/utils.c lexer/checker.c \
+				lexer/lexer.c lexer/tokenize.c lexer/copy.c lexer/delimiter.c lexer/utils.c lexer/checker.c lexer/bracket.c \
 				expanser/expanser.c expanser/var.c expanser/quote.c expanser/insert.c expanser/wildcards.c \
 				parser/parser.c parser/init.c parser/cmd.c parser/delete.c parser/redir.c parser/utils.c parser/path.c parser/file.c parser/args.c \
 				parser/heredoc/heredoc.c parser/heredoc/signals.c \

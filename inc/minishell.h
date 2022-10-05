@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/05 09:53:58 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/05 17:08:33 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,14 @@ int		tokenize(t_token **tokens, char *str, int *i, int type);
 int		lexer_checker(t_token *head);
 int		is_delimiter(char *str);
 int		is_delimiter_spc(char *str);
+int		is_delimiter_var(char *str);
 int		is_isspace(char c);
 int		is_quote(char *str, int *type);
 int		is_oper(char c1, char c2, int *type);
 int		is_special(char *str, int *type);
+int		brk_count(t_token *head);
+int		brk_order(t_token *head);
+int		brk_placement(t_token *head);
 char	*copy_chars(char *str, int *i, int n);
 char	*copy_word(char *str, int *i);
 char	*copy_var(char *str, int *i);
