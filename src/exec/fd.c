@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:05:55 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/04 18:52:01 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/05 10:57:32 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	set_fd(t_cmdlst **cmds)
 
 int	update_fd(t_cmd *cmd)
 {
-	if (cmd->fd_in > 0)
+	if (cmd->fd_in)
 	{
 		if (dup2(cmd->fd_in, STDIN_FILENO) < 0)
 			exit(errno);
