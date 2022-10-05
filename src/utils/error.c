@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 18:56:52 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:41:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*err_msg_str(int code, char *tmp)
 		str = ft_strjoin(str, "malloc function failed\n", 1);
 	else if (code == -3)
 		str = ft_strjoin(str, "missing command after redirection\n", 1);
+	else if (code == -4)
+		str = ft_strjoin(str, "ambiguous redirect\n", 1);
 	write(STDERR_FILENO, str, ft_strlen(str));
 	free(str);
 	g_global.data->err = 1;
@@ -59,43 +61,33 @@ char	*err_msg_str(int code, char *tmp)
 
 int	err_bd(int code, int err, char *func, char *arg)
 {
-	char	*str;
-
-	str = NULL;
-	str = ft_strjoin(str, func, 1);
+	write(STDERR_FILENO, func, ft_strlen(func));
 	if (arg)
-		str = ft_strjoin(str, arg, 1);
+		write(STDERR_FILENO, arg, ft_strlen(arg));
 	if (arg && err)
-		str = ft_strjoin(str, ": ", 1);
+		write(STDERR_FILENO, ": ", 2);
 	if (code == -1)
-		str = ft_strjoin(str, ": No such file or directory\n", 1);
+		write(STDERR_FILENO, ": No such file or directory\n", 29);
 	else if (code == -2)
-		str = ft_strjoin(str, ": Invalid option\n", 1);
+		write(STDERR_FILENO, ": Invalid option\n", 18);
 	else if (code == -3)
-		str = ft_strjoin(str, "': not a valid identifier\n", 1);
+		write(STDERR_FILENO, "': not a valid identifier\n", 27);
 	else if (code == -4)
-		str = ft_strjoin(str, ": too many arguments\n", 1);
+		write(STDERR_FILENO, ": too many arguments\n", 22);
 	else if (code == -5)
-		str = ft_strjoin(str, ": numeric arguments required\n", 1);
-	write(STDERR_FILENO, str, ft_strlen(str));
+		write(STDERR_FILENO, ": numeric arguments required\n", 30);
 	if (errno)
 	{
 		write(STDERR_FILENO, strerror(err), ft_strlen(strerror(err)));
 		write(STDERR_FILENO, "\n", 1);
 	}
-	free(str);
 	return (EXIT_FAILURE);
 }
 
 int	err_cmd(char *cmd)
 {
-	char	*str;
-
-	str = NULL;
-	str = ft_strjoin(str, "minishell: ", 1);
-	str = ft_strjoin(str, cmd, 1);
-	str = ft_strjoin(str, ": command not found\n", 1);
-	write(STDERR_FILENO, str, ft_strlen(str));
-	free(str);
-	return (EXIT_FAILURE);
+	write(STDERR_FILENO, "minishell: ", 11);
+	write(STDERR_FILENO, cmd, ft_strlen(cmd));
+	write(STDERR_FILENO, ": command not found\n", 21);
+	return (127);
 }

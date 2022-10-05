@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   navigate_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:43:51 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/20 17:08:41 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:33:51 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ int	nav_backwards(char *path, char **env)
 	}
 	if (!path || !path[0])
 		return (EXIT_SUCCESS);
-	if (!ft_strcmp(path, ".") || !ft_strcmp(path, "./"))
+	if (!ft_strcmp(path, ".."))
+		nav_back(pwd, env);
+	else if (!ft_strcmp(path, ".") || !ft_strcmp(path, "./"))
 		return (EXIT_SUCCESS);
 	pwd = ft_getenv("PWD");
 	res = nav_relative(pwd, path, env);

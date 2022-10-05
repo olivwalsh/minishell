@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:13:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/20 15:12:33 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:47:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	display_cmd(t_cmd *cmd)
 	if (cmd)
 	{
 		printf("\ncmd\t= "GREEN"|"RESET"%s"GREEN"|"RESET"\n", cmd->cmd);
+		// printf("\ncmd full path\t= "GREEN"|"RESET"%s"GREEN"|"RESET"\n", cmd->cmd);
 		args = cmd->args;
 		// i++;
 		if (args && args[i])

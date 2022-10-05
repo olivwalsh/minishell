@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:50:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 16:02:01 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:58:43 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ms_wait(t_cmdlst **cmds, int res)
 	t_cmdlst	*tmp;
 
 	error = 0;
+	if (!*cmds)
+		return (res);
 	while ((*cmds)->prev)
 		*cmds = (*cmds)->prev;
 	tmp = *cmds;

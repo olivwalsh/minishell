@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/02 14:24:25 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/05 12:16:01 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	has_wildcard(char *str)
 	return (0);
 }
 
-static int	var_expanser(t_token **tokens, int *res)
+static int	var_expanser(t_token **tokens, int *res, int exstatus)
 {
 	t_token		*tmp;
 
@@ -52,7 +52,7 @@ static int	var_expanser(t_token **tokens, int *res)
 		if (tmp->type == WORD && has_wildcard(tmp->value))
 			*res = expanse_wildcard(&tmp);
 		if (tmp->type == VAR && !ft_strncmp(tmp->value, "$?", 2))
-			*res = expanse_exstatus(&tmp, *res);
+			*res = expanse_exstatus(&tmp, exstatus);
 		if (tmp->type == VAR && tmp->var_stop > -1)
 			*res = expanse_var(&tmp, res);
 		if (!tmp)
@@ -63,15 +63,15 @@ static int	var_expanser(t_token **tokens, int *res)
 	while (tmp)
 	{
 		if (tmp->type == VAR && tmp->var_stop > -1)
-			*res = var_expanser(tokens, res);
+			*res = var_expanser(tokens, res, exstatus);
 		tmp = tmp->next;
 	}
 	return (*res);
 }
 
-int	ms_expanser(t_token **tokens, int *res)
+int	ms_expanser(t_token **tokens, int *res, int exstatus)
 {
-	if (!var_expanser(tokens, res))
+	if (!*res && !var_expanser(tokens, res, exstatus))
 	{
 		if (!quote_expanser(tokens))
 		{

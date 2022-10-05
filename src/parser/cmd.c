@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 18:38:04 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:00:34 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,54 +96,20 @@ char	*copy_cmd(t_token **token)
 
 void	check_builtin(t_cmd *new)
 {
-	if (!ft_strcmp(new->cmd, "echo"))
+	if (!ft_strncmp("echo", new->cmd, 5))
 		new->builtin = BD_ECHO;
-	else if (!ft_strcmp(new->cmd, "cd"))
+	else if (!ft_strncmp("cd", new->cmd, 3))
 		new->builtin = BD_CD;
-	else if (!ft_strcmp(new->cmd, "pwd"))
+	else if (!ft_strncmp("pwd", new->cmd, 4))
 		new->builtin = BD_PWD;
-	else if (!ft_strcmp(new->cmd, "export"))
+	else if (!ft_strncmp("export", new->cmd, 7))
 		new->builtin = BD_EXPORT;
-	else if (!ft_strcmp(new->cmd, "unset"))
+	else if (!ft_strncmp("unset", new->cmd, 6))
 		new->builtin = BD_UNSET;
-	else if (!ft_strcmp(new->cmd, "env"))
+	else if (!ft_strncmp("env", new->cmd, 4))
 		new->builtin = BD_ENV;
-	else if (!ft_strcmp(new->cmd, "exit"))
+	else if (!ft_strncmp("exit", new->cmd, 5))
 		new->builtin = BD_EXIT;
 	else
 		new->builtin = 0;
-}
-
-void	cmd_setargs(t_token **token, t_cmd *new)
-{
-	int		i;
-	t_token	*tmp;
-
-	if (*token && !new->cmd)
-	{
-		new->cmd = copy_cmd(token);
-		check_builtin(new);
-		if (!new->builtin)
-			new->cmd = get_cmdpath(new->cmd);
-	}
-	i = 0;
-	tmp = *token;
-	while (tmp && !is_delim(tmp) && !is_redir(tmp))
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	new->args = malloc(sizeof(char *) * (i + 1));
-	if (!new->args)
-	{
-		err_msg_str(-2, 0);
-		return ;
-	}
-	i = 0;
-	while (*token && !is_delim(*token) && !is_redir(*token))
-	{
-		new->args[i++] = copy_cmd(token);
-		*token = (*token)->next;
-	}
-	new->args[i] = NULL;
 }
