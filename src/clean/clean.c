@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 17:44:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 13:08:31 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ void	free_tab(char **table)
 	{
 		while (table && table[i])
 		{
-			free(table[i]);
-			table[i] = NULL;
+			if (table[i])
+			{
+				free(table[i]);
+				table[i] = NULL;
+			}
 			i++;
 		}
 		free(table);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   navigate_1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:52:25 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 19:02:02 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:47:25 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,29 @@ int	nav_home(char **env)
 
 	home = ft_getenv("HOME");
 	if (chdir(home) < 0)
-		return (err_bd(0, errno, "minishell: cd: ", home));
-	set_pwd(home, env);
+	{
+		err_bd(0, errno, "minishell: cd: ", "HOME not set\n");
+		free(home);
+		return (EXIT_FAILURE);		
+	}
+	set_pwd(env);
+	free(home);
 	return (EXIT_SUCCESS);
 }
 
 // cd relative/path
 int	nav_relative(char *origin, char *path, char **env)
 {
-	origin = ft_strjoin(origin, "/", 0);
+	if (origin && origin[ft_strlen(origin) - 1] != '/')
+		origin = ft_strjoin(origin, "/", 0);
 	origin = ft_strjoin(origin, path, 1);
 	if (chdir(origin) < 0)
 	{
 		free(origin);
 		return (err_bd(0, errno, "minishell: cd: ", path));
 	}
-	set_pwd(origin, env);
+	set_pwd(env);
+	free(origin);
 	return (EXIT_SUCCESS);
 }
 
@@ -49,8 +56,12 @@ int	nav_fromhome(char *path, char **env)
 	pwd = ft_strjoin(home, "/", 1);
 	pwd = ft_strjoin(pwd, path, 1);
 	if (chdir(pwd) < 0)
+	{
+		free(pwd);
 		return (err_bd(0, errno, "minishell: cd: ", path));
-	set_pwd(pwd, env);
+	}
+	set_pwd(env);
+	free(pwd);
 	return (EXIT_SUCCESS);
 }
 

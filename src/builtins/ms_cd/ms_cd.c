@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 19:01:56 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:41:09 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int    ms_cd(char *cmd, char **args, char **env)
         res = cd_navigate(args[1], env, pwd);
     if (res)
     {
-        free(pwd);
+        // free(pwd);
         return (EXIT_FAILURE);
     }
     set_oldpwd(pwd, env);
