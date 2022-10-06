@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bracket.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:23:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 14:43:47 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:53:38 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	bracket_checker(t_token *head)
 	count = brk_count(head);
 	order = brk_order(head);
 	if (count > 0 || count != order)
-		err_msg(-1, ")", 1);
+		err_msg(SYNTAX_ERR, ')', 1);
 	else if (count < 0)
-		err_msg(-1, "(", 1);
+		err_msg(SYNTAX_ERR, '(', 1);
 	if (count != 0 || order != 0)
 		return (EXIT_FAILURE);
 	if (brk_placement(head))
@@ -35,11 +35,8 @@ int	brk_placement(t_token *head)
 	t_token	*tmp;
 	char	*str;
 	int		i;
-	int		brk;
 
 	tmp = head;
-	brk = 0;
-	(void)brk;
 	while (tmp)
 	{
 		i = 0;
@@ -48,10 +45,7 @@ int	brk_placement(t_token *head)
 			&& tmp->type != SGL_QUOTE && str && str[i])
 		{
 			if ((str[i] == '(' || str[i] == ')') && is_brk_problem(str[i], tmp))
-			{
-				str[i + 1] = '\0';
-				return (err_msg(-1, &str[i], 1));
-			}
+				return (err_msg(SYNTAX_ERR, str[i], 1));
 			i++;
 		}
 		tmp = tmp->next;

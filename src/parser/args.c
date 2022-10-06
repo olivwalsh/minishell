@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:50:18 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/05 09:51:08 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:45:22 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	cmd_newargs(t_token **token, t_cmd *new, int i)
 	new->args = malloc(sizeof(char *) * (i + 1));
 	if (!new->args)
 	{
-		err_msg_str(-2, 0);
+		err_msg_str(MALLOC_ERR);
 		return ;
 	}
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:35 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:33:00 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:42:48 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*get_value(char *str, int i, int j)
 	var = NULL;
 	var = malloc(sizeof(char) * (j + 1));
 	if (!var)
-		return (err_msg_str(-2, 0));
+		return (err_msg_str(MALLOC_ERR));
 	var = ft_strncpy(var, &str[i + 1], j);
 	val = ft_getenv(var);
 	free(var);

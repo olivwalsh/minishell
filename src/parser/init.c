@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:41:47 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 14:25:12 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:54:23 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_redir	*create_redir(void)
 	redir = malloc(sizeof(t_redir));
 	if (!redir)
 	{
-		err_msg_str(-2, 0);
+		err_msg_str(MALLOC_ERR);
 		return (NULL);
 	}
 	memset(redir, 0, sizeof(t_redir));
@@ -33,7 +33,7 @@ t_cmd	*init_cmd(void)
 	new = malloc(sizeof(t_cmd));
 	if (!new)
 	{
-		err_msg_str(-2, 0);
+		err_msg_str(MALLOC_ERR);
 		return (NULL);
 	}
 	memset(new, 0, sizeof(t_cmd));
@@ -53,7 +53,7 @@ t_cmdlst	*create_cmdlst(int type, t_cmd *cmd)
 	new = malloc(sizeof(t_cmdlst));
 	if (!new)
 	{
-		err_msg_str(-2, 0);
+		err_msg_str(MALLOC_ERR);
 		return (NULL);
 	}
 	new->type = type;
@@ -92,14 +92,14 @@ t_cmd	*create_cmd(t_token **token)
 		else if (is_redir(*token)
 			&& (!(*token)->next || (*token)->next->type != WORD))
 		{
-			err_msg_str(-4, 0);
+			err_msg_str(AMB_REDIR);
 			return (NULL);
 		}
 		else if ((*token)->type == WORD)
 			cmd_setargs(token, new);
 		else
 		{
-			err_msg_str(-3, 0);
+			err_msg_str(MISS_CMD);
 			return (NULL);
 		}
 	}

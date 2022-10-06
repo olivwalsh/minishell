@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:04:23 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 18:50:04 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:44:25 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*create_result(char *res)
 
 	new = malloc(sizeof(char) * (ft_strlen(res) + 1));
 	if (!new)
-		return (err_msg_str(-2, 0));
+		return (err_msg_str(MALLOC_ERR));
 	ft_strncpy(new, res, ft_strlen(res));
 	return (new);
 }

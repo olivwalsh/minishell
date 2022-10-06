@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 15:44:15 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:56:12 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:42:07 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**dup_env(char **env)
 	copy = malloc(sizeof(char *) * (ft_tablen(env) + 1));
 	if (!copy)
 	{
-		err_msg_str(-2, 0);
+		err_msg_str(MALLOC_ERR);
 		return (NULL);
 	}
 	i = 0;

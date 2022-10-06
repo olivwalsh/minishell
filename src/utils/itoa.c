@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 15:43:49 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 18:48:22 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:44:19 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_itoa(int n)
 	size += countdigits(l);
 	str = malloc(sizeof(char) * (size + 1));
 	if (!str)
-		return (err_msg_str(-2, 0));
+		return (err_msg_str(MALLOC_ERR));
 	if (n < 0)
 		str[0] = '-';
 	putnbr(l, str, size - 1);

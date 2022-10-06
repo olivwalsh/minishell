@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:22:28 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/02 18:14:19 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:49:06 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,18 @@
 // Keys
 # define KEY_NONE 0
 # define KEY_CTRL_C 3
-# define KEY_CTRL_D 4 
+# define KEY_CTRL_D 4
+
+// Error code
+# define MALLOC_ERR -101
+# define SYNTAX_ERR -102
+# define MISS_CMD -103
+# define AMB_REDIR -104
+# define NO_FILE -105
+# define NO_OPTION -106
+# define NO_ID -107
+# define TOO_MANY_ARGS -108
+# define NUM_ARG -109
+# define NO_CMD 127
 
 #endif
