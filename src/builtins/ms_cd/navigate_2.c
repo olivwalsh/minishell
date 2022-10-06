@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:43:51 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/04 14:33:51 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:21:04 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ int	nav_pwd(char **env)
 
 	pwd = ft_getenv("PWD");
 	if (chdir(pwd) < 0)
+	{
+		free(pwd);
 		return (err_bd(0, errno, "minishell: cd: ", pwd));
-	set_pwd(pwd, env);
+	}
+	set_pwd(env);
+	free(pwd);
 	return (EXIT_SUCCESS);
 }
 
@@ -31,8 +35,12 @@ int	nav_oldpwd(char **env)
 
 	oldpwd = ft_getenv("OLDPWD");
 	if (chdir(oldpwd) < 0)
+	{
+		free(oldpwd);
 		return (err_bd(0, errno, "minishell: cd: ", oldpwd));
-	set_pwd(oldpwd, env);
+	}
+	set_pwd(env);
+	free(oldpwd);
 	return (EXIT_SUCCESS);
 }
 
@@ -61,7 +69,8 @@ int	nav_back(char *origin, char **env)
 		i = 1;
 	new = ft_strncpy(new, origin, i);
 	chdir(new);
-	set_pwd(new, env);
+	set_pwd(env);
+	free(new);
 	return (EXIT_SUCCESS);
 }
 
@@ -80,14 +89,17 @@ int	nav_backwards(char *path, char **env)
 		free(pwd);
 		path += 3;
 	}
-	if (!path || !path[0])
-		return (EXIT_SUCCESS);
-	if (!ft_strcmp(path, ".."))
-		nav_back(pwd, env);
-	else if (!ft_strcmp(path, ".") || !ft_strcmp(path, "./"))
+	if (!path || !path[0]
+		|| !ft_strcmp(path, ".") || !ft_strcmp(path, "./"))
 		return (EXIT_SUCCESS);
 	pwd = ft_getenv("PWD");
-	res = nav_relative(pwd, path, env);
+	if (!ft_strncmp(path, "..", 3))
+	{
+		nav_back(pwd, env);
+		path += 2;
+	}
+	if (path && path[0])
+		res = nav_relative(pwd, path, env);
 	free(pwd);
 	return (res);
 }
@@ -96,6 +108,6 @@ int	nav_absolute(char *path, char **env)
 {
 	if (chdir(path) < 0)
 		return (err_bd(0, errno, "minishell: cd: ", path));
-	set_pwd(path, env);
+	set_pwd(env);
 	return (EXIT_SUCCESS);
 }

@@ -6,26 +6,28 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:23:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/05 16:30:08 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:43:47 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_phrase(t_token *token)
+int	bracket_checker(t_token *head)
 {
-	if (token && (token->type == WORD || token->type == SGL_QUOTE \
-		|| token->type == DBL_QUOTE))
-		return (1);
-	return (0);
-}
+	int	count;
+	int	order;
 
-static int	is_connector(t_token *token)
-{
-	if (token && (token->type == OPERAND || token->type == OPEROR \
-		|| token->type == PIPE))
-		return (1);
-	return (0);
+	count = brk_count(head);
+	order = brk_order(head);
+	if (count > 0 || count != order)
+		err_msg(-1, ")", 1);
+	else if (count < 0)
+		err_msg(-1, "(", 1);
+	if (count != 0 || order != 0)
+		return (EXIT_FAILURE);
+	if (brk_placement(head))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	brk_placement(t_token *head)
@@ -45,15 +47,10 @@ int	brk_placement(t_token *head)
 		while (tmp->type != DBL_QUOTE \
 			&& tmp->type != SGL_QUOTE && str && str[i])
 		{
-			if (str[i] == '(' || str[i] == ')')
+			if ((str[i] == '(' || str[i] == ')') && is_brk_problem(str[i], tmp))
 			{
-				if ((str[i] == '(' && tmp->next && tmp->next->type == CLOSE_BRK) \
-					|| (str[i] == '(' && tmp->prev && !is_connector(tmp->prev)) \
-					|| (str[i] == ')' && tmp->prev && !is_phrase(tmp->prev)))
-				{
-					str[i + 1] = '\0';
-					return (err_msg(-1, &str[i], 1));
-				}
+				str[i + 1] = '\0';
+				return (err_msg(-1, &str[i], 1));
 			}
 			i++;
 		}
