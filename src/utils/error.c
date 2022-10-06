@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 14:10:38 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:00:02 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	err_cmd(int code, char *cmd)
 	}
 	else if (code == NO_FILE)
 		write(STDERR_FILENO, ": no such file or directory\n", 29);
+	else if (code == FILE_ARG)
+		write(STDERR_FILENO, ": filename argument required\n", 30);
 	return (EXIT_FAILURE);
 }
 

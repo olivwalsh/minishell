@@ -6,11 +6,20 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:46:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 13:46:18 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:00:16 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	cmd_checker(char *cmd)
+{
+	if (!ft_strcmp("..", cmd))
+		return (err_cmd(NO_CMD, cmd));
+	if (!ft_strcmp(".", cmd))
+		return (err_cmd(FILE_ARG, cmd));
+	return (EXIT_SUCCESS);
+}
 
 char	*get_cmdpath(char *cmd)
 {
@@ -27,11 +36,8 @@ char	*get_cmdpath(char *cmd)
 	}
 	path_list = ft_split(env, ':');
 	free(env);
-	if (!ft_strcmp("..", cmd))
-	{
-		err_cmd(NO_CMD, cmd);
+	if (cmd_checker(cmd))
 		return (NULL);
-	}
 	if (!access(cmd, X_OK))
 		return (cmd);
 	i = 0;
