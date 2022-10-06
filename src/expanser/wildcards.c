@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:57:07 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/02 17:02:45 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:35:14 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	specify_wildcard(char *wildcard, char **prefix, char **suffix)
 		*suffix = ft_strndup(&wildcard[i + 1], j);
 }
 
-static void	insert_file(t_token **token, char *file)
+static void	insert_file(t_token **token, char *file, int *found)
 {
 	char	*prefix;
 	char	*suffix;
@@ -68,6 +68,7 @@ static void	insert_file(t_token **token, char *file)
 	{
 		file = ft_strjoin(file, " ", 0);
 		add_token(create_token(WORD, file), token);
+		*found = TRUE;
 	}
 }
 
@@ -76,7 +77,9 @@ int	expanse_wildcard(t_token **token)
 	struct dirent	*entry;
 	DIR				*folder;
 	char			*pwd;
+	int				found;
 
+	found = FALSE;
 	pwd = NULL;
 	pwd = getcwd(pwd, 0);
 	if (!pwd)
@@ -90,11 +93,11 @@ int	expanse_wildcard(t_token **token)
 	entry = readdir(folder);
 	while (entry)
 	{
-		insert_file(token, entry->d_name);
+		insert_file(token, entry->d_name, &found);
 		entry = readdir(folder);
 	}
-	delete_token(token);
-	display_tokens();
+	if (found)
+		delete_token(token);
 	closedir(folder);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:23 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 13:33:44 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:25:38 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	unset_checker(char **args, int i)
 	j = 1;
 	if (!args[i][0])
 		return (err_bd(NO_ID, 0, "minishell: unset: `", args[i]));
+	if (args[i][0] == '-')
+		return (err_bd(NO_OPTION, 0, "minishell: unset: ", args[i]));
 	if (!is_alpha(args[i][0]) && args[i][0] != '_' && args[i][0] != '\\')
 		return (err_bd(NO_ID, 0, "minishell: unset: `", args[i]));
 	while (args && args[i] && args[i][j])
@@ -84,24 +86,25 @@ int	ms_unset(char *cmd, char **args, char **env)
 	if (ft_strcmp("unset", cmd))
 		return (EXIT_FAILURE);
 	i = 0;
-	if (args[0][0] == '-')
-		return (err_bd(NO_OPTION, 0, "minishell: unset: ", args[i]));
 	str = NULL;
 	while (args && args[i])
 	{
-		if (unset_checker(args, i))
-			return(EXIT_FAILURE);
-		str = ft_strjoin(args[i], "=", 0);
-		if (!str)
-			return (EXIT_FAILURE);
-		del_env(str, env);
-		if (g_global.data->err)
+		if (!unset_checker(args, i))
 		{
+			str = ft_strjoin(args[i], "=", 0);
+			if (!str)
+				return (EXIT_FAILURE);
+			del_env(str, env);
+			if (g_global.data->err)
+			{
+				free(str);
+				return (EXIT_FAILURE);
+			}
 			free(str);
-			return (EXIT_FAILURE);
 		}
-		free(str);
 		i++;
 	}
+	if (g_global.data->err)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

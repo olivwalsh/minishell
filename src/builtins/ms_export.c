@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 13:33:36 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:26:24 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,16 @@ int	ms_export(char *cmd, char **args, char **env)
 		display_export(env);
 		return (EXIT_SUCCESS);
 	}
-	if (!args[0][0])
-		return (err_bd(NO_ID, 0, "minishell: export: `", args[i]));
 	while (args && args[i])
 	{
-		if (export_checker(args, i))
-			return (EXIT_FAILURE);
-		if (strchr(args[i], '=') && args[i][0] != '=')
-			add_env(args[i], env);
+		if (!export_checker(args, i))
+		{
+			if (strchr(args[i], '=') && args[i][0] != '=')
+				add_env(args[i], env);
+		}
 		i++;
 	}
+	if (g_global.data->err)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

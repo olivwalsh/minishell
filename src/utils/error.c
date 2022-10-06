@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 13:44:20 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:10:38 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ int	err_bd(int code, int err, char *func, char *arg)
 		write(STDERR_FILENO, strerror(err), ft_strlen(strerror(err)));
 		write(STDERR_FILENO, "\n", 1);
 	}
+	g_global.data->err = 1;
 	return (EXIT_FAILURE);
 }
