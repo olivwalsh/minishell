@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:57:07 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 14:35:14 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:45:20 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	insert_file(t_token **token, char *file, int *found)
 	specify_wildcard((*token)->value, &prefix, &suffix);
 	if (prefix)
 		plen = ft_strlen(prefix);
-	if (!ft_strcmp(file, ".") || !ft_strcmp(file, ".."))
+	if (!ft_strncmp(file, ".", 2) || !ft_strncmp(file, "..", 3))
 		return ;
 	if ((prefix && !suffix && !ft_strncmp(file, prefix, plen))
 		|| (suffix && !prefix && has_suffix(file, suffix))
