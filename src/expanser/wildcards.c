@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:57:07 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 18:45:20 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 19:06:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ static void	specify_wildcard(char *wildcard, char **prefix, char **suffix)
 	i = 0;
 	*prefix = NULL;
 	*suffix = NULL;
-	while (wildcard && wildcard[i] && wildcard[i] != '*')
-		i++;
-	if (i != 0)
+	
 		*prefix = ft_strndup(wildcard, i);
 	j = i + 1;
 	while (wildcard && wildcard[j])
@@ -50,26 +48,50 @@ static void	specify_wildcard(char *wildcard, char **prefix, char **suffix)
 
 static void	insert_file(t_token **token, char *file, int *found)
 {
-	char	*prefix;
-	char	*suffix;
-	int		plen;
+	file = ft_strjoin(file, " ", 0);
+	add_token(create_token(WORD, file), token);
+	*found = TRUE;
+}
 
-	plen = 0;
-	specify_wildcard((*token)->value, &prefix, &suffix);
-	if (prefix)
-		plen = ft_strlen(prefix);
+int	next_wc(char *wildcard)
+{
+	int	i;
+
+	i = 0;
+	while (wildcard && wildcard[i] && wildcard[i] != '*')
+		i++;
+	if (i == 0 || i = ft_strlen(wildcard))
+		return (0);
+	return (i);
+}
+
+static int	check_file(char *wildcard, char *file)
+{
+	char	*prefix;
+	int		wc;
+	// char	*suffix;
+	// int		plen;
+
+	// plen = 0;
+	// specify_wildcard((*token)->value, &prefix, &suffix);
+	// if (prefix)
+	// 	plen = ft_strlen(prefix);
 	if (!ft_strncmp(file, ".", 2) || !ft_strncmp(file, "..", 3))
-		return ;
-	if ((prefix && !suffix && !ft_strncmp(file, prefix, plen))
-		|| (suffix && !prefix && has_suffix(file, suffix))
-		|| (suffix && prefix
-			&& !ft_strncmp(file, prefix, plen) && has_suffix(file, suffix))
-		|| (!suffix && !prefix))
+		return (0);
+	wc = next_wc(wildcard);
+	while (file && )
+	if (!ft_strncmp(file, wildcard, next_wc(wildcard) - 1));
 	{
-		file = ft_strjoin(file, " ", 0);
-		add_token(create_token(WORD, file), token);
-		*found = TRUE;
+		wildcard += wc;
+		file += wc;
 	}
+	// if ((prefix && !suffix && !ft_strncmp(file, prefix, plen))
+	// 	|| (suffix && !prefix && has_suffix(file, suffix))
+	// 	|| (suffix && prefix
+	// 		&& !ft_strncmp(file, prefix, plen) && has_suffix(file, suffix))
+	// 	|| (!suffix && !prefix))
+	
+
 }
 
 int	expanse_wildcard(t_token **token)
@@ -93,7 +115,8 @@ int	expanse_wildcard(t_token **token)
 	entry = readdir(folder);
 	while (entry)
 	{
-		insert_file(token, entry->d_name, &found);
+		if (check_file((*token)->value, entry->d_name))
+			insert_file(token, entry->d_name, &found);
 		entry = readdir(folder);
 	}
 	if (found)
