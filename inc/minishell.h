@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 11:42:01 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:45:39 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
 int		err_msg(int code, char c, int err);
-int		err_cmd(char *cmd);
+int		err_cmd(int code, char *cmd);
 int		err_bd(int code, int err, char *func, char *arg);
 char	*get_next_line(int fd);
 char	*err_msg_str(int code);

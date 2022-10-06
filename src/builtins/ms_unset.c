@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:23 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 11:50:36 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:33:44 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,24 @@ int	del_env(char *str, char **env)
 	return (EXIT_SUCCESS);
 }
 
+int	unset_checker(char **args, int i)
+{
+	int		j;
+
+	j = 1;
+	if (!args[i][0])
+		return (err_bd(NO_ID, 0, "minishell: unset: `", args[i]));
+	if (!is_alpha(args[i][0]) && args[i][0] != '_' && args[i][0] != '\\')
+		return (err_bd(NO_ID, 0, "minishell: unset: `", args[i]));
+	while (args && args[i] && args[i][j])
+	{
+		if (!is_alnum(args[i][j]) && args[i][j] != '_' && args[i][j] != '\\')
+			return (err_bd(NO_ID, 0, "minishell: unset: `", args[i]));
+		j++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	ms_unset(char *cmd, char **args, char **env)
 {
 	int		i;
@@ -71,6 +89,8 @@ int	ms_unset(char *cmd, char **args, char **env)
 	str = NULL;
 	while (args && args[i])
 	{
+		if (unset_checker(args, i))
+			return(EXIT_FAILURE);
 		str = ft_strjoin(args[i], "=", 0);
 		if (!str)
 			return (EXIT_FAILURE);

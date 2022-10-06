@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 11:52:50 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:44:20 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,18 @@ char	*err_msg_str(int code)
 	return (NULL);
 }
 
-int	err_cmd(char *cmd)
+int	err_cmd(int code, char *cmd)
 {
 	write(STDERR_FILENO, "minishell: ", 11);
 	write(STDERR_FILENO, cmd, ft_strlen(cmd));
-	write(STDERR_FILENO, ": command not found\n", 21);
-	return (NO_CMD);
+	if (code == NO_CMD)
+	{
+		write(STDERR_FILENO, ": command not found\n", 21);
+		return (NO_CMD);
+	}
+	else if (code == NO_FILE)
+		write(STDERR_FILENO, ": no such file or directory\n", 29);
+	return (EXIT_FAILURE);
 }
 
 int	err_bd(int code, int err, char *func, char *arg)
@@ -59,9 +65,9 @@ int	err_bd(int code, int err, char *func, char *arg)
 	if (arg && err)
 		write(STDERR_FILENO, ": ", 2);
 	if (code == NO_FILE)
-		write(STDERR_FILENO, ": No such file or directory\n", 29);
+		write(STDERR_FILENO, ": no such file or directory\n", 29);
 	else if (code == NO_OPTION)
-		write(STDERR_FILENO, ": Invalid option\n", 18);
+		write(STDERR_FILENO, ": invalid option\n", 18);
 	else if (code == NO_ID)
 		write(STDERR_FILENO, "': not a valid identifier\n", 27);
 	else if (code == TOO_MANY_ARGS)

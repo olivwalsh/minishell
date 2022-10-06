@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 11:50:08 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:33:36 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,20 @@ int	add_env(char *str, char **env)
 	return (EXIT_SUCCESS);
 }
 
-int	args_checker(char **args, int i)
+int	export_checker(char **args, int i)
 {
 	int		j;
 
 	j = 1;
-	if (args[i][j] == '-')
+	if (!args[i][0])
+		return (err_bd(NO_ID, 0, "minishell: export: `", args[i]));
+	if (args[i][0] == '-')
 		return (err_bd(NO_OPTION, 0, "minishell: export: ", args[i]));
+	if (!is_alpha(args[i][0]) && args[i][0] != '_' && args[i][0] != '\\')
+		return (err_bd(NO_ID, 0, "minishell: export: `", args[i]));
 	while (args && args[i] && args[i][j] && args[i][j] != '=')
 	{
-		if (!is_alpha(args[i][0]) && args[i][0] != '_' && args[i][0] != '/')
-			return (err_bd(NO_ID, 0, "minishell: export: `", args[i]));
-		if (!is_alnum(args[i][j]) && args[i][j] != '_')
+		if (!is_alnum(args[i][j]) && args[i][j] != '_' && args[i][j] != '\\')
 			return (err_bd(NO_ID, 0, "minishell: export: `", args[i]));
 		j++;
 	}
@@ -111,7 +113,7 @@ int	ms_export(char *cmd, char **args, char **env)
 		return (err_bd(NO_ID, 0, "minishell: export: `", args[i]));
 	while (args && args[i])
 	{
-		if (args_checker(args, i))
+		if (export_checker(args, i))
 			return (EXIT_FAILURE);
 		if (strchr(args[i], '=') && args[i][0] != '=')
 			add_env(args[i], env);
