@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 15:34:56 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 19:10:30 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ static int	var_expanser(t_token **tokens, int *res, int exstatus)
 	{
 		if (tmp->type == VAR && tmp->var_stop > -1)
 			*res = var_expanser(tokens, res, exstatus);
+		if (tmp->spc)
+			tmp->value = add_space(tmp->value);
 		tmp = tmp->next;
 	}
 	return (*res);
@@ -92,7 +94,10 @@ int	ms_expanser(t_token **tokens, int *res, int exstatus)
 			if (!*res && !word_expanser(tokens, res))
 			{
 				if (!change_type(tokens))
+				{
+					display_tokens();
 					return (EXIT_SUCCESS);
+				}
 			}
 		}
 	}

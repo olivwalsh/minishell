@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 11:42:52 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:21:25 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*add_space(char *str)
 	return (new);
 }
 
-void	check_new(t_token *new)
+void	check_new(t_token *new, t_token *token)
 {
 	t_token	*tmp;
 
@@ -45,6 +45,8 @@ void	check_new(t_token *new)
 			tmp->type = WORD;
 			tmp->value = add_space(tmp->value);
 		}
+		if (!tmp->next)
+			tmp->spc = token->spc;
 		tmp = tmp->next;
 	}
 }
@@ -90,7 +92,7 @@ int	expanse_var(t_token **tokens, int *res)
 		return (EXIT_FAILURE);
 	if (str)
 		free(str);
-	check_new(new);
+	check_new(new, *tokens);
 	insert_token(tokens, new);
 	return (EXIT_SUCCESS);
 }

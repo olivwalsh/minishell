@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:34:44 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 14:54:16 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:55:10 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_delimiter(char *str)
 	return (i);
 }
 
-int	is_delimiter_var(char *str)
+int	is_delimiter_var(char *str, int *j)
 {
 	char	*special;
 	char	*operand;
@@ -36,9 +36,16 @@ int	is_delimiter_var(char *str)
 	i = 0;
 	special = "|<>\'\"().$=/";
 	operand = "&&";
-	while (str && str[i] && (str[i] > 32 && str[i] < 127) \
+	while (str && str[i] && (str[i] > 31 && str[i] < 127) \
 		&& !strchr(special, str[i]) && ft_strncmp(operand, &str[i], 2))
+	{
+		if (str[i] == ' ' && str[i + 1] > 32 && str[i + 1] < 127)
+		{
+			*j = 1;
+			break ;
+		}
 		i++;
+	}
 	return (i);
 }
 

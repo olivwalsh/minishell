@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:57:07 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 14:35:14 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:07:16 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	insert_file(t_token **token, char *file, int *found)
 		|| (!suffix && !prefix))
 	{
 		file = ft_strjoin(file, " ", 0);
-		add_token(create_token(WORD, file), token);
+		add_token(create_token(WORD, file, 0), token);
 		*found = TRUE;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:51 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 14:54:44 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:51:22 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ms_parser(t_token *tokens, t_cmdlst **cmds, int *res)
 {
 	t_token	*tmp;
 
+	// display_tokens();
 	tmp = tokens;
 	while (!*res && tmp && !g_global.data->err)
 	{

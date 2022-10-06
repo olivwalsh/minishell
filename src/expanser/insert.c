@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:08:26 by foctavia          #+#    #+#             */
-/*   Updated: 2022/08/28 20:15:43 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:00:50 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	insert_head(t_token *tokens, t_token *new)
 	tokens->value = new->value;
 	tokens->type = new->type;
 	tokens->var_stop = new->var_stop;
+	tokens->spc = new->spc;
 	if ((new)->next)
 	{
 		tmp1 = tokens->next;
@@ -42,6 +43,7 @@ static void	insert_tail(t_token *tokens, t_token *new)
 	tokens->value = new->value;
 	tokens->type = new->type;
 	tokens->var_stop = new->var_stop;
+	tokens->spc = new->spc;
 	if ((new)->next)
 	{
 		tokens->next = new->next;

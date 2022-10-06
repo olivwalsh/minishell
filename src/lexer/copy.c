@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:58 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 11:43:11 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:54:22 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ char	*copy_word(char *str, int *i)
 	return (value);
 }
 
-char	*copy_var(char *str, int *i)
+char	*copy_var(char *str, int *i, int *spc)
 {
 	int		j;
 	char	*value;
 
-	j = is_delimiter_var(&str[1]) + 1;
+	j = is_delimiter_var(&str[1], spc) + 1;
 	value = malloc(sizeof(char) * (j + 1));
 	if (!value)
 		return (err_msg_str(MALLOC_ERR));

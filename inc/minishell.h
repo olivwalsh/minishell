@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 15:27:17 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:06:38 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		tokenize(t_token **tokens, char *str, int *i, int type);
 int		lexer_checker(t_token *head);
 int		is_delimiter(char *str);
 int		is_delimiter_spc(char *str);
-int		is_delimiter_var(char *str);
+int		is_delimiter_var(char *str, int *j);
 int		is_isspace(char c);
 int		is_quote(char *str, int *type);
 int		is_oper(char c1, char c2, int *type);
@@ -70,12 +70,11 @@ int		brk_order(t_token *head);
 int		brk_placement(t_token *head);
 char	*copy_chars(char *str, int *i, int n);
 char	*copy_word(char *str, int *i);
-char	*copy_var(char *str, int *i);
+char	*copy_var(char *str, int *i, int *spc);
 char	*copy_quote(char *str, int *i);
 void	add_token(t_token *new, t_token **tokens);
-void	check_new(t_token *new);
 void	delete_token(t_token **tokens);
-t_token	*create_token(int type, char *value);
+t_token	*create_token(int type, char *value, int spc);
 /*
 **
 ** EXPANSER
@@ -89,6 +88,7 @@ int		expanse_tilde(t_token **token);
 int		expanse_wildcard(t_token **wildcard);
 int		change_type(t_token **tokens);
 void	insert_token(t_token **tokens, t_token *new);
+void	check_new(t_token *new, t_token *token);
 char	*add_space(char *str);
 void	delete_token(t_token **tokens);
 /*
