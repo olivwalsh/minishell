@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:52:25 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 13:47:25 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:19:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	nav_home(char **env)
 	{
 		err_bd(0, errno, "minishell: cd: ", "HOME not set\n");
 		free(home);
-		return (EXIT_FAILURE);		
+		return (EXIT_FAILURE);
 	}
 	set_pwd(env);
 	free(home);

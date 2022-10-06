@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 13:24:34 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:24:06 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 t_global	g_global = {NULL};
 
-static void ms_minishell(t_data *data, int *res)
+static void	ms_minishell(t_data *data, int *res)
 {
 	int	exstatus;
-	
+
 	exstatus = *res;
 	if (data->shell.input)
 		free(data->shell.input);
@@ -40,7 +40,8 @@ static void ms_minishell(t_data *data, int *res)
 
 int	ms_error(void)
 {
-	write(STDERR_FILENO, "minishell: wrong usage: ./minishell echo coucou\n", 49);
+	write(STDERR_FILENO, "minishell: ", 11);
+	write(STDERR_FILENO, "wrong usage: ./minishell echo coucou\n", 38);
 	write(STDERR_FILENO, "minishell: correct usage: ./minishell\n", 39);
 	write(STDERR_FILENO, "-> minishell$ echo coucou\n", 27);
 	return (EXIT_FAILURE);

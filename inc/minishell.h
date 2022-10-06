@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 13:27:36 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:44:11 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int		is_isspace(char c);
 int		is_quote(char *str, int *type);
 int		is_oper(char c1, char c2, int *type);
 int		is_special(char *str, int *type);
+int		is_brk_problem(char c, t_token *tmp);
+int		bracket_checker(t_token *head);
 int		brk_count(t_token *head);
 int		brk_order(t_token *head);
 int		brk_placement(t_token *head);
