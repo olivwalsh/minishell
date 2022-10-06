@@ -6,16 +6,16 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 11:50:48 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:50:57 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int    ms_cd(char *cmd, char **args, char **env)
+int	ms_cd(char *cmd, char **args, char **env)
 {
-    int        res;
-    char    *pwd;
+	int		res;
+	char	*pwd;
 
     res = EXIT_SUCCESS;
     (void)cmd;

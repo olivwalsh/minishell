@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 13:45:39 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:49:51 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int		is_isspace(char c);
 int		is_quote(char *str, int *type);
 int		is_oper(char c1, char c2, int *type);
 int		is_special(char *str, int *type);
+int		is_brk_problem(char c, t_token *tmp);
+int		bracket_checker(t_token *head);
 int		brk_count(t_token *head);
 int		brk_order(t_token *head);
 int		brk_placement(t_token *head);
@@ -179,7 +181,7 @@ int		ms_pwd(char *cmd, char **args, char **env);
 int		display_env(char **env);
 int		display_export(char **env);
 int		cd_navigate(char *path, char **env, char *pwd);
-int		set_pwd(char *newpath, char **env);
+int		set_pwd(char **env);
 int		set_oldpwd(char *newpath, char **env);
 int		is_absolute(char *path);
 int		nav_backwards(char *path, char **env);

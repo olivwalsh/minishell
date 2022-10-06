@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:41:47 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 11:43:50 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:54:23 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_cmd	*init_cmd(void)
 t_cmdlst	*create_cmdlst(int type, t_cmd *cmd)
 {
 	t_cmdlst	*new;
-	
+
 	if (type == WORD && !cmd)
 		return (NULL);
 	new = malloc(sizeof(t_cmdlst));
@@ -89,7 +89,8 @@ t_cmd	*create_cmd(t_token **token)
 	{
 		if (is_redir(*token) && (*token)->next && (*token)->next->type == WORD)
 			cmd_addredir(token, new);
-		else if (is_redir(*token) && (!(*token)->next || (*token)->next->type != WORD))
+		else if (is_redir(*token)
+			&& (!(*token)->next || (*token)->next->type != WORD))
 		{
 			err_msg_str(AMB_REDIR);
 			return (NULL);

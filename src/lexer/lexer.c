@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:16:38 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/05 17:09:27 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:46:15 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ int	ms_lexer(char *str, t_token **tokens, int *res)
 			*res = tokenize(tokens, &str[i], &i, WORD);
 	}
 	if (g_global.data->err)
-	{
 		*res = EXIT_FAILURE;
-		return (*res);
-	}
-	*res = lexer_checker(*tokens);
+	if (!*res)
+		*res = lexer_checker(*tokens);
 	return (*res);
 }

@@ -6,25 +6,29 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:44:17 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/15 17:31:21 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 13:30:24 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	set_pwd(char *newpath, char **env)
+int	set_pwd(char **env)
 {
 	char	**path;
 	int		res;
+	char	*cwd;
 
 	res = EXIT_SUCCESS;
+	cwd = NULL;
+	cwd = getcwd(cwd, 0);
+	if (!cwd)
+		free(cwd);
 	path = malloc(sizeof(char *) * 2);
 	if (!path)
 		return (EXIT_FAILURE);
-	path[0] = ft_strjoin("PWD=", newpath, 0);
+	path[0] = ft_strjoin("PWD=", cwd, 0);
 	path[1] = NULL;
 	res = ms_export("export", path, env);
-	free(newpath);
 	free(path[0]);
 	free(path[1]);
 	free(path);
