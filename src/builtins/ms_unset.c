@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:23 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:55:43 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:50:36 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**remove_env(char **old, int n)
 	new = malloc(sizeof(char *) * ft_tablen(old));
 	if (!new)
 	{
-		err_msg_str(-2, 0);
+		err_msg_str(MALLOC_ERR);
 		return (NULL);
 	}
 	i = 0;
@@ -67,7 +67,7 @@ int	ms_unset(char *cmd, char **args, char **env)
 		return (EXIT_FAILURE);
 	i = 0;
 	if (args[0][0] == '-')
-		return (err_bd(-2, 0, "minishell: unset: ", args[i]));
+		return (err_bd(NO_OPTION, 0, "minishell: unset: ", args[i]));
 	str = NULL;
 	while (args && args[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:11 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:53:40 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:28:40 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	is_quote(char *str, int *type)
 		}
 		i++;
 	}
-	str[1] = '\0';
-	err_msg(-1, &str[0], 1);
+	err_msg(SYNTAX_ERR, str[0], 1);
 	return (0);
 }
 

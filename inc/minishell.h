@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/05 17:08:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:42:01 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int			read_stdin(char *delimiter, int fd);
 int			fork_stdin(char *delimiter);
 int			create_file(char *file);
 int			append_file(char *file);
-int			err_cmd(char *cmd);
 void		check_builtin(t_cmd *new);
 void		add_cmdlst(t_cmdlst **lst, t_cmdlst	*new);
 void		cmd_setargs(t_token **token, t_cmd *new);
@@ -149,10 +148,11 @@ int		ft_isdigit(char c);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strlen(char *str);
-int		err_msg(int code, char *c, int err);
+int		err_msg(int code, char c, int err);
+int		err_cmd(char *cmd);
 int		err_bd(int code, int err, char *func, char *arg);
 char	*get_next_line(int fd);
-char	*err_msg_str(int code, char *str);
+char	*err_msg_str(int code);
 char	*ft_itoa(int n);
 char	*ft_getenv(char *name);
 char	*ft_strchr(char *str, int c);

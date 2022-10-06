@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/05 12:00:34 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:43:23 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*copy_cmd(t_token **token)
 	len = count_words(token);
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
-		return (err_msg_str(-2, 0));
+		return (err_msg_str(MALLOC_ERR));
 	if (len == ft_strtoken((*token)->value))
 		ft_strncpy(str, (*token)->value, len);
 	else

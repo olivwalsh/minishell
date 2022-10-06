@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 19:01:56 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:50:48 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int    ms_cd(char *cmd, char **args, char **env)
         return (EXIT_FAILURE);
     }
     if (args && args[1] && args[2])
-        return (err_bd(-4, 0, "minishell: cd", NULL));
+        return (err_bd(TOO_MANY_ARGS, 0, "minishell: cd", NULL));
     else
         res = cd_navigate(args[1], env, pwd);
     if (res)

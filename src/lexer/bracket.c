@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bracket.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:23:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/05 16:30:08 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:28:29 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,8 @@ int	brk_placement(t_token *head)
 	t_token	*tmp;
 	char	*str;
 	int		i;
-	int		brk;
 
 	tmp = head;
-	brk = 0;
-	(void)brk;
 	while (tmp)
 	{
 		i = 0;
@@ -50,10 +47,7 @@ int	brk_placement(t_token *head)
 				if ((str[i] == '(' && tmp->next && tmp->next->type == CLOSE_BRK) \
 					|| (str[i] == '(' && tmp->prev && !is_connector(tmp->prev)) \
 					|| (str[i] == ')' && tmp->prev && !is_phrase(tmp->prev)))
-				{
-					str[i + 1] = '\0';
-					return (err_msg(-1, &str[i], 1));
-				}
+					return (err_msg(SYNTAX_ERR, str[i], 1));
 			}
 			i++;
 		}

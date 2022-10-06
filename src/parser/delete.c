@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:48:08 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:38:26 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:43:30 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*delete_quotes(char *src, char *rest)
 	if (!dest)
 	{
 		free(src);
-		return (err_msg_str(-2, 0));
+		return (err_msg_str(MALLOC_ERR));
 	}
 	dest = non_quote(dest, src, type);
 	if (quote_exist(&rest[j], &i))

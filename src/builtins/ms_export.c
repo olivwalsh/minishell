@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/05 16:06:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:50:08 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**redo_malloc(char **old, char *str, int n)
 	new = malloc(sizeof(char *) * (n + 1));
 	if (!new)
 	{
-		err_msg_str(-2, 0);
+		err_msg_str(MALLOC_ERR);
 		return (NULL);
 	}
 	i = 0;
@@ -59,7 +59,7 @@ int	add_env(char *str, char **env)
 
 	new = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!new)
-		return (err_msg(-2, 0, 1));
+		return (err_msg(MALLOC_ERR, 0, 1));
 	new = ft_strncpy(new, str, ft_strlen(str));
 	str = cut_str(str);
 	i = 0;
@@ -83,13 +83,13 @@ int	args_checker(char **args, int i)
 
 	j = 1;
 	if (args[i][j] == '-')
-		return (err_bd(-2, 0, "minishell: export: ", args[i]));
+		return (err_bd(NO_OPTION, 0, "minishell: export: ", args[i]));
 	while (args && args[i] && args[i][j] && args[i][j] != '=')
 	{
 		if (!is_alpha(args[i][0]) && args[i][0] != '_' && args[i][0] != '/')
-			return (err_bd(-3, 0, "minishell: export: `", args[i]));
+			return (err_bd(NO_ID, 0, "minishell: export: `", args[i]));
 		if (!is_alnum(args[i][j]) && args[i][j] != '_')
-			return (err_bd(-3, 0, "minishell: export: `", args[i]));
+			return (err_bd(NO_ID, 0, "minishell: export: `", args[i]));
 		j++;
 	}
 	return (EXIT_SUCCESS);
@@ -108,7 +108,7 @@ int	ms_export(char *cmd, char **args, char **env)
 		return (EXIT_SUCCESS);
 	}
 	if (!args[0][0])
-		return (err_bd(-3, 0, "minishell: export: `", args[i]));
+		return (err_bd(NO_ID, 0, "minishell: export: `", args[i]));
 	while (args && args[i])
 	{
 		if (args_checker(args, i))

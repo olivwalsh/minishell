@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:58 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/05 17:09:00 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:43:11 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*copy_chars(char *str, int *i, int n)
 
 	value = malloc(sizeof(char) * (n + 1));
 	if (!value)
-		return (err_msg_str(-2, 0));
+		return (err_msg_str(MALLOC_ERR));
 	j = 0;
 	while (j < n)
 	{
@@ -39,7 +39,7 @@ char	*copy_word(char *str, int *i)
 	j = is_delimiter_spc(str);
 	value = malloc(sizeof(char) * (j + 1));
 	if (!value)
-		return (err_msg_str(-2, 0));
+		return (err_msg_str(MALLOC_ERR));
 	value = ft_strncpy(value, str, j);
 	*i += j;
 	return (value);
@@ -53,7 +53,7 @@ char	*copy_var(char *str, int *i)
 	j = is_delimiter_var(&str[1]) + 1;
 	value = malloc(sizeof(char) * (j + 1));
 	if (!value)
-		return (err_msg_str(-2, 0));
+		return (err_msg_str(MALLOC_ERR));
 	value = ft_strncpy(value, str, j);
 	*i += j;
 	return (value);
@@ -78,7 +78,7 @@ char	*copy_quote(char *str, int *i)
 	}
 	value = malloc(sizeof(char) * (j + 2));
 	if (!value)
-		return (err_msg_str(-2, 0));
+		return (err_msg_str(MALLOC_ERR));
 	value = ft_strncpy(value, str, j + 1);
 	*i += j + 1;
 	return (value);

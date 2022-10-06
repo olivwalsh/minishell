@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:44:58 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/05 16:32:37 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:30:01 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	bracket_checker(t_token *head)
 	count = brk_count(head);
 	order = brk_order(head);
 	if (count > 0 || count != order)
-		err_msg(-1, ")", 1);
+		err_msg(SYNTAX_ERR, ')', 1);
 	else if (count < 0)
-		err_msg(-1, "(", 1);
+		err_msg(SYNTAX_ERR, '(', 1);
 	if (count != 0 || order != 0)
 		return (EXIT_FAILURE);
 	if (brk_placement(head))
@@ -33,15 +33,12 @@ int	bracket_checker(t_token *head)
 int	redir_checker(t_token *head)
 {
 	t_token *tmp;
-	char	first[2];
 
 	tmp = head;
 	while (tmp)
 	{
-		first[0] =  tmp->value[0];
-		first[1] = '\0';
 		if (is_redir(tmp) && tmp->next && is_redir(tmp->next))
-			return (err_msg(-1, first, 1));
+			return (err_msg(SYNTAX_ERR, tmp->value[0], 1));
 		tmp = tmp->next;
 	}
 	return (EXIT_SUCCESS);

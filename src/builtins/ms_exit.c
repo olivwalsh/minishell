@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:28:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 19:02:12 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:49:02 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_flag(char *arg)
 	while (arg && arg[i])
 	{
 		if (!ft_isdigit(arg[i]))
-			return (err_bd(-5, 0, "exit\nminishell: exit: ", arg));
+			return (err_bd(NUM_ARG, 0, "exit\nminishell: exit: ", arg));
 		i++;
 	}
 	return (EXIT_SUCCESS);
