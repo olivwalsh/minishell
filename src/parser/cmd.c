@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 19:09:33 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/07 10:29:40 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ int	count_words(t_token **token, int *count)
 	tmp = *token;
 	while (tmp->next && tmp->next->type == WORD && tmp->next->value[0] != '-')
 	{
+		(*count)++;
 		str = tmp->next->value;
 		i += loop_words(str, &code);
 		if (code)
 			return (i);
-		(*count)++;
 		tmp = tmp->next;
 	}
 	return (i);
@@ -75,7 +75,6 @@ char	*copy_cmd(t_token **token)
 
 	count = 0;
 	len = count_words(token, &count);
-	printf("count is %d\n", count);
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (err_msg_str(MALLOC_ERR));
@@ -87,12 +86,10 @@ char	*copy_cmd(t_token **token)
 	{
 		join = NULL;
 		join = ft_strjoin(join, (*token)->value, 1);
-		printf("join is %s\n", join);
 		while ((*token)->next && (*token)->next->type == WORD && \
 			(*token)->next->value[0] != '-' && count)
 		{
 			join = ft_strjoin(join, (*token)->next->value, 1);
-			printf("join is |%s|\n", join);
 			count--;
 			*token = (*token)->next;
 		}

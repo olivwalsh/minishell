@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 17:56:14 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/07 10:30:18 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ms_minishell(t_data *data, int *res)
 		&& !ms_expanser(&data->tokens, res, exstatus)
 		&& !ms_parser(data->tokens, &data->cmds, res))
 	{
-		display_cmds();
+		// display_cmds();
 		*res = ms_execute(&data->cmds, data->shell.env);
 		*res = ms_wait(&data->cmds, *res);
 	}
