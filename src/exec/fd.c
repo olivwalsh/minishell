@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:05:55 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/05 11:40:22 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/07 18:03:58 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,19 @@ int	update_fd(t_cmd *cmd)
 {
 	if (cmd->fd_in > 0)
 	{
+		printf("in update fd_in is %d, in pid: %d\n", cmd->fd_in, getpid());
 		if (dup2(cmd->fd_in, STDIN_FILENO) < 0)
 			exit(errno);
 		close(cmd->fd_in);
+		printf("in close fd_in is %d, in pid: %d\n", cmd->fd_in, getpid());
 	}
 	if (cmd->fd_out > 0)
 	{
+		printf("in update fd_out is %d, in pid: %d\n", cmd->fd_out, getpid());
 		if (dup2(cmd->fd_out, STDOUT_FILENO) < 0)
 			exit(errno);
 		close(cmd->fd_out);
+		printf("in close fd_out is %d, in pid: %d\n", cmd->fd_out, getpid());
 	}
 	return (EXIT_SUCCESS);
 }
