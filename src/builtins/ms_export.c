@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 14:26:24 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:43:02 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ms_export(char *cmd, char **args, char **env)
 	int		i;
 
 	i = 0;
-	if (ft_strcmp("export", cmd))
+	if (ft_strncmp("export", cmd, 7))
 		return (EXIT_FAILURE);
 	if (!args || !args[0])
 	{

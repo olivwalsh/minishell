@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:13 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 11:47:17 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:42:38 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ms_env(char *cmd, char **args, char **env)
 {
-	if (ft_strcmp("env", cmd))
+	if (ft_strncmp("env", cmd, 4))
 		return (EXIT_FAILURE);
 	if (args && args[0] && args[0][0] == '-')
 		return (err_bd(NO_OPTION, 0, "env: ", args[0]));
