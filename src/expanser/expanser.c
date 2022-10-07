@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/07 10:30:42 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/07 11:14:03 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,14 @@ static int	word_expanser(t_token **tokens, int *res)
 	t_token		*tmp;
 
 	tmp = *tokens;
-	while (tmp && !g_global.data->err)
+	while (tokens && tmp && !g_global.data->err)
 	{
 		if (tmp->type == WORD && !ft_strncmp("~", tmp->value, 1))
 			*res = expanse_tilde(&tmp);
 		if (tmp->type == WORD && has_wildcard(tmp->value))
 			*res = expanse_wildcard(&tmp);
-		if (!tmp)
-			break ;
-		tmp = tmp->next;
+		if (tmp)
+			tmp = tmp->next;
 	}
 	return (*res);
 }
@@ -63,18 +62,17 @@ static int	var_expanser(t_token **tokens, int *res, int exstatus)
 	t_token		*tmp;
 
 	tmp = *tokens;
-	while (tmp && !g_global.data->err)
+	while (tokens && tmp && !g_global.data->err)
 	{
 		if (tmp->type == VAR && !ft_strncmp("$?", tmp->value, 2))
 			*res = expanse_exstatus(&tmp, exstatus);
 		if (tmp->type == VAR && tmp->var_stop > -1)
 			*res = expanse_var(&tmp, res);
-		if (!tmp)
-			break ;
-		tmp = tmp->next;
+		if (tmp)
+			tmp = tmp->next;
 	}
 	tmp = *tokens;
-	while (tmp)
+	while (tokens && tmp)
 	{
 		if (tmp->type == VAR && tmp->var_stop > -1)
 			*res = var_expanser(tokens, res, exstatus);

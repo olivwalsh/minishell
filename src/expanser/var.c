@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 17:21:25 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/07 11:12:45 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	delete_token(t_token **tokens)
 		next->prev = prev;
 	free((*tokens)->value);
 	free(*tokens);
+	*tokens = NULL;
 	if (!prev && !next)
 	{
 		tokens = NULL;

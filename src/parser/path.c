@@ -6,18 +6,27 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:46:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 16:00:16 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/07 11:47:25 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cmd_checker(char *cmd)
+int	cmd_checker(char *cmd, char **path_list)
 {
-	if (!ft_strcmp("..", cmd))
-		return (err_cmd(NO_CMD, cmd));
-	if (!ft_strcmp(".", cmd))
-		return (err_cmd(FILE_ARG, cmd));
+	int	err;
+
+	err= 0;
+	if (!ft_strncmp("..", cmd, 3))
+		err = err_cmd(NO_CMD, cmd);
+	if (!ft_strncmp(".", cmd, 2))
+		err = err_cmd(FILE_ARG, cmd);
+	if (err)
+	{
+		free_tab(path_list);
+		free(cmd);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -32,14 +41,18 @@ char	*get_cmdpath(char *cmd)
 	if (!env)
 	{
 		err_cmd(NO_FILE, cmd);
+		free(cmd);
 		return(NULL);
 	}
 	path_list = ft_split(env, ':');
 	free(env);
-	if (cmd_checker(cmd))
+	if (cmd_checker(cmd, path_list))
 		return (NULL);
 	if (!access(cmd, X_OK))
+	{
+		free_tab(path_list);
 		return (cmd);
+	}
 	i = 0;
 	while (path_list && path_list[i])
 	{
@@ -54,5 +67,6 @@ char	*get_cmdpath(char *cmd)
 	}
 	free_tab(path_list);
 	err_cmd(NO_CMD, cmd);
+	free(cmd);
 	return (NULL);
 }
