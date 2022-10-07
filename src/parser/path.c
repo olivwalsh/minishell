@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:46:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/07 11:47:25 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/07 17:40:50 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	cmd_checker(char *cmd, char **path_list)
 {
 	int	err;
 
-	err= 0;
+	err = 0;
 	if (!ft_strncmp("..", cmd, 3))
 		err = err_cmd(NO_CMD, cmd);
 	if (!ft_strncmp(".", cmd, 2))
@@ -30,29 +30,28 @@ int	cmd_checker(char *cmd, char **path_list)
 	return (EXIT_SUCCESS);
 }
 
-char	*get_cmdpath(char *cmd)
+char	**get_pathlist(char *cmd)
 {
-	char	*cmd_path;
 	char	**path_list;
-	char	*env;
-	int		i;
+	char	*path;
 
-	env = ft_getenv("PATH");
-	if (!env)
+	path = ft_getenv("PATH");
+	if (!path)
 	{
 		err_cmd(NO_FILE, cmd);
 		free(cmd);
-		return(NULL);
-	}
-	path_list = ft_split(env, ':');
-	free(env);
-	if (cmd_checker(cmd, path_list))
 		return (NULL);
-	if (!access(cmd, X_OK))
-	{
-		free_tab(path_list);
-		return (cmd);
 	}
+	path_list = ft_split(path, ':');
+	free(path);
+	return (path_list);
+}
+
+char	*get_access(char *cmd, char **path_list)
+{
+	int		i;
+	char	*cmd_path;
+
 	i = 0;
 	while (path_list && path_list[i])
 	{
@@ -66,7 +65,27 @@ char	*get_cmdpath(char *cmd)
 		free(cmd_path);
 	}
 	free_tab(path_list);
-	err_cmd(NO_CMD, cmd);
+	if (ft_strchr(cmd, '/'))
+		err_cmd(NO_FILE, cmd);
+	else
+		err_cmd(NO_CMD, cmd);
 	free(cmd);
 	return (NULL);
+}
+
+char	*get_cmdpath(char *cmd)
+{
+	char	**path_list;
+
+	path_list = get_pathlist(cmd);
+	if (!path_list)
+		return (NULL);
+	if (cmd_checker(cmd, path_list))
+		return (NULL);
+	if (!access(cmd, X_OK))
+	{
+		free_tab(path_list);
+		return (cmd);
+	}
+	return (get_access(cmd, path_list));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/05 12:04:30 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/07 17:01:42 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,20 @@ int	ms_builtin_child(t_cmd *cmd, char **env)
 	return (EXIT_SUCCESS);
 }
 
+int	exec_parent(t_cmdlst **cmds, char **env)
+{
+	t_cmd	*cmd;
+	int		res;
+
+	res = EXIT_SUCCESS;
+	cmd = (*cmds)->cmd;
+	if (cmd->builtin == BD_EXIT || cmd->builtin == BD_EXPORT || \
+		cmd->builtin == BD_CD || cmd->builtin == BD_UNSET)
+		res = ms_builtin_parent(cmd, env);
+	close_fd(cmd);
+	return (res);
+}
+
 int	exec_cmd(t_cmdlst **cmds, char **env)
 {
 	t_cmd	*cmd;
@@ -63,14 +77,9 @@ int	exec_cmd(t_cmdlst **cmds, char **env)
 		if (cmd->builtin)
 			exit(ms_builtin_child(cmd, env));
 		if (execve(cmd->cmd, cmd->args, env) < 0)
-			exit(errno);
+			exit(err_cmd(errno, cmd->args[0]));
 	}
 	else
-	{
-		if (cmd->builtin == BD_EXIT || cmd->builtin == BD_EXPORT || \
-			cmd->builtin == BD_CD || cmd->builtin == BD_UNSET)
-			res = ms_builtin_parent(cmd, env);
-		close_fd(cmd);
-	}
+		res = exec_parent(cmds, env);
 	return (res);
 }

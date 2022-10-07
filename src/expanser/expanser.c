@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/07 11:14:03 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/07 13:51:36 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	var_expanser(t_token **tokens, int *res, int exstatus)
 			tmp = tmp->next;
 	}
 	tmp = *tokens;
-	while (tokens && tmp)
+	while (tokens && tmp && !*res)
 	{
 		if (tmp->type == VAR && tmp->var_stop > -1)
 			*res = var_expanser(tokens, res, exstatus);

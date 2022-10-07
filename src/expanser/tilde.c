@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:13:13 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 15:29:07 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/07 17:02:45 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	expanse_tilde(t_token **token)
 		{
 			delete_token(token);
 			return (EXIT_SUCCESS);
-	}
+		}
 	}
 	return (EXIT_SUCCESS);
 }
