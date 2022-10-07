@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 15:44:15 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 11:42:07 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:42:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	sort_env(int n, char **env)
 	while (i < (n - 1))
 	{
 		j = i + 1;
-		if (ft_strcmp(env[i], env[j]) > 0)
+		if (ft_strncmp(env[i], env[j], ft_strlen(env[i])) > 0)
 		{
 			swap_env(&env[i], &env[j]);
 			i = 0;

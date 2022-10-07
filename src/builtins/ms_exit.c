@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:28:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 11:49:02 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:42:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	clean_exit(char **env)
 
 int	ms_exit(char *cmd, char **args, char **env)
 {
-	if (ft_strcmp("exit", cmd))
+	if (ft_strncmp("exit", cmd, 5))
 		return (EXIT_FAILURE);
 	if (args && args[0] && !check_flag(args[0]))
 		exit(atoi(args[0]));

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:43:51 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 14:21:04 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 18:45:06 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	nav_backwards(char *path, char **env)
 		path += 3;
 	}
 	if (!path || !path[0]
-		|| !ft_strcmp(path, ".") || !ft_strcmp(path, "./"))
+		|| !ft_strncmp(path, ".", 2) || !ft_strncmp(path, "./", 3))
 		return (EXIT_SUCCESS);
 	pwd = ft_getenv("PWD");
 	if (!ft_strncmp(path, "..", 3))
