@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:57:07 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/07 13:04:38 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/07 13:46:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 
 static void	insert_file(t_token **token, char *file, int *found)
 {
+	t_token	*new;
+	t_token	*next;
+
+	next = (*token)->next;
 	file = ft_strjoin(file, " ", 0);
-	add_token(create_token(WORD, file), token);
+	new = create_token(WORD, file);
+	(*token)->next = new;
+	new->prev = *token;
+	new->next = next;
 	*found = TRUE;
 }
 
@@ -58,24 +65,13 @@ static int	check_file(char *wildcard, char *file)
 	return (EXIT_FAILURE);
 }
 
-static int	err_getcwd(char *pwd)
-{
-	free(pwd);
-	return (EXIT_FAILURE);
-}
-
-int	expanse_wildcard(t_token **token)
+static void	read_directory(char *pwd, t_token **token, char *wildcard)
 {
 	struct dirent	*entry;
 	DIR				*folder;
-	char			*pwd;
 	int				found;
 
 	found = FALSE;
-	pwd = NULL;
-	pwd = getcwd(pwd, 0);
-	if (!pwd)
-		return (err_getcwd(pwd));
 	folder = opendir(pwd);
 	if (folder == NULL)
 		exit(errno);
@@ -84,13 +80,29 @@ int	expanse_wildcard(t_token **token)
 	{
 		if (ft_strncmp(entry->d_name, "..", 3)
 			&& ft_strncmp(entry->d_name, ".", 2)
-			&& !check_file((*token)->value, entry->d_name))
+			&& !check_file(wildcard, entry->d_name))
 			insert_file(token, entry->d_name, &found);
 		entry = readdir(folder);
 	}
 	if (found)
 		delete_token(token);
 	closedir(folder);
+}
+
+int	expanse_wildcard(t_token **token)
+{
+	char			*pwd;
+	char			*wildcard;
+
+	wildcard = (*token)->value;
+	pwd = NULL;
+	pwd = getcwd(pwd, 0);
+	if (!pwd)
+	{
+		free(pwd);
+		return (EXIT_FAILURE);
+	}
+	read_directory(pwd, token, wildcard);
 	free(pwd);
 	return (EXIT_SUCCESS);
 }

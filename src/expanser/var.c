@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/07 11:39:02 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/07 13:12:10 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	delete_token(t_token **tokens)
 		next->prev = prev;
 	free((*tokens)->value);
 	free(*tokens);
-	if (next)
-		*tokens = next;
+	if (prev)
+		*tokens = prev;
 	if (!prev && !next)
 	{
 		tokens = NULL;
