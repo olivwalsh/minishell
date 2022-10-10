@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:23 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 18:44:47 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/10 14:49:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,12 @@ int	unset_checker(char **args, int i)
 	return (EXIT_SUCCESS);
 }
 
+static int	err_unset(char *str)
+{
+	free(str);
+	return (EXIT_FAILURE);
+}
+
 int	ms_unset(char *cmd, char **args, char **env)
 {
 	int		i;
@@ -96,10 +102,7 @@ int	ms_unset(char *cmd, char **args, char **env)
 				return (EXIT_FAILURE);
 			del_env(str, env);
 			if (g_global.data->err)
-			{
-				free(str);
-				return (EXIT_FAILURE);
-			}
+				return (err_unset(str));
 			free(str);
 		}
 		i++;

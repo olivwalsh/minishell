@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 14:10:38 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/10 14:16:31 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ char	*err_msg_str(int code)
 	if (code == MALLOC_ERR)
 		write(STDERR_FILENO, "malloc function failed\n", 24);
 	else if (code == SYNTAX_ERR)
-		write(STDERR_FILENO, "syntax error near unexpected token `newline'\n", 46);
+		write(STDERR_FILENO, \
+		"syntax error near unexpected token `newline'\n", 46);
 	else if (code == MISS_CMD)
 		write(STDERR_FILENO, "missing command after redirection\n", 35);
 	else if (code == AMB_REDIR)
