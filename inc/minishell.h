@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/07 13:27:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:44:08 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,57 +45,58 @@ extern t_global	g_global;
 ** INIT
 **
 */
-int		ms_init(t_data *data, char **argv, char **env, int *res);
-int		copy_env(t_data *data, char **env);
-void	set_terminal(t_terminal *terminal);
+int			ms_init(t_data *data, char **argv, char **env, int *res);
+int			copy_env(t_data *data, char **env);
+void		set_terminal(t_terminal *terminal);
 /*
 **
 ** LEXER
 **
 */
-int		ms_lexer(char *str, t_token **tokens, int *res);
-int		tokenize(t_token **tokens, char *str, int *i, int type);
-int		lexer_checker(t_token *head);
-int		is_delimiter(char *str);
-int		is_delimiter_spc(char *str);
-int		is_delimiter_var(char *str);
-int		is_isspace(char c);
-int		is_quote(char *str, int *type);
-int		is_oper(char c1, char c2, int *type);
-int		is_special(char *str, int *type);
-int		is_brk_problem(char c, t_token *tmp);
-int		bracket_checker(t_token *head);
-int		brk_count(t_token *head);
-int		brk_order(t_token *head);
-int		brk_placement(t_token *head);
-char	*copy_chars(char *str, int *i, int n);
-char	*copy_word(char *str, int *i);
-char	*copy_var(char *str, int *i);
-char	*copy_quote(char *str, int *i);
-void	add_token(t_token *new, t_token **tokens);
-void	check_new(t_token *new);
-void	delete_token(t_token **tokens);
-t_token	*create_token(int type, char *value);
+int			ms_lexer(char *str, t_token **tokens, int *res);
+int			tokenize(t_token **tokens, char *str, int *i, int type);
+int			lexer_checker(t_token *head);
+int			is_delimiter(char *str);
+int			is_delimiter_spc(char *str);
+int			is_delimiter_var(char *str, int *j);
+int			is_isspace(char c);
+int			is_quote(char *str, int *type);
+int			is_oper(char c1, char c2, int *type);
+int			is_special(char *str, int *type);
+int			is_brk_problem(char c, t_token *tmp);
+int			bracket_checker(t_token *head);
+int			brk_count(t_token *head);
+int			brk_order(t_token *head);
+int			brk_placement(t_token *head);
+char		*copy_chars(char *str, int *i, int n);
+char		*copy_word(char *str, int *i);
+char		*copy_var(char *str, int *i, int *spc);
+char		*copy_quote(char *str, int *i);
+void		add_token(t_token *new, t_token **tokens);
+void		delete_token(t_token **tokens);
+t_token		*create_token(int type, char *value, int spc);
 /*
 **
 ** EXPANSER
 **
 */
-int		ms_expanser(t_token **tokens, int *res, int exstatus);
-int		expanse_exstatus(t_token **tokens, int exstatus);
-int		expanse_var(t_token **tokens, int *res);
-int		expanse_quote(t_token *tokens, char *str);
-int		change_type(t_token **tokens);
-int		expanse_wildcard(t_token **tokens);
-void	insert_token(t_token **tokens, t_token *new);
-char	*add_space(char *str);
-void	delete_token(t_token **tokens);
+int			ms_expanser(t_token **tokens, int *res, int exstatus);
+int			expanse_exstatus(t_token **tokens, int exstatus);
+int			expanse_var(t_token **tokens, int *res);
+int			expanse_quote(t_token *tokens, char *str);
+int			expanse_tilde(t_token **token);
+int			expanse_wildcard(t_token **tokens);
+int			change_type(t_token **tokens);
+void		insert_token(t_token **tokens, t_token *new);
+void		check_new(t_token *new, t_token *token);
+char		*add_space(char *str);
+void		delete_token(t_token **tokens);
 /*
 **
 ** PARSER
 **
 */
-int 		ms_parser(t_token *tokens, t_cmdlst **cmds, int *res);
+int			ms_parser(t_token *tokens, t_cmdlst **cmds, int *res);
 int			cmd_addredir(t_token **token, t_cmd *cmd);
 int			is_delim(t_token *token);
 int			is_redir(t_token *token);
@@ -135,62 +136,62 @@ int			update_fd(t_cmd *cmd);
 ** CLEAN
 **
 */
-void	clean(t_data *data);
-void	free_tokens(t_token **tokens);
-void	free_tab(char **table);
+void		clean(t_data *data);
+void		free_tokens(t_token **tokens);
+void		free_tab(char **table);
 /*
 **
 ** UTILS
 **
 */
-int 	is_alnum(char c);
-int		is_alpha(char c);
-int		ft_tablen(char **table);
-int		ft_isdigit(char c);
-int		ft_strcmp(char *s1, char *s2);
-int		ft_strncmp(char *s1, char *s2, int n);
-int		ft_strlen(char *str);
-int		err_msg(int code, char c, int err);
-int		err_cmd(int code, char *cmd);
-int		err_bd(int code, int err, char *func, char *arg);
-char	*get_next_line(int fd);
-char	*err_msg_str(int code);
-char	*ft_itoa(int n);
-char	*ft_getenv(char *name);
-char	*ft_strchr(char *str, int c);
-char	*ft_strstr(char *str, char *to_find);
-char	*ft_strjoin(char *s1, char *s2, int clean);
-char	*ft_strncpy(char *dst, char *src, int n);
-char	*ft_strndup(const char *s, int n);
-char	**ft_split(char *s, char c);
-void	display_tokens(void);
-void	display_cmds(void);
-void	display_specific_tokens(t_token *head);
+int			is_alnum(char c);
+int			is_alpha(char c);
+int			ft_tablen(char **table);
+int			ft_isdigit(char c);
+int			ft_strcmp(char *s1, char *s2);
+int			ft_strncmp(char *s1, char *s2, int n);
+int			ft_strlen(char *str);
+int			err_msg(int code, char c, int err);
+int			err_cmd(int code, char *cmd);
+int			err_bd(int code, int err, char *func, char *arg);
+char		*get_next_line(int fd);
+char		*err_msg_str(int code);
+char		*ft_itoa(int n);
+char		*ft_getenv(char *name);
+char		*ft_strchr(char *str, int c);
+char		*ft_strstr(char *str, char *to_find);
+char		*ft_strjoin(char *s1, char *s2, int clean);
+char		*ft_strncpy(char *dst, char *src, int n);
+char		*ft_strndup(const char *s, int n);
+char		**ft_split(char *s, char c);
+void		display_tokens(void);
+void		display_cmds(void);
+void		display_specific_tokens(t_token *head);
 /*
 **
 ** BUILTINS
 **
 */
-int		ms_cd(char *cmd, char **args, char **env);
-int		ms_echo(char *cmd, char **args);
-int		ms_exit(char *cmd, char **args, char **env);
-int		ms_env(char *cmd, char **args, char ** env);
-int		ms_export(char *cmd, char **args, char **env);
-int		ms_unset(char *cmd, char **args, char **env);
-int		ms_pwd(char *cmd, char **args, char **env);
-int		display_env(char **env);
-int		display_export(char **env);
-int		cd_navigate(char *path, char **env, char *pwd);
-int		set_pwd(char **env);
-int		set_oldpwd(char *newpath, char **env);
-int		is_absolute(char *path);
-int		nav_backwards(char *path, char **env);
-int		nav_oldpwd(char **env);
-int		nav_fromhome(char *path, char **env);
-int		nav_absolute(char *path, char **env);
-int		nav_relative(char *origin, char *path, char **env);
-int		nav_back(char *origin, char **env);
-int		nav_home(char **env);
-int		nav_pwd(char **env);
+int			ms_cd(char *cmd, char **args, char **env);
+int			ms_echo(char *cmd, char **args);
+int			ms_exit(char *cmd, char **args, char **env);
+int			ms_env(char *cmd, char **args, char **env);
+int			ms_export(char *cmd, char **args, char **env);
+int			ms_unset(char *cmd, char **args, char **env);
+int			ms_pwd(char *cmd, char **args, char **env);
+int			display_env(char **env);
+int			display_export(char **env);
+int			cd_navigate(char *path, char **env, char *pwd);
+int			set_pwd(char **env);
+int			set_oldpwd(char *newpath, char **env);
+int			is_absolute(char *path);
+int			nav_backwards(char *path, char **env);
+int			nav_oldpwd(char **env);
+int			nav_fromhome(char *path, char **env);
+int			nav_absolute(char *path, char **env);
+int			nav_relative(char *origin, char *path, char **env);
+int			nav_back(char *origin, char **env);
+int			nav_home(char **env);
+int			nav_pwd(char **env);
 
 #endif

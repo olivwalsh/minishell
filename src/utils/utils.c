@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:04:23 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 14:19:28 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/10 15:06:58 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ char	*create_result(char *res)
 	return (new);
 }
 
+char	*get_newname(char *name)
+{
+	char	*new_name;
+
+	if (!name)
+		return (NULL);
+	new_name = NULL;
+	new_name = ft_strjoin(new_name, name, 1);
+	new_name = ft_strjoin(new_name, "=", 1);
+	return (new_name);
+}
+
 char	*ft_getenv(char *name)
 {
 	char	**env;
@@ -30,11 +42,7 @@ char	*ft_getenv(char *name)
 	char	*new_name;
 	int		i;
 
-	if (!name)
-		return (NULL);
-	new_name = NULL;
-	new_name = ft_strjoin(new_name, name, 1);
-	new_name = ft_strjoin(new_name, "=", 1);
+	new_name = get_newname(name);
 	if (!new_name)
 		return (NULL);
 	env = g_global.data->shell.env;

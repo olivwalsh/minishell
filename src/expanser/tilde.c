@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait.c                                             :+:      :+:    :+:   */
+/*   tilde.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 17:50:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/07 22:52:43 by foctavia         ###   ########.fr       */
+/*   Created: 2022/10/06 15:13:13 by foctavia          #+#    #+#             */
+/*   Updated: 2022/10/07 17:02:45 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ms_wait(t_cmdlst **cmds, int res)
+int	expanse_tilde(t_token **token)
 {
-	int			error;
-	int			exit_status;
-	t_cmdlst	*tmp;
+	char	*var;
 
-	error = 0;
-	if (!*cmds)
-		return (res);
-	while ((*cmds)->prev)
-		*cmds = (*cmds)->prev;
-	tmp = *cmds;
-	while (tmp)
+	if ((*token)->value && (*token)->value[0] && !(*token)->value[1])
 	{
-		if (tmp->cmd)
+		var = "HOME";
+		(*token)->value = ft_getenv(var);
+		if (!(*token)->value)
 		{
-			waitpid(tmp->cmd->pid, &exit_status, 0);
-			if (WIFEXITED(exit_status))
-				error = WEXITSTATUS(exit_status);
-			if (error)
-				return (error);
+			delete_token(token);
+			return (EXIT_SUCCESS);
 		}
-		tmp = tmp->next;
 	}
-	return (res);
+	return (EXIT_SUCCESS);
 }

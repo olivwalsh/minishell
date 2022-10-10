@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:23 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/10 14:49:46 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/10 15:09:44 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	ms_unset(char *cmd, char **args, char **env)
 		return (EXIT_FAILURE);
 	i = 0;
 	str = NULL;
-	while (args && args[i])
+	while (args && args[i] && !g_global.data->err)
 	{
 		if (!unset_checker(args, i))
 		{
