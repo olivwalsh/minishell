@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:59:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/30 16:34:51 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:43:10 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ms_pwd(char *cmd, char **args, char **env)
 
 	(void)args;
 	(void)env;
-	if (ft_strcmp(cmd, "pwd"))
+	if (ft_strncmp(cmd, "pwd", 4))
 		return (EXIT_FAILURE);
 	cwd = NULL;
 	cwd = getcwd(cwd, 0);

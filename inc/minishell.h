@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/07 18:55:19 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/07 22:44:08 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			expanse_exstatus(t_token **tokens, int exstatus);
 int			expanse_var(t_token **tokens, int *res);
 int			expanse_quote(t_token *tokens, char *str);
 int			expanse_tilde(t_token **token);
-int			expanse_wildcard(t_token **wildcard);
+int			expanse_wildcard(t_token **tokens);
 int			change_type(t_token **tokens);
 void		insert_token(t_token **tokens, t_token *new);
 void		check_new(t_token *new, t_token *token);

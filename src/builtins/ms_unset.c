@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:23 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/07 16:52:24 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/07 22:52:13 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ms_unset(char *cmd, char **args, char **env)
 	int		i;
 	char	*str;
 
-	if (ft_strcmp("unset", cmd))
+	if (ft_strncmp("unset", cmd, 6))
 		return (EXIT_FAILURE);
 	i = 0;
 	str = NULL;
