@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:33:00 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/04 19:16:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/10 19:05:54 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	read_file(char *file)
 		g_global.data->err = EXIT_FAILURE;
 		write(STDERR_FILENO, "minishell: ", 11);
 		perror(file);
-		return (0);
+		// return (0);
 	}
 	return (fd);
 }
@@ -37,7 +37,7 @@ int	create_file(char *file)
 		g_global.data->err = EXIT_FAILURE;
 		write(STDERR_FILENO, "minishell: ", 11);
 		perror(file);
-		return (0);
+		// return (0);
 	}
 	return (fd);
 }
@@ -52,7 +52,7 @@ int	append_file(char *file)
 		g_global.data->err = EXIT_FAILURE;
 		write(STDERR_FILENO, "minishell: ", 11);
 		perror(file);
-		return (0);
+		// return (0);
 	}
 	return (fd);
 }

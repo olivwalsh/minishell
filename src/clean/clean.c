@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 16:24:46 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/10 19:07:34 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,10 @@ void	free_cmds(t_cmdlst **lst)
 					free(tmp->cmd->cmd);
 				if (tmp->cmd->args)
 					free_tab(tmp->cmd->args);
+				if (tmp->cmd->fd_in != -1)
+					close (tmp->cmd->fd_in);
+				if (tmp->cmd->fd_out != -1)
+					close (tmp->cmd->fd_out);
 				free(tmp->cmd);
 			}
 			free(tmp);
