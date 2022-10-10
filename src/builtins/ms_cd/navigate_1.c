@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:52:25 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 18:44:09 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/10 14:08:41 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ int	nav_home(char **env)
 int	nav_relative(char *origin, char *path, char **env)
 {
 	if (origin && origin[ft_strlen(origin) - 1] != '/')
+	{
 		origin = ft_strjoin(origin, "/", 0);
-	origin = ft_strjoin(origin, path, 1);
+		origin = ft_strjoin(origin, path, 1);
+	}
+	else
+		origin = ft_strjoin(origin, path, 0);
 	if (chdir(origin) < 0)
 	{
 		free(origin);

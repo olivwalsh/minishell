@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:23 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/07 22:52:13 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:09:44 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,12 @@ int	unset_checker(char **args, int i)
 	return (EXIT_SUCCESS);
 }
 
+static int	err_unset(char *str)
+{
+	free(str);
+	return (EXIT_FAILURE);
+}
+
 int	ms_unset(char *cmd, char **args, char **env)
 {
 	int		i;
@@ -95,6 +101,8 @@ int	ms_unset(char *cmd, char **args, char **env)
 			if (!str)
 				return (EXIT_FAILURE);
 			del_env(str, env);
+			if (g_global.data->err)
+				return (err_unset(str));
 			free(str);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:44:17 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 13:30:24 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/10 16:04:43 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	set_pwd(char **env)
 	char	**path;
 	int		res;
 	char	*cwd;
+	char	*pwd;
 
 	res = EXIT_SUCCESS;
 	cwd = NULL;
@@ -28,10 +29,14 @@ int	set_pwd(char **env)
 		return (EXIT_FAILURE);
 	path[0] = ft_strjoin("PWD=", cwd, 0);
 	path[1] = NULL;
-	res = ms_export("export", path, env);
+	pwd = ft_getenv("PWD");
+	if (pwd)
+		res = ms_export("export", path, env);
 	free(path[0]);
 	free(path[1]);
 	free(path);
+	free(cwd);
+	free(pwd);
 	return (res);
 }
 
@@ -47,7 +52,6 @@ int	set_oldpwd(char *newpath, char **env)
 	path[0] = ft_strjoin("OLDPWD=", newpath, 0);
 	path[1] = NULL;
 	res = ms_export("export", path, env);
-	free(newpath);
 	free(path[0]);
 	free(path[1]);
 	free(path);

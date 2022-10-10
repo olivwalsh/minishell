@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:04:23 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/07 17:45:42 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:06:58 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ char	*ft_getenv(char *name)
 	if (!new_name)
 		return (NULL);
 	env = g_global.data->shell.env;
-	i = 0;
-	while (env && env[i])
+	i = -1;
+	while (env && env[++i])
 	{
 		res = ft_strstr(env[i], new_name);
 		if (res && !ft_strncmp(env[i], new_name, ft_strlen(new_name)))
@@ -55,8 +55,6 @@ char	*ft_getenv(char *name)
 			res = create_result(res);
 			break ;
 		}
-		else
-			i++;
 	}
 	free(new_name);
 	return (res);
