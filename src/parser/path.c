@@ -3,37 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:46:50 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 18:45:38 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:50:51 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_cmdpath(char *cmd)
+int	cmd_checker(char *cmd, char **path_list)
 {
-	char	*cmd_path;
-	char	**path_list;
-	char	*env;
-	int		i;
+	int	err;
 
-	env = ft_getenv("PATH");
-	if (!env)
+	err = 0;
+	if (!ft_strncmp("..", cmd, 3))
+		err = err_cmd(NO_CMD, cmd);
+	if (!ft_strncmp(".", cmd, 2))
+		err = err_cmd(FILE_ARG, cmd);
+	if (err)
+	{
+		free_tab(path_list);
+		free(cmd);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
+char	**get_pathlist(char *cmd)
+{
+	char	**path_list;
+	char	*path;
+
+	path = ft_getenv("PATH");
+	if (!path)
 	{
 		err_cmd(NO_FILE, cmd);
-		return(NULL);
-	}
-	path_list = ft_split(env, ':');
-	free(env);
-	if (!ft_strncmp("..", cmd, 3))
-	{
-		err_cmd(NO_CMD, cmd);
+		free(cmd);
 		return (NULL);
 	}
-	if (!access(cmd, X_OK))
-		return (cmd);
+	path_list = ft_split(path, ':');
+	free(path);
+	return (path_list);
+}
+
+char	*get_access(char *cmd, char **path_list)
+{
+	int		i;
+	char	*cmd_path;
+
 	i = 0;
 	while (path_list && path_list[i])
 	{
@@ -47,6 +65,27 @@ char	*get_cmdpath(char *cmd)
 		free(cmd_path);
 	}
 	free_tab(path_list);
-	err_cmd(NO_CMD, cmd);
+	if (ft_strchr(cmd, '/'))
+		err_cmd(NO_FILE, cmd);
+	else
+		err_cmd(NO_CMD, cmd);
+	free(cmd);
 	return (NULL);
+}
+
+char	*get_cmdpath(char *cmd)
+{
+	char	**path_list;
+
+	path_list = get_pathlist(cmd);
+	if (!path_list)
+		return (NULL);
+	if (cmd_checker(cmd, path_list))
+		return (NULL);
+	if (!access(cmd, X_OK))
+	{
+		free_tab(path_list);
+		return (cmd);
+	}
+	return (get_access(cmd, path_list));
 }

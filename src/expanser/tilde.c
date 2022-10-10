@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_cd.c                                            :+:      :+:    :+:   */
+/*   tilde.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/09 11:29:53 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/07 16:47:23 by foctavia         ###   ########.fr       */
+/*   Created: 2022/10/06 15:13:13 by foctavia          #+#    #+#             */
+/*   Updated: 2022/10/07 17:02:45 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ms_cd(char *cmd, char **args, char **env)
+int	expanse_tilde(t_token **token)
 {
-	int		res;
-	char	*pwd;
+	char	*var;
 
-	res = EXIT_SUCCESS;
-	(void)cmd;
-	pwd = NULL;
-	pwd = getcwd(pwd, 0);
-	if (!pwd)
+	if ((*token)->value && (*token)->value[0] && !(*token)->value[1])
 	{
-		free(pwd);
-		return (EXIT_FAILURE);
+		var = "HOME";
+		(*token)->value = ft_getenv(var);
+		if (!(*token)->value)
+		{
+			delete_token(token);
+			return (EXIT_SUCCESS);
+		}
 	}
-	if (args && args[1] && args[2])
-		return (err_bd(TOO_MANY_ARGS, 0, "minishell: cd", NULL));
-	else
-		res = cd_navigate(args[1], env, pwd);
-	if (res)
-	{
-		free(pwd);
-		return (EXIT_FAILURE);
-	}
-	set_oldpwd(pwd, env);
-	return (res);
+	return (EXIT_SUCCESS);
 }

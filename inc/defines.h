@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:22:28 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 11:49:06 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:59:48 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@
 # define NO_ID -107
 # define TOO_MANY_ARGS -108
 # define NUM_ARG -109
+# define FILE_ARG -110
 # define NO_CMD 127
 
 #endif

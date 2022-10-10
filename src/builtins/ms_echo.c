@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:20 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/05 09:47:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/06 16:18:49 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	ms_echo(char *cmd, char **args)
 	while (args && args[i])
 	{
 		write(STDOUT_FILENO, args[i], ft_strlen(args[i]));
-		write(STDOUT_FILENO, " ", 1);
+		if (args[i + 1])
+			write(STDOUT_FILENO, " ", 1);
 		i++;
 	}
 	if (nl)

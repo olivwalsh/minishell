@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:50:18 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 18:49:01 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:49:51 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static void	cmd_newargs(t_token **token, t_cmd *new, int i)
 		err_msg_str(MALLOC_ERR);
 		return ;
 	}
-	i = 0;
+	new->args[0] = ft_strndup(new->cmd, ft_strlen(new->cmd));
+	*token = (*token)->next;
+	i = 1;
 	while (*token && !is_delim(*token) && !is_redir(*token))
 	{
 		new->args[i] = copy_cmd(token);

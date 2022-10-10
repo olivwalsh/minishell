@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 10:08:05 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 18:48:03 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:49:57 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	loop_words(char *str, int *code)
 	return (j);
 }
 
-int	count_words(t_token **token)
+int	count_words(t_token **token, int *count)
 {
 	int		i;
 	int		code;
@@ -47,6 +47,7 @@ int	count_words(t_token **token)
 
 	i = 0;
 	code = 0;
+	*count = 0;
 	str = (*token)->value;
 	if (!str[i])
 		return (i);
@@ -56,6 +57,7 @@ int	count_words(t_token **token)
 	tmp = *token;
 	while (tmp->next && tmp->next->type == WORD && tmp->next->value[0] != '-')
 	{
+		(*count)++;
 		str = tmp->next->value;
 		i += loop_words(str, &code);
 		if (code)
@@ -65,31 +67,38 @@ int	count_words(t_token **token)
 	return (i);
 }
 
+char	*join_words(t_token **token, char *str, int count, int len)
+{
+	char	*join;
+
+	join = NULL;
+	join = ft_strjoin(join, (*token)->value, 1);
+	while ((*token)->next && (*token)->next->type == WORD && \
+		(*token)->next->value[0] != '-' && count)
+	{
+		join = ft_strjoin(join, (*token)->next->value, 1);
+		count--;
+		*token = (*token)->next;
+	}
+	ft_strncpy(str, join, len);
+	free(join);
+	return (str);
+}
+
 char	*copy_cmd(t_token **token)
 {
 	char	*str;
-	char	*join;
 	int		len;
+	int		count;
 
-	len = count_words(token);
+	len = count_words(token, &count);
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (err_msg_str(MALLOC_ERR));
 	if (len == ft_strtoken((*token)->value))
 		ft_strncpy(str, (*token)->value, len);
 	else
-	{
-		join = NULL;
-		join = ft_strjoin(join, (*token)->value, 1);
-		while ((*token)->next && (*token)->next->type == WORD && \
-			(*token)->next->value[0] != '-')
-		{
-			join = ft_strjoin(join, (*token)->next->value, 1);
-			*token = (*token)->next;
-		}
-		ft_strncpy(str, join, len);
-		free(join);
-	}
+		str = join_words(token, str, count, len);
 	str = delete_quotes(str, str);
 	return (str);
 }

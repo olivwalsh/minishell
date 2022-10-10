@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   insert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 11:08:26 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/07 13:35:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/07 22:44:27 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	insert_head(t_token *tokens, t_token *new)
 	tokens->value = new->value;
 	tokens->type = new->type;
 	tokens->var_stop = new->var_stop;
+	tokens->spc = new->spc;
 	if ((new)->next)
 	{
 		tmp1 = tokens->next;
@@ -42,6 +43,7 @@ static void	insert_tail(t_token *tokens, t_token *new)
 	tokens->value = new->value;
 	tokens->type = new->type;
 	tokens->var_stop = new->var_stop;
+	tokens->spc = new->spc;
 	if ((new)->next)
 	{
 		tokens->next = new->next;
