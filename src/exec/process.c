@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 14:54:57 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:10:27 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@ int	exec_cmd(t_cmdlst **cmds, char **env)
 		exit(errno);
 	if (cmd->pid == 0)
 	{
+		redir_fd(*cmds, cmd);
+		close_fd(*cmds, cmd);
 		if (!cmd->cmd && !cmd->redir)
 			exit(127);
 		if (!cmd->cmd)
 			exit(0);
-		redir_fd(*cmds, cmd);
 		if (cmd->builtin)
 			exit(ms_builtin_child(cmd, env));		
 		if (execve(cmd->cmd, cmd->args, env) < 0)

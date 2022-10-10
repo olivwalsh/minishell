@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:08:26 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 13:08:31 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/10 16:24:46 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	free_tab(char **table)
 
 void	free_redir(t_redir *redir)
 {
-	if (redir->redir_in)
+	if (redir->infile)
 		free(redir->infile);
-	if (redir->append_in)
+	if (redir->delimiter)
 		free(redir->delimiter);
-	if (redir->append_out || redir->redir_out)
+	if (redir->outfile)
 		free(redir->outfile);
 	free(redir);
 }
