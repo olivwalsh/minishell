@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 12:27:46 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/10 14:54:57 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	exec_parent(t_cmdlst **cmds, char **env)
 	if (cmd->builtin == BD_EXIT || cmd->builtin == BD_EXPORT || \
 		cmd->builtin == BD_CD || cmd->builtin == BD_UNSET)
 		res = ms_builtin_parent(cmd, env);
-	close_fd(cmd);
+	close_fd(*cmds, cmd);
 	return (res);
 }
 
@@ -73,7 +73,7 @@ int	exec_cmd(t_cmdlst **cmds, char **env)
 			exit(127);
 		if (!cmd->cmd)
 			exit(0);
-		update_fd(cmd);
+		redir_fd(*cmds, cmd);
 		if (cmd->builtin)
 			exit(ms_builtin_child(cmd, env));		
 		if (execve(cmd->cmd, cmd->args, env) < 0)
