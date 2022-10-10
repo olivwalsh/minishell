@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:05:55 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 18:10:17 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:45:12 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	redir_fd(t_cmdlst *cmds, t_cmd *cmd)
 	{
 		if (dup2(cmd->fd_out, STDOUT_FILENO) < 0)
 			exit(errno);
+		close(cmd->fd_out);
 	}
 	if (cmd->redir && cmd->redir->redir_in && cmd->fd_in != -1)
 	{
@@ -57,8 +58,11 @@ int	redir_fd(t_cmdlst *cmds, t_cmd *cmd)
 		{
 			if (dup2(tmp->cmd->fd_in, STDIN_FILENO) < 0)
 				exit(errno);
+			close(tmp->cmd->fd_in);
 		}
 	}
+	if (cmd->fd_in > 0)
+		close(cmd->fd_in);
 	return (EXIT_SUCCESS);
 }
 
