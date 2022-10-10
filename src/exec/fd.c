@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:05:55 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/07 19:01:33 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/10 11:47:15 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,72 @@ int	set_fd(t_cmdlst **cmds)
 	return (EXIT_SUCCESS);
 }
 
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (fd < 0)
+		return ;
+	if (n == -2147483648)
+	{
+		write (fd, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		write (fd, "-", 1);
+		n = -n;
+	}
+	if (n > 9)
+		ft_putnbr_fd(n / 10, fd);
+	n %= 10;
+	n += 48;
+	write (fd, &n, 1);
+}
+
 int	update_fd(t_cmd *cmd)
 {
-	if (cmd->fd_in > 0)
+	int	resin;
+	int	resout;
+
+	resin = -2;
+	resout = -2;
+	if (cmd->fd_out > 2)
 	{
-		if (dup2(cmd->fd_in, STDIN_FILENO) < 0)
-			exit(errno);
-		close(cmd->fd_in);
+		// close(STDOUT_FILENO);
+		resout = dup2(cmd->fd_out, STDOUT_FILENO);
+		// write(2, "resout is ", 10);
+		// ft_putnbr_fd(resout, 2);
+		// write(2, "\n", 1);
+		// if (resout < 0)
+		// 	exit(errno);
+		if (close(cmd->fd_out) < 0)
+		{
+			write(2, "out\n", 4);
+			perror("close fd_out");
+		}
 	}
-	if (cmd->fd_out > 0)
+	if (cmd->fd_in > 2)
 	{
-		if (dup2(cmd->fd_out, STDOUT_FILENO) < 0)
-			exit(errno);
-		close(cmd->fd_out);
+		// close(STDIN_FILENO);
+		resin = dup2(cmd->fd_in, STDIN_FILENO);
+		// write(2, "resin is ", 9);
+		// ft_putnbr_fd(resin, 2);
+		// write(2, "\n", 1);
+		// if (resin < 0)
+		// 	exit(errno);
+		if (close(cmd->fd_in) < 0)
+		{
+			write(2, "in\n", 3);
+			perror("close fd_in");
+		}
 	}
 	return (EXIT_SUCCESS);
 }
 
 int	close_fd(t_cmd *cmd)
 {
-	if (cmd->fd_in > 0)
+	if (cmd->fd_in > 2)
 		close(cmd->fd_in);
-	if (cmd->fd_out > 0)
+	if (cmd->fd_out > 2)
 		close(cmd->fd_out);
 	return (EXIT_SUCCESS);
 }
