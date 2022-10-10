@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 15:13:15 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/10 14:46:23 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int	ms_execute(t_cmdlst **cmds, char **env)
 		return (res);
 	if (!env)
 		return (EXIT_FAILURE);
-	if ((*cmds)->next && (*cmds)->next->type == PIPE)
-		set_fd(cmds);
+	if ((*cmds)->type == WORD && (((*cmds)->next && (*cmds)->next->type == PIPE) || \
+		((*cmds)->prev && (*cmds)->prev->type == PIPE)))
+		set_fd(*cmds);
 	if ((*cmds)->type == WORD)
 		res = exec_cmd(cmds, env);
 	if ((*cmds)->type == OPEN_BRK)

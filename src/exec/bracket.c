@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bracket.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 14:00:00 by foctavia          #+#    #+#             */
-/*   Updated: 2022/09/30 18:10:35 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/10 14:51:50 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int	ms_bracket(t_cmdlst **cmds, char **env)
 	res = EXIT_SUCCESS;
 	while (*cmds && (*cmds)->type != CLOSE_BRK)
 	{
-		if ((*cmds)->next && (*cmds)->next->type == PIPE)
-			set_fd(cmds);
+		if ((*cmds)->type == WORD && (((*cmds)->next && (*cmds)->next->type == PIPE) || \
+			((*cmds)->prev && (*cmds)->prev->type == PIPE)))
+			set_fd(*cmds);
 		if ((*cmds)->type == WORD)
 			res = exec_cmd(cmds, env);
 		if ((*cmds)->next

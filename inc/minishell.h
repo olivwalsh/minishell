@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/07 22:44:08 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:47:21 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,10 @@ int			ms_execute(t_cmdlst **cmds, char **env);
 int			ms_bracket(t_cmdlst **cmds, char **env);
 int			ms_wait(t_cmdlst **cmds, int res);
 int			exec_cmd(t_cmdlst **cmds, char **env);
-int			set_fd(t_cmdlst **cmds);
-int			close_fd(t_cmd *cmd);
-int			update_fd(t_cmd *cmd);
+int			set_fd(t_cmdlst *cmds);
+int			redir_fd(t_cmdlst *cmds, t_cmd *cmd);
+// int			close_redir(t_cmd *cmd);
+int			close_fd(t_cmdlst *cmds, t_cmd *cmd);
 /*
 **
 ** CLEAN
