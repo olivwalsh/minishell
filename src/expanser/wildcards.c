@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:57:07 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/07 22:49:36 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:04:28 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	insert_file(t_token **token, char *file, int *found)
 
 	next = (*token)->next;
 	file = ft_strjoin(file, " ", 0);
-	new = create_token(WORD, file);
+	new = create_token(WORD, file, 0);
 	(*token)->next = new;
 	new->prev = *token;
 	new->next = next;
