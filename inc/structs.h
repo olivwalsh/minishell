@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 15:33:25 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:45:50 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	pid_t			pid;
-	int				fd_in;
-	int				fd_out;
+	int				pipe_in;
+	int				pipe_out;
+	int				redir_in;
+	int				redir_out;
 	int				pipe[2];
 	int				builtin;
 	char			*cmd;

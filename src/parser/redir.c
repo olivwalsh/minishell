@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:07:15 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 11:42:26 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:47:19 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	cmd_readinfile(t_token **token, t_cmd *cmd)
 		*token = (*token)->next;
 		return (EXIT_FAILURE);
 	}
-	cmd->fd_in = read_file(cmd->redir->infile);
+	cmd->redir_in = read_file(cmd->redir->infile);
 	*token = (*token)->next;
 	return (EXIT_SUCCESS);
 }
@@ -43,7 +43,7 @@ int	cmd_readstdin(t_token **token, t_cmd *cmd)
 		return (EXIT_FAILURE);
 	}
 	cmd->redir->delimiter = copy_cmd(token);
-	cmd->fd_in = fork_stdin(cmd->redir->delimiter);
+	cmd->redir_in = fork_stdin(cmd->redir->delimiter);
 	*token = (*token)->next;
 	return (EXIT_SUCCESS);
 }
@@ -63,7 +63,7 @@ int	cmd_writeoutfile(t_token **token, t_cmd *cmd)
 		*token = (*token)->next;
 		return (EXIT_FAILURE);
 	}
-	cmd->fd_out = create_file(cmd->redir->outfile);
+	cmd->redir_out = create_file(cmd->redir->outfile);
 	*token = (*token)->next;
 	return (EXIT_SUCCESS);
 }
@@ -83,7 +83,7 @@ int	cmd_appendoutfile(t_token **token, t_cmd *cmd)
 		*token = (*token)->next;
 		return (EXIT_FAILURE);
 	}
-	cmd->fd_out = append_file(cmd->redir->outfile);
+	cmd->redir_out = append_file(cmd->redir->outfile);
 	*token = (*token)->next;
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/10 18:15:47 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:16:34 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,48 @@ char	*add_space(char *str)
 	return (new);
 }
 
-void	check_new(t_token *new, t_token *token)
+char	*copy_words(char *str, int *i)
 {
-	t_token	*tmp;
+	int		j;
+	char	*value;
 
-	tmp = new;
-	while (tmp)
+	j = 0;
+	while (str && str[j] && (str[j] > 31 && str[j] < 127))
 	{
-		if (tmp->value[0] == '$')
+		if (str[j] == ' ' && str[j + 1] > 32 && str[j + 1] < 127)
 		{
-			tmp->var_stop = -1;
-			tmp->type = WORD;
-			tmp->value = add_space(tmp->value);
+			j++;
+			break ;
 		}
-		if (!tmp->next)
-			tmp->spc = token->spc;
-		tmp = tmp->next;
+		j++;
 	}
+	value = malloc(sizeof(char) * (j + 1));
+	if (!value)
+		return (err_msg_str(MALLOC_ERR));
+	value = ft_strncpy(value, str, j);
+	*i += j;
+	return (value);
+}
+
+int	ms_word(char *str, t_token **tokens, int *res)
+{
+	int	i;
+	int	type;
+
+	i = 0;
+	type = 0;
+	if (!str || !str[0])
+		return (*res);
+	while (str && str[i] && !g_global.data->err)
+	{
+		while (str[i] && is_isspace(str[i]))
+			i++;
+		if (str[i])
+			add_token(create_token(WORD, copy_words(&str[i], &i), 0), tokens);
+	}
+	if (g_global.data->err)
+		*res = EXIT_FAILURE;
+	return (*res);
 }
 
 void	delete_token(t_token **tokens)
@@ -90,21 +115,12 @@ int	expanse_var(t_token **tokens, int *res)
 		delete_token(tokens);
 		return (EXIT_SUCCESS);
 	}
-	if (ms_lexer(str, &new, res))
+	if (ms_word(str, &new, res))
 		return (EXIT_FAILURE);
 	if (!new)
 		return (EXIT_FAILURE);
 	if (str)
 		free(str);
-	check_new(new, *tokens);
 	insert_token(tokens, new);
-	return (EXIT_SUCCESS);
-}
-
-int	expanse_exstatus(t_token **tokens, int exstatus)
-{
-	free((*tokens)->value);
-	(*tokens)->value = ft_itoa(exstatus);
-	(*tokens)->type = WORD;
 	return (EXIT_SUCCESS);
 }
