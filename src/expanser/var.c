@@ -3,33 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/11 11:16:34 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:13:33 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*add_space(char *str)
+void	check_new(t_token *new, t_token *token)
 {
-	char	*new;
-	int		i;
+	t_token	*tmp;
 
-	i = 0;
-	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
-	if (!new)
-		err_msg_str(MALLOC_ERR);
-	while (str && str[i])
+	tmp = new;
+	while (tmp)
 	{
-		new[i] = str[i];
-		i++;
+		if (tmp->value[0] == '$')
+		{
+			tmp->var_stop = -1;
+			tmp->type = WORD;
+			tmp->value = add_space(tmp->value);
+		}
+		if (!tmp->next)
+			tmp->spc = token->spc;
+		tmp = tmp->next;
 	}
-	new[i] = ' ';
-	new[i + 1] = '\0';
-	free(str);
-	return (new);
 }
 
 char	*copy_words(char *str, int *i)
@@ -121,6 +120,7 @@ int	expanse_var(t_token **tokens, int *res)
 		return (EXIT_FAILURE);
 	if (str)
 		free(str);
+	check_new(new, *tokens);
 	insert_token(tokens, new);
 	return (EXIT_SUCCESS);
 }

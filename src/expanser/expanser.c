@@ -6,25 +6,11 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 13:13:33 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/10 16:15:54 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 19:15:10 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	has_wildcard(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i])
-	{
-		if (str[i] == '*')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 static int	word_expanser(t_token **tokens, int *res)
 {

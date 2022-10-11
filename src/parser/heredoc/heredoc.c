@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 17:58:27 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 10:13:21 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 19:04:26 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	read_stdin(char *delimiter, int fd)
 	line = get_next_line(0);
 	if (!line)
 		sig_eof(delimiter);
-	while (line && ft_strncmp(line, delimiter, ft_strlen(delimiter) - 1))
+	while (line && ft_strncmp(line, delimiter, ft_strlen(delimiter)))
 	{
 		write(fd, line, ft_strlen(line));
 		free(line);

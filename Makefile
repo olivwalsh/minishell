@@ -3,18 +3,9 @@ RED			= "\033[1;31m"
 GREEN		= "\033[1;32m"
 RESET		= "\033[m"
 
-# Compilation flags
-ifeq ($(DMEM),1)
-MEM 		= -fsanitize=address
-endif
-
-ifeq ($(DTHREAD),1)
-MEM 		= -fsanitize=thread
-endif
-
 # Variables
 NAME		= minishell
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror
 CC			= cc
 FLAGS		= -lreadline
 
@@ -25,7 +16,7 @@ INC_DIR		= inc/
 SRC_FILES	=	minishell.c \
 				init/init.c init/env.c init/terminal.c \
 				lexer/lexer.c lexer/tokenize.c lexer/copy.c lexer/delimiter.c lexer/utils_1.c lexer/utils_2.c lexer/checker.c lexer/bracket.c \
-				expanser/expanser.c expanser/var.c expanser/quote.c expanser/tilde.c expanser/exstatus.c expanser/insert.c expanser/wildcards.c \
+				expanser/expanser.c expanser/var.c expanser/quote.c expanser/tilde.c expanser/exstatus.c expanser/insert.c expanser/wildcards.c expanser/utils.c \
 				parser/parser.c parser/init.c parser/cmd.c parser/delete.c parser/redir.c parser/utils.c parser/path.c parser/file.c parser/args.c \
 				parser/heredoc/heredoc.c parser/heredoc/signals.c \
 				exec/execute.c exec/bracket.c exec/process.c exec/wait.c exec/fd.c \
@@ -42,18 +33,12 @@ all : $(NAME)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@mkdir -p ${@D}
-	$(CC) $(CFLAGS) $(MEM) $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(MEM) $(INC)  $(OBJS) -o  $@ $(FLAGS)
+	$(CC) $(CFLAGS) $(INC)  $(OBJS) -o  $@ $(FLAGS)
 	@echo -n "Compiling minishell"
 	@echo $(GREEN)"\tOK"$(RESET)
-
-run: all
-	./minishell
-
-rerun: re
-	./minishell
 
 clean :
 	rm -rf $(OBJ_DIR)

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 14:34:13 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 19:30:06 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,12 @@ int			expanse_var(t_token **tokens, int *res);
 int			expanse_quote(t_token *tokens, char *str);
 int			expanse_tilde(t_token **token);
 int			expanse_wildcard(t_token **tokens);
+int			has_wildcard(char *str);
 int			change_type(t_token **tokens);
 void		insert_token(t_token **tokens, t_token *new);
 void		check_new(t_token *new, t_token *token);
-char		*add_space(char *str);
 void		delete_token(t_token **tokens);
+char		*add_space(char *str);
 /*
 **
 ** PARSER

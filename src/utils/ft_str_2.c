@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:13:55 by owalsh            #+#    #+#             */
-/*   Updated: 2022/09/16 16:15:10 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 16:28:33 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,14 @@ char	*ft_strstr(char *str, char *to_find)
 			return (str + i);
 	}
 	return (NULL);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+		i++;
+	return (i);
 }

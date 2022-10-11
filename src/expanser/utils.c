@@ -1,31 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tilde.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 15:13:13 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/11 16:05:28 by owalsh           ###   ########.fr       */
+/*   Created: 2022/10/11 19:14:38 by owalsh            #+#    #+#             */
+/*   Updated: 2022/10/11 19:15:21 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	expanse_tilde(t_token **token)
+char	*add_space(char *str)
 {
-	char	*val;
+	char	*new;
+	int		i;
 
-	if ((*token)->value && (*token)->value[0] && !(*token)->value[1])
+	i = 0;
+	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	if (!new)
+		err_msg_str(MALLOC_ERR);
+	while (str && str[i])
 	{
-		val = (*token)->value;
-		free(val);
-		(*token)->value = ft_getenv("HOME");
-		if (!(*token)->value)
-		{
-			delete_token(token);
-			return (EXIT_SUCCESS);
-		}
+		new[i] = str[i];
+		i++;
 	}
-	return (EXIT_SUCCESS);
+	new[i] = ' ';
+	new[i + 1] = '\0';
+	free(str);
+	return (new);
+}
+
+int	has_wildcard(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '*')
+			return (1);
+		i++;
+	}
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 13:07:15 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 10:47:19 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:51:47 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	cmd_readinfile(t_token **token, t_cmd *cmd)
 		err_msg_str(SYNTAX_ERR);
 		return (EXIT_FAILURE);
 	}
+	if (cmd->redir->infile)
+		free(cmd->redir->infile);
 	cmd->redir->infile = copy_cmd(token);
 	if (!read_file(cmd->redir->infile))
 	{
@@ -42,6 +44,8 @@ int	cmd_readstdin(t_token **token, t_cmd *cmd)
 		err_msg_str(SYNTAX_ERR);
 		return (EXIT_FAILURE);
 	}
+	if (cmd->redir->delimiter)
+		free(cmd->redir->delimiter);
 	cmd->redir->delimiter = copy_cmd(token);
 	cmd->redir_in = fork_stdin(cmd->redir->delimiter);
 	*token = (*token)->next;
@@ -57,6 +61,8 @@ int	cmd_writeoutfile(t_token **token, t_cmd *cmd)
 		err_msg_str(SYNTAX_ERR);
 		return (EXIT_FAILURE);
 	}
+	if (cmd->redir->outfile)
+		free(cmd->redir->outfile);
 	cmd->redir->outfile = copy_cmd(token);
 	if (!create_file(cmd->redir->outfile))
 	{
@@ -77,6 +83,8 @@ int	cmd_appendoutfile(t_token **token, t_cmd *cmd)
 		err_msg_str(SYNTAX_ERR);
 		return (EXIT_FAILURE);
 	}
+	if (cmd->redir->outfile)
+		free(cmd->redir->outfile);
 	cmd->redir->outfile = copy_cmd(token);
 	if (!append_file(cmd->redir->outfile))
 	{

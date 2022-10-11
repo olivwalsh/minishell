@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:02:04 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 14:37:48 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 20:33:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	main(int argc, char **argv, char **env)
 	int		res;
 
 	if (argc != 1)
+		return (ms_error());
+	if (!isatty(STDIN_FILENO))
 		return (ms_error());
 	if (ms_init(&data, argv, env, &res))
 		return (EXIT_FAILURE);
