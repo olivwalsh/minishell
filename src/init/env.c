@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:56:15 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/11 14:34:29 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 15:20:28 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,19 @@ int	copy_substr(char **new_env, char **env, int substr)
 	return (EXIT_SUCCESS);
 }
 
+int	create_env(t_data *data)
+{
+	char	**env;
+
+	env = (char **)malloc(sizeof(char *) * 2);
+	if (!env)
+		return (EXIT_FAILURE);
+	env[0] = ft_strndup("PATH=/bin", 10);
+	env[1] = NULL;
+	data->shell.env = env;
+	return (EXIT_SUCCESS);
+}
+
 int	copy_env(t_data *data, char **env)
 {
 	char	**new_env;
@@ -58,7 +71,7 @@ int	copy_env(t_data *data, char **env)
 	i = 0;
 	substr = 0;
 	if (!env || !env[i] || !data)
-		return (EXIT_FAILURE);
+		return (create_env(data));
 	substr = count_substr(env);
 	if (!substr)
 		return (EXIT_FAILURE);
