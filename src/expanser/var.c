@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/11 10:16:01 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:16:34 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	ms_word(char *str, t_token **tokens, int *res)
 		*res = EXIT_FAILURE;
 	return (*res);
 }
-
 
 void	delete_token(t_token **tokens)
 {

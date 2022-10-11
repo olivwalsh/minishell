@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:05:55 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 10:55:05 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:18:11 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	set_fd(t_cmdlst *cmds)
 {
 	int	pipes[2];
-	
+
 	if (!cmds->next)
 		return (EXIT_SUCCESS);
 	else
@@ -34,10 +34,24 @@ int	set_fd(t_cmdlst *cmds)
 	return (EXIT_SUCCESS);
 }
 
-int	redir_fd(t_cmdlst *cmds, t_cmd *cmd)
+int	redir_prevcmd(t_cmdlst *cmds)
 {
 	t_cmdlst	*tmp;
 
+	tmp = cmds->prev;
+	while (tmp && tmp->type != WORD)
+		tmp = tmp->prev;
+	if (tmp->cmd->pipe_in != -1)
+	{
+		if (dup2(tmp->cmd->pipe_in, STDIN_FILENO) < 0)
+			exit(errno);
+		close(tmp->cmd->pipe_in);
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	redir_fd(t_cmdlst *cmds, t_cmd *cmd)
+{
 	if (cmd->pipe_in != -1)
 		close(cmd->pipe_in);
 	if (cmd->redir_out != -1)
@@ -59,24 +73,14 @@ int	redir_fd(t_cmdlst *cmds, t_cmd *cmd)
 		close(cmd->redir_in);
 	}
 	else if (cmds->prev)
-	{	
-		tmp = cmds->prev;
-		while (tmp && tmp->type != WORD)
-			tmp = tmp->prev;
-		if (tmp->cmd->pipe_in != -1)
-		{
-			if (dup2(tmp->cmd->pipe_in, STDIN_FILENO) < 0)
-				exit(errno);
-			close(tmp->cmd->pipe_in);
-		}
-	}
+		redir_prevcmd(cmds);
 	return (EXIT_SUCCESS);
 }
 
 int	close_fd(t_cmdlst *cmds, t_cmd *cmd)
 {
 	t_cmdlst	*tmp;
-	
+
 	if (cmd->pipe_out != -1)
 		close(cmd->pipe_out);
 	else if (cmd->redir_out != -1)
