@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:56:15 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 11:03:31 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:34:29 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int	copy_env(t_data *data, char **env)
 	if (copy_substr(new_env, env, substr))
 		return (EXIT_FAILURE);
 	data->shell.env = new_env;
+	data->shell.shlvl = ft_atoi(ft_getenv("SHLVL")) + 1;
 	return (EXIT_SUCCESS);
 }

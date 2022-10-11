@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:16:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 10:45:50 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:42:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_shell
 	int			heredoc;
 	int			fd_heredoc[2];
 	pid_t		pid_heredoc;
+	int			shlvl;
 }				t_shell;
 
 // GLOBAL (variable)

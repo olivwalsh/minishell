@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 11:07:03 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:30:04 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	exec_parent(t_cmdlst **cmds, char **env, int *ex)
 	cmd = (*cmds)->cmd;
 	if (cmd->builtin == BD_EXIT)
 		*ex = 1;
-	else if (cmd->builtin == BD_EXPORT
+	if (cmd->builtin == BD_EXPORT
 		|| cmd->builtin == BD_CD
 		|| cmd->builtin == BD_UNSET)
 		res = ms_builtin_parent(cmd, env);

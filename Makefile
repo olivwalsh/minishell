@@ -29,7 +29,7 @@ SRC_FILES	=	minishell.c \
 				parser/parser.c parser/init.c parser/cmd.c parser/delete.c parser/redir.c parser/utils.c parser/path.c parser/file.c parser/args.c \
 				parser/heredoc/heredoc.c parser/heredoc/signals.c \
 				exec/execute.c exec/bracket.c exec/process.c exec/wait.c exec/fd.c \
-				utils/is.c utils/display.c utils/error.c utils/utils.c utils/ft_str_1.c utils/ft_str_2.c utils/split.c utils/get_next_line.c utils/itoa.c \
+				utils/is.c utils/display.c utils/error.c utils/utils.c utils/ft_str_1.c utils/ft_str_2.c utils/split.c utils/get_next_line.c utils/convert.c utils/mem.c \
 				builtins/builtins.c builtins/ms_exit.c builtins/ms_env.c builtins/ms_echo.c builtins/ms_export.c builtins/ms_pwd.c builtins/ms_unset.c builtins/display.c \
 				builtins/ms_cd/ms_cd.c builtins/ms_cd/navigate_1.c builtins/ms_cd/navigate_2.c builtins/ms_cd/utils.c \
 				clean/clean.c

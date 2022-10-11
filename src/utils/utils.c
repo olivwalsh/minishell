@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:04:23 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 15:06:58 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 14:07:45 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char	*ft_getenv(char *name)
 	char	*new_name;
 	int		i;
 
+	if (!ft_strncmp("SHLVL", name, 6) && g_global.data->shell.shlvl)
+		return (ft_itoa(g_global.data->shell.shlvl));
 	new_name = get_newname(name);
 	if (!new_name)
 		return (NULL);

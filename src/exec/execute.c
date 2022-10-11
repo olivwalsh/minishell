@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 10:03:13 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 12:05:59 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,42 @@ int	ms_execute(t_cmdlst **cmds, char **env, int *ex)
 	return (res);
 }
 
+void	sig_dfl_quit(int signum)
+{
+	(void)signum;
+	write(1, "Quit (core dumped)\n", 19);
+}
+
+void	sig_dfl_nl(int signum)
+{
+	(void)signum;
+	write(1, "\n", 1);
+}
+
 int	ms_exec(t_cmdlst **cmds, char **env)
 {
-	int	res;
-	int	ex;
+	int			res;
+	int			ex;
+	t_cmdlst	*tmp;
 
+	tcsetattr(STDIN_FILENO, TCSANOW, &g_global.data->terminal.dftl);
+	signal(SIGQUIT, &sig_dfl_quit);
+	signal(SIGINT, &sig_dfl_nl);
 	ex = 0;
 	res = ms_execute(cmds, env, &ex);
 	res = ms_wait(cmds, res);
 	if (ex)
-		exit(res);
+	{
+		tmp = *cmds;
+		while (tmp)
+		{
+			if (tmp->cmd && tmp->cmd->builtin == BD_EXIT)
+			{
+				ms_exit(tmp->cmd->cmd, &tmp->cmd->args[1], env);
+				break ;
+			}	
+			tmp = tmp->next;
+		}
+	}
 	return (res);
 }

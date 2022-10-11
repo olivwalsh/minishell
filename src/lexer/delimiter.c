@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delimiter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:34:44 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 16:55:10 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:30:51 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_delimiter(char *str)
 	special = "|<>\'\"()$";
 	operand = "&&";
 	while (str && str[i] && (str[i] > 32 && str[i] < 127) \
-		&& !strchr(special, str[i]) && ft_strncmp(operand, &str[i], 2))
+		&& !ft_strchr(special, str[i]) && ft_strncmp(operand, &str[i], 2))
 		i++;
 	return (i);
 }
@@ -37,7 +37,7 @@ int	is_delimiter_var(char *str, int *j)
 	special = "|<>\'\"().$=/";
 	operand = "&&";
 	while (str && str[i] && (str[i] > 31 && str[i] < 127) \
-		&& !strchr(special, str[i]) && ft_strncmp(operand, &str[i], 2))
+		&& !ft_strchr(special, str[i]) && ft_strncmp(operand, &str[i], 2))
 	{
 		if (str[i] == ' ' && str[i + 1] > 32 && str[i + 1] < 127)
 		{
@@ -59,7 +59,7 @@ int	is_delimiter_spc(char *str)
 	special = "|<>\'\"()";
 	operand = "&&";
 	while (str && str[i] && (str[i] > 31 && str[i] < 127) \
-		&& !strchr(special, str[i]) && ft_strncmp(operand, &str[i], 2))
+		&& !ft_strchr(special, str[i]) && ft_strncmp(operand, &str[i], 2))
 	{
 		if (str[i] == '$' && is_delimiter_spc(&str[i + 1]))
 			break ;

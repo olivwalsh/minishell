@@ -1,40 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminal.c                                         :+:      :+:    :+:   */
+/*   mem.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 13:57:12 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 11:48:56 by owalsh           ###   ########.fr       */
+/*   Created: 2022/10/11 14:28:30 by owalsh            #+#    #+#             */
+/*   Updated: 2022/10/11 14:32:02 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sig_exit(int signum)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	(void)signum;
-	if (rl_line_buffer[0])
-		return ;
-	write(1, "exit\n", 5);
-	rl_clear_history();
-	clean(g_global.data);
-	exit(EXIT_SUCCESS);
+	char	*i_s;
+	size_t	i;
+
+	i_s = s;
+	i = 0;
+	while (s && i < n)
+	{
+		i_s[i] = c;
+		i++;
+	}
+	return (s);
 }
 
-void	sig_nl(int signum)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	(void)signum;
-	write(1, "^C\n", 3);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+	const char	*cast_src;
+	char		*cast_dest;
+	size_t		i;
 
-void	set_terminal(t_terminal *term)
-{
-	tcsetattr(STDIN_FILENO, TCSANOW, &term->new);
-	signal(SIGQUIT, &sig_exit);
-	signal(SIGINT, &sig_nl);
+	cast_dest = dest;
+	cast_src = src;
+	i = 0;
+	while (src && dest && i < n)
+	{
+		cast_dest[i] = cast_src[i];
+		i++;
+	}
+	return (dest);
 }

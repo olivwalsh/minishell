@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 11:00:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 14:34:13 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ int			ft_isdigit(char c);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_strncmp(char *s1, char *s2, int n);
 int			ft_strlen(char *str);
+int			ft_atoi(const char *nptr);
 int			err_msg(int code, char c, int err);
 int			err_cmd(int code, char *cmd);
 int			err_bd(int code, int err, char *func, char *arg);
@@ -168,6 +169,8 @@ char		**ft_split(char *s, char c);
 void		display_tokens(void);
 void		display_cmds(void);
 void		display_specific_tokens(t_token *head);
+void		*ft_memcpy(void *dest, const void *src, size_t n);
+void		*ft_memset(void *s, int c, size_t n);
 /*
 **
 ** BUILTINS

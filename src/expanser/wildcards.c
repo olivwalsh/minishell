@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcards.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:57:07 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 18:16:25 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 12:20:35 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	expanse_wildcard(t_token **token)
 	char			*wildcard;
 
 	wildcard = (*token)->value;
+	printf("in wildcard with wildcard: %s\n", wildcard);
 	pwd = NULL;
 	pwd = getcwd(pwd, 0);
 	if (!pwd)

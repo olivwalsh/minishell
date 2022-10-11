@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:19 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/06 18:43:02 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 14:30:30 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	ms_export(char *cmd, char **args, char **env)
 	{
 		if (!export_checker(args, i))
 		{
-			if (strchr(args[i], '=') && args[i][0] != '=')
+			if (ft_strchr(args[i], '=') && args[i][0] != '=')
 				add_env(args[i], env);
 		}
 		i++;

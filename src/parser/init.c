@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:41:47 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/11 10:46:44 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:32:43 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_redir	*create_redir(void)
 		err_msg_str(MALLOC_ERR);
 		return (NULL);
 	}
-	memset(redir, 0, sizeof(t_redir));
+	ft_memset(redir, 0, sizeof(t_redir));
 	return (redir);
 }
 
@@ -36,7 +36,7 @@ t_cmd	*init_cmd(void)
 		err_msg_str(MALLOC_ERR);
 		return (NULL);
 	}
-	memset(new, 0, sizeof(t_cmd));
+	ft_memset(new, 0, sizeof(t_cmd));
 	new->pid = -1;
 	new->redir_in = -1;
 	new->redir_out = -1;

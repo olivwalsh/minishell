@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:19:11 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/07 16:28:05 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:30:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	is_var(char *str)
 	if (str && str[0] == '$')
 	{
 		if ((str[1] > 32 && str[1] < 127) && !is_isspace(str[1])
-			&& !strchr(special, str[1]))
+			&& !ft_strchr(special, str[1]))
 			return (1);
 	}
 	return (0);
