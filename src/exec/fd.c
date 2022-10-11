@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:05:55 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 18:45:12 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:56:24 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	set_fd(t_cmdlst *cmds)
 {
 	int	pipes[2];
-	
+
 	if (!cmds->next)
 		return (EXIT_SUCCESS);
 	else
@@ -34,33 +34,39 @@ int	set_fd(t_cmdlst *cmds)
 	return (EXIT_SUCCESS);
 }
 
-int	redir_fd(t_cmdlst *cmds, t_cmd *cmd)
+int	redir_prevcmd(t_cmdlst *cmds)
 {
 	t_cmdlst	*tmp;
 
+	tmp = cmds->prev;
+	while (tmp && tmp->type != WORD)
+		tmp = tmp->prev;
+	if (tmp->cmd && tmp->cmd->fd_in > 0)
+	{
+		if (dup2(tmp->cmd->fd_in, STDIN_FILENO) < 0)
+			exit(errno);
+		close(tmp->cmd->fd_in);
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	redir_fd(t_cmdlst *cmds, t_cmd *cmd)
+{
 	if (cmd->fd_out != -1)
 	{
 		if (dup2(cmd->fd_out, STDOUT_FILENO) < 0)
 			exit(errno);
 		close(cmd->fd_out);
 	}
-	if (cmd->redir && cmd->redir->redir_in && cmd->fd_in != -1)
+	if (cmd->redir
+		&& (cmd->redir->redir_in || cmd->redir->append_in)
+		&& cmd->fd_in != -1)
 	{
 		if (dup2(cmd->fd_in, STDIN_FILENO) < 0)
 			exit(errno);
 	}
 	else if (cmds->prev)
-	{	
-		tmp = cmds->prev;
-		while (tmp && tmp->type != WORD)
-			tmp = tmp->prev;
-		if (tmp->cmd->fd_in > 0)
-		{
-			if (dup2(tmp->cmd->fd_in, STDIN_FILENO) < 0)
-				exit(errno);
-			close(tmp->cmd->fd_in);
-		}
-	}
+		redir_prevcmd(cmds);
 	if (cmd->fd_in > 0)
 		close(cmd->fd_in);
 	return (EXIT_SUCCESS);
@@ -69,7 +75,7 @@ int	redir_fd(t_cmdlst *cmds, t_cmd *cmd)
 int	close_fd(t_cmdlst *cmds, t_cmd *cmd)
 {
 	t_cmdlst	*tmp;
-	
+
 	if (cmd->fd_out > 0)
 		close(cmd->fd_out);
 	if (cmd->redir && cmd->redir->redir_in && cmd->fd_in > 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 18:44:14 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:59:51 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,24 @@ int	ms_builtin_child(t_cmd *cmd, char **env)
 	return (EXIT_SUCCESS);
 }
 
-int	exec_parent(t_cmdlst **cmds, char **env)
+int	exec_parent(t_cmdlst **cmds, char **env, int *ex)
 {
 	t_cmd	*cmd;
 	int		res;
 
 	res = EXIT_SUCCESS;
 	cmd = (*cmds)->cmd;
-	if (cmd->builtin == BD_EXIT || cmd->builtin == BD_EXPORT || \
-		cmd->builtin == BD_CD || cmd->builtin == BD_UNSET)
+	if (cmd->builtin == BD_EXIT)
+		*ex = 1;
+	else if (cmd->builtin == BD_EXPORT
+		|| cmd->builtin == BD_CD
+		|| cmd->builtin == BD_UNSET)
 		res = ms_builtin_parent(cmd, env);
 	close_fd(*cmds, cmd);
 	return (res);
 }
 
-int	exec_cmd(t_cmdlst **cmds, char **env)
+int	exec_cmd(t_cmdlst **cmds, char **env, int *ex)
 {
 	t_cmd	*cmd;
 	int		res;
@@ -70,17 +73,16 @@ int	exec_cmd(t_cmdlst **cmds, char **env)
 	if (cmd->pid == 0)
 	{
 		redir_fd(*cmds, cmd);
-		// close_fd(*cmds, cmd);
 		if (!cmd->cmd && !cmd->redir)
 			exit(127);
 		if (!cmd->cmd)
 			exit(0);
 		if (cmd->builtin)
-			exit(ms_builtin_child(cmd, env));		
+			exit(ms_builtin_child(cmd, env));
 		if (execve(cmd->cmd, cmd->args, env) < 0)
 			exit(err_cmd(errno, cmd->args[0]));
 	}
 	else
-		res = exec_parent(cmds, env);
+		res = exec_parent(cmds, env, ex);
 	return (res);
 }
