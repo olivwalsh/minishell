@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:41:47 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/10 15:33:30 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:46:44 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ t_cmd	*init_cmd(void)
 	}
 	memset(new, 0, sizeof(t_cmd));
 	new->pid = -1;
-	new->fd_in = -1;
-	new->fd_out = -1;
+	new->redir_in = -1;
+	new->redir_out = -1;
+	new->pipe_in = -1;
+	new->pipe_out = -1;
 	new->redir = NULL;
 	return (new);
 }
