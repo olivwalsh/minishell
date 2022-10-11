@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 13:52:25 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 14:08:41 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 15:40:47 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ int	nav_home(char **env)
 	char	*home;
 
 	home = ft_getenv("HOME");
+	if (!home)
+		err_bd(NO_HOME, 0, "minishell: cd", NULL);
 	if (chdir(home) < 0)
 	{
-		err_bd(0, errno, "minishell: cd: ", "HOME not set\n");
 		free(home);
-		return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
 	}
 	set_pwd(env);
 	free(home);

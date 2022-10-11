@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:12:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 15:06:47 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 15:35:58 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ int	err_bd(int code, int err, char *func, char *arg)
 		write(STDERR_FILENO, ": too many arguments\n", 22);
 	else if (code == NUM_ARG)
 		write(STDERR_FILENO, ": numeric argument required\n", 29);
-	if (errno)
+	else if (code == NO_HOME)
+		write(STDERR_FILENO, ": HOME not set\n", 16);
+	else if (errno)
 	{
 		write(STDERR_FILENO, strerror(err), ft_strlen(strerror(err)));
 		write(STDERR_FILENO, "\n", 1);

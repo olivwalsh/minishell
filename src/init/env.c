@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:56:15 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/11 15:20:28 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 15:26:38 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	create_env(t_data *data)
 int	copy_env(t_data *data, char **env)
 {
 	char	**new_env;
+	char	*shlvl;
 	int		substr;
 	int		i;
 
@@ -81,6 +82,11 @@ int	copy_env(t_data *data, char **env)
 	if (copy_substr(new_env, env, substr))
 		return (EXIT_FAILURE);
 	data->shell.env = new_env;
-	data->shell.shlvl = ft_atoi(ft_getenv("SHLVL")) + 1;
+	shlvl = ft_getenv("SHLVL");
+	if (shlvl)
+	{
+		data->shell.shlvl = ft_atoi(shlvl) + 1;
+		free(shlvl);
+	}
 	return (EXIT_SUCCESS);
 }

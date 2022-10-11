@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:22:28 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/06 15:59:48 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:33:04 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@
 # define TOO_MANY_ARGS -108
 # define NUM_ARG -109
 # define FILE_ARG -110
+# define NO_HOME -111
 # define NO_CMD 127
 
 #endif
