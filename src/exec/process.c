@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 18:44:14 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:07:30 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,12 @@ int	exec_cmd(t_cmdlst **cmds, char **env)
 	if (cmd->pid == 0)
 	{
 		redir_fd(*cmds, cmd);
-		// close_fd(*cmds, cmd);
 		if (!cmd->cmd && !cmd->redir)
 			exit(127);
 		if (!cmd->cmd)
 			exit(0);
 		if (cmd->builtin)
-			exit(ms_builtin_child(cmd, env));		
+			exit(ms_builtin_child(cmd, env));
 		if (execve(cmd->cmd, cmd->args, env) < 0)
 			exit(err_cmd(errno, cmd->args[0]));
 	}

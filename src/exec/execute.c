@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:35:56 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 14:46:23 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:08:39 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int	ms_execute(t_cmdlst **cmds, char **env)
 		return (res);
 	if (!env)
 		return (EXIT_FAILURE);
-	if ((*cmds)->type == WORD && (((*cmds)->next && (*cmds)->next->type == PIPE) || \
-		((*cmds)->prev && (*cmds)->prev->type == PIPE)))
+	if ((*cmds)->type == WORD
+		&& (((*cmds)->next && (*cmds)->next->type == PIPE)
+			|| ((*cmds)->prev && (*cmds)->prev->type == PIPE)))
 		set_fd(*cmds);
 	if ((*cmds)->type == WORD)
 		res = exec_cmd(cmds, env);
