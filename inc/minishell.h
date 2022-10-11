@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 09:55:10 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/11 11:00:33 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ int			ms_wait(t_cmdlst **cmds, int res);
 int			exec_cmd(t_cmdlst **cmds, char **env, int *ex);
 int			set_fd(t_cmdlst *cmds);
 int			redir_fd(t_cmdlst *cmds, t_cmd *cmd);
-// int			close_redir(t_cmd *cmd);
 int			close_fd(t_cmdlst *cmds, t_cmd *cmd);
 /*
 **
