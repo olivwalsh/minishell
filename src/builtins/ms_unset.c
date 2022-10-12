@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:38:23 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/11 20:13:15 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/12 08:37:49 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	ms_unset(char *cmd, char **args, char **env)
 		return (EXIT_FAILURE);
 	i = 0;
 	str = NULL;
-	while (args && args[i] && !g_global.data->err)
+	while (args && args[i])
 	{
 		if (!unset_checker(args, i))
 		{

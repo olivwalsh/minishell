@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:58:51 by foctavia          #+#    #+#             */
-/*   Updated: 2022/10/11 19:13:33 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/12 08:38:38 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ char	*copy_words(char *str, int *i)
 int	ms_word(char *str, t_token **tokens, int *res)
 {
 	int	i;
-	int	type;
 
 	i = 0;
-	type = 0;
 	if (!str || !str[0])
 		return (*res);
 	while (str && str[i] && !g_global.data->err)

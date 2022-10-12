@@ -6,7 +6,7 @@
 /*   By: foctavia <foctavia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:50:18 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/07 22:49:51 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/10/12 09:23:33 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,14 @@ static void	cmd_newargs(t_token **token, t_cmd *new, int i)
 		err_msg_str(MALLOC_ERR);
 		return ;
 	}
-	new->args[0] = ft_strndup(new->cmd, ft_strlen(new->cmd));
-	*token = (*token)->next;
-	i = 1;
+	if (new->cmd)
+	{
+		new->args[0] = ft_strndup(new->cmd, ft_strlen(new->cmd));
+		*token = (*token)->next;
+		i = 1;
+	}
+	else
+		i = 0;
 	while (*token && !is_delim(*token) && !is_redir(*token))
 	{
 		new->args[i] = copy_cmd(token);
