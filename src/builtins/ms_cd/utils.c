@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:44:17 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/10 16:04:43 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/12 11:09:01 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,10 @@ int	is_absolute(char *path)
 	if (path && path[0] == '/')
 		return (1);
 	return (0);
+}
+
+int	nav_free(char *origin, int status)
+{
+	free(origin);
+	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 19:30:06 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/12 11:09:56 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,8 +195,9 @@ int			nav_oldpwd(char **env);
 int			nav_fromhome(char *path, char **env);
 int			nav_absolute(char *path, char **env);
 int			nav_relative(char *origin, char *path, char **env);
-int			nav_back(char *origin, char **env);
+int			nav_back(char **env);
 int			nav_home(char **env);
 int			nav_pwd(char **env);
+int			nav_free(char *origin, int status);
 
 #endif
