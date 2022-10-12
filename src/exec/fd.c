@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:05:55 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 18:39:14 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/12 11:25:21 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	redir_prevcmd(t_cmdlst *cmds)
 	tmp = cmds->prev;
 	while (tmp && tmp->type != WORD)
 		tmp = tmp->prev;
-	if (tmp->cmd->pipe_in != -1)
+	if (tmp && tmp->cmd && tmp->cmd->pipe_in != -1)
 	{
 		if (dup2(tmp->cmd->pipe_in, STDIN_FILENO) < 0)
 			exit(errno);
@@ -81,18 +81,18 @@ int	close_fd(t_cmdlst *cmds, t_cmd *cmd)
 {
 	t_cmdlst	*tmp;
 
-	if (cmd->pipe_out != -1)
+	if (cmd && cmd->pipe_out != -1)
 		close(cmd->pipe_out);
-	else if (cmd->redir_out != -1)
+	else if (cmd && cmd->redir_out != -1)
 		close(cmd->redir_out);
-	if (cmd->redir_in != -1)
+	if (cmd && cmd->redir_in != -1)
 		close(cmd->redir_in);
-	else if (cmds->prev)
+	else if (cmds && cmds->prev)
 	{
 		tmp = cmds->prev;
 		while (tmp && tmp->type != WORD)
 			tmp = tmp->prev;
-		if (tmp->cmd->pipe_in > 0)
+		if (tmp && tmp->cmd && tmp->cmd->pipe_in > 0)
 			close(tmp->cmd->pipe_in);
 	}
 	return (EXIT_SUCCESS);
