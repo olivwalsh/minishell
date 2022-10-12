@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:01:32 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/12 11:09:56 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/12 18:13:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int			ms_echo(char *cmd, char **args);
 int			ms_exit(char *cmd, char **args, char **env);
 int			ms_env(char *cmd, char **args, char **env);
 int			ms_export(char *cmd, char **args, char **env);
-int			ms_unset(char *cmd, char **args, char **env);
+int			ms_unset(char *cmd, char **args);
 int			ms_pwd(char *cmd, char **args, char **env);
 int			display_env(char **env);
 int			display_export(char **env);

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:47:30 by owalsh            #+#    #+#             */
-/*   Updated: 2022/10/11 17:25:40 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/10/12 18:13:35 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ms_builtin_parent(t_cmd *cmd, char **env)
 	else if (cmd->builtin == BD_EXPORT)
 		res = ms_export(cmd->cmd, &cmd->args[1], env);
 	else if (cmd->builtin == BD_UNSET)
-		res = ms_unset(cmd->cmd, &cmd->args[1], env);
+		res = ms_unset(cmd->cmd, &cmd->args[1]);
 	return (res);
 }
 
