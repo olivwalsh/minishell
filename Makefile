@@ -3,6 +3,15 @@ RED			= "\033[1;31m"
 GREEN		= "\033[1;32m"
 RESET		= "\033[m"
 
+# Compilation flags
+ifeq ($(DMEM),1)
+MEM 		= -fsanitize=address
+endif
+
+ifeq ($(DTHREAD),1)
+MEM 		= -fsanitize=thread
+endif
+
 # Variables
 NAME		= minishell
 CFLAGS		= -Wall -Wextra -Werror
@@ -20,7 +29,7 @@ SRC_FILES	=	minishell.c \
 				parser/parser.c parser/init.c parser/cmd.c parser/delete.c parser/redir.c parser/utils.c parser/path.c parser/file.c parser/args.c \
 				parser/heredoc/heredoc.c parser/heredoc/signals.c \
 				exec/execute.c exec/bracket.c exec/process.c exec/wait.c exec/fd.c \
-				utils/is.c utils/error.c utils/utils.c utils/ft_str_1.c utils/ft_str_2.c utils/split.c utils/get_next_line.c utils/convert.c utils/mem.c \
+				utils/is.c utils/error.c utils/utils.c utils/ft_str_1.c utils/ft_str_2.c utils/split.c utils/get_next_line.c utils/convert.c utils/mem.c utils/display.c \
 				builtins/builtins.c builtins/ms_exit.c builtins/ms_env.c builtins/ms_echo.c builtins/ms_export.c builtins/ms_pwd.c builtins/ms_unset.c builtins/display.c \
 				builtins/ms_cd/ms_cd.c builtins/ms_cd/navigate_1.c builtins/ms_cd/navigate_2.c builtins/ms_cd/navigate_3.c builtins/ms_cd/utils.c \
 				clean/clean.c
@@ -33,12 +42,18 @@ all : $(NAME)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@mkdir -p ${@D}
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(MEM) $(INC) -c $< -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(INC) $(OBJS) -o  $@ $(FLAGS)
+	$(CC) $(CFLAGS) $(MEM) $(INC) $(OBJS) -o  $@ $(FLAGS)
 	@echo -n "Compiling minishell"
 	@echo $(GREEN)"\tOK"$(RESET)
+
+run: all
+	./minishell
+
+rerun: re
+	./minishell
 
 clean :
 	rm -rf $(OBJ_DIR)
